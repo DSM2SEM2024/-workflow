@@ -1,0 +1,80 @@
+/* Definindo cada variação da fonte Roboto */
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Italic';
+    src: url('../fonts/Roboto-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto-Light';
+    src: url('../fonts/Roboto-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('../fonts/Roboto-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('../fonts/Roboto-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+:root {
+    /* Definindo variáveis de cor */
+    --primary-red: #BA1A1A;
+    --secundary-red: #C13333;
+    --darken-red: darken(var(--primary-red), 10%);
+    --lighten-red: lighten(var(--secundary-red), 10%);
+    --primary-white: #F0F0F0;
+    --secundary-white: #E0E0E0;
+    --terciary-white: #FFF;
+    --quaternary-white: #D9D9D9;
+    --primary-black: #1F1F1F;
+    --secundary-black: #292929;
+    --terciary-black: #303030;
+    --darken-black: darken(var(--primary-black), 10%);
+    --lighten-black: lighten(var(--secundary-black), 10%);
+    --background-red: linear-gradient(to right, var(--primary-red), var(--secondary-red));
+    --background-white: linear-gradient(to right, var(--primary-white), var(--secundary-white));
+    --background-black: linear-gradient(to right, var(--primary-black), var(--secundary-black));
+
+
+    /* Definindo variáveis de fonte */
+    --roboto-regular: 'Roboto-Regular', sans-serif;
+    --roboto-bold: 'Roboto-Bold', sans-serif;
+    --roboto-italic: 'Roboto-Italic', sans-serif;
+    --roboto-light: 'Roboto-Light', sans-serif;
+    --roboto-medium: 'Roboto-Medium', sans-serif;
+    --roboto-thin: 'Roboto-Thin', sans-serif;
+    --font-size: 16px;
+}
+
+body {
+    font-family: var(--roboto-regular);
+    font-size: var(--font-size);
+    padding: none;
+    margin: none;
+    box-sizing: border-box;
+}
