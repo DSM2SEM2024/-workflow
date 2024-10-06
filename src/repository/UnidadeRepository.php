@@ -1,8 +1,8 @@
 <?php
-namespace App\Src\Repository;
-use App\Src\Database\Database;
-use App\Src\Model\Unidade;
-use App\Src\Service\MessageService;
+namespace src\Repository;
+use src\database\Database;
+use src\Model\Unidade;
+use src\model\Message;
 use PDO;
 use PDOException;
 
@@ -21,9 +21,9 @@ class UnidadeRepository {
         $prepare->bindValue(2, $unidade->getEndereco());
         try {
             $prepare->execute();
-            return MessageService::message(true,200,'Cadastrado com sucesso',[]);
+            return Message::message(true,200,'Cadastrado com sucesso',[]);
         } catch (PDOException $e) {
-            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -33,9 +33,9 @@ class UnidadeRepository {
         try {
             $prepare->execute();
             $data = $prepare->fetchAll();
-            return MessageService::message(true,200,'Dados encontrados',$data);
+            return Message::message(true,200,'Dados encontrados',$data);
         } catch (PDOException $e) {
-            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -46,9 +46,9 @@ class UnidadeRepository {
         try {
             $prepare->execute();
             $data = $prepare->fetch();
-            return MessageService::message(true,200,'Dados encontrados',$data);
+            return Message::message(true,200,'Dados encontrados',$data);
         } catch (PDOException $e) {
-            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -60,9 +60,9 @@ class UnidadeRepository {
         $prepare->bindValue(3, $unidade->getId());
         try {
             $prepare->execute();
-            return MessageService::message(true,200,'Cadastro atualizado com sucesso',[]);
+            return Message::message(true,200,'Cadastro atualizado com sucesso',[]);
         } catch(PDOException $e){
-            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -72,9 +72,9 @@ class UnidadeRepository {
         $prepare->bindValue(1, $unidade->getId());
         try {
             $prepare->execute();
-            return MessageService::message(true,200,'Unidade removida com sucesso',[]);
+            return Message::message(true,200,'Unidade removida com sucesso',[]);
         } catch (PDOException $e) {
-            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 

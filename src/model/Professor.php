@@ -1,6 +1,6 @@
 <?php
-namespace App\Src\Model;
-use App\Src\Model\Unidade;
+namespace src\Model;
+use src\model\Unidade;
 
 class Professor {
 
