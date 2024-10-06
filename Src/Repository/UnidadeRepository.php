@@ -33,7 +33,7 @@ class UnidadeRepository {
         try {
             $prepare->execute();
             $data = $prepare->fetchAll();
-            return MessageService::message(true,200,'Cadastrado com sucesso',$data);
+            return MessageService::message(true,200,'Dados encontrados',$data);
         } catch (PDOException $e) {
             return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
         }
@@ -46,14 +46,36 @@ class UnidadeRepository {
         try {
             $prepare->execute();
             $data = $prepare->fetch();
-            return MessageService::message(true,200,'Cadastrado com sucesso',$data);
+            return MessageService::message(true,200,'Dados encontrados',$data);
         } catch (PDOException $e) {
             return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
     public function update(Unidade $unidade) : array {
+        $update = 'UPDATE Unidade SET Nome_Unidade = ?, Endereco = ? WHERE ID_Unidade = ?';
+        $prepare = $this->connection->prepare($update);
+        $prepare->bindValue(1, $unidade->getNome());
+        $prepare->bindValue(2, $unidade->getEndereco());
+        $prepare->bindValue(3, $unidade->getId());
+        try {
+            $prepare->execute();
+            return MessageService::message(true,200,'Cadastro atualizado com sucesso',[]);
+        } catch(PDOException $e){
+            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+        }
+    }
 
+    public function delete(Unidade $unidade){
+        $delete = 'DELETE FROM Unidade WHERE ID_Unidade = ?';
+        $prepare = $this->connection->prepare($delete);
+        $prepare->bindValue(1, $unidade->getId());
+        try {
+            $prepare->execute();
+            return MessageService::message(true,200,'Unidade removida com sucesso',[]);
+        } catch (PDOException $e) {
+            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+        }
     }
 
 }

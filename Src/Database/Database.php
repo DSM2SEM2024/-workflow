@@ -7,11 +7,11 @@ class Database {
 
     public static function connect(){
 
-        $host = "";
-        $db = "";
+        $host = "sql10.freesqldatabase.com";
+        $db = "sql10735819";
         $charset = "utf8mb4";
-        $user = "";
-        $password = "";
+        $user = "sql10735819";
+        $password = "FHfE5NPBtq";
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 

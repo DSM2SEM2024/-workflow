@@ -86,7 +86,7 @@ class Professor {
     /**
      * Get the value of unidade
      */ 
-    public function getUnidade()
+    public function getUnidade() : Unidade
     {
         return $this->unidade;
     }
