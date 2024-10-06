@@ -1,9 +1,8 @@
 <?php
-namespace App\Src\Repository;
-use App\Src\Model\Professor;
-use App\Src\Model\Unidade;
-use App\Src\Database\Database;
-use App\Src\Service\MessageService;
+namespace src\Repository;
+use src\Model\Professor;
+use src\Database\Database;
+use src\model\Message;
 use PDO;
 use PDOException;
 
@@ -25,9 +24,9 @@ class ProfessorRepository {
         $prepare->bindValue(4, $professor->getUnidade()->getId());
         try{
             $prepare->execute();
-            return MessageService::message(true,200,'Cadastro efetuado com sucesso',[]);
+            return Message::message(true,200,'Cadastro efetuado com sucesso',[]);
         } catch(PDOException $e){
-            return MessageService::message(false, $e->getCode(),$e->getMessage(),[]);
+            return Message::message(false, $e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -37,9 +36,9 @@ class ProfessorRepository {
         try {
             $prepare->execute();
             $data = $prepare->fetchAll();
-            return MessageService::message(true,200,'Dados encontrados',$data);
+            return Message::message(true,200,'Dados encontrados',$data);
         } catch (PDOException $e) {
-            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -50,9 +49,9 @@ class ProfessorRepository {
         try {
             $prepare->execute();
             $data = $prepare->fetch();
-            return MessageService::message(true,200,'Dados encontrados',$data);
+            return Message::message(true,200,'Dados encontrados',$data);
         } catch (PDOException $e) {
-            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -66,9 +65,9 @@ class ProfessorRepository {
         $prepare->bindValue(5, $professor->getId());
         try {
             $prepare->execute();
-            return MessageService::message(true,200,'Cadastro atualizado com sucesso',[]);
+            return Message::message(true,200,'Cadastro atualizado com sucesso',[]);
         } catch (PDOException $e) {
-            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -78,9 +77,9 @@ class ProfessorRepository {
         $prepare->bindValue(1, $professor->getId());
         try {
             $prepare->execute();
-            return MessageService::message(true,200,'Cadastro removido com sucesso',[]);
+            return Message::message(true,200,'Cadastro removido com sucesso',[]);
         } catch (PDOException $e) {
-            return MessageService::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 

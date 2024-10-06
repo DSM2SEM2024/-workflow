@@ -1,7 +1,7 @@
 <?php
-namespace App\Src\Service;
+namespace src\Model;
 
-class MessageService {
+class Message {
 
     public static function message($status,$code,$message,$data) : array {
         return [
@@ -11,5 +11,4 @@ class MessageService {
             'DATA'=>$data
         ];
     }
-
 }
