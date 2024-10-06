@@ -16,6 +16,7 @@
         }
     ],
     "require": {
-        "firebase/php-jwt": "^6.10"
+        "firebase/php-jwt": "^6.10",
+        "twbs/bootstrap": "5.0.2"
     }
 }
