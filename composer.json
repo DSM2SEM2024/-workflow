@@ -2,14 +2,20 @@
     "name": "app/src",
     "autoload": {
         "psr-4": {
-            "App\\Src\\": "Src/"
+            "src\\": "src"
         }
     },
     "authors": [
         {
             "name": "Joia",
             "email": "gustavo.sc.joia@gmail.com"
+        },
+        {
+            "name": "Gabriel Arcanjo",
+            "email": "gabrielarcanocontato04@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    }
 }
