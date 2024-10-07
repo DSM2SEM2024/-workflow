@@ -2,12 +2,12 @@
     "name": "app/src",
     "autoload": {
         "psr-4": {
-            "src\\": "src"
+            "Src\\": "src"
         }
     },
     "authors": [
         {
-            "name": "Joia",
+            "name": "Gustavo Joia",
             "email": "gustavo.sc.joia@gmail.com"
         },
         {
