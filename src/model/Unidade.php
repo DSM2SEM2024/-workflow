@@ -1,5 +1,5 @@
 <?php
-namespace src\Model;
+namespace Src\Model;
 
 class Unidade {
 

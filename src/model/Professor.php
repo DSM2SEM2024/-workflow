@@ -1,14 +1,15 @@
 <?php
-namespace src\Model;
-use src\model\Unidade;
+namespace Src\Model;
+use Src\Model\Unidade;
 
 class Professor {
 
     private int $id;
-    private string $nome;
+    private string $name;
     private string $email;
-    private string $atuacao;
-    private Unidade $unidade;
+    private string $expertise;
+    private string $password;
+    private $unit;
 
 
     /**
@@ -32,9 +33,9 @@ class Professor {
     /**
      * Get the value of nome
      */ 
-    public function getNome()
+    public function getName()
     {
-        return $this->nome;
+        return $this->name;
     }
 
     /**
@@ -42,9 +43,9 @@ class Professor {
      *
      * @return  self
      */ 
-    public function setNome($nome)
+    public function setName($name)
     {
-        $this->nome = $nome;
+        $this->name = $name;
     }
 
     /**
@@ -68,9 +69,9 @@ class Professor {
     /**
      * Get the value of atuacao
      */ 
-    public function getAtuacao()
+    public function getExpertise()
     {
-        return $this->atuacao;
+        return $this->expertise;
     }
 
     /**
@@ -78,17 +79,17 @@ class Professor {
      *
      * @return  self
      */ 
-    public function setAtuacao($atuacao)
+    public function setExpertise($expertise)
     {
-        $this->atuacao = $atuacao;
+        $this->expertise = $expertise;
     }
 
     /**
      * Get the value of unidade
      */ 
-    public function getUnidade() : Unidade
+    public function getUnit()
     {
-        return $this->unidade;
+        return $this->unit;
     }
 
     /**
@@ -96,8 +97,30 @@ class Professor {
      *
      * @return  self
      */ 
-    public function setUnidade($unidade)
+    public function setUnit($unit)
     {
-        $this->unidade = $unidade;
+        $this->unit = $unit;
+    }
+
+    /**
+     * Get the value of password
+     *
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @param string $password
+     *
+     * @return self
+     */
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
     }
 }

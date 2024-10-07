@@ -1,5 +1,5 @@
 <?php
-namespace App\Src;
+namespace Src;
 include_once (__DIR__.'/../vendor/autoload.php');
 
 if( $_SERVER['REQUEST_METHOD'] == 'GET'){
