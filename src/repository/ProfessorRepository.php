@@ -18,10 +18,10 @@ class ProfessorRepository {
     public function insert(Professor $professor){
         $insert = 'INSERT INTO Professor(Name,Email,Password,Area_of_Expertise) VALUES(?,?,?,?)';
         $prepare = $this->connection->prepare($insert);
-        $prepare->bindValue(1, $professor->getNome());
+        $prepare->bindValue(1, $professor->getName());
         $prepare->bindValue(2, $professor->getEmail());
         $prepare->bindValue(3, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
-        $prepare->bindValue(4, $professor->getAtuacao());
+        $prepare->bindValue(4, $professor->getExpertise());
         try{
             $prepare->execute();
             return Message::send(true,200,'Cadastro efetuado com sucesso',[]);
@@ -58,10 +58,10 @@ class ProfessorRepository {
     public function update(Professor $professor){
         $update = 'UPDATE Professor SET Name = ?, Email = ?,Password = ?, Area_of_Expertise = ? WHERE ID_Professor = ?';
         $prepare = $this->connection->prepare($update);
-        $prepare->bindValue(1, $professor->getNome());
+        $prepare->bindValue(1, $professor->getName());
         $prepare->bindValue(2, $professor->getEmail());
         $prepare->bindValue(3, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
-        $prepare->bindValue(4, $professor->getAtuacao());
+        $prepare->bindValue(4, $professor->getExpertise());
         $prepare->bindValue(5, $professor->getId());
         try {
             $prepare->execute();

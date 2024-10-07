@@ -1,12 +1,12 @@
 <?php
 namespace Src\Repository;
 use Src\Database\Database;
-use Src\Model\Unidade;
+use Src\Model\Unit;
 use Src\model\Message;
 use PDO;
 use PDOException;
 
-class UnidadeRepository {
+class UnitRepository {
 
     private PDO $connection;
 
@@ -14,11 +14,11 @@ class UnidadeRepository {
         $this->connection = Database::connect();
     }
 
-    public function insert(Unidade $unidade) : array {
+    public function insert(Unit $unit) : array {
         $insert = 'INSERT INTO Unit(Unit_Name,Address) VALUES(?,?)';
         $prepare = $this->connection->prepare($insert);
-        $prepare->bindValue(1, $unidade->getNome());
-        $prepare->bindValue(2, $unidade->getEndereco());
+        $prepare->bindValue(1, $unit->getName());
+        $prepare->bindValue(2, $unit->getAddress());
         try {
             $prepare->execute();
             return Message::send(true,200,'Cadastrado com sucesso',[]);
@@ -28,7 +28,7 @@ class UnidadeRepository {
     }
 
     public function selectAll() : array {
-        $select = 'SELECT * FROM Unidade';
+        $select = 'SELECT * FROM Unit';
         $prepare = $this->connection->prepare($select);
         try {
             $prepare->execute();
@@ -39,10 +39,10 @@ class UnidadeRepository {
         }
     }
 
-    public function selectById(Unidade $unidade) : array {
-        $select = 'SELECT * FROM Unidade WHERE ID_Unidade = ?';
+    public function selectById(Unit $unit) : array {
+        $select = 'SELECT * FROM Unit WHERE ID_Unit = ?';
         $prepare = $this->connection->prepare($select);
-        $prepare->bindValue(1, $unidade->getId());
+        $prepare->bindValue(1, $unit->getId());
         try {
             $prepare->execute();
             $data = $prepare->fetch();
@@ -52,12 +52,12 @@ class UnidadeRepository {
         }
     }
 
-    public function update(Unidade $unidade) : array {
-        $update = 'UPDATE Unidade SET Nome_Unidade = ?, Endereco = ? WHERE ID_Unidade = ?';
+    public function update(Unit $unit) : array {
+        $update = 'UPDATE Unit SET Nome_Unit = ?, Endereco = ? WHERE ID_Unit = ?';
         $prepare = $this->connection->prepare($update);
-        $prepare->bindValue(1, $unidade->getNome());
-        $prepare->bindValue(2, $unidade->getEndereco());
-        $prepare->bindValue(3, $unidade->getId());
+        $prepare->bindValue(1, $unit->getName());
+        $prepare->bindValue(2, $unit->getAddress());
+        $prepare->bindValue(3, $unit->getId());
         try {
             $prepare->execute();
             return Message::send(true,200,'Cadastro atualizado com sucesso',[]);
@@ -66,13 +66,13 @@ class UnidadeRepository {
         }
     }
 
-    public function delete(Unidade $unidade){
-        $delete = 'DELETE FROM Unidade WHERE ID_Unidade = ?';
+    public function delete(Unit $unit){
+        $delete = 'DELETE FROM Unit WHERE ID_Unit = ?';
         $prepare = $this->connection->prepare($delete);
-        $prepare->bindValue(1, $unidade->getId());
+        $prepare->bindValue(1, $unit->getId());
         try {
             $prepare->execute();
-            return Message::send(true,200,'Unidade removida com sucesso',[]);
+            return Message::send(true,200,'Unit removida com sucesso',[]);
         } catch (PDOException $e) {
             return Message::send(false,$e->getCode(),$e->getMessage(),[]);
         }

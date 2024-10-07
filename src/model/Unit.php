@@ -1,11 +1,11 @@
 <?php
 namespace Src\Model;
 
-class Unidade {
+class Unit {
 
     private int $id;
-    private string $nome;
-    private string $endereco;
+    private string $name;
+    private string $address;
 
 
     /**
@@ -27,38 +27,38 @@ class Unidade {
     }
 
     /**
-     * Get the value of nome
+     * Get the value of name
      */ 
-    public function getNome()
+    public function getName()
     {
-        return $this->nome;
+        return $this->name;
     }
 
     /**
-     * Set the value of nome
+     * Set the value of name
      *
      * @return  self
      */ 
-    public function setNome($nome)
+    public function setName($name)
     {
-        $this->nome = $nome;
+        $this->name = $name;
     }
 
     /**
-     * Get the value of endereco
+     * Get the value of address
      */ 
-    public function getEndereco()
+    public function getAddress()
     {
-        return $this->endereco;
+        return $this->address;
     }
 
     /**
-     * Set the value of endereco
+     * Set the value of address
      *
      * @return  self
      */ 
-    public function setEndereco($endereco)
+    public function setAddress($address)
     {
-        $this->endereco = $endereco;
+        $this->address = $address;
     }
 }

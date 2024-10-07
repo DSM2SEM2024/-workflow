@@ -1,6 +1,5 @@
 <?php
 namespace Src\Model;
-use Src\Model\Unidade;
 
 class Professor {
 
