@@ -1,32 +1,44 @@
 export const Login = {
     template: `
-        <div id="login">
+        <main id="login" class="d-flex justify-content-evenly align-items-center flex-row">
             <section id="left-content">
                 <figure>
-                    <img src="logo" alt="Logo Centro Paula Souza">
-                    <figcaption>Logo CPS</figcaption>
+                    <img src="../images/logo-cps.png" alt="Logo Centro Paula Souza">
                 </figure>
+            </section>
+
+            <section id="middle-content">
             </section>
 
             <section id="right-content">
                 <h1>Login</h1>
-                <p>Faça login na plataforma para criar projetos</p>
-                <section>
-                    <input type="email" v-model="email" placeholder="E-mail">
-                    <input type="password" v-model="password">
+                <p class="subtitle">Faça login na plataforma para criar projetos</p>
 
-                    <section class="options-password">
-                        <input type="checkbox" placeholder="Lembrar credenciais">
+                <section>
+                    <div class="d-flex flex-column justify-content-start form-inputs">
+                        <input type="email" v-model="email" placeholder="E-mail">
+                        <input type="password" v-model="password" placeholder="Senha">
+                    </div>
+
+                    <section class="d-flex justify-content-between flex-row options-password">
+                        <div class="d-flex justify-content-start align-items-center gap-2">
+                            <input type="checkbox">
+                            <label>Lembrar credenciais</label>
+                        </div>
+
                         <a href="">Esqueci a senha</a>
                     </section>
 
-                    <section class="options-login">
-                        <button type="submit">Entrar</button>
-                        <button type="submit">Entrar com Microsoft</button>
+                    <section class="d-flex justify-content-center flex-column gap-3 options-login">
+                        <button type="submit" class="button btn-red">Entrar</button>
+                        <button type="submit" class="d-flex justify-content-center flex-row align-items-center gap-3 button btn-white">
+                            <img class="icon" src="../images/logo-microsoft.png" alt="Logo Microsoft">
+                            Entrar com Microsoft
+                        </button>
                     </section>
                 </section>
             </section>
-        </div>
+        </main>
         {{email}} {{password}}
     `,
     data() {
@@ -41,7 +53,7 @@ export const Login = {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
-        save(){
+        save() {
             this.email;
         }
     },
