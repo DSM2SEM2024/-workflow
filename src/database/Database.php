@@ -23,9 +23,11 @@ class Database {
             ]);
             return $pdo;
         } catch(PDOException $e){
-            return false;
+            return $e->getMessage();
         }
 
     }
 
 }
+
+echo json_encode(Database::connect());

@@ -11,7 +11,8 @@ class ProfessorRepository {
     private PDO $connection;
 
     public function __construct()
-    {
+    {   
+        echo json_encode(Database::connect());
         $this->connection = Database::connect();
     }
 
@@ -52,6 +53,20 @@ class ProfessorRepository {
             return Message::send(true,200,'Dados encontrados',$data);
         } catch (PDOException $e) {
             return Message::send(false,$e->getCode(),$e->getMessage(),[]);
+        }
+    }
+
+    public function login(Professor $professor){
+        $select = 'SELECT Email, Password FROM Professor WHERE Email = ? AND Password = ?';
+        $prepare = $this->connection->prepare($select);
+        $prepare->bindValue(1, $professor->getEmail());
+        $prepare->bindValue(2, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
+        try {
+            $prepare->execute();
+            $data = $prepare->fetch();
+            return Message::send(true,200,'Usuário reconhecido',$data);
+        } catch (PDOException $e) {
+            return Message::send(false, $e->getCode(),$e->getMessage(),[]);
         }
     }
 
