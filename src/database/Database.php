@@ -7,11 +7,14 @@ class Database {
 
     public static function connect(){
 
-        $host = "sql10.freesqldatabase.com";
+        // $host = "sql10.freesqldatabase.com:3306";
         $db = "sql10735819";
+        // $user = "sql10735819";
+        // $password = "FHfE5NPBtq";
+        $host = "localhost:3306";
+        $user = "root";
+        $password = "root";
         $charset = "utf8mb4";
-        $user = "sql10735819";
-        $password = "FHfE5NPBtq";
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
@@ -23,7 +26,7 @@ class Database {
             ]);
             return $pdo;
         } catch(PDOException $e){
-            return false;
+            return $e->getMessage();
         }
 
     }

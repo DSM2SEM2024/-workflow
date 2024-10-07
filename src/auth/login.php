@@ -7,25 +7,28 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Src\Model\Message;
 
-$teste_user = 'usuario';
-$teste_senha = '123';
+use Src\Model\Professor;
+use Src\Repository\ProfessorRepository;
 
+$professor = new Professor();
 $dados = json_decode(file_get_contents("php://input"));
 
-if ($dados->usuario == $teste_user && $dados->senha == $teste_senha){
+$professor->setEmail($dados->usuario);
+$professor->setPassword($dados->senha);
+
+$prof_repo = new ProfessorRepository();
+$login_data = $prof_repo->login($professor);
+
+if ($login_data['STATUS']==true){
     $payload = [
         'iat' => time(),
         'exp' => + 3600 * 12,
-        'usuario' => $dados->usuario
+        'usuario' => $login_data['DATA']
     ];
     
     $jwt = JWT::encode($payload, SECRET_KEY, 'HS256');
     
-    echo json_encode(
-        Message::send(true,200,'Login efetuado',$jwt)
-    );
+    echo json_encode(Message::send(true,200,'Login efetuado',$jwt));
 } else{
-    echo json_encode(
-        Message::send(false,401,'Usuário ou senha inválidos',[])
-    );
+    echo json_encode(Message::send(false,401,'Usuário ou senha inválidos',null));
 }

@@ -55,6 +55,24 @@ class ProfessorRepository {
         }
     }
 
+    public function login(Professor $professor){
+        $select = 'SELECT Email, Password FROM Professor WHERE Email = ? AND Password = ?';
+        $prepare = $this->connection->prepare($select);
+        $prepare->bindValue(1, $professor->getEmail());
+        $prepare->bindValue(2, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
+        try {
+            $prepare->execute();
+            $data = $prepare->fetch();
+            if(is_array($data)){
+                return Message::send(true,200,'Usuário reconhecido',$data);
+            }
+            return Message::send(false, 404, 'Usuário não reconhecido',[]);
+           
+        } catch (PDOException $e) {
+            return Message::send(false, $e->getCode(),$e->getMessage(),[]);
+        }
+    }
+
     public function update(Professor $professor){
         $update = 'UPDATE Professor SET Name = ?, Email = ?,Password = ?, Area_of_Expertise = ? WHERE ID_Professor = ?';
         $prepare = $this->connection->prepare($update);
