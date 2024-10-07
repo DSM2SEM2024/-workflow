@@ -11,8 +11,7 @@ class ProfessorRepository {
     private PDO $connection;
 
     public function __construct()
-    {   
-        echo json_encode(Database::connect());
+    {
         $this->connection = Database::connect();
     }
 
@@ -64,7 +63,11 @@ class ProfessorRepository {
         try {
             $prepare->execute();
             $data = $prepare->fetch();
-            return Message::send(true,200,'Usuário reconhecido',$data);
+            if(is_array($data)){
+                return Message::send(true,200,'Usuário reconhecido',$data);
+            }
+            return Message::send(false, 404, 'Usuário não reconhecido',[]);
+           
         } catch (PDOException $e) {
             return Message::send(false, $e->getCode(),$e->getMessage(),[]);
         }
