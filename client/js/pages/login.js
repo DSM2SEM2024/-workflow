@@ -1,6 +1,6 @@
 export const Login = {
     template: `
-        <main id="login" class="d-flex justify-content-evenly align-items-center flex-row">
+        <main id="login" class="dinamic-content d-flex justify-content-evenly align-items-center flex-row">
             <section id="left-content">
                 <figure>
                     <img src="../images/logo-cps.png" alt="Logo Centro Paula Souza">
