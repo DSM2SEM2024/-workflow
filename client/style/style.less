@@ -107,15 +107,16 @@ body {
 
 header{
     width: 6rem;
-    height: auto;
+    min-height: 30rem;
+    max-height: 100%;
     background: transparent;
 
     & nav{
         padding: 5rem 0rem 5rem 0rem;
 
         & .icon{
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 2rem;
+            height: 2rem;
         }
     }
 }
@@ -123,8 +124,27 @@ header{
 main{
     & .dinamic-content{
         width: 70vw;
-        height: 30vh;
+        height: 100%;
         background-color: @quinary-white;
+        padding: 5rem 2rem 0rem 2rem;
+
+        & .title-section{
+            margin-top: rem;
+            background: @background-red;
+            color: @terciary-white;
+            min-width: 70%;
+            height: 5rem;
+            border-radius: 0.4rem;
+
+            & h2{
+                font-size: 1.5rem;
+                font-family: @roboto-medium;
+                text-transform: uppercase;
+                text-align: start;
+                padding-top: 0.5rem;
+                padding-left: 2rem;
+            }
+        }
     }
 
     & a{

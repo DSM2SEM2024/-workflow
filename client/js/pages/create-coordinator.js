@@ -2,6 +2,9 @@ export const CreateCoordinator = {
     template: `
         <main id="create-coordinator" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
+                <div class="title-section d-flex justify-content-start align-items-center">
+                    <h2>Cadastrar coordenador</h2>
+                </div>
      
             </section>
             
