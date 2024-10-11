@@ -44,6 +44,7 @@
 // Definindo variáveis de cor
 @primary-red: #BA1A1A;
 @secundary-red: #C13333;
+@terciary-red: #BF2C2C;
 @primary-white: #F0F0F0;
 @secundary-white: #E0E0E0;
 @terciary-white: #FFF;
@@ -81,122 +82,210 @@ body {
     background: @background-white;
 }
 
-#login{
+#login {
     height: 100vh;
-    & #left-content{
-        & figure{
-            & img{
+
+    & #left-content {
+        & figure {
+            & img {
                 max-width: 80%;
             }
         }
     }
 
-    & #middle-content{
+    & #middle-content {
         height: 40%;
         width: 0.01rem;
         background: @lighten-black;
     }
 
-    & #right-content{
-        & .options-password{
+    & #right-content {
+        & .options-password {
             padding: 1rem 0rem 1rem 0rem;
             font-family: @roboto-regular;
         }
     }
 }
 
-header{
+header {
     width: 6rem;
     min-height: 30rem;
     max-height: 100%;
     background: transparent;
 
-    & nav{
+    & nav {
         padding: 5rem 0rem 5rem 0rem;
 
-        & .icon{
+        & .icon {
             width: 2rem;
             height: 2rem;
         }
     }
 }
 
-main{
-    & .dinamic-content{
-        width: 70vw;
-        height: 100%;
-        background-color: @quinary-white;
-        padding: 5rem 2rem 0rem 2rem;
-
-        & .title-section{
-            margin-top: rem;
-            background: @background-red;
-            color: @terciary-white;
-            min-width: 70%;
-            height: 5rem;
-            border-radius: 0.4rem;
-
-            & h2{
-                font-size: 1.5rem;
-                font-family: @roboto-medium;
-                text-transform: uppercase;
-                text-align: start;
-                padding-top: 0.5rem;
-                padding-left: 2rem;
-            }
-        }
-    }
-
-    & a{
+main {
+    & a {
         text-decoration: none;
         color: @secundary-black;
     }
 
-    & button, input, textarea{
-        border: none;
-        background-color: transparent;
-        outline: none;
-
-        & .icon{
-            max-width: 1.5rem;
-            max-height: 1.5rem;
-        }
-    }
-
-    & h1{
+    & h1 {
         font-family: @roboto-bold;
     }
 
-    & .subtitle{
+    & .subtitle {
         font-family: @roboto-regular;
     }
 
-    & .button{
+    & .button {
         border-radius: 0.3rem;
         padding: 0.5rem;
         font-family: @roboto-regular;
         font-size: 0.9rem;
     }
 
-    & .btn-red{
+    & .btn-red {
         background: @background-red;
         color: @terciary-white;
         text-transform: uppercase;
     }
 
-    & .btn-white{
+    & .btn-white {
         background: @primary-white;
         color: @secundary-black;
         font-family: @roboto-light;
     }
 
-    & .form-inputs{
+    & .dinamic-content {
+        width: 70vw;
+        height: 100%;
+        background-color: @quinary-white;
+        padding: 5rem 2rem 0rem 2rem;
+
+        & .page-section {
+            margin-top: rem;
+            background: @background-red;
+            color: @terciary-white;
+            min-width: 70%;
+            height: 4rem;
+            border-radius: 0.4rem;
+
+            & h2 {
+                font-size: 1.1rem;
+                font-family: @roboto-medium;
+                text-transform: uppercase;
+                text-align: start;
+                padding-top: 0.7rem;
+                padding-left: 2rem;
+            }
+        }
+
+        & .form-content {
+            margin-top: 1rem;
+            border-radius: 0.1rem;
+            background: @terciary-white;
+            box-shadow: 1px 0px 2px 0px @quaternary-white;
+            padding: 1.5rem;
+
+            & .section-title {
+                font-family: @roboto-regular;
+                background: @primary-white;
+                box-shadow: 0px 1px 2px 0px @terciary-black;
+                padding: 0.4rem 0.8rem 0.1rem 0.8rem;
+                border-radius: 0.1rem;
+
+                & h3 {
+                    padding-top: 0.5rem;
+                    font-size: 1rem;
+                    text-transform: uppercase;
+                }
+
+                & .icon {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    cursor: pointer;
+                }
+            }
+
+            & form {
+                & .form-inputs {
+                    gap: 5%;
+
+                    & input,
+                    select {
+                        outline: none;
+                        width: 16rem;
+                        border: 0.01px solid @primary-black;
+                        border-radius: 0.3rem;
+                        padding: 0.4rem 1rem 0.4rem 1rem;
+                        font-size: 0.9rem;
+                        font-family: @roboto-regular;
+                        margin: 1.7rem 0rem 0rem 0rem;
+                    }
+                }
+            }
+
+            & hr {
+                margin: 2.5rem 0rem 2.5rem 0rem;
+            }
+
+            & .form-footer {
+                & p {
+                    font-family: @roboto-regular;
+                }
+
+                & .btn-create {
+                    border: none;
+                    outline: none;
+                    background: @terciary-red;
+                    color: @terciary-white;
+                    font-family: @roboto-regular;
+                    text-transform: uppercase;
+                    font-size: 0.9rem;
+                    padding: 0.5rem 1rem 0.5rem 1rem;
+                    border-radius: 0.4rem;
+                    cursor: pointer;
+                    white-space: nowrap;
+
+                    & .icon {
+                        width: 0.8rem;
+                        height: 0.8rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#login {
+    & .form-inputs {
         gap: 1.8rem;
-        & input{
+
+        & input {
             background: transparent;
             border: 0.01rem solid @primary-black;
             border-radius: 0.2rem;
             padding: 0.5rem 1rem 0.5rem 1rem;
+        }
+    }
+
+    & .options-login {
+
+        & button,
+        input,
+        textarea {
+            border: none;
+            background-color: transparent;
+            outline: none;
+
+            & .icon {
+                max-width: 1.5rem;
+                max-height: 1.5rem;
+            }
+        }
+
+        & .btn-white {
+            background: @terciary-white;
         }
     }
 }
