@@ -7,7 +7,7 @@ class Database {
 
     public static function connect(){
 
-        // $host = "sql10.freesqldatabase.com:3306";
+        // $host = "sql10.freesqldatabase.com";
         $db = "sql10735819";
         // $user = "sql10735819";
         // $password = "FHfE5NPBtq";
