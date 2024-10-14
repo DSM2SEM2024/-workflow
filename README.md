@@ -39,3 +39,11 @@ git push origin prefixo/nome
 ```
 
 - Esse nome da branch tem que ser o mesmo que você definiu.
+
+#
+
+### 4. Crie um pull-request da branch que você criou depois de terminar tudo.
+
+Isso você fará no próprio site do github, no repositorio da branch, no botão ***CONTRIBUTE*** e aguarde :D
+
+![Captura de tela do repositório remoto no Github, com ênfase no botão de criar Pull-Request](./docs/readme/image.png)
