@@ -21,7 +21,7 @@ class Unit {
      *
      * @return  self
      */ 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -39,7 +39,7 @@ class Unit {
      *
      * @return  self
      */ 
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -57,7 +57,7 @@ class Unit {
      *
      * @return  self
      */ 
-    public function setAddress($address)
+    public function setAddress($address): void
     {
         $this->address = $address;
     }

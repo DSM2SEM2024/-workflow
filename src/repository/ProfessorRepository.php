@@ -63,7 +63,7 @@ class ProfessorRepository {
         try {
             $prepare->execute();
             $data = $prepare->fetch();
-            if(is_array($data)){
+            if(is_array($data) && count($data) > 0){
                 return Message::send(true,200,'Usuário reconhecido',$data);
             }
             return Message::send(false, 404, 'Usuário não reconhecido',[]);
