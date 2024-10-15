@@ -1,3 +1,6 @@
+CREATE DATABASE repositories;
+USE repositories;
+
 -- phpMyAdmin SQL Dump
 -- version 4.7.1
 -- https://www.phpmyadmin.net/
