@@ -33,9 +33,9 @@ class LoginAuth {
             
             $jwt = JWT::encode($payload, SECRET_KEY, 'HS256');
             
-            echo json_encode(Message::send(true,200,'Login efetuado',$jwt));
+            return json_encode(Message::send(true,200,'Login efetuado',$jwt));
         } else{
-            echo json_encode(Message::send(false,401,'Usuário ou senha inválidos',null));
+            return json_encode(Message::send(false,401,'Usuário ou senha inválidos',null));
         }
     }
 
