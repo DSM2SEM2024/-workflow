@@ -46,4 +46,8 @@ git push origin prefixo/nome
 
 Isso você fará no próprio site do github, no repositorio da branch, no botão ***CONTRIBUTE*** e aguarde :D
 
-![Captura de tela do repositório remoto no Github, com ênfase no botão de criar Pull-Request](./docs/readme/image.png)
+![Captura de tela do repositório remoto no Github, com ênfase no botão de criar Pull-Request](./docs/readme/image1.png)
+
+#
+
+![alt text](./docs/readme/image2.png)
