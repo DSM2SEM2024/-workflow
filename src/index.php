@@ -2,6 +2,10 @@
 namespace Src;
 require_once '../vendor/autoload.php';
 
+use Src\Auth\LoginAuth;
 use Src\Model\Message;
 
-echo json_encode(Message::send(true,200,'Requisição funcionando',[]));
+
+$dados = json_decode(file_get_contents("php://input"),true);
+
+echo json_encode(LoginAuth::login($dados));
