@@ -2,6 +2,8 @@
 
 ## Como fazer atualizações do projeto
 
+- Recomendo que tenham baixado no VSCode a extensão Auto Open Markdown Preview (ele abre o README dentro do vscode ao abrir o arquivo)
+
 ### 1. Preparar o ambiente:
 
 ```sh
@@ -31,8 +33,9 @@ git branch -m fix/namespace
 
 #
 
-### 3. Após fazer suas alterações, adicionar com um comentário e subir a sua branch :)
+### 3. Após fazer suas alterações, tente puxar da branch main para garantir que está tudo em dia, então adicionar com um comentário e subir a sua branch :)
 ```sh
+git pull origin main
 git add *
 git commit -m "Comentário do que você fez"
 git push origin prefixo/nome
@@ -46,8 +49,10 @@ git push origin prefixo/nome
 
 Isso você fará no próprio site do github, no repositorio da branch, no botão ***CONTRIBUTE*** e aguarde :D
 
+- Me coloque como Reviewer (revisor) do Pull Request, e associe o Pull Request ao projeto Workflow conforme o print de exemplo (segunda imagem)
+
 ![Captura de tela do repositório remoto no Github, com ênfase no botão de criar Pull-Request](./docs/readme/image1.png)
 
 #
 
-![alt text](./docs/readme/image2.png)
+![Captura de tela do repositório remoto no Github, na tela de Pull Request](./docs/readme/image2.png)
