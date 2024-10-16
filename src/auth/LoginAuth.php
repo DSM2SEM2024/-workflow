@@ -24,11 +24,11 @@ class LoginAuth {
         $prof_repo = new ProfessorRepository();
         $login_data = $prof_repo->login($professor);
         
-        if ($login_data['STATUS']==true){
+        if ($login_data['status']==true){
             $payload = [
                 'iat' => time(),
                 'exp' => + 3600 * 12,
-                'usuario' => $login_data['DATA']
+                'usuario' => $login_data['data']
             ];
             
             $jwt = JWT::encode($payload, SECRET_KEY, 'HS256');
