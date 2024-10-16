@@ -4,6 +4,10 @@ namespace Src\Routes;
 class Router{
     public static function resolve(array $arrayRotas, $method, $uri) {
         //extrai do array a classe e o metodo
+        echo json_encode($arrayRotas);
+        // echo json_encode($method);
+        // echo json_encode($uri);
+        exit();
        foreach ($arrayRotas[$method] as $route => $controller) {
            //extrai da rota o recurso  /user/1 u /user
            $pattern = preg_replace('/\{([a-zA-Z0-9_]+)\}/', '([a-zA-Z0-9_]+)', $route);

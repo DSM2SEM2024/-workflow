@@ -2,10 +2,20 @@
 namespace Src;
 require_once '../vendor/autoload.php';
 
-use Src\Auth\LoginAuth;
+use Src\Routes\Routes;
+use Src\Routes\Router;
 use Src\Model\Message;
-
 
 $dados = json_decode(file_get_contents("php://input"),true);
 
-echo json_encode(LoginAuth::login($dados));
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    echo json_encode(Message::send(false,204,'Erro na requisição',null));
+    exit();
+}
+
+$method = $_SERVER['REQUEST_METHOD'];
+$uri = $_SERVER['REQUEST_URI'];
+
+$arrayRotas = Routes::getRoutes();
+
+Router::resolve($arrayRotas, $method, $uri);
