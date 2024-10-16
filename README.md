@@ -1,5 +1,33 @@
 # Workflow
 
+## Padrões do projeto
+
+- Nome de pastas em minúsculo
+
+    ![alt text](./docs/readme/image3.png)
+- Nome de namespace em PascalCase (primeira letra maiúscula de cada palavra, tudo junto sem espaçamentos)
+    - exemplo:
+    ```php
+    <?php
+    namespace Src\Repository;
+    use Src\Model\Professor;
+    use Src\Database\Database;
+    ```
+
+- Nomeclatura em inglês para classes, preferível para variáveis também.
+- Variáveis e funções em camelCase (primeira letra minúscula da primeira palavra, as outras maíusculas)
+    - exemplo:
+    ```php
+    <?php
+    namespace Src\Teste;
+
+    $camelExample = "Dessa maneira";
+
+    public function showCamel() : string {
+        return $camelExample;
+    }
+    ```
+
 ## Como fazer atualizações do projeto
 
 - Recomendo que tenham baixado no VSCode a extensão Auto Open Markdown Preview (ele abre o README dentro do vscode ao abrir o arquivo)
