@@ -1,9 +1,9 @@
 <?php
-namespace src\Model;
+namespace Src\Model;
 
 class Message {
 
-    public static function message($status,$code,$message,$data) : array {
+    public static function send($status,$code,$message,$data) : array {
         return [
             'STATUS'=>$status,
             'CODE'=>$code,

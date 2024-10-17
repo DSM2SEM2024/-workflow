@@ -1,9 +1,7 @@
 <?php
-namespace App\Src;
-include_once (__DIR__.'/../vendor/autoload.php');
+namespace Src;
+require_once '../vendor/autoload.php';
 
-if( $_SERVER['REQUEST_METHOD'] == 'GET'){
-    http_response_code('200');
-    echo json_encode(["message" => "get funcionando"]);
-}
+use Src\Model\Message;
 
+echo json_encode(Message::send(true,200,'Requisição funcionando',[]));

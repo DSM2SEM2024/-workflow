@@ -1,5 +1,5 @@
 <?php
-namespace src\database;
+namespace Src\Database;
 use PDO;
 use PDOException;
 
@@ -7,11 +7,12 @@ class Database {
 
     public static function connect(){
 
-        $host = "sql10.freesqldatabase.com";
-        $db = "sql10735819";
+        $db = "repositories";
+        $host = "localhost";
+        $user = "root";
+        $password = "";
+        // $password = "root";
         $charset = "utf8mb4";
-        $user = "sql10735819";
-        $password = "FHfE5NPBtq";
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
@@ -23,7 +24,7 @@ class Database {
             ]);
             return $pdo;
         } catch(PDOException $e){
-            return false;
+            return $e->getMessage();
         }
 
     }

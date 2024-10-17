@@ -1,8 +1,8 @@
 <?php
-namespace src\Repository;
-use src\Model\Professor;
-use src\Database\Database;
-use src\model\Message;
+namespace Src\Repository;
+use Src\Model\Professor;
+use Src\Database\Database;
+use Src\Model\Message;
 use PDO;
 use PDOException;
 
@@ -16,17 +16,17 @@ class ProfessorRepository {
     }
 
     public function insert(Professor $professor){
-        $insert = 'INSERT INTO Professor(Nome_Professor, Email_Professor,Area_Atuacao,ID_Unidade) VALUES(?,?,?,?)';
+        $insert = 'INSERT INTO Professor(Name,Email,Password,Area_of_Expertise) VALUES(?,?,?,?)';
         $prepare = $this->connection->prepare($insert);
-        $prepare->bindValue(1, $professor->getNome());
+        $prepare->bindValue(1, $professor->getName());
         $prepare->bindValue(2, $professor->getEmail());
-        $prepare->bindValue(3, $professor->getAtuacao());
-        $prepare->bindValue(4, $professor->getUnidade()->getId());
+        $prepare->bindValue(3, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
+        $prepare->bindValue(4, $professor->getExpertise());
         try{
             $prepare->execute();
-            return Message::message(true,200,'Cadastro efetuado com sucesso',[]);
+            return Message::send(true,200,'Cadastro efetuado com sucesso',[]);
         } catch(PDOException $e){
-            return Message::message(false, $e->getCode(),$e->getMessage(),[]);
+            return Message::send(false, $e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -36,9 +36,9 @@ class ProfessorRepository {
         try {
             $prepare->execute();
             $data = $prepare->fetchAll();
-            return Message::message(true,200,'Dados encontrados',$data);
+            return Message::send(true,200,'Dados encontrados',$data);
         } catch (PDOException $e) {
-            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::send(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -49,25 +49,43 @@ class ProfessorRepository {
         try {
             $prepare->execute();
             $data = $prepare->fetch();
-            return Message::message(true,200,'Dados encontrados',$data);
+            return Message::send(true,200,'Dados encontrados',$data);
         } catch (PDOException $e) {
-            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::send(false,$e->getCode(),$e->getMessage(),[]);
+        }
+    }
+
+    public function login(Professor $professor){
+        $select = 'SELECT Email, Password FROM Professor WHERE Email = ? AND Password = ?';
+        $prepare = $this->connection->prepare($select);
+        $prepare->bindValue(1, $professor->getEmail());
+        $prepare->bindValue(2, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
+        try {
+            $prepare->execute();
+            $data = $prepare->fetch();
+            if(is_array($data) && count($data) > 0){
+                return Message::send(true,200,'Usuário reconhecido',$data);
+            }
+            return Message::send(false, 404, 'Usuário não reconhecido',[]);
+           
+        } catch (PDOException $e) {
+            return Message::send(false, $e->getCode(),$e->getMessage(),[]);
         }
     }
 
     public function update(Professor $professor){
-        $update = 'UPDATE Professor SET Nome_Professor = ?, Email_Professor = ?, Area_Atuacao = ?, ID_Unidade = ? WHERE ID_Professor = ?';
+        $update = 'UPDATE Professor SET Name = ?, Email = ?,Password = ?, Area_of_Expertise = ? WHERE ID_Professor = ?';
         $prepare = $this->connection->prepare($update);
-        $prepare->bindValue(1, $professor->getNome());
+        $prepare->bindValue(1, $professor->getName());
         $prepare->bindValue(2, $professor->getEmail());
-        $prepare->bindValue(3, $professor->getAtuacao());
-        $prepare->bindValue(4, $professor->getUnidade()->getId());
+        $prepare->bindValue(3, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
+        $prepare->bindValue(4, $professor->getExpertise());
         $prepare->bindValue(5, $professor->getId());
         try {
             $prepare->execute();
-            return Message::message(true,200,'Cadastro atualizado com sucesso',[]);
+            return Message::send(true,200,'Cadastro atualizado com sucesso',[]);
         } catch (PDOException $e) {
-            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::send(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
@@ -77,9 +95,9 @@ class ProfessorRepository {
         $prepare->bindValue(1, $professor->getId());
         try {
             $prepare->execute();
-            return Message::message(true,200,'Cadastro removido com sucesso',[]);
+            return Message::send(true,200,'Cadastro removido com sucesso',[]);
         } catch (PDOException $e) {
-            return Message::message(false,$e->getCode(),$e->getMessage(),[]);
+            return Message::send(false,$e->getCode(),$e->getMessage(),[]);
         }
     }
 
