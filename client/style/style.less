@@ -289,3 +289,41 @@ main {
         }
     }
 }
+
+#home{
+    .form-content{
+        & .box-search{
+            & .form-inputs{
+                display: flex;
+                flex-direction: column;
+
+                & .input-content{
+                    & label{
+
+                    }
+
+                    & .input-section, .select-section{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: start;
+                        align-items: start;
+
+                        & img{
+                            background-color: @background-red;
+                            width: 10px;
+
+                        }
+
+                        & input, select{
+
+                        }
+                    }
+
+                    & button{
+
+                    }
+                }
+            }
+        }
+    }
+}
