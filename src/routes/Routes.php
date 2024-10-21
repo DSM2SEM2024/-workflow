@@ -1,6 +1,7 @@
 <?php
 namespace Src\Routes;
-use Src\Auth\LoginAuth;
+use Src\Controller\ProfessorController;
+use Src\Model\Professor;
 
 class Routes {
 
@@ -8,17 +9,17 @@ class Routes {
     public static function getRoutes(): array{
         return [
             'GET' => [
-                '/auth' => [LoginAuth::class, 'login'],
-                '/auth/{id}' => [LoginAuth::class, 'login'],
+                '/teste' => [ProfessorController::class, 'teste'],
+                '/auth/{id}' => [ProfessorController::class, 'login'],
             ],
             'POST' => [
-                '/auth' => [LoginAuth::class, 'login'],
+                '/login/professor' => [ProfessorController::class, 'login'],
             ],
             'PUT' => [
-                '/auth/{id}' => [LoginAuth::class, 'login'],
+                '/auth/{id}' => [ProfessorController::class, 'login'],
             ],
             'DELETE' => [
-                '/auth/{id}' => [LoginAuth::class, 'login'],
+                '/auth/{id}' => [ProfessorController::class, 'login'],
             ],
         ];
     }

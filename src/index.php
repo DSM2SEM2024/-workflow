@@ -6,10 +6,8 @@ use Src\Routes\Routes;
 use Src\Routes\Router;
 use Src\Model\Message;
 
-$dados = json_decode(file_get_contents("php://input"),true);
-
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    echo json_encode(Message::send(false,204,'Erro na requisição',null));
+    echo json_encode(Message::send(false, 404, 'Erro na requisição',null));
     exit();
 }
 

@@ -12,7 +12,7 @@ use Src\Repository\ProfessorRepository;
 
 class LoginAuth {
 
-    public static function login(array $dados){
+    public static function validate(array $dados) : array {
 
         $professor = new Professor();
         
