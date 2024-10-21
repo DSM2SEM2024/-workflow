@@ -1,13 +1,13 @@
 //Importando os arquivos através do caminho e atribuindo o seu identificador
 import { Login } from './pages/login.js';
-// import { Home } from './pages/home.js';
+import { Home } from './pages/home.js';
 import { CreateCoordinator } from './pages/create-coordinator.js';
 // import { Footer } from './components/footer.js';
 
 //Definindo as rotas através desse identificador
 const routes = [
     { path: '/', component: Login },
-    // { path: '/home', component: Home },
+    { path: '/home', component: Home },
     { path: '/create-coordinator', component: CreateCoordinator },
 ];
 
