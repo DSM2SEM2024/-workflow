@@ -16,6 +16,7 @@ class ProfessorRepository {
     }
 
     public function insert(Professor $professor){
+    
         $insert = 'INSERT INTO Professor(Name,Email,Password,Area_of_Expertise) VALUES(?,?,?,?)';
         $prepare = $this->connection->prepare($insert);
         $prepare->bindValue(1, $professor->getName());
@@ -56,15 +57,16 @@ class ProfessorRepository {
     }
 
     public function login(Professor $professor){
-        $select = 'SELECT Email, Password FROM Professor WHERE Email = ? AND Password = ?';
+        $select = 'SELECT Email, Password FROM Professor WHERE Email = ?';
         $prepare = $this->connection->prepare($select);
         $prepare->bindValue(1, $professor->getEmail());
-        $prepare->bindValue(2, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
         try {
             $prepare->execute();
             $data = $prepare->fetch();
             if(is_array($data) && count($data) > 0){
-                return Message::send(true,200,'Usuário reconhecido',$data);
+                if(password_verify($professor->getPassword(),$data['Password'])){
+                    return Message::send(true,200,'Usuário reconhecido',$data);
+                }
             }
             return Message::send(false, 404, 'Usuário não reconhecido',[]);
            
