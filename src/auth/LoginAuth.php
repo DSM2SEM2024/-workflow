@@ -12,12 +12,7 @@ use Src\Repository\ProfessorRepository;
 
 class LoginAuth {
 
-    public static function validate(array $dados) : array {
-
-        $professor = new Professor();
-        
-        $professor->setEmail($dados['usuario']);
-        $professor->setPassword($dados['senha']);
+    public static function validate(Professor $professor) : array {
         
         $prof_repo = new ProfessorRepository();
         $login_data = $prof_repo->login($professor);

@@ -14,6 +14,7 @@ class Routes {
             ],
             'POST' => [
                 '/login/professor' => [ProfessorController::class, 'login'],
+                '/register/professor' => [ProfessorController::class, 'register'],
             ],
             'PUT' => [
                 '/auth/{id}' => [ProfessorController::class, 'login'],
