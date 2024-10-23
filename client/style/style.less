@@ -222,7 +222,38 @@ main {
                         font-size: 0.9rem;
                         font-family: @roboto-regular;
                         margin: 1.7rem 0rem 0rem 0rem;
+                    }
+                    
+                    & .description {
+                        width: calc(32rem + 5%);
                         resize: none;
+                    }
+
+                }
+                & .form-entries {
+                    gap: 5%;
+
+                    & .entries {
+                        outline: none;
+                        width: calc(16rem + 5%);
+                        box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
+                        border-radius: 0.3rem;
+                        padding: 0.5rem 1rem 0.5rem 0.7rem;
+                        font-size: 0.9rem;
+                        font-family: @roboto-regular;
+                        margin: 1rem 0rem 0rem 0rem;
+
+                        & .icon {
+                            width: 1.5rem;
+                            height: 1.5rem;
+                            margin-right: 0.5rem;
+                        }
+
+                        & p {
+                            margin-bottom: 0;
+                            color: @lighten-black;
+                            opacity: 0.8;
+                        }
                     }
                 }
             }

@@ -23,18 +23,25 @@ export const CreateProject = {
                             <input type="date" placeholder="Data de conclusão">
                         </div>
                         <div class="form-inputs d-flex justify-content-start d-column">
-                            <textarea placeholder="Descrição"></textarea>
+                            <textarea class="description" placeholder="Descrição"></textarea>
                         </div>                        
                     </form>
                     <br>
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Integrantes</h3>
                         <img class="icon" src="../images/bottom-section.png" alt="Expandir">
-                    </div>
-                    <form>
+                        </div>
+                        <form>
                         <div class="form-inputs d-flex justify-content-start d-column">
-                            <input type="text" placeholder="Integrante">                        
+                            <input type="text" placeholder="Integrante"> 
+                            <!-- Botão para adicionar o integrante -->
                         </div>              
+                        <div class="form-entries d-flex justify-content-start d-column flex-column">
+                            <div class="entries d-flex flex-row align-items-center">
+                                <img class="icon" src="../images/search.png" alt="Expandir">
+                                <p> Alexandre Silva </p> 
+                            </div>
+                        </div>
                     </form>
                     <br>
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
