@@ -30,42 +30,74 @@ export const CreateProject = {
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Integrantes</h3>
                         <img class="icon" src="../images/bottom-section.png" alt="Expandir">
-                        </div>
-                        <form>
+                    </div>
+                    <form>
                         <div class="form-inputs d-flex justify-content-start d-column">
                             <input type="text" placeholder="Integrante"> 
-                            <!-- Botão para adicionar o integrante -->
+                            <span class="add-btn">+</span>
                         </div>              
                         <div class="form-entries d-flex justify-content-start d-column flex-column">
-                            <div class="entries d-flex flex-row align-items-center">
-                                <img class="icon" src="../images/search.png" alt="Expandir">
-                                <p> Alexandre Silva </p> 
+                            <!-- Exemplo de membros abaixo -->
+                            <div class="members">
+                                <img src="../images/user.png" alt="Expandir">
+                                <p>Alexandre Silva</p>
+                                <span>-</span>
+                            </div>
+                            <div class="members">
+                                <img src="../images/user.png" alt="Expandir">
+                                <p>Mariane Leite</p>
+                                <span>-</span>
                             </div>
                         </div>
-                    </form>
+                        </form>
                     <br>
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Anexos</h3>
                         <img class="icon" src="../images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
-                        <div class="form-inputs d-flex justify-content-start d-column">
-                            <select placeholder="Escolha um arquivo">
-                                <option value="unity">PDF</option>
-                                <option value="unity">URL</option>
-                                <option value="unity">JPEG</option>
-                                <option value="unity">PNG</option>
-                            </select>                   
-                        </div>              
+                        <div class="form-gap d-flex d-row flex-row">
+                            <div class="form-inputs d-flex justify-content-start d-column flex-column">
+                                <select placeholder="Escolha um arquivo">
+                                    <option value="PDF">PDF</option>
+                                    <option value="URL">URL</option>
+                                    <option value="JPEG">JPEG</option>
+                                    <option value="PNG">PNG</option>
+                                </select>
+                                <div class="file-drop d-flex justify-content-center d-column flex-column align-items-center">
+                                    <img class="icon" src="../images/download.png" alt="Integrante">
+                                    <p>Anexe ou arraste o arquivo para cá </p>
+                                    <button type="button">Selecionar arquivo</button>
+                                </div>         
+                            </div>  
+                            <div class="form-entries d-flex justify-content-start d-column flex-column">
+                                <!-- Exemplo de membros abaixo -->
+                                <div class="files">
+                                    <img src="../images/file-pdf.png" alt="Expandir">
+                                    <p>manual_do_usuario.pdf</p>
+                                    <span>-</span>
+                                </div>                                
+                                <div class="files">
+                                    <img src="../images/file-pdf.png" alt="Expandir">
+                                    <p>diagramas.pdf</p>
+                                    <span>-</span>
+                                </div>                                
+                                <div class="files">
+                                    <img src="../images/file-link.png" alt="Expandir">
+                                    <p>https://github.com/users/projectsofia</p>
+                                    <span>-</span>
+                                </div>                                
+                            </div>  
+                        </div>           
                     </form>
 
                     <hr>
 
-                    <div class="form-footer d-flex justify-content-between d-row align-items-start">
+                    <div class="form-footer d-flex justify-content-between d-column align-items-start">
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
 
                         <button class="btn-create">Cadastrar projeto ‎ |
-                            <img class="icon" src="../images/next.png" alt="Expandir">
+                            <img class="icon" src="../images/next.png" alt="Integrante">
                         </button>
                     </div>
                 

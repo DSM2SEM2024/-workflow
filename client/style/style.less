@@ -208,6 +208,10 @@ main {
             }
 
             & form {
+                & .form-gap {
+                    gap: 5%;
+                }
+
                 & .form-inputs {
                     gap: 5%;
 
@@ -216,24 +220,73 @@ main {
                     textarea {
                         outline: none;
                         width: 16rem;
-                        border: 0.01px solid @primary-black;
+                        border: 0.01px solid @terciary-black;
                         border-radius: 0.3rem;
                         padding: 0.5rem 1rem 0.5rem 1rem;
                         font-size: 0.9rem;
                         font-family: @roboto-regular;
                         margin: 1.7rem 0rem 0rem 0rem;
                     }
+
+                    & .add-btn {
+                        position: relative;
+                        margin: 1.7rem 0rem 0rem 0rem;
+                        right: calc(5% - 1rem);
+                        color: @primary-red;
+                        font-weight: bolder;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                    }
                     
                     & .description {
                         width: calc(32rem + 5%);
+                        height: 8rem;
                         resize: none;
+                    }
+
+                    & .file-drop {
+                        outline: none;
+                        width: 16rem;
+                        box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
+                        border-radius: 0.3rem;
+                        padding: 1rem;
+                        font-size: 0.9rem;
+                        font-family: @roboto-regular;
+                        margin: 1rem 0rem 0rem 0rem;
+
+                        & .icon {
+                            width: 3.5rem;
+                            height: 3.5rem;
+                            opacity: 0.6;
+                        }
+
+                        & p {
+                            margin: .4rem 0 .8rem 0;
+                            color: @lighten-black;
+                            opacity: 0.8;
+                        }
+
+                        & button {
+                            outline: none;
+                            border: none;
+                            background-color: @primary-red;
+                            color: @primary-white;
+                            box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
+                            border-radius: 0.3rem;
+                            font-size: 0.7rem;
+                            padding: .4rem 1rem;
+                        }
+
                     }
 
                 }
                 & .form-entries {
-                    gap: 5%;
 
-                    & .entries {
+                    .members, .files:first-of-type {
+                        margin: 1.7rem 0rem 0rem 0rem;
+                    }
+
+                    & .members, .files {
                         outline: none;
                         width: calc(16rem + 5%);
                         box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
@@ -241,12 +294,17 @@ main {
                         padding: 0.5rem 1rem 0.5rem 0.7rem;
                         font-size: 0.9rem;
                         font-family: @roboto-regular;
-                        margin: 1rem 0rem 0rem 0rem;
+                        margin: .8rem 0rem 0rem 0rem;
+                        display: flex;
+                        position: relative;
+                        flex-direction: row;
+                        align-items: center;
 
-                        & .icon {
-                            width: 1.5rem;
-                            height: 1.5rem;
+                        & img {
+                            width: 1rem;
+                            height: 1rem;
                             margin-right: 0.5rem;
+                            opacity: 0.8;
                         }
 
                         & p {
@@ -254,6 +312,27 @@ main {
                             color: @lighten-black;
                             opacity: 0.8;
                         }
+
+                        & span {
+                            position: absolute;
+                            top: .7rem;
+                            right: .7rem;
+                            width: 1rem;
+                            height: 1rem;
+                            border-radius: 0.15rem;
+                            background-color: @primary-red;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: @secundary-white;
+                            font-weight: bolder;
+                            font-size: 1.2rem;
+                            cursor: pointer;
+                        }
+                    }
+
+                    & .files {
+                        width: calc(24rem + 5%);
                     }
                 }
             }
