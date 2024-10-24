@@ -16,7 +16,11 @@ class ProfessorController {
         $professor->setEmail($data['email']);
         $professor->setPassword($data['password']);
         $login_response = $repo->login($professor);
-        echo json_encode(TokenHandler::validate('professor',$professor));
+        if($login_response['status']==true){
+            echo json_encode(TokenHandler::create('professor',$professor));
+        } else {
+            echo json_encode($login_response);
+        }
 
     }
 
@@ -32,6 +36,15 @@ class ProfessorController {
         $professor->setExpertise($data['expertise']);
 
         echo json_encode($repo->insert($professor));
+
+    }
+
+    public function verifyToken(){
+
+        $headers = getallheaders();
+        $data = json_decode(file_get_contents('php://input'),true);
+
+        echo json_encode($headers['Authorization']);
 
     }
     
