@@ -300,68 +300,139 @@ main {
 }
 
 #home {
-    .form-content {
-        & .box-search {
-            & .form-inputs {
-                display: flex;
-                flex-direction: row;
-                justify-content: start;
-                gap: 1rem;
+    & .dinamic-content {
+        .form-content {
+            & .box-search {
+                & .form-inputs {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: start;
+                    gap: 1rem;
+                    margin-bottom: 0.5rem;
 
-                & .input-content {
-                    margin: 0px;
-                    padding: 0px;
-                    margin-top: 1rem;
+                    & .input-content {
+                        margin: 0px;
+                        padding: 0px;
 
-                    & label {
-                        color: @primary-black;
-                        opacity: 0.8;
-                        text-transform: uppercase;
-                        padding-bottom: 0.5rem;
-                        font-size: 0.9rem;
-                    }
+                        & label {
+                            color: @primary-black;
+                            opacity: 0.8;
+                            text-transform: uppercase;
+                            padding-bottom: 0.5rem;
+                            font-size: 0.9rem;
+                        }
 
-                    & button {
-                        padding: 0.3rem 1.5rem 0.2rem 1.5rem;
-                        border-radius: 0.2rem;
-                        background: @terciary-white;
-                        box-shadow: 0px 0px 3px 0px lighten(@primary-black, 50%);
-                    }
+                        & button {
+                            padding: 0.3rem 1.5rem 0.2rem 1.5rem;
+                            border-radius: 0.2rem;
+                            background: @terciary-white;
+                            box-shadow: 0px 0px 3px 0px lighten(@primary-black, 50%);
+                        }
 
-                    & .input-section,
-                    .select-section {
-                        border-radius: 0.4rem;
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: center;
-                        align-items: center;
-                        cursor: pointer;
+                        & .input-section,
+                        .select-section {
+                            border-radius: 0.4rem;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            cursor: pointer;
 
-                        & .input-icon {
-                            background: @background-red;
-                            border-radius: 0.4rem 0rem 0rem 0.4rem;
-                            padding: 0.4rem 0.6rem 0.4rem 0.6rem;
+                            & .input-icon {
+                                background: @background-red;
+                                border-radius: 0.4rem 0rem 0rem 0.4rem;
+                                padding: 0.4rem 0.6rem 0.4rem 0.6rem;
 
-                            & img {
-                                width: 1.2rem;
+                                & img {
+                                    width: 1.2rem;
+                                }
+                            }
+
+                            & input,
+                            select {
+                                border: none;
+                                margin: 0rem;
+                                border-radius: 0px;
+                                border-top: 0.01rem solid @primary-black;
+                                border-bottom: 0.01rem solid @primary-black;
+                                border-right: 0.01rem solid @primary-black;
+                                border-radius: 0rem 0.2rem 0.2rem 0rem;
                             }
                         }
+                    }
 
-                        & input,
-                        select {
-                            border: none;
-                            margin: 0rem;
-                            border-radius: 0px;
-                            border-top: 0.01rem solid @primary-black;
-                            border-bottom: 0.01rem solid @primary-black;
-                            border-right: 0.01rem solid @primary-black;
-                            border-radius: 0rem 0.2rem 0.2rem 0rem;
-                        }
+                    & .gap-column {
+                        width: 1.3rem;
                     }
                 }
 
-                & .gap-column {
-                    width: 1.3rem;
+                & .icon-column{
+                    & img{
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        & .project-container {
+            padding: 2rem 0rem 2rem 0rem;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+
+            & .project-card {
+                width: 45%;
+                padding: 2rem 0rem 0rem 0rem;
+
+                & h1 {
+                    font-size: 1.8rem;
+                    padding-bottom: 0.5rem;
+                    font-family: @roboto-medium;
+                }
+
+                & .project-image {
+                    width: 100%;
+                    height: 20rem;
+                    background: @terciary-white;
+                    border-radius: 0.2rem;
+                }
+
+                & .project-description {
+                    padding: 1.5rem 0rem 1rem 0rem;
+                }
+
+                & .project-info {
+                    width: 100%;
+
+                    & .all-information {
+                        & h3 {
+                            font-family: @roboto-bold;
+                            font-size: 1rem;
+                            text-transform: uppercase;
+                            color: lighten(@terciary-black, 45%);
+                            letter-spacing: 0.09rem;
+                        }
+
+                        & h4 {
+
+                            font-size: 1.1rem;
+                        }
+
+                        & p {
+                            margin: 0rem;
+                            color: @primary-red;
+                            font-family: @roboto-italic;
+                            font-weight: 300;
+                            font-size: 1rem;
+                        }
+                    }
+
+                    & button {
+                        text-transform: capitalize;
+                        padding: 0.5rem 1rem 0.5rem 1rem;  
+                    }
                 }
             }
         }

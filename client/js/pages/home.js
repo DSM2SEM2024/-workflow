@@ -1,13 +1,17 @@
 export const Home = {
     template: `
         <main id="home" class="d-flex justify-content-evenly align-items-center flex-row">
-            <section class="dinamic-content">
+            <div class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
                     <h2>Projetos Interdisciplinares</h2>
                 </div>
 
                 <section class="form-content">
                     <form class="box-search">
+                        <div class="icon-column d-flex justify-content-end top-0">
+                            <img class="icon" src="../images/bottom-section.png" alt="Projeto Interdisciplinar">
+                        </div>
+                                            
                         <div class="form-inputs">
                             <div class="input-content">
                                 <label>Nome</label>
@@ -59,10 +63,49 @@ export const Home = {
                                 <button class="btn-white" name="filter">Filtrar</button>
                                 <button class="btn-white" name="clear">Limpar</button>
                             </div>
-                        </div>
+                        </div>                        
                     </form>
                 </section>
-            </section>
+
+                <article class="project-container d-flex flex-row w-100">
+                    <div class="project-card">
+                        <h1 class="project-title">Nome do Projeto</h1>
+                        <img class="project-image" src="../images/event.jpg" alt="Projeto Interdisciplinar">
+
+                        <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit, Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        
+                        <div class="project-info d-flex justify-content-between flex-row align-items-end gap-4">
+                            <div class="all-information d-flex flex-column align-items-start w-80">
+                                <h3>Curso</h3>
+                                <h4>Desenvolvimento de Software e Multiplataforma</h4>
+                                <p>Clique em visualizar para obter mais informações</p>
+                            </div>
+
+                            <div class="w-20">
+                                <button class="button btn-red">Visualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h1 class="project-title">Nome do Projeto</h1>
+                        <img class="project-image" src="../images/event.jpg" alt="Projeto Interdisciplinar">
+
+                        <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit, Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        
+                        <div class="project-info d-flex justify-content-between flex-row align-items-end gap-4">
+                            <div class="all-information d-flex flex-column align-items-start w-80">
+                                <h3>Curso</h3>
+                                <h4>Desenvolvimento de Software e Multiplataforma</h4>
+                                <p>Clique em visualizar para obter mais informações</p>
+                            </div>
+
+                            <div class="w-20">
+                                <button class="button btn-red">Visualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </main>
         {{email}} {{password}}
     `,
