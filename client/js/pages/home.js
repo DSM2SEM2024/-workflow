@@ -12,15 +12,20 @@ export const Home = {
                             <div class="input-content">
                                 <label>Nome</label>
                                 <div class="input-section">
-                                    <img href="">
+                                    <div class="input-icon">
+                                        <img src="../images/icon-searchlight.png" alt="Projeto Interdisciplinar">
+                                    </div>
                                     <input type="text" name="name">
                                 </div>
                             </div>
-
-                            <div class="form-inputs">
+                            <div class="gap-column">
+                            </div>                            
+                            <div class="input-content">
                                 <label>Curso</label>
                                 <div class="select-section">
-                                    <img href="">
+                                    <div class="input-icon">
+                                        <img src="../images/icon-bottom.png" alt="Projeto Interdisciplinar">
+                                    </div>
                                     <select name="curses">
                                         <option>Escolha um curso...</option>
                                     </select>
@@ -28,24 +33,34 @@ export const Home = {
                             </div>                    
                         </div>
 
-                        <div class="form-inputs">
+                        <div class="form-inputs align-items-end">
                             <div class="input-content">
                                 <label>Data</label>
                                 <div class="input-section">
-                                    <img href="">
-                                    <input type="date" name="name">
-                                    <p>até</p>
-                                    <input type="date" name="name">
-                                </div>
+                                    <div class="input-icon">
+                                        <img src="../images/calendar.png" alt="Projeto Interdisciplinar">
+                                    </div>
+                                    <input type="date" name="name">                                    
+                                </div>                               
+                            </div>
+                            <div class="gap-column d-flex justify-content-end align-items-end">
+                                <p>até</p>
                             </div>
                             <div class="input-content">
-                                <button name="filter">Filtrar</button>
-                                <button name="clear">Limpar</button>
+                                <div class="input-section">
+                                    <div class="input-icon">
+                                        <img src="../images/calendar.png" alt="Projeto Interdisciplinar">
+                                    </div>
+                                    <input type="date" name="name">                                    
+                                </div>                                
+                            </div>
+
+                            <div class="input-content d-flex align-items-center gap-3">
+                                <button class="btn-white" name="filter">Filtrar</button>
+                                <button class="btn-white" name="clear">Limpar</button>
                             </div>
                         </div>
                     </form>
-                    
-                
                 </section>
             </section>
         </main>
