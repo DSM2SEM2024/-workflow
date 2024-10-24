@@ -4,8 +4,11 @@ require 'config.php';
 require_once __DIR__.'/../../vendor/autoload.php';
 
 use Exception;
+use Firebase\JWT\BeforeValidException;
+use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Firebase\JWT\SignatureInvalidException;
 use Src\Model\Message;
 
 use Src\Model\Professor;
@@ -62,8 +65,22 @@ class TokenHandler {
             return Message::send(true,200,'Token válido',null);
 
             // tratar as exceções de código posteriormente para caso de erro por expirar, corrompido, outro servidor etc.
-        }catch(Exception $e){
-            return Message::send(false,400,'Erro na decodificação',null);
+        }catch (ExpiredException $e) {
+            http_response_code(401);
+            return Message::send(false,401,"Token expirado: " . $e->getMessage(),[]);
+            exit();
+        } catch (BeforeValidException $e) {
+            http_response_code(401);
+            return Message::send(false,401,"Token ainda não é válido" . $e->getMessage(),[]);
+            exit();
+        } catch (SignatureInvalidException $e) {
+            http_response_code(401);
+            return Message::send(true,401,"Assinatura do token inválida: " . $e->getMessage(),[]);
+            exit();
+        } catch (Exception $e) {
+            http_response_code(401);
+            return Message::send(true,401,"Erro ao validar token: " . $e->getMessage(),[]);
+            exit();
         }
 
     }
