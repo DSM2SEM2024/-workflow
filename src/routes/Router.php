@@ -28,7 +28,7 @@ class Router{
             }
         }
         http_response_code(404);
-        echo json_encode(['status' => false, 'message' => 'Rota não encontrada']);
+        echo json_encode(Message::send(false,404,'Rota não encontrada',[]));
         exit();
     }
 }
