@@ -11,12 +11,9 @@ use Firebase\JWT\Key;
 use Firebase\JWT\SignatureInvalidException;
 use Src\Model\Message;
 
-use Src\Model\Professor;
-use Src\Repository\ProfessorRepository;
-
 class TokenHandler {
 
-    public static function create(string $role, $user) : array {
+    public static function createAsLogin(string $role, $user) : array {
 
         switch ($role) {
             case 'professor':
@@ -47,7 +44,8 @@ class TokenHandler {
             'aud' => 'http://localhost:8080',
             'iat' => time(),
             'nbf' => time(),
-            'exp' => time() + 20,
+            // Uma hora de validade para o token
+            'exp' => time() + 3600,
             'pages' => $pages,
             'sub' => $user,
             'role'=> $role
@@ -58,29 +56,30 @@ class TokenHandler {
         return Message::send(true,200,'JWT criado',$jwt);
     }
 
-    public static function verify(string $token) : array {
+    public static function verifyPermission(string $role) : array {
+
+        $headers = getallheaders();
+        $token = explode(' ',$headers['Authorization'])[1];
 
         try{
-            $token_data = JWT::decode($token, new Key(SECRET_KEY, alg));
-            return Message::send(true,200,'Token válido',null);
-
-            // tratar as exceções de código posteriormente para caso de erro por expirar, corrompido, outro servidor etc.
+            $decoded_token = JWT::decode($token, new Key(SECRET_KEY, alg));
+            if($decoded_token->role==$role){
+                return Message::send(true,200,'Permissão concedida',[]);
+            } else {
+                return Message::send(false,401,'Permissão negada',[]);
+            }
         }catch (ExpiredException $e) {
             http_response_code(401);
             return Message::send(false,401,"Token expirado: " . $e->getMessage(),[]);
-            exit();
         } catch (BeforeValidException $e) {
             http_response_code(401);
             return Message::send(false,401,"Token ainda não é válido" . $e->getMessage(),[]);
-            exit();
         } catch (SignatureInvalidException $e) {
             http_response_code(401);
             return Message::send(true,401,"Assinatura do token inválida: " . $e->getMessage(),[]);
-            exit();
         } catch (Exception $e) {
             http_response_code(401);
             return Message::send(true,401,"Erro ao validar token: " . $e->getMessage(),[]);
-            exit();
         }
 
     }

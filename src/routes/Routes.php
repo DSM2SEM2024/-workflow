@@ -9,19 +9,18 @@ class Routes {
     public static function getRoutes(): array{
         return [
             'GET' => [
-                '/teste' => [ProfessorController::class, 'teste'],
-                '/auth/{id}' => [ProfessorController::class, 'login'],
+                '/projetos' => [ProfessorController::class, 'mensagem'],
+                '/projetos/{id}' => [ProfessorController::class,'mensagem2']
             ],
             'POST' => [
                 '/login/professor' => [ProfessorController::class, 'login'],
-                '/register/professor' => [ProfessorController::class, 'register'],
-                '/verify/jwt' => [ProfessorController::class, 'verifyToken']
+                '/professor/cadastrar' => [ProfessorController::class, 'cadastra']
             ],
             'PUT' => [
-                '/auth/{id}' => [ProfessorController::class, 'login'],
+                '/a/{id}' => [ProfessorController::class, 'login'],
             ],
             'DELETE' => [
-                '/auth/{id}' => [ProfessorController::class, 'login'],
+                '/b/{id}' => [ProfessorController::class, 'login'],
             ],
         ];
     }
