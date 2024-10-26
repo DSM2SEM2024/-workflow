@@ -17,7 +17,7 @@ class ProfessorRepository {
 
     public function insert(Professor $professor){
     
-        $insert = 'INSERT INTO Professor(Name,Email,Password,Area_of_Expertise) VALUES(?,?,?,?)';
+        $insert = 'INSERT INTO professor(Name,Email,Password,Area_of_Expertise) VALUES(?,?,?,?)';
         $prepare = $this->connection->prepare($insert);
         $prepare->bindValue(1, $professor->getName());
         $prepare->bindValue(2, $professor->getEmail());
@@ -32,7 +32,7 @@ class ProfessorRepository {
     }
 
     public function selectAll(){
-        $select = 'SELECT * FROM Professor';
+        $select = 'SELECT * FROM professor';
         $prepare = $this->connection->prepare($select);
         try {
             $prepare->execute();
@@ -44,7 +44,7 @@ class ProfessorRepository {
     }
 
     public function selectById(Professor $professor){
-        $select = 'SELECT * FROM Professor WHERE ID_Professor = ?';
+        $select = 'SELECT * FROM professor WHERE ID_Professor = ?';
         $prepare = $this->connection->prepare($select);
         $prepare->bindValue(1, $professor->getId());
         try {
@@ -57,7 +57,8 @@ class ProfessorRepository {
     }
 
     public function login(Professor $professor){
-        $select = 'SELECT Email, Password FROM Professor WHERE Email = ?';
+        
+        $select = 'SELECT ID_Professor, Name, Email, Password, Area_of_Expertise FROM professor WHERE Email = ?';
         $prepare = $this->connection->prepare($select);
         $prepare->bindValue(1, $professor->getEmail());
         try {
