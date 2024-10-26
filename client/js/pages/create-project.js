@@ -32,6 +32,8 @@ export const CreateProject = {
                         <img class="icon" src="../images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
+                        <h1>Adicione um novo integrante clicando no ícone abaixo</h1>
+                        <h2>É necessário informar o nome completo do integrante</h2>
                         <div class="form-inputs d-flex justify-content-start d-column">
                             <input type="text" placeholder="Integrante"> 
                             <span class="add-btn">+</span>
