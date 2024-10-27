@@ -42,9 +42,9 @@ const App = {
     //Aplicando o template header padrão em todas as views (páginas) dinamicamente
     //Depois do conteúdo (páginas), implementa-se o footer na ordem em cascata
     template: `
-        <div class="d-flex justify-content-start flex-row">
-            <header class="d-flex flex-column justify-content-start align-items-center">
-                <nav class="d-flex flex-column justify-content-between gap-5">
+        <div class="d-flex justify-content-start flex-row h-100">
+            <header class="d-flex flex-column align-items-center h-100">
+                <nav class="d-flex flex-column justify-content-between gap-5 h-100">
                     <div class="d-flex flex-column justify-content-between gap-5">
                         <router-link to="/">
                         <img class="icon" src="../images/icon-home.png" alt="Home">
@@ -57,7 +57,7 @@ const App = {
                         </router-link>        
                     </div>          
                     
-                    <div>
+                    <div class="cps-icon">
                         <img class="icon" src="../images/logo-cps.png" alt="Home">
                     </div>
                 </nav>

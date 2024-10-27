@@ -58,6 +58,5 @@ export const Login = {
         }
     },
     created() {
-        //Conteúdos que deverão ser carregados em uma espécie de onload.
     }
 };
