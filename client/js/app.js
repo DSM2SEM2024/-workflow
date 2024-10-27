@@ -3,6 +3,7 @@ import { Login } from './pages/login.js';
 import { Home } from './pages/home.js';
 import { CreateCoordinator } from './pages/create-coordinator.js';
 import { MyProjects } from './components/my-projects.js';
+import { Project } from './pages/project.js';
 
 // import { Footer } from './components/footer.js';
 
@@ -11,7 +12,8 @@ const routes = [
     { path: '/', component: Login },
     { path: '/home', component: Home },
     { path: '/create-coordinator', component: CreateCoordinator },
-    { path: '/my-projects', component: MyProjects}
+    { path: '/my-projects', component: MyProjects},
+    { path: '/project/:id', component: Project}
 ];
 
 //Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.
