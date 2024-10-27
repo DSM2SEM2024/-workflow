@@ -1,6 +1,8 @@
+import { MyProjects } from '../components/my-projects.js';
+
 export const Home = {
     template: `
-        <main id="home" class="d-flex justify-content-evenly align-items-center flex-row">
+        <main id="home" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
                     <h2>Projetos Interdisciplinares</h2>
@@ -12,7 +14,7 @@ export const Home = {
                             <img class="icon" src="../images/bottom-section.png" alt="Projeto Interdisciplinar">
                         </div>
                                             
-                        <div class="form-inputs">
+                        <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
                             <div class="input-content">
                                 <label>Nome</label>
                                 <div class="input-section">
@@ -37,7 +39,7 @@ export const Home = {
                             </div>                    
                         </div>
 
-                        <div class="form-inputs align-items-end">
+                        <div class="form-inputs align-items-end flex-wrap">
                             <div class="input-content">
                                 <label>Data</label>
                                 <div class="input-section">
@@ -67,7 +69,7 @@ export const Home = {
                     </form>
                 </section>
 
-                <article class="project-container d-flex flex-row w-100">
+                <article class="project-container d-flex flex-row w-100 gap-5 flex-wrap">
                     <div class="project-card">
                         <h1 class="project-title">Nome do Projeto</h1>
                         <img class="project-image" src="../images/event.jpg" alt="Projeto Interdisciplinar">
@@ -106,14 +108,10 @@ export const Home = {
                     </div>
                 </article>
             </div>
+            <MyProjects></MyProjects>
         </main>
-        {{email}} {{password}}
     `,
     data() {
-        return {
-            // email: null,
-            // password: null
-        };
     },
     inject: ['urlBase'],
     methods: {
@@ -127,5 +125,8 @@ export const Home = {
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
-    }
+    },
+    components:{
+        MyProjects
+    }    
 };

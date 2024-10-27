@@ -109,6 +109,7 @@ body {
 
 header {
     width: 6rem;
+    min-width: 5rem;
     min-height: 30rem;
     max-height: 100%;
     background: transparent;
@@ -162,13 +163,12 @@ main {
     }
 
     & .dinamic-content {
-        width: 70vw;
-        height: 100%;
+        min-width: 65vw;
+        max-width: 100%;
         background-color: @quinary-white;
-        padding: 5rem 2rem 0rem 2rem;
+        padding: 4.5rem 2rem 0rem 2rem;
 
         & .page-section {
-            margin-top: rem;
             background: @background-red;
             color: @terciary-white;
             min-width: 70%;
@@ -220,6 +220,7 @@ main {
                     select {
                         outline: none;
                         width: 16rem;
+                        min-width: 20%;
                         border: 0.01px solid @primary-black;
                         border-radius: 0.3rem;
                         padding: 0.400rem 1rem 0.400rem 1rem;
@@ -371,6 +372,7 @@ main {
                         width: 1.5rem;
                         height: 1.5rem;
                         cursor: pointer;
+                        position: absolute;
                     }
                 }
             }
@@ -383,11 +385,12 @@ main {
             flex-direction: row;
 
             & .project-card {
-                width: 45%;
+                width: 32rem;
+                max-width: 100%;
                 padding: 2rem 0rem 0rem 0rem;
 
                 & h1 {
-                    font-size: 1.8rem;
+                    font-size: 1.5rem;
                     padding-bottom: 0.5rem;
                     font-family: @roboto-medium;
                 }
@@ -440,19 +443,21 @@ main {
 }
 
 #my-projects{
-    width: 30vw;
+    width: 20vw;
+    min-width: 20rem;
+    padding-top: 4.5rem;
 
     & .section-title{
         width: 100%;
         background: @background-red;
         color: @terciary-white;
-        padding: 1rem;
+        padding: 0.8rem 0.8rem 0.8rem 2rem;
         border-radius: 0.5rem 0.5rem 0rem 0rem;
         box-shadow: 1px 0px 6px lighten(@terciary-black, 50%);
 
-
         & h2{
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            padding-top: 0.5rem;
         }
     }
 
@@ -464,12 +469,13 @@ main {
         width: 100%;
         background: @quinary-white;
         border-radius: 0rem 0rem 0.5rem 0.5rem;
-        padding: 1rem;
+        padding: 1.5rem;
         box-shadow: 1px 0px 6px lighten(@terciary-black, 50%);
 
         & p{
             color: lighten(@primary-black, 30%);
             text-transform: uppercase;
+            margin-bottom: 0rem;
         }
 
         & .project{
@@ -478,18 +484,19 @@ main {
             justify-content: space-between;
             gap: 1rem;
             background: @terciary-white;
-            padding: 1rem;
+            padding: 1.3rem 1rem 0.5rem 1.3rem;
+            border-radius: 0.2rem;
 
             & h4{
                 text-transform: uppercase;
                 font-family: @roboto-bold;
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
 
             & h5{
                 font-weight: 500;
                 color: lighten(@primary-black, 30%);
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             & p{
@@ -498,7 +505,7 @@ main {
         }
 
         & .button-section{
-            padding-top: 1.5rem;
+            padding-top: 1rem;
 
             & button{
                 padding: 0.4rem 0.7rem 0.4rem 0.7rem;
@@ -506,6 +513,7 @@ main {
                 color: @terciary-white;
                 outline: none;
                 border-radius: 0.3rem;
+                text-transform: capitalize;
             }
         }
     }
