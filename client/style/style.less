@@ -84,6 +84,7 @@ body {
 
 #login {
     height: 100vh;
+    width: 100%;
 
     & #left-content {
         & figure {
@@ -110,16 +111,24 @@ body {
 header {
     width: 6rem;
     min-width: 5rem;
-    min-height: 30rem;
-    max-height: 100%;
+    height: 100vh;
     background: transparent;
 
     & nav {
         padding: 5rem 0rem 5rem 0rem;
+        height: max-content;
 
         & .icon {
             width: 2rem;
             height: 2rem;
+        }
+
+        & .cps-icon{
+            & .icon {
+                width: 2.5rem;
+                height: 2rem;
+                margin-left: -0.3rem;
+            }
         }
     }
 }
@@ -450,10 +459,9 @@ main {
     & .section-title{
         width: 100%;
         background: @background-red;
-        color: @terciary-white;
+        color: @primary-white;
         padding: 0.8rem 0.8rem 0.8rem 2rem;
         border-radius: 0.5rem 0.5rem 0rem 0rem;
-        box-shadow: 1px 0px 6px lighten(@terciary-black, 50%);
 
         & h2{
             font-size: 1.2rem;
@@ -470,7 +478,6 @@ main {
         background: @quinary-white;
         border-radius: 0rem 0rem 0.5rem 0.5rem;
         padding: 1.5rem;
-        box-shadow: 1px 0px 6px lighten(@terciary-black, 50%);
 
         & p{
             color: lighten(@primary-black, 30%);
