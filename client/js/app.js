@@ -45,15 +45,21 @@ const App = {
         <div class="d-flex justify-content-start flex-row">
             <header class="d-flex flex-column justify-content-start align-items-center">
                 <nav class="d-flex flex-column justify-content-between gap-5">
-                    <router-link to="/">
-                    <img class="icon" src="../images/icon-home.png" alt="Home">
-                    </router-link>
-                     <router-link to="/">
-                    <img class="icon" src="../images/search.png" alt="Home">
-                    </router-link>
-                    <router-link to="/">
-                    <img class="icon" src="../images/colletion.png" alt="Home">
-                    </router-link>                                       
+                    <div class="d-flex flex-column justify-content-between gap-5">
+                        <router-link to="/">
+                        <img class="icon" src="../images/icon-home.png" alt="Home">
+                        </router-link>
+                        <router-link to="/">
+                        <img class="icon" src="../images/search.png" alt="Home">
+                        </router-link>
+                        <router-link to="/">
+                        <img class="icon" src="../images/colletion.png" alt="Home">
+                        </router-link>        
+                    </div>          
+                    
+                    <div>
+                        <img class="icon" src="../images/logo-cps.png" alt="Home">
+                    </div>
                 </nav>
             </header>
             <router-view></router-view>

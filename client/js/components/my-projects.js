@@ -13,7 +13,7 @@ export const MyProjects = {
                     <h4>Projeto Sofia</h4>
                     <h5>Desenvolvimento de Software e Multiplataforma</h5>
                 </div>
-                <div class="right d-flex justify-content-end flex-column align-items-end">
+                <div class="right d-flex justify-content-between flex-column align-items-end">
                     <p>Status</p>
                     <p>28/11/2024</p>
                 </div>
@@ -24,7 +24,7 @@ export const MyProjects = {
                     <h4>Projeto Sofia</h4>
                     <h5>Desenvolvimento de Software e Multiplataforma</h5>
                 </div>
-                <div class="right d-flex justify-content-end flex-column align-items-end">
+                <div class="right d-flex justify-content-between flex-column align-items-end">
                     <p>Status</p>
                     <p>28/11/2024</p>
                 </div>
@@ -36,8 +36,6 @@ export const MyProjects = {
             </div>
         </div>
     </div>
-
-        
     `,
     data() {
 
@@ -53,3 +51,4 @@ export const MyProjects = {
     created() {
     }
 };
+
