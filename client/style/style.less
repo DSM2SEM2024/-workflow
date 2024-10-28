@@ -273,9 +273,10 @@ main {
                     & .file-drop {
                         outline: none;
                         width: 16rem;
-                        box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
+                        min-width: 20%;
+                        border: 0.01px solid @primary-black;
                         border-radius: 0.3rem;
-                        padding: 1rem;
+                        padding: 0.400rem 1rem 0.400rem 1rem;
                         font-size: 0.9rem;
                         font-family: @roboto-regular;
                         margin: 1rem 0rem 0rem 0rem;
@@ -311,6 +312,7 @@ main {
                     .members, .files:first-of-type {
                         margin: 1.7rem 0rem 0rem 0rem;
                     }
+
 
                     & .members, .files {
                         outline: none;
@@ -360,6 +362,7 @@ main {
                     & .files {
                         width: calc(24rem + 5%);
                     }
+
                     & select {
                         padding: 0.420rem 1rem 0.420rem 1rem;
                     }

@@ -14,7 +14,6 @@ const routes = [
     { path: '/create-coordinator', component: CreateCoordinator },
     { path: '/create-project', component: CreateProject },
     { path: '/my-projects', component: MyProjects}
-
 ];
 
 //Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.
