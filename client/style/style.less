@@ -62,7 +62,7 @@
 
 // Definindo gradientes de fundo
 @background-red: linear-gradient(to right, @primary-red, @secundary-red);
-@background-white: linear-gradient(to right, @primary-white, @secundary-white);
+@background-white: linear-gradient(to right, @primary-white, lighten(@secundary-white, 7%));
 @background-black: linear-gradient(to right, @primary-black, @secundary-black);
 
 // Definindo variáveis de fonte
@@ -84,6 +84,7 @@ body {
 
 #login {
     height: 100vh;
+    width: 100%;
 
     & #left-content {
         & figure {
@@ -109,18 +110,37 @@ body {
 
 header {
     width: 6rem;
-    min-height: 30rem;
-    max-height: 100%;
+    min-width: 5rem;
+    height: 100vh;
     background: transparent;
 
     & nav {
         padding: 5rem 0rem 5rem 0rem;
+        height: max-content;
 
         & .icon {
             width: 2rem;
             height: 2rem;
         }
+
+        & .cps-icon{
+            & .icon {
+                width: 2.5rem;
+                height: 2rem;
+                margin-left: -0.3rem;
+            }
+        }
     }
+}
+
+button {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    font-family: @roboto-regular;
+    font-size: 0.9rem;
 }
 
 main {
@@ -137,33 +157,27 @@ main {
         font-family: @roboto-regular;
     }
 
-    & .button {
-        border-radius: 0.3rem;
-        padding: 0.5rem;
-        font-family: @roboto-regular;
-        font-size: 0.9rem;
-    }
-
     & .btn-red {
+        border-color: @primary-red;
         background: @background-red;
         color: @terciary-white;
         text-transform: uppercase;
     }
 
     & .btn-white {
+        border-color: @primary-white;
         background: @primary-white;
         color: @secundary-black;
         font-family: @roboto-light;
     }
 
     & .dinamic-content {
-        width: 70vw;
-        height: 100%;
+        min-width: 65vw;
+        max-width: 100%;
         background-color: @quinary-white;
-        padding: 5rem 2rem 0rem 2rem;
+        padding: 4.5rem 2rem 0rem 2rem;
 
         & .page-section {
-            margin-top: rem;
             background: @background-red;
             color: @terciary-white;
             min-width: 70%;
@@ -183,7 +197,7 @@ main {
         & .form-content {
             margin: 1rem 0rem 1rem 0rem;
             border-radius: 0.1rem 0.1rem 0.3rem 0.3rem;
-            background: @terciary-white;
+            background: linear-gradient(to right, lighten(@primary-white, 7%), lighten(@secundary-white, 7%));
             box-shadow: 1px 0px 2px 0px @quaternary-white;
             padding: 1.5rem;
 
@@ -235,12 +249,11 @@ main {
                         width: 16rem;
                         border: 0.01px solid @terciary-black;
                         border-radius: 0.3rem;
-                        padding: 0.5rem 1rem 0.5rem 1rem;
+                        padding: 0.400rem 1rem 0.400rem 1rem;
                         font-size: 0.9rem;
                         font-family: @roboto-regular;
                         margin: 1.7rem 0rem 0rem 0rem;
                     }
-
                     & .add-btn {
                         position: relative;
                         margin: 1.7rem 0rem 0rem 0rem;
@@ -347,6 +360,9 @@ main {
                     & .files {
                         width: calc(24rem + 5%);
                     }
+                    & select {
+                        padding: 0.420rem 1rem 0.420rem 1rem;
+                    }
                 }
             }
 
@@ -411,6 +427,223 @@ main {
 
         & .btn-white {
             background: @terciary-white;
+        }
+    }
+}
+
+#home {
+    & .dinamic-content {
+        .form-content {
+            & .box-search {
+                & .form-inputs {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: start;
+                    gap: 1rem;
+                    margin-bottom: 0.5rem;
+
+                    & .input-content {
+                        margin: 0px;
+                        padding: 0px;
+
+                        & label {
+                            color: @primary-black;
+                            opacity: 0.8;
+                            text-transform: uppercase;
+                            padding-bottom: 0.5rem;
+                            font-size: 0.9rem;
+                        }
+
+                        & button {
+                            padding: 0.3rem 1.5rem 0.2rem 1.5rem;
+                            border-radius: 0.2rem;
+                            background: @terciary-white;
+                            box-shadow: 0px 0px 3px 0px lighten(@primary-black, 50%);
+                        }
+
+                        & .input-section,
+                        .select-section {
+                            border-radius: 0.4rem;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            cursor: pointer;
+
+                            & .input-icon {
+                                background: @background-red;
+                                border-radius: 0.4rem 0rem 0rem 0.4rem;
+                                padding: 0.4rem 0.6rem 0.4rem 0.6rem;
+
+                                & img {
+                                    width: 1.2rem;
+                                }
+                            }
+
+                            & input,
+                            select {
+                                border: none;
+                                margin: 0rem;
+                                border-radius: 0px;
+                                border-top: 0.01rem solid @primary-black;
+                                border-bottom: 0.01rem solid @primary-black;
+                                border-right: 0.01rem solid @primary-black;
+                                border-radius: 0rem 0.2rem 0.2rem 0rem;
+                            }
+                        }
+                    }
+
+                    & .gap-column {
+                        width: 1.3rem;
+                    }
+                }
+
+                & .icon-column{
+                    & img{
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        cursor: pointer;
+                        position: absolute;
+                    }
+                }
+            }
+        }
+
+        & .project-container {
+            padding: 2rem 0rem 2rem 0rem;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+
+            & .project-card {
+                width: 32rem;
+                max-width: 100%;
+                padding: 2rem 0rem 0rem 0rem;
+
+                & h1 {
+                    font-size: 1.5rem;
+                    padding-bottom: 0.5rem;
+                    font-family: @roboto-medium;
+                }
+
+                & .project-image {
+                    width: 100%;
+                    height: 20rem;
+                    background: @terciary-white;
+                    border-radius: 0.2rem;
+                }
+
+                & .project-description {
+                    padding: 1.5rem 0rem 1rem 0rem;
+                }
+
+                & .project-info {
+                    width: 100%;
+
+                    & .all-information {
+                        & h3 {
+                            font-family: @roboto-bold;
+                            font-size: 1rem;
+                            text-transform: uppercase;
+                            color: lighten(@terciary-black, 45%);
+                            letter-spacing: 0.09rem;
+                        }
+
+                        & h4 {
+
+                            font-size: 1.1rem;
+                        }
+
+                        & p {
+                            margin: 0rem;
+                            color: @primary-red;
+                            font-family: @roboto-italic;
+                            font-weight: 300;
+                            font-size: 1rem;
+                        }
+                    }
+
+                    & button {
+                        text-transform: capitalize;
+                        padding: 0.5rem 1rem 0.5rem 1rem;  
+                    }
+                }
+            }
+        }
+    }
+}
+
+#my-projects{
+    width: 20vw;
+    min-width: 20rem;
+    padding-top: 4.5rem;
+
+    & .section-title{
+        width: 100%;
+        background: @background-red;
+        color: @primary-white;
+        padding: 0.8rem 0.8rem 0.8rem 2rem;
+        border-radius: 0.5rem 0.5rem 0rem 0rem;
+
+        & h2{
+            font-size: 1.2rem;
+            padding-top: 0.5rem;
+        }
+    }
+
+    & .current-projects{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        background: @quinary-white;
+        border-radius: 0rem 0rem 0.5rem 0.5rem;
+        padding: 1.5rem;
+
+        & p{
+            color: lighten(@primary-black, 30%);
+            text-transform: uppercase;
+            margin-bottom: 0rem;
+        }
+
+        & .project{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 1rem;
+            background: @terciary-white;
+            padding: 1.3rem 1rem 0.5rem 1.3rem;
+            border-radius: 0.2rem;
+
+            & h4{
+                text-transform: uppercase;
+                font-family: @roboto-bold;
+                font-size: 1rem;
+            }
+
+            & h5{
+                font-weight: 500;
+                color: lighten(@primary-black, 30%);
+                font-size: 1rem;
+            }
+
+            & p{
+                text-transform: lowercase;
+            }
+        }
+
+        & .button-section{
+            padding-top: 1rem;
+
+            & button{
+                padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+                background: @background-red;
+                color: @terciary-white;
+                outline: none;
+                border-radius: 0.3rem;
+                text-transform: capitalize;
+            }
         }
     }
 }
