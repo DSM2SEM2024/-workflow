@@ -5,12 +5,14 @@ import { CreateCoordinator } from './pages/create-coordinator.js';
 import { MyProjects } from './components/my-projects.js';
 
 // import { Footer } from './components/footer.js';
+import { CreateProject } from './pages/create-project.js';
 
 //Definindo as rotas através desse identificador
 const routes = [
     { path: '/', component: Login },
     { path: '/home', component: Home },
     { path: '/create-coordinator', component: CreateCoordinator },
+    { path: '/create-project', component: CreateProject },
     { path: '/my-projects', component: MyProjects}
 ];
 

@@ -5,10 +5,10 @@ class Message {
 
     public static function send($status,$code,$message,$data) : array {
         return [
-            'STATUS'=>$status,
-            'CODE'=>$code,
-            'MESSAGE'=>$message,
-            'DATA'=>$data
+            'status'=>$status,
+            'code'=>$code,
+            'message'=>$message,
+            'data'=>$data
         ];
     }
 }
