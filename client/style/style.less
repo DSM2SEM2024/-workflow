@@ -650,3 +650,110 @@ main {
         }
     }
 }
+
+#management-page{
+    
+    & .page-content {
+        width: 40vw;
+        min-width: 20rem;
+        text-transform: none;
+        
+        
+        & .page-section {
+            background: @background-red;
+            color: @terciary-white;
+            width: 100%;
+            height: 4rem;
+            border-radius: 0.4rem;
+            
+            
+            & h2 {
+                font-size: 1.1rem;
+                font-family: @roboto-medium;
+                text-transform: uppercase;
+                text-align: start;
+                padding-top: 0.7rem;
+                padding-left: 2rem;
+            }
+        }
+    }
+    
+    & .new-project-card {
+        width: 100%;
+        margin: 1rem 0rem 1rem 0rem;
+        border-radius: 0.1rem 0.1rem 0.3rem 0.3rem;
+        padding: 1.5rem;
+        background: linear-gradient(to right, lighten(@primary-white, 7%), lighten(@quaternary-white, 5%));
+        box-shadow: 0px 3px 2px @quaternary-white;
+
+        & h1, h2 {
+            font-family: @roboto-medium;
+            text-align: start;
+        }
+
+        & h1 {
+            color: @lighten-black;
+            opacity: 0.8;
+            font-size: 1.6rem;
+        }
+       
+        & h2 {
+            font-size: 1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        & button {
+            text-transform: none;
+        }
+    }
+
+    & #projects-container {
+        width: 100%;
+
+        & .project{
+            margin: 1rem 0rem 1rem 0rem;
+            position: relative;
+            background: lighten(@quaternary-white, 5%);
+            box-shadow: 1px 0px 2px 0px @quaternary-white;
+            width: 100%;
+            padding: 1.5rem;
+
+            & h1, h2, span {
+                font-family: @roboto-regular;
+                text-align: start;  
+                font-size: 1.2rem;
+                font-weight: 100;
+            }
+
+            & h1 {
+                font-weight: 900;
+                color: @primary-red;
+
+                & span {
+                    color: @lighten-black;
+                    opacity: 0.6;
+                }
+            }
+
+            & h2 {
+                color: @lighten-black;
+            }
+
+
+            & .btn-editar {
+                position: absolute;
+                bottom: 1rem;
+                right: 1rem;
+                text-transform: none;
+                padding: .4rem 1rem;
+
+                & img {
+                    height: 1rem;
+                    margin-right: .4rem;
+                }
+            }
+        }
+
+    }
+
+}
