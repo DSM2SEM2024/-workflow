@@ -4,9 +4,9 @@ import { Home } from './pages/home.js';
 import { ManagementPage } from './pages/management.js';
 import { CreateCoordinator } from './pages/create-coordinator.js';
 import { MyProjects } from './components/my-projects.js';
-
-// import { Footer } from './components/footer.js';
+import { TeachersArea } from './pages/teachers-area.js';
 import { CreateProject } from './pages/create-project.js';
+// import { Footer } from './components/footer.js';
 
 //Definindo as rotas através desse identificador
 const routes = [
@@ -15,7 +15,8 @@ const routes = [
     { path: '/management', component: ManagementPage },
     { path: '/create-coordinator', component: CreateCoordinator },
     { path: '/create-project', component: CreateProject },
-    { path: '/my-projects', component: MyProjects}
+    { path: '/my-projects', component: MyProjects},
+    { path: '/teachers-area', component: TeachersArea}
 ];
 
 //Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.
