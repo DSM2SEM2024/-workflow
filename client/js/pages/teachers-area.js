@@ -2,11 +2,12 @@ export const TeachersArea = {
     template: `
         <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
-                <div class="section-top">
+                <div class="section-top d-flex justify-content-start flex-row gap-5">
+                    
                     <div class="profile-picture"></div>
-                    <div class="profile-apresentation">
+                    <div class="profile-apresentation d-flex justify-content-start flex-column">
                         <h2 class="teacher-name">Professor</h2>
-                        <h5 class="teacher-expertise"></h5>
+                        <h5 class="teacher-expertise">Graduado em Engenharia da Computação</h5>
                     </div>
                 </div>
 

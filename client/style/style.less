@@ -760,7 +760,7 @@ main {
 }
 
 #management-page{
-    
+
     & .page-content {
         width: 40vw;
         min-width: 20rem;
@@ -860,6 +860,37 @@ main {
                     margin-right: .4rem;
                 }
             }
+        }
+    }
+}
+
+#teachers-area{
+    & .dinamic-content{
+        & .section-top{
+            width: 90%;
+            height: 15rem;
+            padding: 2rem 2rem 0rem 2rem;
+            background: linear-gradient(to bottom, @primary-red 60%, @quinary-white 40%);
+            color: @terciary-white;
+            border-radius: .5rem;
+
+            & .profile-picture{
+                width: 10rem;
+                height: 10rem;
+                min-width: 150px;
+                background-color: #303030;
+                border: 0.03rem solid @terciary-white;
+                border-radius: 5rem;
+            }
+
+            & .profile-apresentation{
+                & .teacher-expertise{
+                    font-family: @roboto-regular;
+                }
+            }
+        }
+
+        & .section-career{
         }
     }
 }
