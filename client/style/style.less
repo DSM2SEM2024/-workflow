@@ -222,11 +222,55 @@ main {
             }
 
             & form {
+                & .form-gap {
+                    gap: 5%;
+                }
+
+                & h1, h2 {
+                    font-size: 1.2rem;
+                    margin: 1.7rem 0rem 0rem 0rem;
+                    font-weight: 100;
+                    font-family: @roboto-regular;
+                }
+
+                & h2 {
+                    color: @primary-red;
+                    font-size: .8rem;
+                    margin: .5rem 0rem 0rem 0rem;
+                }
+
                 & .form-inputs {
                     gap: 5%;
 
                     & input,
-                    select {
+                    select,
+                    textarea {
+                        outline: none;
+                        width: 16rem;
+                        border: 0.01px solid @terciary-black;
+                        border-radius: 0.3rem;
+                        padding: 0.400rem 1rem 0.400rem 1rem;
+                        font-size: 0.9rem;
+                        font-family: @roboto-regular;
+                        margin: 1.7rem 0rem 0rem 0rem;
+                    }
+                    & .add-btn {
+                        position: relative;
+                        margin: 1.7rem 0rem 0rem 0rem;
+                        right: calc(5% - 1rem);
+                        color: @primary-red;
+                        font-weight: bolder;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                    }
+                    
+                    & .description {
+                        width: calc(32rem + 5%);
+                        height: 8rem;
+                        resize: none;
+                    }
+
+                    & .file-drop {
                         outline: none;
                         width: 16rem;
                         min-width: 20%;
@@ -235,7 +279,88 @@ main {
                         padding: 0.400rem 1rem 0.400rem 1rem;
                         font-size: 0.9rem;
                         font-family: @roboto-regular;
+                        margin: 1rem 0rem 0rem 0rem;
+
+                        & .icon {
+                            width: 3.5rem;
+                            height: 3.5rem;
+                            opacity: 0.6;
+                        }
+
+                        & p {
+                            margin: .4rem 0 .8rem 0;
+                            color: @lighten-black;
+                            opacity: 0.8;
+                        }
+
+                        & button {
+                            outline: none;
+                            border: none;
+                            background-color: @primary-red;
+                            color: @primary-white;
+                            box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
+                            border-radius: 0.3rem;
+                            font-size: 0.7rem;
+                            padding: .4rem 1rem;
+                        }
+
+                    }
+
+                }
+                & .form-entries {
+
+                    .members, .files:first-of-type {
                         margin: 1.7rem 0rem 0rem 0rem;
+                    }
+
+
+                    & .members, .files {
+                        outline: none;
+                        width: calc(16rem + 5%);
+                        box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
+                        border-radius: 0.3rem;
+                        padding: 0.5rem 1rem 0.5rem 0.7rem;
+                        font-size: 0.9rem;
+                        font-family: @roboto-regular;
+                        margin: .8rem 0rem 0rem 0rem;
+                        display: flex;
+                        position: relative;
+                        flex-direction: row;
+                        align-items: center;
+
+                        & img {
+                            width: 1rem;
+                            height: 1rem;
+                            margin-right: 0.5rem;
+                            opacity: 0.8;
+                        }
+
+                        & p {
+                            margin-bottom: 0;
+                            color: @lighten-black;
+                            opacity: 0.8;
+                        }
+
+                        & span {
+                            position: absolute;
+                            top: .7rem;
+                            right: .7rem;
+                            width: 1rem;
+                            height: 1rem;
+                            border-radius: 0.15rem;
+                            background-color: @primary-red;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: @secundary-white;
+                            font-weight: bolder;
+                            font-size: 1.2rem;
+                            cursor: pointer;
+                        }
+                    }
+
+                    & .files {
+                        width: calc(24rem + 5%);
                     }
 
                     & select {
@@ -526,7 +651,6 @@ main {
     }
 }
 
-
 #project {
     & hr {
         color: @primary-red;
@@ -633,4 +757,110 @@ main {
             }
         }
     }
+
+#management-page{
+    
+    & .page-content {
+        width: 40vw;
+        min-width: 20rem;
+        text-transform: none;
+        
+        
+        & .page-section {
+            background: @background-red;
+            color: @terciary-white;
+            width: 100%;
+            height: 4rem;
+            border-radius: 0.4rem;
+            
+            
+            & h2 {
+                font-size: 1.1rem;
+                font-family: @roboto-medium;
+                text-transform: uppercase;
+                text-align: start;
+                padding-top: 0.7rem;
+                padding-left: 2rem;
+            }
+        }
+    }
+    
+    & .new-project-card {
+        width: 100%;
+        margin: 1rem 0rem 1rem 0rem;
+        border-radius: 0.1rem 0.1rem 0.3rem 0.3rem;
+        padding: 1.5rem;
+        background: linear-gradient(to right, lighten(@primary-white, 7%), lighten(@quaternary-white, 5%));
+        box-shadow: 0px 3px 2px @quaternary-white;
+
+        & h1, h2 {
+            font-family: @roboto-medium;
+            text-align: start;
+        }
+
+        & h1 {
+            color: @lighten-black;
+            opacity: 0.8;
+            font-size: 1.6rem;
+        }
+       
+        & h2 {
+            font-size: 1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        & button {
+            text-transform: none;
+        }
+    }
+
+    & #projects-container {
+        width: 100%;
+
+        & .project{
+            margin: 1rem 0rem 1rem 0rem;
+            position: relative;
+            background: lighten(@quaternary-white, 5%);
+            box-shadow: 1px 0px 2px 0px @quaternary-white;
+            width: 100%;
+            padding: 1.5rem;
+
+            & h1, h2, span {
+                font-family: @roboto-regular;
+                text-align: start;  
+                font-size: 1.2rem;
+                font-weight: 100;
+            }
+
+            & h1 {
+                font-weight: 900;
+                color: @primary-red;
+
+                & span {
+                    color: @lighten-black;
+                    opacity: 0.6;
+                }
+            }
+
+            & h2 {
+                color: @lighten-black;
+            }
+
+
+            & .btn-editar {
+                position: absolute;
+                bottom: 1rem;
+                right: 1rem;
+                text-transform: none;
+                padding: .4rem 1rem;
+
+                & img {
+                    height: 1rem;
+                    margin-right: .4rem;
+                }
+            }
+        }
+
+    }
+
 }
