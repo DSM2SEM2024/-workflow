@@ -76,10 +76,10 @@ class TokenHandler {
             return Message::send(false,401,"Token ainda não é válido" . $e->getMessage(),[]);
         } catch (SignatureInvalidException $e) {
             http_response_code(401);
-            return Message::send(true,401,"Assinatura do token inválida: " . $e->getMessage(),[]);
+            return Message::send(false,401,"Assinatura do token inválida: " . $e->getMessage(),[]);
         } catch (Exception $e) {
             http_response_code(401);
-            return Message::send(true,401,"Erro ao validar token: " . $e->getMessage(),[]);
+            return Message::send(false,401,"Erro ao validar token: " . $e->getMessage(),[]);
         }
 
     }

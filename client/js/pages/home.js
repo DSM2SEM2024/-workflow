@@ -21,7 +21,7 @@ export const Home = {
                                     <div class="input-icon">
                                         <img src="../images/icon-searchlight.png" alt="Projeto Interdisciplinar">
                                     </div>
-                                    <input type="text" name="name">
+                                    <input type="text" name="name" placeholder="Digite o nome do projeto...">
                                 </div>
                             </div>
                             <div class="gap-column">

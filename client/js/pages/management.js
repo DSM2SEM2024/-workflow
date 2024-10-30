@@ -53,6 +53,7 @@ export const ManagementPage = {
         return {
             // email: null,
             // password: null
+            base_host: window.location.href.split('#')[0]
         };
     },
     inject: ['urlBase'],
@@ -63,9 +64,28 @@ export const ManagementPage = {
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         save() {
             // this.email;
+        },
+        validateAccess(){
+            let token = window.localStorage.getItem('reposystem_token');
+            let validate_url = 'http://localhost:7070/token/validate-access';
+            let validate_options = {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization':`Bearer ${token}`
+                }
+            }
+            fetch(validate_url, validate_options)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status==false){
+                    window.location.href = this.base_host + '#/login'; 
+                }
+            })
         }
     },
     created() {
-        //Conteúdos que deverão ser carregados em uma espécie de onload.
+        this.validateAccess();
     }
 };

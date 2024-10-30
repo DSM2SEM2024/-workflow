@@ -43,7 +43,8 @@ export const Login = {
     data() {
         return {
             email: '',
-            password: ''
+            password: '',
+            base_host: window.location.href.split('#')[0]
         };
     },
     inject: ['urlBase'],
@@ -54,7 +55,7 @@ export const Login = {
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         login() {
 
-            let url = 'http://localhost:7070/login/professor';
+            let url = 'http://localhost:7070/professor/login';
             let options = {
                 method: 'POST',
                 mode: 'cors',
@@ -71,7 +72,13 @@ export const Login = {
             .then(response=>response.json())
             .then(response=>{
 
-                console.log(response);
+                if(response.status==true){
+                    window.localStorage.setItem('reposystem_token',response.data);
+                    window.location.href = this.base_host+'#/management'
+                } else {
+                    // tratamento de falha no login temporário
+                    alert(response.message);
+                }
 
             })
 

@@ -13,8 +13,9 @@ class Routes {
                 '/projetos/{id}' => [ProfessorController::class,'mensagem2']
             ],
             'POST' => [
-                '/login/professor' => [ProfessorController::class, 'login'],
-                '/professor/cadastrar' => [ProfessorController::class, 'cadastra']
+                '/professor/login' => [ProfessorController::class, 'login'],
+                '/professor/create' => [ProfessorController::class, 'signin'],
+                '/token/validate-access'=>[ProfessorController::class, 'validateAccess'],
             ],
             'PUT' => [
                 '/a/{id}' => [ProfessorController::class, 'login'],
