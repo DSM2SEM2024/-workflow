@@ -1,3 +1,8 @@
+import { backend_url } from "../global-var/backend-url.js";
+import { urlBase } from "../global-var/url-base.js";
+import { dateFormatter } from "../functions/date-formatter.js";
+import { semChecker } from "../functions/sem-checker.js";
+
 export const Project = {
     template: `
         <main id="project" class="d-flex justify-content-evenly align-items-center flex-row">
@@ -9,11 +14,11 @@ export const Project = {
                 <div class="section-data d-flex flex-column align-items-start gap-1">
                     <div class="data-title d-flex justify-content-start flex-row gap-3">
                         <div class="icon-title"></div>
-                        <h1>Projeto</h1>
+                        <h1>{{project.Name}}</h1>
                     </div>
 
-                    <h3>Publicado em 28/11/2024</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum</p>
+                    <h3>Publicado em {{project.End_Date}}</h3>
+                    <p>{{project.Description}}</p>
                 </div>
                 <hr>
                 <div class="section-files d-flex flex-column justify-content-start gap-2">
@@ -58,7 +63,7 @@ export const Project = {
                     <div class="label-content">
                         <label>Semestre</label>
                         <div class="d-flex justify-content-start flex-row gap-2">
-                            <p>1° semestre de 2024</p>
+                            <p>{{sem}}</p>
                         </div>                    
                     </div>
 
@@ -72,7 +77,7 @@ export const Project = {
                     <div class="label-content">
                         <label>Equipe de Desenvolvimento</label>
                         <div>
-                            <p>Anthony Cabral, Renata Joaquim, Mariane Leite e José Carlos</p>
+                            <p>{{members}}</p>
                         </div>                    
                     </div>
 
@@ -86,6 +91,13 @@ export const Project = {
         </main>
     `,
     data() {
+        return {
+            project: {
+                ID_Project: window.location.href.split('project/')[1]
+            },
+            sem: '',
+            members: ''
+        }
     },
     inject: ['urlBase'],
     methods: {
@@ -95,9 +107,35 @@ export const Project = {
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         save() {
             // this.email;
-        }
+        },
+        getById(){
+            let url = backend_url+'/project/'+this.project.ID_Project;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status==true){
+                    this.project = response.data;
+                    this.project.End_Date = dateFormatter(this.project.End_Date);
+                    this.sem = semChecker(this.project.Start_Date);
+                    let count_participants = response.data.Participants.length;
+                    console.log(response.data)
+                    response.data.Participants.forEach((participant, key) => {
+                        if(key==(count_participants-1) && count_participants>1){
+                            this.members+=`e ${participant.participantName}`;
+                        } else if(count_participants==1) {
+                            this.members+=`${participant.participantName}`;
+                        } else {
+                            this.members+=`${participant.participantName}, `;
+                        }
+                    });
+                }
+            })
+        },
+        dateFormatter,
+        semChecker
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
+        this.getById()
     }
 };

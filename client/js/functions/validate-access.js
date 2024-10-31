@@ -1,8 +1,8 @@
 import { backend_url } from "../global-var/backend-url.js";
+import { urlBase } from "../global-var/url-base.js";
 
 export function validateAccess(role){
 
-    let base_host = window.location.href.split('#')[0]
     let token = window.localStorage.getItem('reposystem_token');
 
     let validate_url = backend_url+'/token/validateAccess';
@@ -24,14 +24,14 @@ export function validateAccess(role){
         if(response.status==false){
             switch (role) {
                 case 'professor':
-                    window.location.href = base_host + '#/login'; 
+                    window.location.href = urlBase + '#/login'; 
                     break;
             
                 case 'coordinator':
-                    window.location.href = base_host + '#/login-coordinator'; 
+                    window.location.href = urlBase + '#/login-coordinator'; 
                     break;
                 case 'admin':
-                    window.location.href = base_host + '#/login-admin';
+                    window.location.href = urlBase + '#/login-admin';
                     break;
             }
             

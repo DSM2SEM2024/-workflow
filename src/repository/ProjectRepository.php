@@ -51,4 +51,19 @@ class ProjectRepository{
 
     }
 
+    public function selectById(Project $project){
+
+        $select = 'SELECT * FROM project WHERE ID_Project = ?';
+        $prepare = $this->pdo->prepare($select);
+        $prepare->bindValue(1, $project->getId());
+        try {
+            $prepare->execute();
+            $array = $prepare->fetch();
+            $array['Participants'] = unserialize($array['Participants']);
+            return Message::send(true, 200, 'Projetos encontrados', $array);
+        } catch (PDOException $e) {
+            return Message::send(false, $e->getCode(), $e->getMessage(),[]);
+        }
+    }
+
 }

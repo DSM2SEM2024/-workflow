@@ -12,7 +12,7 @@ class Routes {
         return [
             'GET' => [
                 '/project' => [ProjectController::class, 'list'],
-                '/project/{id}' => [ProfessorController::class,'mensagem2'],
+                '/project/{id}' => [ProjectController::class,'getById'],
                 '/unit' => [UnitController::class, 'list']
             ],
             'POST' => [

@@ -5,6 +5,7 @@ import { ManagementPage } from './pages/management.js';
 import { CreateCoordinator } from './pages/create-coordinator.js';
 import { MyProjects } from './components/my-projects.js';
 import { Project } from './pages/project.js';
+import { urlBase } from './global-var/url-base.js';
 
 // import { Footer } from './components/footer.js';
 import { CreateProject } from './pages/create-project.js';
@@ -71,11 +72,10 @@ const App = {
             <router-view></router-view>
         </div>
     `,
-    //Porta na qual o servidor front-end roda.
+    //Porta na qual o servidor front-end roda, definita na pasta global-var/base-url.js.
     setup() {
-        const urlBase = 'http://localhost:8080/';
         return {
-            urlBase
+            urlBase: urlBase
         };
     },
     provide() {
