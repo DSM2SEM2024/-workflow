@@ -226,7 +226,8 @@ main {
                     gap: 5%;
                 }
 
-                & h1, h2 {
+                & h1,
+                h2 {
                     font-size: 1.2rem;
                     margin: 1.7rem 0rem 0rem 0rem;
                     font-weight: 100;
@@ -254,6 +255,7 @@ main {
                         font-family: @roboto-regular;
                         margin: 1.7rem 0rem 0rem 0rem;
                     }
+
                     & .add-btn {
                         position: relative;
                         margin: 1.7rem 0rem 0rem 0rem;
@@ -263,7 +265,7 @@ main {
                         font-size: 1.5rem;
                         cursor: pointer;
                     }
-                    
+
                     & .description {
                         width: calc(32rem + 5%);
                         height: 8rem;
@@ -307,14 +309,17 @@ main {
                     }
 
                 }
+
                 & .form-entries {
 
-                    .members, .files:first-of-type {
+                    .members,
+                    .files:first-of-type {
                         margin: 1.7rem 0rem 0rem 0rem;
                     }
 
 
-                    & .members, .files {
+                    & .members,
+                    .files {
                         outline: none;
                         width: calc(16rem + 5%);
                         box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
@@ -744,13 +749,13 @@ main {
                     font-family: @roboto-medium;
                 }
 
-                & div>img{
+                & div>img {
                     width: 1.5rem;
                     height: 1.5rem;
                 }
             }
 
-            & a{
+            & a {
                 color: @primary-red;
                 font-family: @roboto-bold;
                 font-size: 0.9rem;
@@ -759,22 +764,22 @@ main {
     }
 }
 
-#management-page{
+#management-page {
 
     & .page-content {
         width: 40vw;
         min-width: 20rem;
         text-transform: none;
-        
-        
+
+
         & .page-section {
             background: @background-red;
             color: @terciary-white;
             width: 100%;
             height: 4rem;
             border-radius: 0.4rem;
-            
-            
+
+
             & h2 {
                 font-size: 1.1rem;
                 font-family: @roboto-medium;
@@ -785,7 +790,7 @@ main {
             }
         }
     }
-    
+
     & .new-project-card {
         width: 100%;
         margin: 1rem 0rem 1rem 0rem;
@@ -794,7 +799,8 @@ main {
         background: linear-gradient(to right, lighten(@primary-white, 7%), lighten(@quaternary-white, 5%));
         box-shadow: 0px 3px 2px @quaternary-white;
 
-        & h1, h2 {
+        & h1,
+        h2 {
             font-family: @roboto-medium;
             text-align: start;
         }
@@ -804,7 +810,7 @@ main {
             opacity: 0.8;
             font-size: 1.6rem;
         }
-       
+
         & h2 {
             font-size: 1rem;
             margin-bottom: 1.4rem;
@@ -818,7 +824,7 @@ main {
     & #projects-container {
         width: 100%;
 
-        & .project{
+        & .project {
             margin: 1rem 0rem 1rem 0rem;
             position: relative;
             background: lighten(@quaternary-white, 5%);
@@ -826,9 +832,11 @@ main {
             width: 100%;
             padding: 1.5rem;
 
-            & h1, h2, span {
+            & h1,
+            h2,
+            span {
                 font-family: @roboto-regular;
-                text-align: start;  
+                text-align: start;
                 font-size: 1.2rem;
                 font-weight: 100;
             }
@@ -864,17 +872,19 @@ main {
     }
 }
 
-#teachers-area{
-    & .dinamic-content{
-        & .section-top{
+#teachers-area {
+    & .dinamic-content {
+        padding-bottom: 3rem;
+
+        & .section-top {
             width: 90%;
             height: 15rem;
             padding: 2rem 2rem 0rem 2rem;
             background: linear-gradient(to bottom, @primary-red 60%, @quinary-white 40%);
-            color: @terciary-white;
+            color: @primary-white;
             border-radius: .5rem;
 
-            & .profile-picture{
+            & .profile-picture {
                 width: 10rem;
                 height: 10rem;
                 min-width: 150px;
@@ -883,14 +893,106 @@ main {
                 border-radius: 5rem;
             }
 
-            & .profile-apresentation{
-                & .teacher-expertise{
+            & .profile-apresentation {
+                & .teacher-name{
+                    font-size: 1.7rem;
+                }
+
+                & .teacher-expertise {
+                    font-size: 1.2rem;
                     font-family: @roboto-regular;
+                    font-weight: normal;
                 }
             }
         }
 
-        & .section-career{
+        & .section{
+            border-left: 2px solid @primary-red;
+            border-radius: 2px;
+            padding-left: 1.5rem;
+            flex-wrap: wrap;
+
+            & h4 {
+                padding-top: 1rem;
+
+                font-family: @roboto-bold;
+                color: lighten(@terciary-black, 50%);
+                text-transform: uppercase;
+                font-size: 1rem;
+            }
+
+            & p {
+                margin-bottom: 0rem;
+                font-family: @roboto-regular;
+            }
+
+            & .left{
+                min-width: 10vw;
+
+                & div .icon{
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }    
+            }
+        }
+
+        & .section-bottom {
+            gap: 20%;
+        }
+
+        & .teachers-projects {
+            padding: 3rem 0rem 3rem 0rem;
+
+            & .title-section {
+                background: @background-red;
+                color: @primary-white;
+                padding: 0.6rem 0rem 0.2rem 1.5rem;
+                border-radius: 0.2rem;
+
+                & h3 {
+                    font-size: 1.1rem;
+                    text-transform: uppercase;
+                    font-family: @roboto-medium;
+                }
+            }
+
+            & .list {
+                max-height: 35vh;
+                overflow-y: scroll;
+
+
+                & .project {
+                    padding: 1.3rem 1rem 0.7rem 1.5rem;
+                    border-radius: 0.2rem;
+                    background: lighten(@quaternary-white, 5%);
+                    margin-top: 0.8rem;
+                    width: 100%;
+                    cursor: pointer;
+
+                    & .left {
+                        & p {
+                            font-family: @roboto-regular;
+                            margin-bottom: 0.1rem;
+                        }
+
+                        & .project-name {
+                            color: @primary-red;
+                            font-family: @roboto-bold;
+                        }
+
+                        & .curse-name {
+                            color: lighten(@primary-black, 30%);
+                        }
+                    }
+
+                    & .right {
+                        & p {
+                            margin-bottom: 0.2rem;
+                            color: lighten(@primary-black, 30%);
+                        }
+                    }
+                }
+            }
         }
     }
 }
