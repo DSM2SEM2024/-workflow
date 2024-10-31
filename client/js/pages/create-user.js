@@ -1,8 +1,8 @@
 import { validateAccess } from "../functions/validate-access.js";
 
-export const CreateCoordinator = {
+export const CreateUser = {
     template: `
-        <main id="create-coordinator" class="d-flex justify-content-evenly align-items-center flex-row">
+        <main id="create-user" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
                     <h2>Cadastrar usuário</h2>

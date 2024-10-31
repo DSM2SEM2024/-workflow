@@ -2,7 +2,7 @@
 import { Login } from './pages/login.js';
 import { Home } from './pages/home.js';
 import { ManagementPage } from './pages/management.js';
-import { CreateCoordinator } from './pages/create-coordinator.js';
+import { CreateUser } from './pages/create-user.js';
 import { MyProjects } from './components/my-projects.js';
 import { Project } from './pages/project.js';
 import { RegisterUnit } from './pages/register-unit.js';
@@ -17,11 +17,11 @@ const routes = [
     { path: '/', component: Home },
     { path: '/login', component: Login },
     { path: '/management', component: ManagementPage },
-    { path: '/create-coordinator', component: CreateCoordinator },
+    { path: '/create-user', component: CreateUser },
     { path: '/create-project', component: CreateProject },
     { path: '/my-projects', component: MyProjects},
     { path: '/project/:id', component: Project},
-    { path: '/register-unit', component: RegisterUnit}
+    { path: '/register-unit', component: RegisterUnit},
     { path: '/teachers-area', component: TeachersArea}
 ];
 
