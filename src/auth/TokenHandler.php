@@ -56,7 +56,7 @@ class TokenHandler {
         return Message::send(true,200,'JWT criado',$jwt);
     }
 
-    public function verifyPermission() : array {
+    public static function verifyPermission() : array {
         
         try{
 

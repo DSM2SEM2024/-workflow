@@ -1,9 +1,11 @@
+import { backend_url } from "../global-var/backend-url.js";
+
 export function validateAccess(role){
 
     let base_host = window.location.href.split('#')[0]
     let token = window.localStorage.getItem('reposystem_token');
 
-    let validate_url = 'http://localhost:70/token/validateAccess';
+    let validate_url = backend_url+'/token/validateAccess';
     let validate_options = {
         method: 'POST',
         mode: 'cors',

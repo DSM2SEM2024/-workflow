@@ -2,6 +2,8 @@
 namespace Src\Routes;
 use Src\Controller\ProfessorController;
 use Src\Controller\TokenController;
+use Src\Controller\ProjectController;
+use Src\Controller\UnitController;
 
 class Routes {
 
@@ -9,13 +11,15 @@ class Routes {
     public static function getRoutes(): array{
         return [
             'GET' => [
-                '/projetos' => [ProfessorController::class, 'mensagem'],
-                '/projetos/{id}' => [ProfessorController::class,'mensagem2']
+                '/project' => [ProjectController::class, 'list'],
+                '/project/{id}' => [ProfessorController::class,'mensagem2'],
+                '/unit' => [UnitController::class, 'list']
             ],
             'POST' => [
                 '/professor/login' => [ProfessorController::class, 'login'],
                 '/professor/create' => [ProfessorController::class, 'signin'],
                 '/token/validateAccess' => [TokenController::class, 'verifyPermission'],
+                '/project/create' => [ProjectController::class, 'create'],
             ],
             'PUT' => [
                 '/a/{id}' => [ProfessorController::class, 'login'],

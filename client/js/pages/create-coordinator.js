@@ -1,4 +1,5 @@
 import { validateAccess } from "../functions/validate-access.js";
+import { backend_url } from "../global-var/backend-url.js";
 
 export const CreateCoordinator = {
     template: `
@@ -39,7 +40,6 @@ export const CreateCoordinator = {
                 </section>
             </section>
         </main>
-        {{email}} {{password}}
     `,
     data() {
         return {

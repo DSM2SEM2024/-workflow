@@ -84,7 +84,6 @@ export const Project = {
                 </div>
             </section>
         </main>
-        {{email}} {{password}}
     `,
     data() {
     },

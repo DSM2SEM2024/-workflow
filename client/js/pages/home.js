@@ -1,5 +1,6 @@
 import { MyProjects } from '../components/my-projects.js';
 import { navigate } from '../functions/navigate.js';
+import { backend_url } from '../global-var/backend-url.js';
 
 export const Home = {
     template: `
@@ -121,10 +122,21 @@ export const Home = {
         save() {
             // this.email;
         },
-        navigate
+        navigate,
+        list(){
+            let url = backend_url+'/project'
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status==true){
+                    this.projects = response.data;
+                }
+            })
+        }
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
+        this.list();
     },
     components:{
         MyProjects
