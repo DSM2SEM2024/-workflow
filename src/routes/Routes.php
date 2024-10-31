@@ -1,7 +1,7 @@
 <?php
 namespace Src\Routes;
 use Src\Controller\ProfessorController;
-use Src\Model\Professor;
+use Src\Controller\TokenController;
 
 class Routes {
 
@@ -13,8 +13,9 @@ class Routes {
                 '/projetos/{id}' => [ProfessorController::class,'mensagem2']
             ],
             'POST' => [
-                '/login/professor' => [ProfessorController::class, 'login'],
-                '/professor/cadastrar' => [ProfessorController::class, 'cadastra']
+                '/professor/login' => [ProfessorController::class, 'login'],
+                '/professor/create' => [ProfessorController::class, 'signin'],
+                '/token/validateAccess' => [TokenController::class, 'verifyPermission'],
             ],
             'PUT' => [
                 '/a/{id}' => [ProfessorController::class, 'login'],

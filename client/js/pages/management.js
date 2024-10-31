@@ -1,3 +1,6 @@
+import { validateAccess } from "../functions/validate-access.js";
+import { navigate } from "../functions/navigate.js";
+
 export const ManagementPage = {
     template: `
         <main id="management-page" class="d-flex justify-content-evenly align-items-center flex-row">
@@ -9,7 +12,7 @@ export const ManagementPage = {
                     <div class="new-project-card">
                         <h1>Crie um novo Projeto Interdisciplinar</h1>
                         <h2>Gerencie os Projetos através da central de gerenciamento. Crie e atualize Projetos existentes.</h2>
-                        <button class="btn-red">+ Criar Projeto</button>
+                        <button class="btn-red" @click="navigate('create-project')">+ Criar Projeto</button>
                     </div>
                     <div class="page-section d-flex justify-content-start align-items-center">
                         <h2>Meus projetos</h2>
@@ -47,12 +50,12 @@ export const ManagementPage = {
             </section>
 
         </main>
-        {{email}} {{password}}
     `,
     data() {
         return {
             // email: null,
             // password: null
+            base_host: window.location.href.split('#')[0]
         };
     },
     inject: ['urlBase'],
@@ -63,9 +66,10 @@ export const ManagementPage = {
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         save() {
             // this.email;
-        }
+        },
+        navigate
     },
     created() {
-        //Conteúdos que deverão ser carregados em uma espécie de onload.
+        validateAccess('professor');
     }
 };

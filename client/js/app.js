@@ -11,8 +11,8 @@ import { CreateProject } from './pages/create-project.js';
 
 //Definindo as rotas através desse identificador
 const routes = [
-    { path: '/', component: Login },
-    { path: '/home', component: Home },
+    { path: '/', component: Home },
+    { path: '/login', component: Login },
     { path: '/management', component: ManagementPage },
     { path: '/create-coordinator', component: CreateCoordinator },
     { path: '/create-project', component: CreateProject },
