@@ -30,7 +30,8 @@ const App = {
         return {
             startTime: null,
             endTime: null,
-            renderTime: null
+            renderTime: null,
+            career: ''
         };
     },
     beforeMount() {

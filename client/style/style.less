@@ -256,6 +256,17 @@ main {
                         margin: 1.7rem 0rem 0rem 0rem;
                     }
 
+                    & select{
+                        padding: 0.480rem 1rem 0.415rem 1rem;
+                    }
+
+                    & .icon {
+                        width: 1rem;
+                        height: 1rem;
+                        margin-bottom: 0.5rem;
+                        cursor: pointer;
+                    }
+
                     & .add-btn {
                         position: relative;
                         margin: 1.7rem 0rem 0rem 0rem;
@@ -305,9 +316,7 @@ main {
                             font-size: 0.7rem;
                             padding: .4rem 1rem;
                         }
-
                     }
-
                 }
 
                 & .form-entries {
@@ -316,7 +325,6 @@ main {
                     .files:first-of-type {
                         margin: 1.7rem 0rem 0rem 0rem;
                     }
-
 
                     & .members,
                     .files {
@@ -370,6 +378,70 @@ main {
 
                     & select {
                         padding: 0.420rem 1rem 0.420rem 1rem;
+                    }
+                }
+
+                & .teacher-section,
+                .coordinator-section {
+                    margin-top: 1rem;
+
+                    & p {
+                        margin-bottom: 0rem;
+                        margin-top: 1rem;
+                    }
+
+                    & .section-linked-data {
+                        margin: 1rem 0rem 0rem 0rem;
+                        background: @terciary-white;
+                        width: 19rem;
+                        border-radius: 0.3rem;
+                        box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
+                        border-radius: 0.3rem;
+                        padding: 0.8rem 1rem 0.5rem 1.3rem;
+                        font-size: 0.9rem;
+                        font-family: @roboto-regular;
+
+                        & .icon {
+                            width: 1.6rem;
+                            height: 1.6rem;
+                        }
+
+                        & p {
+                            margin-bottom: 0rem;
+                            margin-top: 0rem;
+                        }
+
+                        & span {
+                            width: 1rem;
+                            height: 1rem;
+                            border-radius: 0.15rem;
+                            background-color: @primary-red;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: @secundary-white;
+                            font-weight: bolder;
+                            font-size: 1.2rem;
+                            cursor: pointer;
+                        }
+
+                        & .linked-data{
+
+
+                            & .unity-name{
+                                color: lighten(@secundary-black, 40%);
+                                text-transform: uppercase;
+                            }
+
+                            & .discipline-name{
+                                color: @secundary-black;
+                                font-family: @roboto-bold;
+                            }
+
+                            & .curse-name{
+                                color: @primary-red;
+                            }
+                        }
                     }
                 }
             }
@@ -894,7 +966,7 @@ main {
             }
 
             & .profile-apresentation {
-                & .teacher-name{
+                & .teacher-name {
                     font-size: 1.7rem;
                 }
 
@@ -906,7 +978,7 @@ main {
             }
         }
 
-        & .section{
+        & .section {
             border-left: 2px solid @primary-red;
             border-radius: 2px;
             padding-left: 1.5rem;
@@ -926,13 +998,13 @@ main {
                 font-family: @roboto-regular;
             }
 
-            & .left{
+            & .left {
                 min-width: 10vw;
 
-                & div .icon{
+                & div .icon {
                     width: 1.5rem;
                     height: 1.5rem;
-                }    
+                }
             }
         }
 
