@@ -307,16 +307,16 @@ main {
                     }
 
                 }
-                & .form-entries {
+                & .form-entries, .fe-limited {
+                    width: calc(16rem + 5%);
 
                     .members, .files:first-of-type {
                         margin: 1.7rem 0rem 0rem 0rem;
                     }
 
-
                     & .members, .files {
                         outline: none;
-                        width: calc(16rem + 5%);
+                        width: 100%;
                         box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
                         border-radius: 0.3rem;
                         padding: 0.5rem 1rem 0.5rem 0.7rem;
@@ -367,6 +367,26 @@ main {
                         padding: 0.420rem 1rem 0.420rem 1rem;
                     }
                 }
+
+                & .fe-limited {
+                    width: calc(17rem + 5%);
+                    padding: 0 1rem 1rem 0 ;
+                    height: 10rem;
+                    overflow-y: auto;
+                
+                    &::-webkit-scrollbar {
+                        width: 8px;
+                    }
+                
+                    &::-webkit-scrollbar-thumb {
+                        background: lighten(@terciary-black, 70%);
+                        border-radius: 10px;
+                    }
+                
+                    &::-webkit-scrollbar-track {
+                        background: transparent;
+                    }
+                }                
             }
 
             & hr {
