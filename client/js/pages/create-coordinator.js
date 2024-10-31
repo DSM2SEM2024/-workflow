@@ -1,3 +1,5 @@
+import { validateAccess } from "../functions/validate-access.js";
+
 export const CreateCoordinator = {
     template: `
         <main id="create-coordinator" class="d-flex justify-content-evenly align-items-center flex-row">
@@ -43,6 +45,7 @@ export const CreateCoordinator = {
         return {
             // email: null,
             // password: null
+            base_url: window.location.href.split('#')[0]
         };
     },
     inject: ['urlBase'],
@@ -57,5 +60,6 @@ export const CreateCoordinator = {
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
+        validateAccess('admin');
     }
 };

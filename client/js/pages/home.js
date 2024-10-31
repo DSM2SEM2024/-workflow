@@ -1,4 +1,5 @@
 import { MyProjects } from '../components/my-projects.js';
+import { navigate } from '../functions/navigate.js';
 
 export const Home = {
     template: `
@@ -70,11 +71,12 @@ export const Home = {
                 </section>
 
                 <article class="project-container d-flex flex-row w-100 gap-5 flex-wrap">
-                    <div class="project-card">
-                        <h1 class="project-title">Nome do Projeto</h1>
+
+                    <div class="project-card" v-for="project in projects" :key="project.ID_Project" >
+                        <h1 class="project-title">{{project.Name}}</h1>
                         <img class="project-image" src="../images/event.jpg" alt="Projeto Interdisciplinar">
 
-                        <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit, Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p class="project-description">{{project.Description}}</p>
                         
                         <div class="project-info d-flex justify-content-between flex-row align-items-end gap-4">
                             <div class="all-information d-flex flex-column align-items-start w-80">
@@ -84,34 +86,31 @@ export const Home = {
                             </div>
 
                             <div class="w-20">
-                                <button class="button btn-red">Visualizar</button>
+                                <button class="button btn-red" @click="navigate('project/'+project.ID_Project)">Visualizar</button>
                             </div>
                         </div>
                     </div>
-                    <div class="project-card">
-                        <h1 class="project-title">Nome do Projeto</h1>
-                        <img class="project-image" src="../images/event.jpg" alt="Projeto Interdisciplinar">
-
-                        <p class="project-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit, Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        
-                        <div class="project-info d-flex justify-content-between flex-row align-items-end gap-4">
-                            <div class="all-information d-flex flex-column align-items-start w-80">
-                                <h3>Curso</h3>
-                                <h4>Desenvolvimento de Software e Multiplataforma</h4>
-                                <p>Clique em visualizar para obter mais informações</p>
-                            </div>
-
-                            <div class="w-20">
-                                <button class="button btn-red">Visualizar</button>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </article>
             </div>
             <MyProjects></MyProjects>
         </main>
     `,
     data() {
+        return{
+            projects: [
+                {
+                    ID_Project: 1,
+                    Name: 'Projeto Sofia',
+                    Description: 'Exemplo de descrição'
+                },
+                {
+                    ID_Project: 2,
+                    Name: 'Projeto Sofia',
+                    Description: 'Exemplo de descrição'
+                }
+            ]
+        }
     },
     inject: ['urlBase'],
     methods: {
@@ -121,7 +120,8 @@ export const Home = {
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         save() {
             // this.email;
-        }
+        },
+        navigate
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.

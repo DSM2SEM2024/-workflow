@@ -1,3 +1,5 @@
+import { validateAccess } from "../functions/validate-access.js";
+
 export const Login = {
     template: `
         <main id="login" class="dinamic-content d-flex justify-content-evenly align-items-center flex-row">
@@ -55,7 +57,7 @@ export const Login = {
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         login() {
 
-            let url = 'http://localhost:7070/professor/login';
+            let url = 'http://localhost:70/professor/login';
             let options = {
                 method: 'POST',
                 mode: 'cors',

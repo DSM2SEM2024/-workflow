@@ -56,12 +56,14 @@ class TokenHandler {
         return Message::send(true,200,'JWT criado',$jwt);
     }
 
-    public static function verifyPermission(string $role) : array {
-
-        $headers = getallheaders();
-        $token = explode(' ',$headers['Authorization'])[1];
-
+    public function verifyPermission() : array {
+        
         try{
+
+            $headers = getallheaders();
+            $token = explode(' ',$headers['Authorization'])[1];
+            $role = json_decode(file_get_contents('php://input'),true)['role'];
+
             $decoded_token = JWT::decode($token, new Key(SECRET_KEY, alg));
             if($decoded_token->role==$role){
                 return Message::send(true,200,'Permissão concedida',[]);

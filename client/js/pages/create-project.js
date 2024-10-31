@@ -1,3 +1,5 @@
+import { validateAccess } from "../functions/validate-access.js";
+
 export const CreateProject = {
     template: `
         <main id="create-project" class="d-flex justify-content-evenly align-items-center flex-row">
@@ -124,28 +126,9 @@ export const CreateProject = {
         save() {
             // this.email;
         },
-        validateAccess(){
-            let token = window.localStorage.getItem('reposystem_token');
-            let validate_url = 'http://localhost:7070/token/validate-access';
-            let validate_options = {
-                method: 'POST',
-                mode: 'cors',
-                headers: {
-                    'Content-Type':'application/json',
-                    'Authorization':`Bearer ${token}`
-                }
-            }
-            fetch(validate_url, validate_options)
-            .then(response=>response.json())
-            .then(response=>{
-                if(response.status==false){
-                    window.location.href = this.base_host + '#/login'; 
-                }
-            })
-        }
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
-        this.validateAccess();
+        validateAccess('professor');
     }
 };

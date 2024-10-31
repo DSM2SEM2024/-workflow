@@ -66,10 +66,6 @@ class ProfessorController {
 
     }
 
-    public function validateAccess(){
-        echo json_encode(TokenHandler::verifyPermission('professor'));
-    }
-
     public function mensagem(){
         echo 'mensagem de teste';
     }

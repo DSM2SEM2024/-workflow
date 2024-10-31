@@ -1,3 +1,5 @@
+import { navigate } from "../functions/navigate.js";
+
 export const MyProjects = {
     template: `
     <div id="my-projects" class="">
@@ -31,8 +33,8 @@ export const MyProjects = {
             </div>    
 
             <div class="button-section d-flex justify-content-start flex-row gap-3">
-                <button class="btn-red">Exibir todos</button>
-                <button class="btn-red">+ Criar projeto</button>
+                <button class="btn-red" @click="navigate('management')" >Exibir todos</button>
+                <button class="btn-red" @click="navigate('create-project')" >+ Criar projeto</button>
             </div>
         </div>
     </div>
@@ -46,7 +48,8 @@ export const MyProjects = {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
         save() {
-        }
+        },
+        navigate
     },
     created() {
     }
