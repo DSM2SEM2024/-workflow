@@ -50,6 +50,22 @@ class ProfessorController {
 
     }
 
+    public function signin(){
+        $data = json_decode(file_get_contents('php://input'),true);
+        $repo = new ProfessorRepository();
+
+        $professor = new Professor();
+        $professor->setName($data['name']);
+        $professor->setEmail($data['email']);
+        $professor->setExpertise($data['expertise']);
+        $professor->setPassword($data['password']);
+
+        $insert_response = $repo->insert($professor);
+        http_response_code($insert_response['code']);
+        echo json_encode($insert_response);
+
+    }
+
     public function mensagem(){
         echo 'mensagem de teste';
     }

@@ -1,3 +1,5 @@
+import { validateAccess } from "../functions/validate-access.js";
+
 export const CreateCoordinator = {
     template: `
         <main id="create-coordinator" class="d-flex justify-content-evenly align-items-center flex-row">

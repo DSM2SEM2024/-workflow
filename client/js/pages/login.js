@@ -1,3 +1,5 @@
+import { validateAccess } from "../functions/validate-access.js";
+
 export const Login = {
     template: `
         <main id="login" class="dinamic-content d-flex justify-content-evenly align-items-center flex-row">
@@ -30,7 +32,7 @@ export const Login = {
                     </div>
 
                     <div class="d-flex justify-content-center flex-column gap-3 options-login">
-                        <button type="submit" class="button btn-red">Entrar</button>
+                        <button type="submit" class="button btn-red" @click="login">Entrar</button>
                         <button type="submit" class="d-flex justify-content-center flex-row align-items-center gap-3 button btn-white">
                             <img class="icon" src="../images/logo-microsoft.png" alt="Logo Microsoft">
                             Entrar com Microsoft
@@ -39,12 +41,12 @@ export const Login = {
                 </div>
             </section>
         </main>
-        {{email}} {{password}}
     `,
     data() {
         return {
-            email: null,
-            password: null
+            email: '',
+            password: '',
+            base_host: window.location.href.split('#')[0]
         };
     },
     inject: ['urlBase'],
@@ -53,8 +55,35 @@ export const Login = {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
-        save() {
-            this.email;
+        login() {
+
+            let url = 'http://localhost:70/professor/login';
+            let options = {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    email: this.email,
+                    password: this.password
+                })
+            };
+            
+            fetch(url, options)
+            .then(response=>response.json())
+            .then(response=>{
+
+                if(response.status==true){
+                    window.localStorage.setItem('reposystem_token',response.data);
+                    window.location.href = this.base_host+'#/management'
+                } else {
+                    // tratamento de falha no login temporário
+                    alert(response.message);
+                }
+
+            })
+
         }
     },
     created() {

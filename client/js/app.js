@@ -4,18 +4,24 @@ import { Home } from './pages/home.js';
 import { ManagementPage } from './pages/management.js';
 import { CreateCoordinator } from './pages/create-coordinator.js';
 import { MyProjects } from './components/my-projects.js';
+import { Project } from './pages/project.js';
+import { RegisterUnit } from './pages/register-unit.js';
+
+// import { Footer } from './components/footer.js';
 import { TeachersArea } from './pages/teachers-area.js';
 import { CreateProject } from './pages/create-project.js';
 // import { Footer } from './components/footer.js';
 
 //Definindo as rotas através desse identificador
 const routes = [
-    { path: '/', component: Login },
-    { path: '/home', component: Home },
+    { path: '/', component: Home },
+    { path: '/login', component: Login },
     { path: '/management', component: ManagementPage },
     { path: '/create-coordinator', component: CreateCoordinator },
     { path: '/create-project', component: CreateProject },
     { path: '/my-projects', component: MyProjects},
+    { path: '/project/:id', component: Project},
+    { path: '/register-unit', component: RegisterUnit}
     { path: '/teachers-area', component: TeachersArea}
 ];
 

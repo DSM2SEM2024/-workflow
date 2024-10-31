@@ -1,3 +1,5 @@
+import { validateAccess } from "../functions/validate-access.js";
+
 export const CreateProject = {
     template: `
         <main id="create-project" class="d-flex justify-content-evenly align-items-center flex-row">
@@ -112,6 +114,7 @@ export const CreateProject = {
         return {
             // email: null,
             // password: null
+            base_url: window.location.href.split('#')[0]
         };
     },
     inject: ['urlBase'],
@@ -122,9 +125,10 @@ export const CreateProject = {
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         save() {
             // this.email;
-        }
+        },
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
+        validateAccess('professor');
     }
 };

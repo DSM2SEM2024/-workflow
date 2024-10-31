@@ -56,12 +56,14 @@ class TokenHandler {
         return Message::send(true,200,'JWT criado',$jwt);
     }
 
-    public static function verifyPermission(string $role) : array {
-
-        $headers = getallheaders();
-        $token = explode(' ',$headers['Authorization'])[1];
-
+    public function verifyPermission() : array {
+        
         try{
+
+            $headers = getallheaders();
+            $token = explode(' ',$headers['Authorization'])[1];
+            $role = json_decode(file_get_contents('php://input'),true)['role'];
+
             $decoded_token = JWT::decode($token, new Key(SECRET_KEY, alg));
             if($decoded_token->role==$role){
                 return Message::send(true,200,'Permissão concedida',[]);
@@ -76,10 +78,10 @@ class TokenHandler {
             return Message::send(false,401,"Token ainda não é válido" . $e->getMessage(),[]);
         } catch (SignatureInvalidException $e) {
             http_response_code(401);
-            return Message::send(true,401,"Assinatura do token inválida: " . $e->getMessage(),[]);
+            return Message::send(false,401,"Assinatura do token inválida: " . $e->getMessage(),[]);
         } catch (Exception $e) {
             http_response_code(401);
-            return Message::send(true,401,"Erro ao validar token: " . $e->getMessage(),[]);
+            return Message::send(false,401,"Erro ao validar token: " . $e->getMessage(),[]);
         }
 
     }
