@@ -20,6 +20,7 @@ class Routes {
                 '/professor/create' => [ProfessorController::class, 'signin'],
                 '/token/validateAccess' => [TokenController::class, 'verifyPermission'],
                 '/project/create' => [ProjectController::class, 'create'],
+                '/unit/create' => [UnitController::class, 'create'],
             ],
             'PUT' => [
                 '/a/{id}' => [ProfessorController::class, 'login'],

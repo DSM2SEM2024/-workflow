@@ -66,7 +66,7 @@ class TokenHandler {
 
             $decoded_token = JWT::decode($token, new Key(SECRET_KEY, alg));
             if($decoded_token->role==$role){
-                return Message::send(true,200,'Permissão concedida',[]);
+                return Message::send(true,200,'Permissão concedida',[$decoded_token]);
             } else {
                 return Message::send(false,401,'Permissão negada',[]);
             }

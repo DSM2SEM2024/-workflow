@@ -5,6 +5,7 @@ use Src\Model\Unit;
 use Src\Repository\ProjectRepository;
 use Src\Auth\TokenHandler;
 use Src\Model\Message;
+use Src\Model\Professor;
 
 class ProjectController {
 
@@ -12,6 +13,7 @@ class ProjectController {
 
         $data = json_decode(file_get_contents('php://input'),true);
         $project = new Project();
+
         $project->setName($data['name']);
         $project->setDescription($data['description']);
         $project->setStartDate($data['startDate']);
@@ -21,16 +23,21 @@ class ProjectController {
         $unit->setId($data['unit']);
         $project->setUnit($unit);
         $project->setStatus(0);
-
         $repo = new ProjectRepository();
-
         $token_response = TokenHandler::verifyPermission();
+        $professor = new Professor();
+        $id = $token_response['data'][0]->sub->ID_Professor;
+        $professor->setId($id);
+        $project->setProfessor($professor);
+
         if($token_response['status']==true){
+
             $insert_response = $repo->create($project);
+
             if($insert_response['status']==true){
-                $project->setId($insert_response['data']);
+                $project->setId($insert_response['data'][0]);
                 http_response_code($insert_response['code']);
-                echo json_encode(Message::send(true,$insert_response['code'],$insert_response['message'],$project));
+                echo json_encode(Message::send(true,$insert_response['code'],$insert_response['message'],$project->getId()));
             } else {
                 http_response_code($insert_response['code']);
                 echo json_encode($insert_response);

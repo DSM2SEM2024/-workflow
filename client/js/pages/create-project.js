@@ -176,7 +176,6 @@ export const CreateProject = {
             fetch(url, options)
             .then(response=>response.json())
             .then(response=>{
-                console.log(response)
                 if(response.status==true){
                     navigate('project/'+response.data);
                 } else {

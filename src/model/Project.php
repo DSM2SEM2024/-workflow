@@ -1,6 +1,7 @@
 <?php
 namespace Src\Model;
 use Src\Model\Unit;
+use Src\Model\Professor;
 
 class Project {
 
@@ -12,6 +13,15 @@ class Project {
     private string $participants;
     private Unit $unit;
     private int $status;
+    private Professor $professor;
+
+    public function __construct()
+    {
+        $this->unit = new Unit();
+        $p = new Professor();
+        $p->setId(0);
+        $this->professor = $p;
+    }
 
 
     /**
@@ -172,5 +182,13 @@ class Project {
      */
     public function setStatus(int $status) {
         $this->status = $status;
+    }
+
+    public function getProfessor() : Professor{
+        return $this->professor;
+    }
+
+    public function setProfessor(Professor $professor){
+        $this->professor = $professor;
     }
 }

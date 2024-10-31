@@ -5,6 +5,7 @@ use PDOException;
 use Src\Model\Project;
 use Src\Database\Database;
 use Src\Model\Message;
+use Src\Model\Professor;
 
 class ProjectRepository{
 
@@ -17,7 +18,7 @@ class ProjectRepository{
 
     public function create(Project $project){
 
-        $insert = 'INSERT INTO project(Name, Description, Start_Date, End_Date, Participants, ID_Unit, Status) VALUES (?,?,?,?,?,?,?)';
+        $insert = 'INSERT INTO project(Name, Description, Start_Date, End_Date, Participants, ID_Unit, Status, ID_Professor) VALUES (?,?,?,?,?,?,?,?)';
         $prepare = $this->pdo->prepare($insert);
         $prepare->bindValue(1, $project->getName());
         $prepare->bindValue(2, $project->getDescription());
@@ -26,6 +27,7 @@ class ProjectRepository{
         $prepare->bindValue(5, $project->getParticipants());
         $prepare->bindValue(6, $project->getUnit()->getId());
         $prepare->bindValue(7, $project->getStatus());
+        $prepare->bindValue(8, $project->getProfessor()->getId());
 
         try {
             $prepare->execute();
