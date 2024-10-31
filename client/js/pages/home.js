@@ -1,6 +1,7 @@
 import { MyProjects } from '../components/my-projects.js';
 import { navigate } from '../functions/navigate.js';
 import { backend_url } from '../global-var/backend-url.js';
+import { validateAccess } from '../functions/validate-access.js';
 
 export const Home = {
     template: `
@@ -94,23 +95,14 @@ export const Home = {
                     
                 </article>
             </div>
-            <MyProjects></MyProjects>
+            <MyProjects v-if="showMyProjects"></MyProjects>
         </main>
     `,
     data() {
         return{
-            projects: [
-                {
-                    ID_Project: 1,
-                    Name: 'Projeto Sofia',
-                    Description: 'Exemplo de descrição'
-                },
-                {
-                    ID_Project: 2,
-                    Name: 'Projeto Sofia',
-                    Description: 'Exemplo de descrição'
-                }
-            ]
+            projects: [],
+            showMyProjects: false,
+            token: window.localStorage.getItem('reposystem_token')
         }
     },
     inject: ['urlBase'],
@@ -132,11 +124,35 @@ export const Home = {
                     this.projects = response.data;
                 }
             })
+        },
+        validateLogin(){
+            let url = backend_url+'/token/validateAccess';
+            let options = {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization':`Bearer ${this.token}`
+                },
+                body: JSON.stringify({
+                    role: 'professor'
+                })
+            }
+            fetch(url,options)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status==true){
+                    this.showMyProjects = true;
+                } else {
+                    this.showMyProjects = false;
+                }
+            })
         }
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
         this.list();
+        this.validateLogin();
     },
     components:{
         MyProjects
