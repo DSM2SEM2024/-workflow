@@ -60,13 +60,11 @@ export const CreateProject = {
                     <form>
                         <div class="form-gap d-flex d-row flex-row">
                             <div class="form-inputs d-flex justify-content-start d-column flex-column">
-                                <select placeholder="Escolha um arquivo">
-                                    <option value="PDF">PDF</option>
-                                    <option value="URL">URL</option>
-                                    <option value="JPEG">JPEG</option>
-                                    <option value="PNG">PNG</option>
+                                <select v-model="file_type_value" placeholder="Escolha um arquivo">
+                                    <option value="">Escolha um tipo de arquivo...</option>
+                                    <option v-for="type in file_types" :value="type">{{type}}</option>
                                 </select>
-                                <div class="file-drop d-flex justify-content-center d-column flex-column align-items-center">
+                                <div @dragover.prevent @drop.prevent="handleDrop" @click="selecionarArquivo" class="file-drop d-flex justify-content-center d-column flex-column align-items-center">
                                     <img class="icon" src="../images/download.png" alt="Integrante">
                                     <p>Anexe ou arraste o arquivo para cá </p>
                                     <button type="button">Selecionar arquivo</button>
@@ -74,21 +72,11 @@ export const CreateProject = {
                             </div>  
                             <div class="form-entries d-flex justify-content-start d-column flex-column">
                                 <!-- Exemplo de membros abaixo -->
-                                <div class="files">
-                                    <img src="../images/file-pdf.png" alt="Expandir">
-                                    <p>manual_do_usuario.pdf</p>
-                                    <span>-</span>
-                                </div>                                
-                                <div class="files">
-                                    <img src="../images/file-pdf.png" alt="Expandir">
-                                    <p>diagramas.pdf</p>
-                                    <span>-</span>
-                                </div>                                
-                                <div class="files">
-                                    <img src="../images/file-link.png" alt="Expandir">
-                                    <p>https://github.com/users/projectsofia</p>
-                                    <span>-</span>
-                                </div>                                
+                                <div class="files" v-for="(file, index) in files" :key="index">
+                                    <img v-if="" src="../images/file-pdf.png" alt="Expandir">
+                                    <p>{{file.name}}</p>
+                                    <span @click="removerArquivo(index)" >-</span>
+                                </div>                              
                             </div>  
                         </div>           
                     </form>
@@ -121,7 +109,12 @@ export const CreateProject = {
 
             ],
             unitId: '',
-            units: []
+            units: [],
+            files: [],
+            file_types: [
+                'PDF','URL','JPEG','PNG'
+            ],
+            file_type_value: ''
         };
     },
     inject: ['urlBase'],
@@ -183,6 +176,22 @@ export const CreateProject = {
                 }
             })
 
+        },
+        handleDrop(event){
+
+            const arrastados = Array.from(event.dataTransfer.files);
+            this.files = this.files.concat(arrastados);
+
+        },
+        selecionarArquivo(){
+            this.$refs.fileInput.click();
+        },
+        handleFileSelect(event) {
+            const selecionados = Array.from(event.target.files);
+            this.files = this.files.concat(selecionados);
+        },
+        removerArquivo(index) {
+            this.files.splice(index, 1);
         }
     },
     created() {
