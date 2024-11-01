@@ -70,7 +70,7 @@ export const Project = {
                     <div class="label-content">
                         <label>Ministrado por</label>
                         <div class="d-flex justify-content-start flex-row gap-2">
-                            <p>Fretz Sievers Junior</p>
+                            <p>{{project.Professor_Name}}</p>
                         </div>                    
                     </div>
 
@@ -110,18 +110,21 @@ export const Project = {
         },
         getById(){
             let url = backend_url+'/project/'+this.project.ID_Project;
+            console.log(url)
             fetch(url)
             .then(response=>response.json())
             .then(response=>{
+                console.log(response)
                 if(response.status==true){
                     this.project = response.data;
                     this.project.End_Date = dateFormatter(this.project.End_Date);
                     this.sem = semChecker(this.project.Start_Date);
                     let count_participants = response.data.Participants.length;
-                    console.log(response.data)
                     response.data.Participants.forEach((participant, key) => {
                         if(key==(count_participants-1) && count_participants>1){
-                            this.members+=`e ${participant.participantName}`;
+                            this.members+=`e ${participant.participantName}.`;
+                        } else if(key==(count_participants-2) && count_participants>2){
+                            this.members+=`${participant.participantName} `;
                         } else if(count_participants==1) {
                             this.members+=`${participant.participantName}`;
                         } else {

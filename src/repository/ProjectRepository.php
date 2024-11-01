@@ -42,8 +42,8 @@ class ProjectRepository{
     public function selectAll(){
 
         $select = 'SELECT * FROM project';
-        $prepare = $this->pdo->prepare($select);
         try {
+            $prepare = $this->pdo->prepare($select);
             $prepare->execute();
             $array = $prepare->fetchAll();
             return Message::send(true, 200, 'Projetos encontrados', $array);
@@ -54,14 +54,15 @@ class ProjectRepository{
     }
 
     public function selectById(Project $project){
-
-        $select = 'SELECT * FROM project WHERE ID_Project = ?';
+        $select = 'SELECT project.Name, Description, Start_Date, End_Date, Participants, project.ID_Professor, professor.Name AS Professor_Name, ID_Unit, Status FROM project
+        INNER JOIN professor ON project.ID_Professor = professor.ID_Professor WHERE ID_Project = ?';
         $prepare = $this->pdo->prepare($select);
         $prepare->bindValue(1, $project->getId());
         try {
             $prepare->execute();
             $array = $prepare->fetch();
-            $array['Participants'] = unserialize($array['Participants']);
+            $participants = unserialize($array['Participants']);
+            $array['Participants'] = $participants;
             return Message::send(true, 200, 'Projetos encontrados', $array);
         } catch (PDOException $e) {
             return Message::send(false, $e->getCode(), $e->getMessage(),[]);

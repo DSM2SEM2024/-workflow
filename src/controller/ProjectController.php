@@ -59,9 +59,9 @@ class ProjectController {
 
     public function getById($id){
 
+        $repo = new ProjectRepository();
         $project = new Project();
         $project->setId($id);
-        $repo = new ProjectRepository();
         echo json_encode($repo->selectById($project));
 
     }

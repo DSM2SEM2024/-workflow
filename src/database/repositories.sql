@@ -121,7 +121,7 @@ CREATE TABLE `project` (
   `Description` text NOT NULL,
   `Start_Date` date NOT NULL,
   `End_Date` date NOT NULL,
-  `Participants` varchar(255) DEFAULT NULL,
+  `Participants` varchar(1000) DEFAULT NULL,
   `ID_Unit` int(11) DEFAULT NULL,
   `ID_Professor` int(11) NOT NULL,
   `Status` tinyint(4) NOT NULL DEFAULT 0
