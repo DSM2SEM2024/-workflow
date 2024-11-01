@@ -61,21 +61,29 @@ export const CreateProject = {
                         <div class="form-gap d-flex d-row flex-row">
                             <div class="form-inputs d-flex justify-content-start d-column flex-column">
                                 <select v-model="file_type_value" placeholder="Escolha um arquivo">
-                                    <option value="">Escolha um tipo de arquivo...</option>
+                                    <option value="">Escolha o tipo de anexo...</option>
                                     <option v-for="type in file_types" :value="type">{{type}}</option>
                                 </select>
                                 <div @dragover.prevent @drop.prevent="handleDrop" @click="selecionarArquivo" class="file-drop d-flex justify-content-center d-column flex-column align-items-center">
                                     <img class="icon" src="../images/download.png" alt="Integrante">
                                     <p>Anexe ou arraste o arquivo para cá </p>
                                     <button type="button">Selecionar arquivo</button>
+                                    <input type="file" multiple ref="fileInput" @change="handleFileSelect" style="display: none"/>
                                 </div>         
                             </div>  
                             <div class="form-entries d-flex justify-content-start d-column flex-column">
                                 <!-- Exemplo de membros abaixo -->
-                                <div class="files" v-for="(file, index) in files" :key="index">
-                                    <img v-if="" src="../images/file-pdf.png" alt="Expandir">
+                                <div class="files" v-for="(url, index) in attach.links" :key="index">
+                                    <img src="../images/file-link.png" alt="Expandir">
+                                    <p>{{url}}</p>
+                                    <span @click="removerArquivo(index,'link')" >-</span>
+                                </div>
+                                <div class="files" v-for="(file, index) in attach.files" :key="index">
+                                    <img v-if="isPdf(file)" src="../images/file-pdf.png" alt="Expandir">
+                                    <img v-if="isImg(file)" src="../images/icon-upload.png" alt="Expandir">
+                                    <img v-if="isElse(file)" src="../images/icon-file.png" alt="Expandir">
                                     <p>{{file.name}}</p>
-                                    <span @click="removerArquivo(index)" >-</span>
+                                    <span @click="removerArquivo(index,'file')" >-</span>
                                 </div>                              
                             </div>  
                         </div>           
@@ -110,9 +118,12 @@ export const CreateProject = {
             ],
             unitId: '',
             units: [],
-            files: [],
+            attach: {
+                files: [],
+                links: []
+            },
             file_types: [
-                'PDF','URL','JPEG','PNG'
+                'Arquivo','URL'
             ],
             file_type_value: ''
         };
@@ -177,21 +188,67 @@ export const CreateProject = {
             })
 
         },
-        handleDrop(event){
+        async handleDrop(event) {
+            const itens = event.dataTransfer.items;
+      
+            for (let i = 0; i < itens.length; i++) {
+              const item = itens[i];
+      
+              // Verifica se o item é um arquivo
+              if (item.kind === 'file') {
+                const file = item.getAsFile();
+                if (file) {
+                  this.attach.files.push(file);
+                }
+              }
+              // Verifica se o item é um link ou texto
+              else if (item.kind === 'string' && item.type === 'text/uri-list') {
+                // Lê o link e o adiciona à lista
+                const link = await new Promise((resolve) =>
+                  item.getAsString(resolve)
+                );
+                this.attach.links.push(link);
+              }
+            }
+        },
+        isPdf(file){
 
-            const arrastados = Array.from(event.dataTransfer.files);
-            this.files = this.files.concat(arrastados);
+            if(file.type.split('/')[1]=='pdf'){
+                return true;
+            } else {
+                return false;
+            }
 
+        },
+        isImg(file){
+
+            if(file.type.split('/')[1]=='jpeg' || file.type.split('/')[1]=='png'){
+               return true;
+            } else {
+                return false;
+            }
+
+        },
+        isElse(file){
+            if(file.type.split('/')[1]!='jpeg' && file.type.split('/')[1]!='png' && file.type.split('/')[1]!='pdf'){
+                return true;
+            } else {
+                return false;
+            }
         },
         selecionarArquivo(){
             this.$refs.fileInput.click();
         },
         handleFileSelect(event) {
             const selecionados = Array.from(event.target.files);
-            this.files = this.files.concat(selecionados);
+            this.attach.files = this.attach.files.concat(selecionados);
         },
-        removerArquivo(index) {
-            this.files.splice(index, 1);
+        removerArquivo(index, type) {
+            if(type=='file'){
+                this.attach.files.splice(index, 1);
+            } else {
+                this.attach.links.splice(index, 1);
+            }
         }
     },
     created() {
