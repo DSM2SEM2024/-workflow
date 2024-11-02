@@ -156,38 +156,51 @@ export const CreateProject = {
         remover(key){
             this.participants.splice(key,1);
         },
-        cadastrar(){
-
+        cadastrar() {
             let token = window.localStorage.getItem('reposystem_token');
-            let url = backend_url+'/project/create';
+            let url = backend_url + '/project/create';
+        
+            // Criar o objeto FormData
+            let formData = new FormData();
+            
+            // Adicionar dados do projeto ao FormData
+            formData.append('name', this.name);
+            formData.append('description', this.description);
+            formData.append('startDate', this.startDate);
+            formData.append('endDate', this.endDate);
+            formData.append('participants', JSON.stringify(this.participants)); // Assumindo que `participants` seja um array
+            formData.append('unit', this.unitId);
+            formData.append('role', 'professor');
+        
+            // Adicionar arquivos ao FormData
+            this.attach.files.forEach((arquivo, index) => {
+                formData.append(`arquivos[${index}]`, arquivo);
+            });
+            this.attach.links.forEach((arquivo, index) => {
+                formData.append(`links[${index}]`, arquivo);
+            });
+        
+            // Configurar a requisição
             let options = {
                 method: 'POST',
                 mode: 'cors',
                 headers: {
-                    'Content-Type':'application/json',
-                    'Authorization':`Bearer ${token}`
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({
-                    name: this.name,
-                    description: this.description,
-                    startDate: this.startDate,
-                    endDate: this.endDate,
-                    participants: this.participants,
-                    unit: this.unitId,
-                    role: 'professor'
-                })
-            }
+                body: formData
+            };
+        
             fetch(url, options)
-            .then(response=>response.json())
-            .then(response=>{
-                if(response.status==true){
-                    navigate('project/'+response.data);
+            .then(response => response.json())
+            .then(response => {
+                if (response.status == true) {
+                    navigate('project/' + response.data);
                 } else {
                     alert('Cadastro inválido');
                 }
             })
-
-        },
+            .catch(error => console.error('Erro ao enviar:', error));
+        },        
         async handleDrop(event) {
             const itens = event.dataTransfer.items;
       

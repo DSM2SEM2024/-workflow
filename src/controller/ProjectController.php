@@ -6,36 +6,64 @@ use Src\Repository\ProjectRepository;
 use Src\Auth\TokenHandler;
 use Src\Model\Message;
 use Src\Model\Professor;
+use Src\Controller\FileController;
 
 class ProjectController {
 
     public function create(){
 
-        $data = json_decode(file_get_contents('php://input'),true);
         $project = new Project();
 
-        $project->setName($data['name']);
-        $project->setDescription($data['description']);
-        $project->setStartDate($data['startDate']);
-        $project->setEndDate($data['endDate']);
-        $project->setParticipants(serialize($data['participants']));
+        $project->setName($_POST['name']);
+        $project->setDescription($_POST['description']);
+        $project->setStartDate($_POST['startDate']);
+        $project->setEndDate($_POST['endDate']);
+        $project->setParticipants(serialize(json_decode($_POST['participants'],true)));
+
         $unit = new Unit();
-        $unit->setId($data['unit']);
+        $unit->setId($_POST['unit']);
         $project->setUnit($unit);
         $project->setStatus(0);
         $repo = new ProjectRepository();
-        $token_response = TokenHandler::verifyPermission();
+        $token_response = TokenHandler::verifyPermission($_POST['role']);
         $professor = new Professor();
-        $id = $token_response['data'][0]->sub->ID_Professor;
+        $id = $token_response['data']->sub->ID_Professor;
         $professor->setId($id);
         $project->setProfessor($professor);
-
         if($token_response['status']==true){
 
             $insert_response = $repo->create($project);
 
             if($insert_response['status']==true){
                 $project->setId($insert_response['data'][0]);
+
+                $file_controller = new FileController();
+
+                if (!empty($_FILES['arquivos'])) {
+                    $create_file_response1 = $file_controller->create($_FILES['arquivos'],'file',$project);
+                    if($create_file_response1['status']==false){
+                        http_response_code($create_file_response1['code']);
+                        echo json_encode($create_file_response1);
+                        exit();
+                    }
+                }
+    
+                // Tratamento de links (caso haja links no FormData)
+                $links = [];
+                if (!empty($_POST['links'])) {
+
+                    foreach ($_POST['links'] as $link) {
+                        $links[] = $link; // Adiciona cada link a um array para salvar ou processar
+                    }
+                    $create_file_response2 = $file_controller->create($links,'link',$project);
+                    echo json_encode($create_file_response2);
+                    exit();
+                    if($create_file_response2['status']==false){
+                        http_response_code($create_file_response2['code']);
+                        echo json_encode($create_file_response2);
+                    }
+                }
+
                 http_response_code($insert_response['code']);
                 echo json_encode(Message::send(true,$insert_response['code'],$insert_response['message'],$project->getId()));
             } else {

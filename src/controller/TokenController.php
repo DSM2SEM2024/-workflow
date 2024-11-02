@@ -6,7 +6,7 @@ class TokenController {
 
     public function verifyPermission(){
         $handler = new TokenHandler();
-        echo json_encode($handler->verifyPermission());
+        echo json_encode($handler->verifyPermission(json_decode(file_get_contents('php://input'),true)['role']));
     }
 
 }
