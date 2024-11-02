@@ -41,7 +41,7 @@ class ProjectRepository{
 
     public function selectAll(){
 
-        $select = 'SELECT * FROM project';
+        $select = 'SELECT * FROM project WHERE Status = 1';
         try {
             $prepare = $this->pdo->prepare($select);
             $prepare->execute();
