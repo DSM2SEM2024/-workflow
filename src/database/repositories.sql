@@ -70,7 +70,8 @@ CREATE TABLE `files` (
   `ID_Project` int(11) DEFAULT NULL,
   `File_Name` varchar(100) NOT NULL,
   `File_Type` varchar(50) NOT NULL,
-  `URL` varchar(255) NOT NULL
+  `URL` varchar(255) NULL,
+  `File_Data` LONGTEXT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -121,8 +122,9 @@ CREATE TABLE `project` (
   `Description` text NOT NULL,
   `Start_Date` date NOT NULL,
   `End_Date` date NOT NULL,
-  `Participants` varchar(255) DEFAULT NULL,
+  `Participants` varchar(1000) DEFAULT NULL,
   `ID_Unit` int(11) DEFAULT NULL,
+  `ID_Professor` int(11) NOT NULL,
   `Status` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -195,7 +197,8 @@ ALTER TABLE `professor_unit`
 --
 ALTER TABLE `project`
   ADD PRIMARY KEY (`ID_Project`),
-  ADD KEY `ID_Unit` (`ID_Unit`);
+  ADD KEY `ID_Unit` (`ID_Unit`),
+  ADD KEY `ID_Professor` (`ID_Professor`);
 
 --
 -- Índices de tabela `unit`
@@ -285,6 +288,13 @@ ALTER TABLE `professor_unit`
 --
 ALTER TABLE `project`
   ADD CONSTRAINT `Project_ibfk_1` FOREIGN KEY (`ID_Unit`) REFERENCES `unit` (`ID_Unit`);
+
+------ INSERTS
+
+INSERT INTO unit(Unit_Name,Address) VALUES('Fatec Itaquera','Avenida Miguel Ignácio Curi, 360');
+INSERT INTO unit(Unit_Name,Address) VALUES('Fatec Zona Leste','Avenida Águia de Haia, 2983');
+INSERT INTO unit(Unit_Name,Address) VALUES('Fatec São Paulo','Avenida Tiradentes, 610');
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

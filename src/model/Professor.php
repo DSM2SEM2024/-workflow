@@ -3,7 +3,7 @@ namespace Src\Model;
 
 class Professor {
 
-    private int $id;
+    private $id;
     private string $name;
     private string $email;
     private string $expertise;

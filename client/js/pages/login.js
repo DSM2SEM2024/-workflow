@@ -1,4 +1,5 @@
 import { validateAccess } from "../functions/validate-access.js";
+import { backend_url } from "../global-var/backend-url.js";
 
 export const Login = {
     template: `
@@ -57,7 +58,7 @@ export const Login = {
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         login() {
 
-            let url = 'http://localhost:70/professor/login';
+            let url = backend_url+'/professor/login';
             let options = {
                 method: 'POST',
                 mode: 'cors',
