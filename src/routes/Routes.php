@@ -4,6 +4,7 @@ use Src\Controller\ProfessorController;
 use Src\Controller\TokenController;
 use Src\Controller\ProjectController;
 use Src\Controller\UnitController;
+use Src\Controller\FileController;
 
 class Routes {
 
@@ -13,7 +14,8 @@ class Routes {
             'GET' => [
                 '/project' => [ProjectController::class, 'list'],
                 '/project/{id}' => [ProjectController::class,'getById'],
-                '/unit' => [UnitController::class, 'list']
+                '/unit' => [UnitController::class, 'list'],
+                '/files/{id}' => [FileController::class, 'list']
             ],
             'POST' => [
                 '/professor/login' => [ProfessorController::class, 'login'],

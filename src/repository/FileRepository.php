@@ -42,4 +42,20 @@ class FileRepository {
 
     }
 
+    public function selectByProject(File $file){
+
+        $select = 'SELECT * FROM files WHERE ID_Project = ?';
+        $prepare = $this->pdo->prepare($select);
+        $prepare->bindValue(1, $file->getProject()->getId());
+        try{
+            $prepare->execute();
+            $array = $prepare->fetchAll();
+
+            return Message::send(true, 200, 'Arquivos encontrados', $array);
+        } catch(PDOException $e){
+            return Message::send(false, $e->getCode(), $e->getMessage(),[]);
+        }
+
+    }
+
 }
