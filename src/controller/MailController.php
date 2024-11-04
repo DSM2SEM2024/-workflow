@@ -7,7 +7,7 @@ use Src\Model\Message;
 
 class MailController {
 
-    public function requestPassword($name, $email){
+    public function requestPassword($name, $email, $id){
 
         $data = json_decode(file_get_contents('php://input'),true);
 
@@ -44,7 +44,7 @@ class MailController {
                             <p>$mail_name</p>
                             <a href='http://localhost:8080/'>Avançar para criação de senha</a>
                             <br>
-                            <a href='http://localhost:8080/'>Recusar cadastro</a>";
+                            <a href='http://localhost:70/user/remove/$id'>Recusar cadastro</a>";
 
             $mail->send();
             return Message::send(true, 200, 'E-mail enviado com sucesso',[]);
