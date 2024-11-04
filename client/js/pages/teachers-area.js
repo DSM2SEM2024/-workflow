@@ -1,3 +1,5 @@
+import { MyData } from '../components/my-data.js';
+
 export const TeachersArea = {
     template: `
         <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
@@ -89,6 +91,7 @@ export const TeachersArea = {
                     </div>
                 </div>
             </div>
+            <MyData></MyData>
         </main>
     `,
     data() {
@@ -106,4 +109,7 @@ export const TeachersArea = {
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
     },
+    components:{
+        MyData
+    } 
 };
