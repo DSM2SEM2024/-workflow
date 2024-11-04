@@ -63,7 +63,7 @@ class ProfessorController {
         $professor->setId($insert_response['data']);
         http_response_code($insert_response['code']);
         $mail_system = new MailController();
-        $mail_system->requestPassword($professor->getName(),$professor->getEmail(), $professor->getId());
+        $mail_system->requestPassword($professor->getName(),$professor->getEmail(), $professor->getId(),'professor');
         return $insert_response;
 
 

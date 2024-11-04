@@ -85,5 +85,23 @@ class TokenHandler {
 
     }
 
+    public static function mailToken(array $data){
+
+        $payload = [
+            'iss' => 'http://localhost:8080',
+            'aud' => 'http://localhost:8080',
+            'iat' => time(),
+            'nbf' => time(),
+            // Uma hora de validade para o token
+            'exp' => time() + (6*3600),
+            'email'=>$data['email'],
+            'role'=>$data['role']
+        ];
+
+        $token = JWT::encode($payload, SECRET_KEY, alg);
+        return Message::send(true,200,'Token criado',$token);
+
+    }
+
 }
 

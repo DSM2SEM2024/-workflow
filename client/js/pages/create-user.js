@@ -158,6 +158,7 @@ export const CreateUser = {
                     unit: this.unit
                 })
             }
+            console.log('Mail request');
             fetch(url, options)
             .then(response=>response.json())
             .then(response=>{
