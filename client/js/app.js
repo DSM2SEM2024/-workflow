@@ -7,6 +7,7 @@ import { MyProjects } from './components/my-projects.js';
 import { Project } from './pages/project.js';
 import { urlBase } from './global-var/url-base.js';
 import { RegisterUnit } from './pages/register-unit.js';
+import { RegisterCourse } from './pages/register-course.js';
 
 // import { Footer } from './components/footer.js';
 import { TeachersArea } from './pages/teachers-area.js';
@@ -23,7 +24,8 @@ const routes = [
     { path: '/my-projects', component: MyProjects},
     { path: '/project/:id', component: Project},
     { path: '/register-unit', component: RegisterUnit},
-    { path: '/teachers-area', component: TeachersArea}
+    { path: '/teachers-area', component: TeachersArea},
+    { path: '/register-course', component: RegisterCourse}
 ];
 
 //Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.
