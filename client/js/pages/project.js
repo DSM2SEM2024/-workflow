@@ -27,28 +27,23 @@ export const Project = {
                         <h2>Anexos</h2>
                     </div>
 
-                    <div class="files-content d-flex justify-content-between flex-row">
+                    <div v-for="(file, index) in files" class="files-content d-flex justify-content-between flex-row">
+
                         <div class="left-data d-flex justify-content-start align-items-center flex-row gap-3">
-                            <img class="icon" src="../images/icon-pdf.png" alt="Projeto Interdisciplinar">
-                            <p>Documento</p>
+                            <img v-if="isPdf(file.File_Type)" class="icon" src="../images/icon-pdf.png" alt="Projeto Interdisciplinar">
+                            <img v-if="isImg(file.File_Type)" class="icon" src="../images/icon-upload.png" alt="Projeto Interdisciplinar">
+                            <img v-if="isLink(file.File_Type)" class="icon" src="../images/icon-link.png" alt="Projeto Interdisciplinar">
+                            <img v-if="isElse(file.File_Type)" class="icon" src="../images/icon-file.png" alt="Projeto Interdisciplinar">
+
+                            <p>{{file.File_Name}}</p>
                         </div>
 
                         <div class="right-data d-flex justify-content-start align-items-center flex-row gap-3">
                             <img class="icon" src="../images/icon-upload.png" alt="Projeto Interdisciplinar">
                         </div>
+
                     </div>
 
-                    
-                    <div class="files-content d-flex justify-content-between flex-row">
-                        <div class="left-data d-flex justify-content-start align-items-center flex-row gap-3">
-                            <img class="icon" src="../images/icon-link.png" alt="Projeto Interdisciplinar">
-                            <p>Link</p>
-                        </div>
-
-                        <div class="right-data d-flex justify-content-start align-items-center flex-row gap-3">
-                            <img class="icon" src="../images/icon-upload.png" alt="Projeto Interdisciplinar">
-                        </div>
-                    </div>
                 </div>  
 
                 <div class="section-info">
@@ -96,7 +91,8 @@ export const Project = {
                 ID_Project: window.location.href.split('project/')[1]
             },
             sem: '',
-            members: ''
+            members: '',
+            files: []
         }
     },
     inject: ['urlBase'],
@@ -123,7 +119,7 @@ export const Project = {
                     response.data.Participants.forEach((participant, key) => {
                         if(key==(count_participants-1) && count_participants>1){
                             this.members+=`e ${participant.participantName}.`;
-                        } else if(key==(count_participants-2) && count_participants>2){
+                        } else if(key==(count_participants-2) && count_participants>=2){
                             this.members+=`${participant.participantName} `;
                         } else if(count_participants==1) {
                             this.members+=`${participant.participantName}`;
@@ -134,11 +130,55 @@ export const Project = {
                 }
             })
         },
+        getFiles(){
+            let url = backend_url+'/files/'+this.project.ID_Project;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                this.files = response.data;
+                console.log(this.files[0].File_Type)
+            })
+        },
+        isPdf(file_type){
+
+            if(file_type=='pdf'){
+                return true;
+            } else {
+                return false;
+            }
+
+        },
+        isImg(file_type){
+
+            if(file_type=='jpeg' || file_type=='jpg' || file_type=='png'){
+               return true;
+            } else {
+                return false;
+            }
+
+        },
+        isLink(file_type){
+
+            if(file_type=='link'){
+               return true;
+            } else {
+                return false;
+            }
+
+        },
+        isElse(file_type){
+            if(file_type!='jpeg' && file_type!='jpg' && file_type!='png' && file_type!='pdf'){
+                return true;
+            } else {
+                return false;
+            }
+        },
         dateFormatter,
         semChecker
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
-        this.getById()
+        this.getById();
+        this.getFiles();
     }
 };

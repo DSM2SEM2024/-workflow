@@ -43,4 +43,21 @@ class FileController {
 
     }
 
+    public function list($project_id){
+
+        $project = new Project();
+        $project->setId($project_id);
+        $file = new File();
+        $file->setProject($project);
+        $repo = new FileRepository();
+        $response = $repo->selectByProject($file);
+
+        foreach ($response['data'] as $key => $file) {
+            $file['File_Data'] = 'data:application/octet-stream;base64,'.$file['File_Data'];
+        }
+
+        echo json_encode($response);
+
+    }
+
 }
