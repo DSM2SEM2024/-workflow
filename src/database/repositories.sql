@@ -90,6 +90,10 @@ CREATE TABLE `professor` (
 
 -- --------------------------------------------------------
 
+CREATE TABLE `mail_code`(
+  `Code` int(11) NOT NULL
+)
+
 --
 -- Estrutura para tabela `professor_course`
 --

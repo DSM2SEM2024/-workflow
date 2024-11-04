@@ -35,7 +35,7 @@ export const CreatePassword = {
     `,
     data() {
         return {
-            email: window.location.href.split('create-password/')[1],
+            code: decodeURIComponent(window.location.href.split('create-password/')[1]),
             password: '',
             confirm: '',
             base_host: window.location.href.split('#')[0]
@@ -57,7 +57,7 @@ export const CreatePassword = {
                     'Content-Type':'application/json'
                 },
                 body: JSON.stringify({
-                    email: this.email,
+                    code: this.cide,
                     password: this.password,
                 })
             };

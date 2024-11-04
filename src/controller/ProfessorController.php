@@ -69,16 +69,11 @@ class ProfessorController {
 
     }
 
-    public function mensagem(){
-        echo 'mensagem de teste';
-    }
+    public function definePassword(){
 
-    public function mensagem2($id){
-        echo 'mensagem '.$id;
-    }
-    
-    public function cadastra(){
-        echo 'mandou pro db';
+        $data = json_decode(file_get_contents('php://input'),true);
+        $token_response = TokenHandler::verifyMailToken($data['email']);
+
     }
 
 }

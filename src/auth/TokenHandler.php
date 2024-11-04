@@ -10,6 +10,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\SignatureInvalidException;
 use Src\Model\Message;
+use Src\Repository\MailRepository;
 
 class TokenHandler {
 
@@ -94,12 +95,41 @@ class TokenHandler {
             'nbf' => time(),
             // Uma hora de validade para o token
             'exp' => time() + (6*3600),
-            'email'=>$data['email'],
+            'code'=>$data['code'],
             'role'=>$data['role']
         ];
 
         $token = JWT::encode($payload, SECRET_KEY, alg);
         return Message::send(true,200,'Token criado',$token);
+
+    }
+
+    public static function verifyMailToken($token){
+
+        $code = '';
+
+        try {
+
+            $decoded = JWT::decode($token, new Key(SECRET_KEY, alg));
+            if($decoded->code==$code){
+                return Message::send(true, 200, 'Código válido', $decoded);
+            } else {
+                return Message::send(false, 404, 'Código inválido',[]);
+            }
+
+        }catch (ExpiredException $e) {
+            http_response_code(401);
+            return Message::send(false,401,"Código expirado: " . $e->getMessage(),[]);
+        } catch (BeforeValidException $e) {
+            http_response_code(401);
+            return Message::send(false,401,"Código ainda não é válido" . $e->getMessage(),[]);
+        } catch (SignatureInvalidException $e) {
+            http_response_code(401);
+            return Message::send(false,401,"Assinatura do token inválida: " . $e->getMessage(),[]);
+        } catch (Exception $e) {
+            http_response_code(401);
+            return Message::send(false,401,"Erro ao validar token: " . $e->getMessage(),[]);
+        }
 
     }
 
