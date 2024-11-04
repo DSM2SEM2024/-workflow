@@ -39,7 +39,12 @@ export const Project = {
                         </div>
 
                         <div class="right-data d-flex justify-content-start align-items-center flex-row gap-3">
-                            <img class="icon" src="../images/icon-upload.png" alt="Projeto Interdisciplinar">
+                            <a v-if="isLink(file.File_Type)" :href="file.URL" target="_blank">
+                                <img class="icon" src="../images/icon-upload.png" alt="Projeto Interdisciplinar">
+                            </a>
+                            <a v-else :href="file.File_Data" :download="file.File_Name">
+                                <img class="icon" src="../images/icon-upload.png" alt="Projeto Interdisciplinar">
+                            </a>
                         </div>
 
                     </div>
@@ -136,7 +141,7 @@ export const Project = {
             .then(response=>response.json())
             .then(response=>{
                 this.files = response.data;
-                console.log(this.files[0].File_Type)
+                console.log(this.files)
             })
         },
         isPdf(file_type){
@@ -167,7 +172,7 @@ export const Project = {
 
         },
         isElse(file_type){
-            if(file_type!='jpeg' && file_type!='jpg' && file_type!='png' && file_type!='pdf'){
+            if(file_type!='jpeg' && file_type!='jpg' && file_type!='png' && file_type!='pdf' && file_type!='link'){
                 return true;
             } else {
                 return false;
