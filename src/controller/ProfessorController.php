@@ -4,6 +4,7 @@ use Src\Auth\TokenHandler;
 use Src\Model\Message;
 use Src\Model\Professor;
 use Src\Repository\ProfessorRepository;
+use Src\Controller\MailController;
 
 class ProfessorController {
 
@@ -76,6 +77,13 @@ class ProfessorController {
     
     public function cadastra(){
         echo 'mandou pro db';
+    }
+
+    public function sendEmail(){
+
+        $controller = new MailController();
+        echo json_encode($controller->send('Gustavo Joia','gustavo.sc.joia@gmail.com'));
+
     }
 
 }
