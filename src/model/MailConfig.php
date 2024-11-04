@@ -7,13 +7,19 @@ class MailConfig {
     private $password;
     private $host;
     private $port;
+    private $name;
 
     public function __construct()
     {
+        $this->name = 'Equipe Workflow';
         $this->username = 'workflow.fatec.pi@gmail.com';
         $this->password = 'xnzq buzs ylmo ujai';
         $this->host = 'smtp.gmail.com';
         $this->port = 587;
+    }
+
+    public function getName(){
+        return $this->name;
     }
 
     public function getUsername(){

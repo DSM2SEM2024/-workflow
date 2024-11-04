@@ -1,5 +1,6 @@
 import { validateAccess } from "../functions/validate-access.js";
 import { backend_url } from "../global-var/backend-url.js";
+import { token } from "../global-var/token.js";
 
 export const CreateUser = {
     template: `
@@ -21,7 +22,7 @@ export const CreateUser = {
                         </div>
                         <div class="form-inputs d-flex justify-content-start d-column">                               
                             <select v-model="unit" class="unity">
-                                <option>Unidade...</option>
+                                <option value="">Unidade...</option>
                                 <option v-for="unit in units" :value="unit.ID_Unit">{{unit.Unit_Name}}</option>
                             </select>       
 
@@ -104,7 +105,7 @@ export const CreateUser = {
 
                     <div class="form-footer d-flex justify-content-between d-row align-items-start">
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
-                        <button class="btn-create">Cadastrar usuário ‎ |
+                        <button :disabled="btn_disable" class="btn-create" @click="send">Cadastrar usuário ‎ |
                             <img class="icon" src="../images/next.png" alt="Expandir">
                         </button>
                     </div>
@@ -130,7 +131,8 @@ export const CreateUser = {
             name: '',
             email: '',
             unit: '',
-            role: ''
+            role: '',
+            btn_disable: false
         };
     },
     inject: ['urlBase'],
@@ -140,7 +142,34 @@ export const CreateUser = {
         },
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         send() {
-            let url = backend_url+'/'
+            this.btn_disable = true;
+            let url = backend_url+'/user/create';
+            let options = {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization':`Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name: this.name,
+                    email: this.email,
+                    role: this.role,
+                    unit: this.unit
+                })
+            }
+            fetch(url, options)
+            .then(response=>response.json())
+            .then(response=>{
+                console.log(response);
+                this.btn_disable = false;
+                if(response.status==true){
+                    this.name = '',
+                    this.email = '',
+                    this.role = '',
+                    this.unit = ''
+                }
+            })
         },
         getUnits(){
             fetch(backend_url+'/unit')

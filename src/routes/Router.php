@@ -42,7 +42,7 @@ class Router{
                 break;
             
             case 'coordinator':
-                # code...
+                echo json_encode(Message::send(true, 200, 'Sem endpoint ainda',[]));
                 break;
         }
     }

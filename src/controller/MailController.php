@@ -7,12 +7,13 @@ use Src\Model\Message;
 
 class MailController {
 
-    public function send($name, $email){
+    public function requestPassword($name, $email){
 
         $data = json_decode(file_get_contents('php://input'),true);
 
         $mail_config = new MailConfig();
         $mail = new PHPMailer(true);
+
         try{
 
             $mail->isSMTP();
@@ -25,7 +26,8 @@ class MailController {
             $mail->CharSet = 'UTF-8';
             $mail->isHTML(true);
 
-            $mail->setFrom($mail_config->getUsername(), 'Equipe Workflow');
+            $mail->setFrom($mail_config->getUsername(), $mail_config->getName());
+            $mail_name = $mail_config->getName();
             $mail->addAddress($email, $name);
             $mail->Subject = "Solicitação de criação de perfil";
             $mail->Body = "<h1>Boas-vindas ao Repositório</h1>\n
@@ -35,10 +37,14 @@ class MailController {
                             </p>
                             <p>
                                 Para tal, você deve simplesmente clicar na URL abaixo, para assim criar a sua senha de acesso
-                                ao sistema, permitindo seu login. Caso não reconheça essa atividade e deseja recusar, pedimos cordialmente
-                                que desconsidere esta mensagem. \n Atenciosamente,\n Equipe Workflow.
+                                ao sistema, permitindo seu login. Caso não reconheça essa atividade e/ou deseja recusar, pedimos cordialmente
+                                que utilize a opção de recusar cadastro.
                             </p>
-                            <a href='http://localhost:8080/'>Avançar para criação de senha</a>";
+                            <p>Atenciosamente,</p>
+                            <p>$mail_name</p>
+                            <a href='http://localhost:8080/'>Avançar para criação de senha</a>
+                            <br>
+                            <a href='http://localhost:8080/'>Recusar cadastro</a>";
 
             $mail->send();
             return Message::send(true, 200, 'E-mail enviado com sucesso',[]);

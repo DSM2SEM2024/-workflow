@@ -21,7 +21,7 @@ class Routes {
             ],
             'POST' => [
                 '/professor/login' => [ProfessorController::class, 'login'],
-                '/professor/create' => [ProfessorController::class, 'signin'],
+                '/user/create' => [Router::class, 'userSwitch'],
                 '/token/validateAccess' => [TokenController::class, 'verifyPermission'],
                 '/project/create' => [ProjectController::class, 'create'],
                 '/unit/create' => [UnitController::class, 'create'],

@@ -1,0 +1,1 @@
+export let token = window.localStorage.getItem('reposystem_token');

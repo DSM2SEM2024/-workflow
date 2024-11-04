@@ -58,12 +58,14 @@ class ProfessorController {
         $professor = new Professor();
         $professor->setName($data['name']);
         $professor->setEmail($data['email']);
-        $professor->setExpertise($data['expertise']);
-        $professor->setPassword($data['password']);
 
         $insert_response = $repo->insert($professor);
+        $professor->setId($insert_response['data']);
         http_response_code($insert_response['code']);
+        $mail_system = new MailController();
+        $mail_system->requestPassword($professor->getName(),$professor->getEmail(), $professor->getId());
         return $insert_response;
+
 
     }
 
@@ -77,13 +79,6 @@ class ProfessorController {
     
     public function cadastra(){
         echo 'mandou pro db';
-    }
-
-    public function sendEmail(){
-
-        $controller = new MailController();
-        echo json_encode($controller->send('Gustavo Joia','gustavo.sc.joia@gmail.com'));
-
     }
 
 }
