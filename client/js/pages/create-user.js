@@ -1,4 +1,5 @@
 import { validateAccess } from "../functions/validate-access.js";
+import { backend_url } from "../global-var/backend-url.js";
 
 export const CreateUser = {
     template: `
@@ -15,19 +16,19 @@ export const CreateUser = {
                     </div>
                     <form>
                         <div class="form-inputs d-flex justify-content-start d-column">
-                            <input type="text" name="name" placeholder="Nome">
-                            <input type="email" name="email" placeholder="E-mail">
+                            <input v-model="name" type="text" name="name" placeholder="Nome">
+                            <input v-model="email" type="email" name="email" placeholder="E-mail">
                         </div>
                         <div class="form-inputs d-flex justify-content-start d-column">                               
-                            <select class="unity">
-                                <option>Unidade</option>
+                            <select v-model="unit" class="unity">
+                                <option>Unidade...</option>
+                                <option v-for="unit in units" :value="unit.ID_Unit">{{unit.Unit_Name}}</option>
                             </select>       
 
                             <!-- Ajustado para valores únicos -->
-                            <select class="career" v-model="career">
-                                <option value="">Cargo</option>
-                                <option value="coordinator">Coordenador</option>
-                                <option value="teacher">Professor</option>
+                            <select v-model="role" class="career">
+                                <option value="">Cargo...</option>
+                                <option v-for="role in roles" :value="role.value">{{role.name}}</option>
                             </select>
                         </div>
 
@@ -115,6 +116,21 @@ export const CreateUser = {
     data() {
         return {
             career: '',
+            roles: [
+                {
+                    value: 'professor',
+                    name: 'Professor'
+                },
+                {
+                    value: 'coordinator',
+                    name: 'Coordenador'
+                }
+            ],
+            units: [],
+            name: '',
+            email: '',
+            unit: '',
+            role: ''
         };
     },
     inject: ['urlBase'],
@@ -123,11 +139,21 @@ export const CreateUser = {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
-        save() {
-            // this.email;
-        }
+        send() {
+            let url = backend_url+'/'
+        },
+        getUnits(){
+            fetch(backend_url+'/unit')
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status==true){
+                    this.units = response.data;
+                }
+            })
+        },
     },
     created() {
         // Conteúdos que deverão ser carregados em uma espécie de onload.
+        this.getUnits();
     }
 };

@@ -84,8 +84,8 @@ CREATE TABLE `professor` (
   `ID_Professor` int(11) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Email` varchar(100) NOT NULL,
-  `Password` varchar(100) NOT NULL,
-  `Area_of_Expertise` varchar(100) DEFAULT NULL
+  `Password` varchar(100) NULL,
+  `Area_of_Expertise` varchar(100) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------

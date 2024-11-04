@@ -63,7 +63,7 @@ class ProfessorController {
 
         $insert_response = $repo->insert($professor);
         http_response_code($insert_response['code']);
-        echo json_encode($insert_response);
+        return $insert_response;
 
     }
 

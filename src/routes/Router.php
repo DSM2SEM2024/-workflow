@@ -1,6 +1,7 @@
 <?php
 namespace Src\Routes;
 use Src\Model\Message;
+use Src\Controller\ProfessorController;
 
 class Router{
     public static function resolve(array $arrayRotas, $method, $uri) {
@@ -31,4 +32,19 @@ class Router{
         echo json_encode(Message::send(false,404,'Rota não encontrada',[]));
         exit();
     }
+
+    public function userSwitch(){
+        $data = json_decode(file_get_contents('php://input'),true);
+        switch ($data['role']) {
+            case 'professor':
+                $pc = new ProfessorController();
+                echo json_encode($pc->signin());
+                break;
+            
+            case 'coordinator':
+                # code...
+                break;
+        }
+    }
+
 }
