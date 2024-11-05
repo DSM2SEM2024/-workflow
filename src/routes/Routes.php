@@ -5,6 +5,8 @@ use Src\Controller\TokenController;
 use Src\Controller\ProjectController;
 use Src\Controller\UnitController;
 use Src\Controller\FileController;
+use Src\Controller\MailController;
+use Src\Routes\Router;
 
 class Routes {
 
@@ -19,10 +21,11 @@ class Routes {
             ],
             'POST' => [
                 '/professor/login' => [ProfessorController::class, 'login'],
-                '/professor/create' => [ProfessorController::class, 'signin'],
+                '/user/create' => [Router::class, 'userSwitch'],
                 '/token/validateAccess' => [TokenController::class, 'verifyPermission'],
                 '/project/create' => [ProjectController::class, 'create'],
                 '/unit/create' => [UnitController::class, 'create'],
+                '/password/define' => [Router::class, '']
             ],
             'PUT' => [
                 '/a/{id}' => [ProfessorController::class, 'login'],

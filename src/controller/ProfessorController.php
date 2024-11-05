@@ -4,6 +4,8 @@ use Src\Auth\TokenHandler;
 use Src\Model\Message;
 use Src\Model\Professor;
 use Src\Repository\ProfessorRepository;
+use Src\Controller\MailController;
+use Src\Model\Project;
 
 class ProfessorController {
 
@@ -57,25 +59,38 @@ class ProfessorController {
         $professor = new Professor();
         $professor->setName($data['name']);
         $professor->setEmail($data['email']);
-        $professor->setExpertise($data['expertise']);
-        $professor->setPassword($data['password']);
 
         $insert_response = $repo->insert($professor);
+        $professor->setId($insert_response['data']);
         http_response_code($insert_response['code']);
-        echo json_encode($insert_response);
+        $mail_system = new MailController();
+        if($insert_response['status']==true){
+            $mail_system->requestPassword($professor->getName(),$professor->getEmail(), $professor->getId(),'professor');
+        }
+        return $insert_response;
+
 
     }
 
-    public function mensagem(){
-        echo 'mensagem de teste';
-    }
+    public function definePassword(){
 
-    public function mensagem2($id){
-        echo 'mensagem '.$id;
-    }
-    
-    public function cadastra(){
-        echo 'mandou pro db';
+        $data = json_decode(file_get_contents('php://input'),true);
+        $token_response = TokenHandler::verifyMailToken($data['code']);
+
+        $repo = new ProfessorRepository();
+        $professor = new Professor();
+        $professor->setPassword($data['password']);
+
+        if($token_response['status']==true){
+            $professor->setId($token_response['data']->id);
+            $update_response = $repo->updatePassword($professor);
+
+            echo json_encode($update_response);
+            
+        } else {
+            echo json_encode($token_response);
+        }
+
     }
 
 }

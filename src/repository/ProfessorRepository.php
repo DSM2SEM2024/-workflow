@@ -8,24 +8,22 @@ use PDOException;
 
 class ProfessorRepository {
 
-    private PDO $connection;
+    private PDO $pdo;
 
     public function __construct()
     {
-        $this->connection = Database::connect();
+        $this->pdo = Database::connect();
     }
 
     public function insert(Professor $professor){
     
-        $insert = 'INSERT INTO professor(Name,Email,Password,Area_of_Expertise) VALUES(?,?,?,?)';
-        $prepare = $this->connection->prepare($insert);
+        $insert = 'INSERT INTO professor(Name,Email) VALUES(?,?)';
+        $prepare = $this->pdo->prepare($insert);
         $prepare->bindValue(1, $professor->getName());
         $prepare->bindValue(2, $professor->getEmail());
-        $prepare->bindValue(3, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
-        $prepare->bindValue(4, $professor->getExpertise());
         try{
             $prepare->execute();
-            return Message::send(true,200,'Cadastro efetuado com sucesso',[]);
+            return Message::send(true,200,'Cadastro efetuado com sucesso',$this->pdo->lastInsertId());
         } catch(PDOException $e){
             return Message::send(false, $e->getCode(),$e->getMessage(),[]);
         }
@@ -33,7 +31,7 @@ class ProfessorRepository {
 
     public function selectAll(){
         $select = 'SELECT * FROM professor';
-        $prepare = $this->connection->prepare($select);
+        $prepare = $this->pdo->prepare($select);
         try {
             $prepare->execute();
             $data = $prepare->fetchAll();
@@ -45,7 +43,7 @@ class ProfessorRepository {
 
     public function selectById(Professor $professor){
         $select = 'SELECT * FROM professor WHERE ID_Professor = ?';
-        $prepare = $this->connection->prepare($select);
+        $prepare = $this->pdo->prepare($select);
         $prepare->bindValue(1, $professor->getId());
         try {
             $prepare->execute();
@@ -59,7 +57,7 @@ class ProfessorRepository {
     public function login(Professor $professor){
         
         $select = 'SELECT ID_Professor, Name, Email, Password, Area_of_Expertise FROM professor WHERE Email = ?';
-        $prepare = $this->connection->prepare($select);
+        $prepare = $this->pdo->prepare($select);
         $prepare->bindValue(1, $professor->getEmail());
         try {
             $prepare->execute();
@@ -78,7 +76,7 @@ class ProfessorRepository {
 
     public function update(Professor $professor){
         $update = 'UPDATE Professor SET Name = ?, Email = ?,Password = ?, Area_of_Expertise = ? WHERE ID_Professor = ?';
-        $prepare = $this->connection->prepare($update);
+        $prepare = $this->pdo->prepare($update);
         $prepare->bindValue(1, $professor->getName());
         $prepare->bindValue(2, $professor->getEmail());
         $prepare->bindValue(3, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
@@ -94,13 +92,26 @@ class ProfessorRepository {
 
     public function delete(Professor $professor){
         $update = 'DELETE FROM Professor WHERE ID_Professor = ?';
-        $prepare = $this->connection->prepare($update);
+        $prepare = $this->pdo->prepare($update);
         $prepare->bindValue(1, $professor->getId());
         try {
             $prepare->execute();
             return Message::send(true,200,'Cadastro removido com sucesso',[]);
         } catch (PDOException $e) {
             return Message::send(false,$e->getCode(),$e->getMessage(),[]);
+        }
+    }
+
+    public function updatePassword(Professor $professor){
+        $update = 'UPDATE professor SET Password = ? WHERE ID_Professor = ?';
+        $prepare = $this->pdo->prepare($update);
+        $prepare->bindValue(1, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
+        $prepare->bindValue(2, $professor->getId());
+        try{
+            $prepare->execute();
+            return Message::send(true, 200, 'Senha criada',[]);
+        } catch(PDOException $e){
+            return Message::send(false, $e->getCode(), $e->getMessage(),[]);
         }
     }
 

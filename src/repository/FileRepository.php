@@ -17,7 +17,6 @@ class FileRepository {
     }
 
     public function insert(File $file){
-
         if($file->getType()!='link'){
             $insert = 'INSERT INTO files(ID_Project,File_Name,File_Type,File_Data) VALUES (?,?,?,?)';
             $prepare = $this->pdo->prepare($insert);

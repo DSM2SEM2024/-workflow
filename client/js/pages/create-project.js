@@ -138,7 +138,7 @@ export const CreateProject = {
             // this.email;
         },
         getUnits(){
-            fetch('http://localhost:70/unit')
+            fetch(backend_url+'/unit')
             .then(response=>response.json())
             .then(response=>{
                 if(response.status==true){
@@ -193,6 +193,7 @@ export const CreateProject = {
             fetch(url, options)
             .then(response => response.json())
             .then(response => {
+                console.log(response);
                 if (response.status == true) {
                     navigate('project/' + response.data);
                 } else {
