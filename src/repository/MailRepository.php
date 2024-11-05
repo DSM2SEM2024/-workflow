@@ -40,7 +40,7 @@ class MailRepository {
             $prepare->execute();
             $array = $prepare->fetchAll();
             if(count($array)>0){
-                return Message::send(true, 200, 'Permitido',[]);
+                return Message::send(true, 200, 'Permitido',$array[0]['Code']);
             } else {
                 return Message::send(false, 404, 'Negado',[]);
             }

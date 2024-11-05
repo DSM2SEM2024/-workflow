@@ -102,4 +102,17 @@ class ProfessorRepository {
         }
     }
 
+    public function updatePassword(Professor $professor){
+        $update = 'UPDATE professor SET Password = ? WHERE ID_Professor = ?';
+        $prepare = $this->pdo->prepare($update);
+        $prepare->bindValue(1, password_hash($professor->getPassword(),PASSWORD_DEFAULT));
+        $prepare->bindValue(2, $professor->getId());
+        try{
+            $prepare->execute();
+            return Message::send(true, 200, 'Senha criada',[]);
+        } catch(PDOException $e){
+            return Message::send(false, $e->getCode(), $e->getMessage(),[]);
+        }
+    }
+
 }

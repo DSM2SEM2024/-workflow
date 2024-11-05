@@ -5,6 +5,7 @@ use Src\Model\Message;
 use Src\Model\Professor;
 use Src\Repository\ProfessorRepository;
 use Src\Controller\MailController;
+use Src\Model\Project;
 
 class ProfessorController {
 
@@ -63,7 +64,9 @@ class ProfessorController {
         $professor->setId($insert_response['data']);
         http_response_code($insert_response['code']);
         $mail_system = new MailController();
-        $mail_system->requestPassword($professor->getName(),$professor->getEmail(), $professor->getId(),'professor');
+        if($insert_response['status']==true){
+            $mail_system->requestPassword($professor->getName(),$professor->getEmail(), $professor->getId(),'professor');
+        }
         return $insert_response;
 
 
@@ -72,7 +75,21 @@ class ProfessorController {
     public function definePassword(){
 
         $data = json_decode(file_get_contents('php://input'),true);
-        $token_response = TokenHandler::verifyMailToken($data['email']);
+        $token_response = TokenHandler::verifyMailToken($data['code']);
+
+        $repo = new ProfessorRepository();
+        $professor = new Professor();
+        $professor->setPassword($data['password']);
+
+        if($token_response['status']==true){
+            $professor->setId($token_response['data']->id);
+            $update_response = $repo->updatePassword($professor);
+
+            echo json_encode($update_response);
+            
+        } else {
+            echo json_encode($token_response);
+        }
 
     }
 

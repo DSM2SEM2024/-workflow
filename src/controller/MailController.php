@@ -33,7 +33,7 @@ class MailController {
             $mail->addAddress($email, $name);
             $n = mt_rand(0,999999);
             $code = str_pad($n, 6, '0', STR_PAD_LEFT);
-            $token_response = TokenHandler::mailToken(['code'=>$code,'role'=>$role]);
+            $token_response = TokenHandler::mailToken(['code'=>$code,'role'=>$role, 'id'=>$id]);
             $token = $token_response['data'];
             $token = urlencode($token);
             $mail->Subject = "Solicitação de criação de perfil";

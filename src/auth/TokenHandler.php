@@ -96,7 +96,8 @@ class TokenHandler {
             // Uma hora de validade para o token
             'exp' => time() + (6*3600),
             'code'=>$data['code'],
-            'role'=>$data['role']
+            'role'=>$data['role'],
+            'id'=>$data['id']
         ];
 
         $token = JWT::encode($payload, SECRET_KEY, alg);
@@ -106,11 +107,12 @@ class TokenHandler {
 
     public static function verifyMailToken($token){
 
-        $code = '';
+        $mail_repo = new MailRepository();
 
         try {
 
             $decoded = JWT::decode($token, new Key(SECRET_KEY, alg));
+            $code = $mail_repo->verify($decoded->code)['data'];
             if($decoded->code==$code){
                 return Message::send(true, 200, 'Código válido', $decoded);
             } else {

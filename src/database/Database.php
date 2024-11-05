@@ -10,8 +10,8 @@ class Database {
         $db = "repositories";
         $host = "localhost";
         $user = "root";
-        // $password = "";
-        $password = "root";
+        $password = "";
+        // $password = "root";
         $charset = "utf8mb4";
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
