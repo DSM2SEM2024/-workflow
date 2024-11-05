@@ -108,7 +108,6 @@ class TokenHandler {
     public static function verifyMailToken($token){
 
         $mail_repo = new MailRepository();
-
         try {
 
             $decoded = JWT::decode($token, new Key(SECRET_KEY, alg));
