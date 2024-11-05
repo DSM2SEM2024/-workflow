@@ -50,4 +50,18 @@ class MailRepository {
 
     }
 
+    public function clearCode($code){
+
+        $delete = 'DELETE FROM mail_code WHERE Code = ?';
+        $prepare = $this->pdo->prepare($delete);
+        $prepare->bindValue(1, $code);
+        try{
+            $prepare->execute();
+            return Message::send(true, 200, 'Código removido',[]);
+        } catch(PDOException $e){
+            return Message::send(false, $e->getCode(), $e->getMessage(),[]);
+        }
+
+    }
+
 }

@@ -5,7 +5,9 @@ use Src\Model\Message;
 use Src\Model\Professor;
 use Src\Repository\ProfessorRepository;
 use Src\Controller\MailController;
+use Src\Controller\MailRepository;
 use Src\Model\Project;
+use Src\Repository\MailRepository as RepositoryMailRepository;
 
 class ProfessorController {
 
@@ -84,7 +86,8 @@ class ProfessorController {
         if($token_response['status']==true){
             $professor->setId($token_response['data']->id);
             $update_response = $repo->updatePassword($professor);
-
+            $mail_repo = new RepositoryMailRepository();
+            $mail_repo->clearCode($data['code']);
             echo json_encode($update_response);
             
         } else {
