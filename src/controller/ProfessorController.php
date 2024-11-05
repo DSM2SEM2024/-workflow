@@ -41,7 +41,7 @@ class ProfessorController {
 
         $login_response = $repo->login($professor);
         if($login_response['status']){
-            $token_response = TokenHandler::createAsLogin('professor',$login_response['data']);
+            $token_response = TokenHandler::createAsLogin('professor',$login_response['data'], $data['login']);
             http_response_code($token_response['code']);
             echo json_encode(Message::send(true,$token_response['code'],'Login efetuado',$token_response['data']));
         } else {

@@ -25,7 +25,7 @@ export const Login = {
 
                     <div class="d-flex justify-content-between flex-row options-password">
                         <div class="d-flex justify-content-start align-items-center gap-2">
-                            <input type="checkbox">
+                            <input type="checkbox" v-model="manter_login">
                             <label>Lembrar credenciais</label>
                         </div>
 
@@ -47,6 +47,7 @@ export const Login = {
         return {
             email: '',
             password: '',
+            manter_login: false,
             base_host: window.location.href.split('#')[0]
         };
     },
@@ -67,7 +68,8 @@ export const Login = {
                 },
                 body: JSON.stringify({
                     email: this.email,
-                    password: this.password
+                    password: this.password,
+                    login: this.manter_login
                 })
             };
             
