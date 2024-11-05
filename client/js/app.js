@@ -27,7 +27,7 @@ const routes = [
     { path: '/project/:id', component: Project},
     { path: '/register-unit', component: RegisterUnit},
     { path: '/teachers-area', component: TeachersArea},
-    { path: '/create-password/:email', component: CreatePassword}
+    { path: '/create-password/:email', component: CreatePassword},
     { path: '/register-course', component: RegisterCourse}
 ];
 
