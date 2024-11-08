@@ -16,6 +16,7 @@ import { TeachersArea } from './pages/teachers-area.js';
 import { CreateProject } from './pages/create-project.js';
 import { MyData } from './components/my-data.js';
 
+
 //Definindo as rotas através desse identificador
 const routes = [
     { path: '/', component: Home },
