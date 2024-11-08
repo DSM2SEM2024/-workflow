@@ -25,7 +25,7 @@ class Routes {
                 '/token/validateAccess' => [TokenController::class, 'verifyPermission'],
                 '/project/create' => [ProjectController::class, 'create'],
                 '/unit/create' => [UnitController::class, 'create'],
-                '/password/define' => [Router::class, '']
+                '/password/define' => [ProfessorController::class, 'definePassword']
             ],
             'PUT' => [
                 '/a/{id}' => [ProfessorController::class, 'login'],

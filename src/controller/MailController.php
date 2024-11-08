@@ -53,6 +53,8 @@ class MailController {
                             <a href='http://localhost:70/user/remove/$id'>Recusar cadastro</a>";
 
             $mail->send();
+            $repo = new MailRepository();
+            $repo->registerCode($code);
             return Message::send(true, 200, 'E-mail enviado com sucesso',[]);
 
         } catch(Exception $e){

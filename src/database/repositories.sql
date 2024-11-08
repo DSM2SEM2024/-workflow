@@ -155,6 +155,9 @@ ALTER TABLE `coordinator`
   ADD PRIMARY KEY (`ID_Coordinator`),
   ADD KEY `ID_Unit` (`ID_Unit`);
 
+ALTER TABLE `mail_code`
+  ADD PRIMARY KEY (`Code`);
+
 --
 -- Índices de tabela `course`
 --

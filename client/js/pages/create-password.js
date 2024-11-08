@@ -57,7 +57,7 @@ export const CreatePassword = {
                     'Content-Type':'application/json'
                 },
                 body: JSON.stringify({
-                    code: this.cide,
+                    code: this.code,
                     password: this.password,
                 })
             };
@@ -66,7 +66,7 @@ export const CreatePassword = {
                 fetch(url, options)
                 .then(response=>response.json())
                 .then(response=>{
-    
+                    console.log(response)
                     if(response.status==true){
                         window.location.href = this.base_host+'#/login'
                     } else {
