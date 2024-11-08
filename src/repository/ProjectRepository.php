@@ -41,7 +41,7 @@ class ProjectRepository{
 
     public function selectAll(){
 
-        $select = 'SELECT * FROM project WHERE Status = 1';
+        $select = 'SELECT * FROM project WHERE Status = 1 ORDER BY ID_Project DESC';
         try {
             $prepare = $this->pdo->prepare($select);
             $prepare->execute();

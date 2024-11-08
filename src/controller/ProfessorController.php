@@ -87,11 +87,13 @@ class ProfessorController {
             $professor->setId($token_response['data']->id);
             $update_response = $repo->updatePassword($professor);
             $mail_repo = new RepositoryMailRepository();
-            $mail_repo->clearCode($data['code']);
-            echo json_encode($update_response);
+            if($update_response['status']){
+                $mail_repo->clearCode($data['code']);
+            }
+            return $update_response;
             
         } else {
-            echo json_encode($token_response);
+            return $token_response;
         }
 
     }

@@ -33,7 +33,7 @@ CREATE TABLE `coordinator` (
   `ID_Coordinator` int(11) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Email` varchar(100) NOT NULL,
-  `Password` varchar(100) NOT NULL,
+  `Password` varchar(100) NULL,
   `ID_Unit` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 

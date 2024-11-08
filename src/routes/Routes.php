@@ -6,6 +6,7 @@ use Src\Controller\ProjectController;
 use Src\Controller\UnitController;
 use Src\Controller\FileController;
 use Src\Controller\MailController;
+use Src\Controller\UserController;
 use Src\Routes\Router;
 
 class Routes {
@@ -21,11 +22,11 @@ class Routes {
             ],
             'POST' => [
                 '/professor/login' => [ProfessorController::class, 'login'],
-                '/user/create' => [Router::class, 'userSwitch'],
+                '/user/create' => [UserController::class, 'userSwitch'],
                 '/token/validateAccess' => [TokenController::class, 'verifyPermission'],
                 '/project/create' => [ProjectController::class, 'create'],
                 '/unit/create' => [UnitController::class, 'create'],
-                '/password/define' => [ProfessorController::class, 'definePassword']
+                '/password/define' => [UserController::class, 'switchPassword']
             ],
             'PUT' => [
                 '/a/{id}' => [ProfessorController::class, 'login'],
