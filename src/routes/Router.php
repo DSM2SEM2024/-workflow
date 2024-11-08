@@ -33,18 +33,4 @@ class Router{
         exit();
     }
 
-    public function userSwitch(){
-        $data = json_decode(file_get_contents('php://input'),true);
-        switch ($data['role']) {
-            case 'professor':
-                $pc = new ProfessorController();
-                echo json_encode($pc->signin());
-                break;
-            
-            case 'coordinator':
-                echo json_encode(Message::send(true, 200, 'Sem endpoint ainda',[]));
-                break;
-        }
-    }
-
 }

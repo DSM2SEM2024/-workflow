@@ -12,6 +12,11 @@ class MailController {
     public function requestPassword($name, $email, $id, $role){
 
         $data = json_decode(file_get_contents('php://input'),true);
+        if($role=='professor'){
+            $cargo = 'Professor';
+        } else {
+            $cargo = 'Coordenador';
+        }
 
         $mail_config = new MailConfig();
         $mail = new PHPMailer(true);
@@ -47,9 +52,12 @@ class MailController {
                                 ao sistema, permitindo seu login. Caso não reconheça essa atividade e/ou deseja recusar, pedimos cordialmente
                                 que utilize a opção de recusar cadastro.
                             </p>
+                            <p>
+                                Destacamos que aqui, voocê está manuseando suas credenciais como $cargo dentro do nosso sistema!
+                            </p>
                             <p>Atenciosamente,</p>
                             <p>$mail_name</p>
-                            <a href='http://localhost:8080/#/create-password/$token'>Avançar para criação de senha</a>
+                            <a href='http://localhost:8080/#/create-password/$token'>Avançar para criação de senha</a> \n\n
                             <a href='http://localhost:70/user/remove/$id'>Recusar cadastro</a>";
 
             $mail->send();
