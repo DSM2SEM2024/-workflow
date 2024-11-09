@@ -2,6 +2,7 @@
 namespace Src\Repository;
 use Src\Database\Database;
 use Src\Model\File;
+use Src\Model\Project;
 
 use PDO;
 use PDOException;
@@ -52,6 +53,20 @@ class FileRepository {
 
             return Message::send(true, 200, 'Arquivos encontrados', $array);
         } catch(PDOException $e){
+            return Message::send(false, $e->getCode(), $e->getMessage(),[]);
+        }
+
+    }
+
+    public function selectCoverImage(){
+
+        $select = "SELECT * FROM files WHERE (File_Name LIKE '%.png' OR File_Name LIKE '%.jpg')";
+        $prepare = $this->pdo->prepare($select);
+        try {
+            $prepare->execute();
+            $array = $prepare->fetchAll();
+            return Message::send(true, 200, 'Fotos encontradas', $array);  
+        } catch (PDOException $e) {
             return Message::send(false, $e->getCode(), $e->getMessage(),[]);
         }
 

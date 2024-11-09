@@ -6,14 +6,17 @@ use Src\Model\Project;
 use Src\Database\Database;
 use Src\Model\Message;
 use Src\Model\Professor;
+use Src\Repository\FileRepository;
 
 class ProjectRepository{
 
     private PDO $pdo;
+    private FileRepository $fileRepository;
 
     public function __construct()
     {
         $this->pdo = Database::connect();
+        $this->fileRepository = new FileRepository();
     }
 
     public function create(Project $project){
@@ -41,7 +44,8 @@ class ProjectRepository{
 
     public function selectAll(){
 
-        $select = 'SELECT * FROM project WHERE Status = 1 ORDER BY ID_Project DESC';
+        $select = 'SELECT ID_Project, Name, Description, Start_Date, End_Date, Participants, ID_Unit, ID_Professor, Status FROM project 
+        WHERE Status = 1 ORDER BY ID_Project DESC';
         try {
             $prepare = $this->pdo->prepare($select);
             $prepare->execute();
