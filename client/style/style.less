@@ -222,6 +222,13 @@ main {
             }
 
             & form {
+                & .message-error{
+                    font-size: 0.7rem;
+                    font-family: @roboto-medium;
+                    color: @secundary-red;
+                    padding: 0.2rem 0rem 0rem 0rem;
+                }
+
                 & .form-gap {
                     gap: 5%;
                 }
@@ -242,6 +249,10 @@ main {
 
                 & .form-inputs {
                     gap: 5%;
+
+                    & p{
+                        margin-bottom: 0rem
+                    }
 
                     & input,
                     select,
@@ -500,7 +511,43 @@ main {
                     &::-webkit-scrollbar-track {
                         background: transparent;
                     }
-                }                
+                } 
+
+                & .btn-change{
+                    font-size: 0.8rem;
+                    background: @background-red;
+                    color: @primary-white;
+                    margin-bottom: 0.2rem;
+                    margin-top: 1.7rem;
+                    padding: 0.550rem;
+                }
+
+                & .line-password{
+                    margin: 1rem 0rem 1rem 0rem;
+                }
+
+                & .section-list{
+                    padding: 1rem 0rem 0rem 0rem;
+
+                    & .units, .curses{
+                        & h4{
+                            font-family: @roboto-medium;
+                            text-transform: uppercase;
+                            font-size: 0.9rem;
+                            color: lighten(@terciary-black, 15%);
+                        }
+
+                        & ul{
+                            list-style: none;
+                            padding: 0rem;
+                            margin: 0rem;
+
+                            & li{
+                                font-size: 0.8rem;
+                            }
+                        }
+                    }
+                }
             }
 
             & hr {
@@ -1006,7 +1053,6 @@ main {
         padding-bottom: 3rem;
 
         & .section-top {
-            width: 90%;
             height: 15rem;
             padding: 2rem 2rem 0rem 2rem;
             background: linear-gradient(to bottom, @primary-red 60%, @quinary-white 40%);
@@ -1020,6 +1066,16 @@ main {
                 background-color: #303030;
                 border: 0.03rem solid @terciary-white;
                 border-radius: 5rem;
+
+                & .btn-send-photo{
+                    background: @background-red;
+                    border-radius: 5rem;
+                    & img{
+                        height: 1.5rem;
+                        width: 1.5rem;
+                    }
+
+                }
             }
 
             & .profile-apresentation {
@@ -1032,6 +1088,16 @@ main {
                     font-family: @roboto-regular;
                     font-weight: normal;
                 }
+            }
+
+            & .btn-configuration{
+                background: transparent;
+                
+                & img{
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+
             }
         }
 
@@ -1122,6 +1188,22 @@ main {
                     }
                 }
             }
+        }
+    }
+}
+
+#my-data{     
+    max-width: 58vw;
+
+    margin-top: -2rem;
+
+    & .dinamic-content{
+        background: none;
+        margin: 0rem;
+        padding: 0rem;
+
+        & .form-content{
+            max-width: 58vw;
         }
     }
 }
