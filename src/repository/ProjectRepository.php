@@ -69,10 +69,10 @@ class ProjectRepository{
         }
     }
     
-    public function selectByProfessor(Professor $professor){
+    public function selectByProfessor(Project $project){
         $select = 'SELECT * FROM PROJECT WHERE project.ID_professor = ?';
         $prepare = $this->pdo->prepare($select);
-        $prepare->bindValue(1, $professor->getId());
+        $prepare->bindValue(1, $project->getProfessor()->getId());
 
         try{
             $prepare->execute();

@@ -94,4 +94,12 @@ class ProjectController {
 
     }
 
+    public function getByProfessor(Professor $professor){
+
+        $repo = new ProjectRepository();
+        $project = new Project();
+        $project->setProfessor($professor);
+        echo json_encode($repo->selectByProfessor($project));
+    }
+
 }
