@@ -15,7 +15,8 @@ class Routes {
                 '/project' => [ProjectController::class, 'list'],
                 '/project/{id}' => [ProjectController::class,'getById'],
                 '/unit' => [UnitController::class, 'list'],
-                '/files/{id}' => [FileController::class, 'list']
+                '/files/{id}' => [FileController::class, 'list'],
+                '/project/prof' => [ProjectController::class, 'getByProfessor']
             ],
             'POST' => [
                 '/professor/login' => [ProfessorController::class, 'login'],
