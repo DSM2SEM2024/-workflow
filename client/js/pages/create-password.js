@@ -3,31 +3,31 @@ import { backend_url } from "../global-var/backend-url.js";
 
 export const CreatePassword = {
     template: `
-        <main id="login" class="dinamic-content d-flex justify-content-evenly align-items-center flex-row">
-            <div id="left-content">
+        <main id="create-password" class="dinamic-content d-flex justify-content-evenly align-items-center flex-row">
+            <div class="left-content">
                 <figure>
                     <img src="../images/logo-cps.png" alt="Logo Centro Paula Souza">
                 </figure>
             </div>
 
-            <div id="middle-content">
+            <div class="middle-content">
             </div>
 
-            <section id="right-content">
+            <section class="right-content">
                 <h1>Crie sua senha de acesso</h1>
                 <p class="subtitle">Complete seu registro para acessar o sistema</p>
 
-                <div>
+                <div class="form-newpassword">
                     <div class="d-flex flex-column justify-content-start form-inputs">
                         <input type="password" v-model="password" placeholder="Senha">
+                        
                         <input type="password" v-model="confirm" placeholder="Confirme a senha">
+                        <p class="message-error error-newpassword"><!--As senhas não coincidem --></p>
+                        <!-- A senha precisa de, no mínimo (regras de negócio) ou as senhas não coincidem -->               
                     </div>
 
-                    <div class="d-flex justify-content-between flex-row options-password">
-                    </div>
-
-                    <div class="d-flex justify-content-center flex-column gap-3 options-login">
-                        <button type="submit" class="button btn-red" @click="signin">Registrar-se</button>
+                    <div class="d-flex justify-content-center flex-column gap-3 option-register">
+                        <button type="submit" class="button btn-red signin" @click="signin">Registrar-se</button>
                     </div>
                 </div>
             </section>
