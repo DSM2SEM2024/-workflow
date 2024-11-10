@@ -82,32 +82,6 @@ body {
     background: @background-white;
 }
 
-#login {
-    height: 100vh;
-    width: 100%;
-
-    & #left-content {
-        & figure {
-            & img {
-                max-width: 80%;
-            }
-        }
-    }
-
-    & #middle-content {
-        height: 40%;
-        width: 0.01rem;
-        background: @lighten-black;
-    }
-
-    & #right-content {
-        & .options-password {
-            padding: 1rem 0rem 1rem 0rem;
-            font-family: @roboto-regular;
-        }
-    }
-}
-
 header {
     width: 6rem;
     min-width: 5rem;
@@ -222,11 +196,12 @@ main {
             }
 
             & form {
-                & .message-error{
+                & .message-error {
                     font-size: 0.7rem;
                     font-family: @roboto-medium;
                     color: @secundary-red;
                     padding: 0.2rem 0rem 0rem 0rem;
+                    margin-bottom: 0rem;
                 }
 
                 & .form-gap {
@@ -250,8 +225,8 @@ main {
                 & .form-inputs {
                     gap: 5%;
 
-                    & p{
-                        margin-bottom: 0rem
+                    & p {
+                        margin-bottom: 0rem;
                     }
 
                     & input,
@@ -264,10 +239,10 @@ main {
                         padding: 0.400rem 1rem 0.400rem 1rem;
                         font-size: 0.9rem;
                         font-family: @roboto-regular;
-                        margin: 1.7rem 0rem 0rem 0rem;
+                        margin: 1rem 0rem 0rem 0rem;
                     }
 
-                    & select{
+                    & select {
                         padding: 0.480rem 1rem 0.415rem 1rem;
                     }
 
@@ -330,7 +305,8 @@ main {
                     }
                 }
 
-                & .form-entries, .fe-limited {
+                & .form-entries,
+                .fe-limited {
                     width: calc(16rem + 5%);
 
                     .members,
@@ -384,7 +360,7 @@ main {
                             font-size: 1.2rem;
                             cursor: pointer;
                         }
-                        
+
 
                         & .files {
                             width: calc(24rem + 5%);
@@ -398,18 +374,18 @@ main {
                     & .unit {
                         display: flex;
                         align-items: center;
-                        
+
                         & img {
                             width: 1.8rem;
                             height: 1.8rem;
                             margin-right: 1rem;
                         }
-                        
+
                         & .unit-info {
                             display: flex;
                             flex-direction: column;
                             margin: .5rem 0;
-                        
+
                             & h1 {
                                 font-size: .8rem;
                                 margin: 0;
@@ -417,7 +393,7 @@ main {
                                 opacity: 0.8;
                                 text-transform: uppercase;
                             }
-                        
+
                             & h2 {
                                 font-size: .5rem;
                                 margin: 0;
@@ -427,93 +403,96 @@ main {
                             }
                         }
                     }
-                      
+                }
 
-                    & .teacher-section,
-                    .coordinator-section {
+                & .fe-limited {
+                    width: calc(17rem + 5%);
+                    padding: 0 1rem 1rem 0;
+                    height: 10rem;
+                    overflow-y: auto;
+
+                    &::-webkit-scrollbar {
+                        width: 8px;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        background: lighten(@terciary-black, 70%);
+                        border-radius: 10px;
+                    }
+
+                    &::-webkit-scrollbar-track {
+                        background: transparent;
+                    }
+                }
+
+                & .teacher-section,
+                .coordinator-section {
+                    margin-top: 1rem;
+
+                    & p {
+                        margin-bottom: 0rem;
                         margin-top: 1rem;
+                    }
+
+                    & .message-error{
+                        margin: 0rem;
+                    }
+
+                    & .section-linked-data {
+                        margin: 1rem 0rem 0rem 0rem;
+                        background: @terciary-white;
+                        width: 19rem;
+                        border-radius: 0.3rem;
+                        box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
+                        border-radius: 0.3rem;
+                        padding: 0.8rem 1rem 0.5rem 1.3rem;
+                        font-size: 0.9rem;
+                        font-family: @roboto-regular;
+
+                        & .icon {
+                            width: 1.6rem;
+                            height: 1.6rem;
+                        }
 
                         & p {
                             margin-bottom: 0rem;
-                            margin-top: 1rem;
+                            margin-top: 0rem;
                         }
 
-                        & .section-linked-data {
-                            margin: 1rem 0rem 0rem 0rem;
-                            background: @terciary-white;
-                            width: 19rem;
-                            border-radius: 0.3rem;
-                            box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px 0px;
-                            border-radius: 0.3rem;
-                            padding: 0.8rem 1rem 0.5rem 1.3rem;
-                            font-size: 0.9rem;
-                            font-family: @roboto-regular;
+                        & span {
+                            width: 1rem;
+                            height: 1rem;
+                            border-radius: 0.15rem;
+                            background-color: @primary-red;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: @secundary-white;
+                            font-weight: bolder;
+                            font-size: 1.2rem;
+                            cursor: pointer;
+                        }
 
-                            & .icon {
-                                width: 1.6rem;
-                                height: 1.6rem;
+                        & .linked-data {
+
+                            & .unity-name {
+                                color: lighten(@secundary-black, 40%);
+                                text-transform: uppercase;
                             }
 
-                            & p {
-                                margin-bottom: 0rem;
-                                margin-top: 0rem;
+                            & .discipline-name {
+                                color: @secundary-black;
+                                font-family: @roboto-bold;
                             }
 
-                            & span {
-                                width: 1rem;
-                                height: 1rem;
-                                border-radius: 0.15rem;
-                                background-color: @primary-red;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                color: @secundary-white;
-                                font-weight: bolder;
-                                font-size: 1.2rem;
-                                cursor: pointer;
-                            }
-
-                            & .linked-data{
-
-                                & .unity-name{
-                                    color: lighten(@secundary-black, 40%);
-                                    text-transform: uppercase;
-                                }
-
-                                & .discipline-name{
-                                    color: @secundary-black;
-                                    font-family: @roboto-bold;
-                                }
-
-                                & .curse-name{
-                                    color: @primary-red;
-                                }
+                            & .curse-name {
+                                color: @primary-red;
                             }
                         }
                     }
                 }
 
-                & .fe-limited {
-                    width: calc(17rem + 5%);
-                    padding: 0 1rem 1rem 0 ;
-                    height: 10rem;
-                    overflow-y: auto;
-                
-                    &::-webkit-scrollbar {
-                        width: 8px;
-                    }
-                
-                    &::-webkit-scrollbar-thumb {
-                        background: lighten(@terciary-black, 70%);
-                        border-radius: 10px;
-                    }
-                
-                    &::-webkit-scrollbar-track {
-                        background: transparent;
-                    }
-                } 
-
-                & .btn-change{
+                & .btn-change {
                     font-size: 0.8rem;
                     background: @background-red;
                     color: @primary-white;
@@ -522,32 +501,35 @@ main {
                     padding: 0.550rem;
                 }
 
-                & .line-password{
+                & .line-password {
                     margin: 1rem 0rem 1rem 0rem;
                 }
 
-                & .section-list{
+                & .section-list {
                     padding: 1rem 0rem 0rem 0rem;
 
-                    & .units, .curses{
-                        & h4{
+                    & .units,
+                    .curses {
+                        & h4 {
                             font-family: @roboto-medium;
                             text-transform: uppercase;
                             font-size: 0.9rem;
                             color: lighten(@terciary-black, 15%);
                         }
 
-                        & ul{
+                        & ul {
                             list-style: none;
                             padding: 0rem;
                             margin: 0rem;
 
-                            & li{
+                            & li {
                                 font-size: 0.8rem;
                             }
                         }
                     }
                 }
+
+
             }
 
             & hr {
@@ -582,9 +564,45 @@ main {
     }
 }
 
-#login {
+#login,
+#create-password {
+    height: 100vh;
+    width: 100%;
+
+    & .left-content {
+        & figure {
+            & img {
+                max-width: 80%;
+            }
+        }
+    }
+
+    & .middle-content {
+        height: 40%;
+        width: 0.01rem;
+        background: @lighten-black;
+    }
+
+    & .right-content {
+        & .message-error {
+            font-size: 0.7rem;
+            font-family: @roboto-medium;
+            color: @secundary-red;
+            padding: 0rem 0rem 0.5rem 0rem;
+            margin-bottom: 0rem;
+        }
+
+        & .options-password {
+            padding: 0.5rem 0rem 0.5rem 0rem;
+            font-family: @roboto-regular;
+        }
+    }
+}
+
+#login,
+#create-password {
     & .form-inputs {
-        gap: 1.8rem;
+        gap: 0.2rem;
 
         & input {
             background: transparent;
@@ -612,6 +630,12 @@ main {
         & .btn-white {
             background: @terciary-white;
         }
+    }
+}
+
+#create-password {
+    & .form-inputs {
+        gap: 1rem;
     }
 }
 
@@ -1067,10 +1091,11 @@ main {
                 border: 0.03rem solid @terciary-white;
                 border-radius: 5rem;
 
-                & .btn-send-photo{
+                & .btn-send-photo {
                     background: @background-red;
                     border-radius: 5rem;
-                    & img{
+
+                    & img {
                         height: 1.5rem;
                         width: 1.5rem;
                     }
@@ -1090,10 +1115,10 @@ main {
                 }
             }
 
-            & .btn-configuration{
+            & .btn-configuration {
                 background: transparent;
-                
-                & img{
+
+                & img {
                     width: 1.5rem;
                     height: 1.5rem;
                 }
@@ -1192,17 +1217,17 @@ main {
     }
 }
 
-#my-data{     
+#my-data {
     max-width: 58vw;
 
     margin-top: -2rem;
 
-    & .dinamic-content{
+    & .dinamic-content {
         background: none;
         margin: 0rem;
         padding: 0rem;
 
-        & .form-content{
+        & .form-content {
             max-width: 58vw;
         }
     }
