@@ -88,7 +88,7 @@ export const Home = {
                             </div>
 
                             <div class="w-20">
-                                <button class="button btn-red" @click="navigate('project/'+project.ID_Project)">Visualizar</button>
+                                <button class="button btn-red" @click="(this.$router.push('/project/'+project.ID_Project))">Visualizar</button>
                             </div>
                         </div>
                     </div>

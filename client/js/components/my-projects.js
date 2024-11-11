@@ -33,8 +33,8 @@ export const MyProjects = {
             </div>    
 
             <div class="button-section d-flex justify-content-start flex-row gap-3">
-                <button class="btn-red" @click="navigate('management')" >Exibir todos</button>
-                <button class="btn-red" @click="navigate('create-project')" >+ Criar projeto</button>
+                <button class="btn-red" @click="(this.$router.push('/management'))" >Exibir todos</button>
+                <button class="btn-red" @click="(this.$router.push('/create-project'))" >+ Criar projeto</button>
             </div>
         </div>
     </div>
