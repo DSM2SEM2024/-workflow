@@ -14,7 +14,15 @@ use Src\Repository\MailRepository;
 
 class TokenHandler {
 
-    public static function createAsLogin(string $role, $user) : array {
+    public static function createAsLogin(string $role, $user, $exp_login) : array {
+
+        if($exp_login){
+            // trinta dias de validade para o token
+            $exp = time() + 3600*24*30;
+        }else{
+            // Uma hora de validade para o token
+            $exp = time() + 3600;
+        }
 
         switch ($role) {
             case 'professor':
@@ -40,13 +48,13 @@ class TokenHandler {
                 break;
         }
     
+        
         $payload = [
             'iss' => 'http://localhost:8080',
             'aud' => 'http://localhost:8080',
             'iat' => time(),
             'nbf' => time(),
-            // Uma hora de validade para o token
-            'exp' => time() + 3600,
+            'exp' => $exp,
             'pages' => $pages,
             'sub' => $user,
             'role'=> $role
