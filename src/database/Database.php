@@ -7,10 +7,10 @@ class Database {
 
     public static function connect(){
 
-        $db = "repositories";
-        $host = "localhost";
-        $user = "root";
-        $password = "";
+        $db = "faust537_pi-1";
+        $host = "216.172.172.207";
+        $user = "faust537_pi-1";
+        $password = "P1_@p1_testando";
         // $password = "root";
         $charset = "utf8mb4";
 
