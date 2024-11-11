@@ -68,7 +68,7 @@ export const CreatePassword = {
                 .then(response=>{
                     console.log(response)
                     if(response.status==true){
-                        window.location.href = this.base_host+'#/login'
+                        this.$router.push('/login');
                     } else {
                         // tratamento de falha no login temporário
                         alert(response.message);

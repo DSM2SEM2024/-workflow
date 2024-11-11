@@ -1,4 +1,3 @@
-import { navigate } from "../functions/navigate.js";
 import { validateAccess } from "../functions/validate-access.js";
 import { backend_url } from "../global-var/backend-url.js";
 
@@ -218,7 +217,7 @@ export const CreateProject = {
             .then(response => {
                 console.log(response);
                 if (response.status == true) {
-                    navigate('project/' + response.data);
+                    this.$router.push(`/project/${response.data}`);
                 } else {
                     alert('Cadastro inválido');
                 }

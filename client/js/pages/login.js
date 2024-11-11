@@ -81,7 +81,7 @@ export const Login = {
 
                 if(response.status==true){
                     window.localStorage.setItem('reposystem_token',response.data);
-                    window.location.href = this.base_host+'#/management'
+                    this.$router.push('/management');
                 } else {
                     // tratamento de falha no login temporário
                     alert(response.message);
