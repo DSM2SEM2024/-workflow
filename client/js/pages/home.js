@@ -122,6 +122,7 @@ export const Home = {
             .then(response=>{
                 if(response.status==true){
                     this.projects = response.data;
+                    console.log(response)
                 }
                 this.listImages();
             })

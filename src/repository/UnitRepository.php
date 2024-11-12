@@ -15,7 +15,7 @@ class UnitRepository {
     }
 
     public function insert(Unit $unit) : array {
-        $insert = 'INSERT INTO Unit(Unit_Name,Address) VALUES(?,?)';
+        $insert = 'INSERT INTO unit(Unit_Name,Address) VALUES(?,?)';
         $prepare = $this->connection->prepare($insert);
         $prepare->bindValue(1, $unit->getName());
         $prepare->bindValue(2, $unit->getAddress());
@@ -28,7 +28,7 @@ class UnitRepository {
     }
 
     public function selectAll() : array {
-        $select = 'SELECT * FROM Unit';
+        $select = 'SELECT * FROM unit';
         $prepare = $this->connection->prepare($select);
         try {
             $prepare->execute();
@@ -40,7 +40,7 @@ class UnitRepository {
     }
 
     public function selectById(Unit $unit) : array {
-        $select = 'SELECT * FROM Unit WHERE ID_Unit = ?';
+        $select = 'SELECT * FROM unit WHERE ID_Unit = ?';
         $prepare = $this->connection->prepare($select);
         $prepare->bindValue(1, $unit->getId());
         try {
@@ -53,7 +53,7 @@ class UnitRepository {
     }
 
     public function update(Unit $unit) : array {
-        $update = 'UPDATE Unit SET Nome_Unit = ?, Endereco = ? WHERE ID_Unit = ?';
+        $update = 'UPDATE unit SET Nome_Unit = ?, Endereco = ? WHERE ID_Unit = ?';
         $prepare = $this->connection->prepare($update);
         $prepare->bindValue(1, $unit->getName());
         $prepare->bindValue(2, $unit->getAddress());
@@ -67,7 +67,7 @@ class UnitRepository {
     }
 
     public function delete(Unit $unit){
-        $delete = 'DELETE FROM Unit WHERE ID_Unit = ?';
+        $delete = 'DELETE FROM unit WHERE ID_Unit = ?';
         $prepare = $this->connection->prepare($delete);
         $prepare->bindValue(1, $unit->getId());
         try {
