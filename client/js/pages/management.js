@@ -1,5 +1,4 @@
 import { validateAccess } from "../functions/validate-access.js";
-import { navigate } from "../functions/navigate.js";
 
 export const ManagementPage = {
     template: `
@@ -12,7 +11,7 @@ export const ManagementPage = {
                     <div class="new-project-card">
                         <h1>Crie um novo Projeto Interdisciplinar</h1>
                         <h2>Gerencie os Projetos através da central de gerenciamento. Crie e atualize Projetos existentes.</h2>
-                        <button class="btn-red" @click="navigate('create-project')">+ Criar Projeto</button>
+                        <button class="btn-red" @click="(this.$router.push('/create-project'))">+ Criar Projeto</button>
                     </div>
                     <div class="page-section d-flex justify-content-start align-items-center">
                         <h2>Meus projetos</h2>
@@ -66,8 +65,7 @@ export const ManagementPage = {
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         save() {
             // this.email;
-        },
-        navigate
+        }
     },
     created() {
         validateAccess('professor');

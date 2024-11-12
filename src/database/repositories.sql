@@ -1,5 +1,5 @@
-CREATE DATABASE repositories;
-USE repositories;
+CREATE SCHEMA `faust537_pi-1`;
+USE `faust537_pi-1`;
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
@@ -33,7 +33,7 @@ CREATE TABLE `coordinator` (
   `ID_Coordinator` int(11) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Email` varchar(100) NOT NULL,
-  `Password` varchar(100) NOT NULL,
+  `Password` varchar(100) NULL,
   `ID_Unit` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -84,11 +84,15 @@ CREATE TABLE `professor` (
   `ID_Professor` int(11) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Email` varchar(100) NOT NULL,
-  `Password` varchar(100) NOT NULL,
-  `Area_of_Expertise` varchar(100) DEFAULT NULL
+  `Password` varchar(100) NULL,
+  `Area_of_Expertise` varchar(100) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
+
+CREATE TABLE `mail_code`(
+  `Code` int(11) NOT NULL
+)
 
 --
 -- Estrutura para tabela `professor_course`
@@ -150,6 +154,9 @@ CREATE TABLE `unit` (
 ALTER TABLE `coordinator`
   ADD PRIMARY KEY (`ID_Coordinator`),
   ADD KEY `ID_Unit` (`ID_Unit`);
+
+ALTER TABLE `mail_code`
+  ADD PRIMARY KEY (`Code`);
 
 --
 -- Índices de tabela `course`

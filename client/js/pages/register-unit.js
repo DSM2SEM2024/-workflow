@@ -15,16 +15,39 @@ export const RegisterUnit = {
                     </div>
                     <form>
                         <div class="form-inputs d-flex justify-content-start d-column">
-                            <input type="text" placeholder="Nome da unidade">
-                            <input type="text" placeholder="CEP">
+                            <div class="d-flex flex-column align-items-start">
+                                <input type="text" placeholder="Nome da unidade">
+                                <p class="message-error error-name"></p>
+                            </div>
+
+                            <div class="d-flex flex-column align-items-start">
+                                <input type="text" placeholder="CEP">
+                                <p class="message-error error-cep"><!-- O CEP é inválido.--></p>
+                            </div>
                         </div>
                         <div class="form-inputs d-flex justify-content-start d-column">
-                            <input type="text" placeholder="Endereço">
-                            <input type="text" placeholder="Número">
+
+                            <div class="d-flex flex-column align-items-start">
+                                <input type="text" placeholder="Endereço">
+                                <p class="message-error error-address"><!-- O endereço é obrigatório.--></p>
+                            </div>
+
+                            <div class="d-flex flex-column align-items-start">
+                                <input type="text" placeholder="Número">
+                                <p class="message-error error-number"><!-- O número é obrigatório.--></p>
+                            </div>
                         </div>
-                        <div class="form-inputs d-flex justify-content-start d-column">
-                            <input type="text" placeholder="Cidade">
-                            <input type="text" placeholder="Estado">
+
+                        <div class="form-inputs d-flex justify-content-start flex-row">
+                            <div class="d-flex flex-column align-items-start">
+                                <input type="text" placeholder="Cidade">
+                                <p class="message-error error-city"><!-- A cidade é obrigatório.--></p>
+                            </div>
+
+                            <div class="d-flex flex-column align-items-start">
+                                <input type="text" placeholder="Estado">
+                                <p class="message-error error-state"><!-- O estado é obrigatório.--></p>
+                            </div>
                         </div>
                     </form>
                     <br>
@@ -48,6 +71,7 @@ export const RegisterUnit = {
                                 <span>-</span>
                             </div>
                         </div>
+                        <p class="message-error error-member"><!-- O campo coordenador é obrigatório --></p>
                     </form>
                     <br>
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
@@ -79,6 +103,7 @@ export const RegisterUnit = {
                                 <span>-</span>
                             </div>
                         </div>
+                        <p class="message-error error-member"><!-- O campo docente é obrigatório --></p>
                     </form>
 
                     <hr>

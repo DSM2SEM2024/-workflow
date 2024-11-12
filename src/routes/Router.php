@@ -1,6 +1,7 @@
 <?php
 namespace Src\Routes;
 use Src\Model\Message;
+use Src\Controller\ProfessorController;
 
 class Router{
     public static function resolve(array $arrayRotas, $method, $uri) {
@@ -31,4 +32,5 @@ class Router{
         echo json_encode(Message::send(false,404,'Rota não encontrada',[]));
         exit();
     }
+
 }

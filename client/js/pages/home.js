@@ -76,7 +76,7 @@ export const Home = {
 
                     <div class="project-card" v-for="project in projects" :key="project.ID_Project" >
                         <h1 class="project-title">{{project.Name}}</h1>
-                        <img class="project-image" src="../images/event.jpg" alt="Projeto Interdisciplinar">
+                        <img class="project-image" :src="project.cover.File_Data" alt="Projeto Interdisciplinar">
 
                         <p class="project-description">{{project.Description}}</p>
                         
@@ -88,7 +88,7 @@ export const Home = {
                             </div>
 
                             <div class="w-20">
-                                <button class="button btn-red" @click="navigate('project/'+project.ID_Project)">Visualizar</button>
+                                <button class="button btn-red" @click="(this.$router.push('/project/'+project.ID_Project))">Visualizar</button>
                             </div>
                         </div>
                     </div>
@@ -123,6 +123,7 @@ export const Home = {
                 if(response.status==true){
                     this.projects = response.data;
                 }
+                this.listImages();
             })
         },
         validateLogin(){
@@ -147,6 +148,26 @@ export const Home = {
                     this.showMyProjects = false;
                 }
             })
+        },
+        listImages(){
+
+            let url = backend_url+'/cover';
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                console.log(response)
+                response.data.forEach(img => {
+
+                    this.projects.forEach(project => {
+                        if(project.ID_Project == img.ID_Project){
+                            project.cover = img;
+                        }
+                    });
+                    
+                });
+                console.log(this.projects);
+            })
+
         }
     },
     created() {

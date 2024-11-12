@@ -7,11 +7,11 @@ import { MyProjects } from './components/my-projects.js';
 import { Project } from './pages/project.js';
 import { urlBase } from './global-var/url-base.js';
 import { RegisterUnit } from './pages/register-unit.js';
+import { CreatePassword } from './pages/create-password.js';
 import { RegisterCourse } from './pages/register-course.js';
-
-// import { Footer } from './components/footer.js';
 import { TeachersArea } from './pages/teachers-area.js';
 import { CreateProject } from './pages/create-project.js';
+import { MyData } from './components/my-data.js';
 // import { Footer } from './components/footer.js';
 
 //Definindo as rotas através desse identificador
@@ -25,7 +25,10 @@ const routes = [
     { path: '/project/:id', component: Project},
     { path: '/register-unit', component: RegisterUnit},
     { path: '/teachers-area', component: TeachersArea},
-    { path: '/register-course', component: RegisterCourse}
+    { path: '/create-password/:email', component: CreatePassword},
+    { path: '/register-course', component: RegisterCourse},
+    { path: '/teachers-area', component: TeachersArea},
+    {path: '/my-data', component: MyData}
 ];
 
 //Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.
@@ -80,7 +83,7 @@ const App = {
             <router-view></router-view>
         </div>
     `,
-    //Porta na qual o servidor front-end roda, definita na pasta global-var/base-url.js.
+    //Porta na qual o servidor front-end roda, definida na pasta global-var/base-url.js.
     setup() {
         return {
             urlBase: urlBase

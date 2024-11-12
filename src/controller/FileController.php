@@ -51,12 +51,48 @@ class FileController {
         $file->setProject($project);
         $repo = new FileRepository();
         $response = $repo->selectByProject($file);
+        $files = [];
 
         foreach ($response['data'] as $key => $file) {
-            $file['File_Data'] = 'data:application/octet-stream;base64,'.$file['File_Data'];
+            $data = $file['File_Data'];
+            $f = [
+                'ID_File' => $file['ID_File'],
+                'File_Name' => $file['File_Name'],
+                'File_Type' => $file['File_Type'],
+                'URL' => $file['URL'],
+                'File_Data' => "data:application/octet-stream;base64,$data",
+                'ID_Project' => $file['ID_Project']
+            ];
+            array_push($files, $f);
         }
+        $response['data'] = $files;
 
         echo json_encode($response);
+
+    }
+
+    public function getCover(){
+
+        $repo = new FileRepository();
+        $img_response = $repo->selectCoverImage();
+        if($img_response['status']){
+            $files = [];
+            foreach ($img_response['data'] as $key => $file) {
+                $data = $file['File_Data'];
+                $file_extension = explode('.',$file['File_Name'])[1];
+                $f = [
+                    'ID_File' => $file['ID_File'],
+                    'File_Name' => $file['File_Name'],
+                    'File_Type' => $file['File_Type'],
+                    'URL' => $file['URL'],
+                    'File_Data' => "data:image/$file_extension;base64,$data",
+                    'ID_Project' => $file['ID_Project']
+                ];
+                array_push($files, $f);
+            }
+            $img_response['data'] = $files;
+        }
+        echo json_encode($img_response);
 
     }
 

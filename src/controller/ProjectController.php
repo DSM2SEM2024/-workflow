@@ -30,6 +30,7 @@ class ProjectController {
         $id = $token_response['data']->sub->ID_Professor;
         $professor->setId($id);
         $project->setProfessor($professor);
+
         if($token_response['status']==true){
 
             $insert_response = $repo->create($project);
@@ -42,7 +43,6 @@ class ProjectController {
                 if (!empty($_FILES['arquivos'])) {
                     $create_file_response1 = $file_controller->create($_FILES['arquivos'],'file',$project);
                     if($create_file_response1['status']==false){
-                        http_response_code($create_file_response1['code']);
                         echo json_encode($create_file_response1);
                         exit();
                     }
@@ -56,22 +56,16 @@ class ProjectController {
                         $links[] = $link; // Adiciona cada link a um array para salvar ou processar
                     }
                     $create_file_response2 = $file_controller->create($links,'link',$project);
-                    echo json_encode($create_file_response2);
-                    exit();
                     if($create_file_response2['status']==false){
-                        http_response_code($create_file_response2['code']);
                         echo json_encode($create_file_response2);
                     }
                 }
 
-                http_response_code($insert_response['code']);
                 echo json_encode(Message::send(true,$insert_response['code'],$insert_response['message'],$project->getId()));
             } else {
-                http_response_code($insert_response['code']);
                 echo json_encode($insert_response);
             }
         } else {
-            http_response_code($token_response['code']);
             echo json_encode($token_response);
         }
 

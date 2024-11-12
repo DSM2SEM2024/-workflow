@@ -17,6 +17,7 @@
     ],
     "require": {
         "firebase/php-jwt": "^6.10",
-        "twbs/bootstrap": "5.0.2"
+        "twbs/bootstrap": "5.0.2",
+        "phpmailer/phpmailer": "^6.9"
     }
 }
