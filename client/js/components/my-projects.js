@@ -1,4 +1,5 @@
 import { navigate } from "../functions/navigate.js";
+import { backend_url } from "../global-var/backend-url.js";
 
 export const MyProjects = {
     template: `
@@ -10,27 +11,16 @@ export const MyProjects = {
         <div class="current-projects">
             <p>Criados recentemente</p>
 
-            <div class="project">
+            <div class="project" v-for="project in projects">
                 <div class="left">
-                    <h4>Projeto Sofia</h4>
-                    <h5>Desenvolvimento de Software e Multiplataforma</h5>
+                    <h4>{{project.name}}</h4>
+                    <h5>{{project.course}}</h5>
                 </div>
                 <div class="right d-flex justify-content-between flex-column align-items-end">
-                    <p>Status</p>
-                    <p>28/11/2024</p>
+                    <p>{{project.tatus}}</p>
+                    <p>{{project.endDate}}</p>
                 </div>
-            </div>
-
-            <div class="project">
-                <div class="left">
-                    <h4>Projeto Sofia</h4>
-                    <h5>Desenvolvimento de Software e Multiplataforma</h5>
-                </div>
-                <div class="right d-flex justify-content-between flex-column align-items-end">
-                    <p>Status</p>
-                    <p>28/11/2024</p>
-                </div>
-            </div>    
+            </div>   
 
             <div class="button-section d-flex justify-content-start flex-row gap-3">
                 <button class="btn-red" @click="(this.$router.push('/management'))" >Exibir todos</button>
@@ -40,7 +30,7 @@ export const MyProjects = {
     </div>
     `,
     data() {
-
+        return {projects: []}
     },
     inject: ['urlBase'],
     methods: {
@@ -49,7 +39,23 @@ export const MyProjects = {
         },
         save() {
         },
-        navigate
+        navigate,
+        getProjectByProfessor(){
+            let token = document.localStorage.getItem("reposystem_token");
+            let options = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                }
+            }
+
+            fetch(backend_url+ '/project/prof', options).then(response=> response.json()).then(
+                console.log(response),
+                this.projects = response.data
+            )
+
+        }
     },
     created() {
     }
