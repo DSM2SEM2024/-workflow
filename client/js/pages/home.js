@@ -122,7 +122,6 @@ export const Home = {
             .then(response=>{
                 if(response.status==true){
                     this.projects = response.data;
-                    console.log(response)
                 }
                 this.listImages();
             })
@@ -156,7 +155,6 @@ export const Home = {
             fetch(url)
             .then(response=>response.json())
             .then(response=>{
-                console.log(response)
                 response.data.forEach(img => {
 
                     this.projects.forEach(project => {
@@ -166,7 +164,6 @@ export const Home = {
                     });
                     
                 });
-                console.log(this.projects);
             })
 
         }
