@@ -13,12 +13,12 @@ export const MyProjects = {
 
             <div class="project" v-for="project in projects">
                 <div class="left">
-                    <h4>{{project.name}}</h4>
-                    <h5>{{project.course}}</h5>
+                    <h4>{{project.Name}}</h4>
+                    <h5>Desenvolvimento de Software Multiplataforma</h5>
                 </div>
                 <div class="right d-flex justify-content-between flex-column align-items-end">
-                    <p>{{project.tatus}}</p>
-                    <p>{{project.endDate}}</p>
+                    <p>{{defStatus(project.Status)}}</p>
+                    <p>{{defDate(project.End_Date)}}</p>
                 </div>
             </div>   
 
@@ -30,7 +30,9 @@ export const MyProjects = {
     </div>
     `,
     data() {
-        return {projects: []}
+        return {
+            projects: []
+        }
     },
     inject: ['urlBase'],
     methods: {
@@ -41,7 +43,7 @@ export const MyProjects = {
         },
         navigate,
         getProjectByProfessor(){
-            let token = document.localStorage.getItem("reposystem_token");
+            let token = window.localStorage.getItem("reposystem_token");
             let options = {
                 method: "GET",
                 headers: {
@@ -50,14 +52,28 @@ export const MyProjects = {
                 }
             }
 
-            fetch(backend_url+ '/project/prof', options).then(response=> response.json()).then(
+            fetch(backend_url+ '/projectByProf', options)
+            .then(response=> response.json())
+            .then(response=>{
                 console.log(response),
                 this.projects = response.data
+            }
             )
 
+        },
+        defStatus(status){
+            if(status==0){
+                return 'Em análise';
+            } else {
+                return 'Aprovado';
+            }
+        },
+        defDate(date){
+            return date.split('-')[2]+'/'+date.split('-')[1]+'/'+date.split('-')[0];
         }
     },
     created() {
+        this.getProjectByProfessor();
     }
 };
 
