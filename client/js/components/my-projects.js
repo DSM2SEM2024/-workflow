@@ -52,7 +52,7 @@ export const MyProjects = {
                 }
             }
 
-            fetch(backend_url+ '/projectByProf', options)
+            fetch(backend_url+ '/projectByProfLimit', options)
             .then(response=> response.json())
             .then(response=>{
                 console.log(response),

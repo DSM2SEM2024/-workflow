@@ -74,7 +74,21 @@ class ProjectRepository{
     }
     
     public function selectByProfessor(Project $project){
-        $select = 'SELECT * FROM project WHERE project.ID_professor = ?';
+        $select = 'SELECT * FROM project WHERE project.ID_professor = ? ORDER BY ID_Project DESC';
+        $prepare = $this->pdo->prepare($select);
+        $prepare->bindValue(1, $project->getProfessor()->getId());
+
+        try{
+            $prepare->execute();
+            $array = $prepare->fetchAll();
+            return Message::send(true, 200, 'Projetos encontrados para este id', $array);
+        }catch(PDOException $e){
+            return Message::send(false, $e->getCode(), $e->getMessage(), []);
+        }
+    }
+
+    public function selectByProfessorLimit(Project $project){
+        $select = 'SELECT * FROM project WHERE project.ID_professor = ? ORDER BY ID_Project DESC LIMIT 3';
         $prepare = $this->pdo->prepare($select);
         $prepare->bindValue(1, $project->getProfessor()->getId());
 
