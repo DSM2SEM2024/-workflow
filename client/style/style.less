@@ -972,7 +972,7 @@ main {
     }
 }
 
-#management-page {
+#management-page, #management-teachers {
 
     & .page-content {
         width: 40vw;
@@ -1002,12 +1002,12 @@ main {
         }
     }
 
-    & .new-project-card {
+    & .new-project-card, .new-teacher-card {
         width: 100%;
         margin: 1rem 0rem 1rem 0rem;
         border-radius: 0.1rem 0.1rem 0.3rem 0.3rem;
         padding: 1.5rem;
-        background: linear-gradient(to right, lighten(@primary-white, 7%), lighten(@quaternary-white, 5%));
+        background: linear-gradient(to right, lighten(@primary-white, 2%), lighten(@quaternary-white, 8%));
         box-shadow: 0px 3px 2px @quaternary-white;
 
         & h1,
@@ -1017,7 +1017,7 @@ main {
         }
 
         & h1 {
-            color: @lighten-black;
+            color: @primary-black;
             opacity: 0.8;
             font-size: 1.6rem;
         }
@@ -1032,13 +1032,13 @@ main {
         }
     }
 
-    & #projects-container {
+    & #projects-container, #teachers-container {
         width: 100%;
 
-        & .project {
+        & .project, .teachers {
             margin: 1rem 0rem 1rem 0rem;
             position: relative;
-            background: lighten(@quaternary-white, 5%);
+            background: lighten(@quaternary-white, 7%);
             box-shadow: 1px 0px 2px 0px @quaternary-white;
             width: 100%;
             padding: 1.5rem;
@@ -1066,6 +1066,26 @@ main {
                 color: @lighten-black;
             }
 
+            & p{
+                margin-bottom: 0rem;
+            }
+
+            & .teacher-unit {
+                text-transform: uppercase;
+                font-family: @roboto-medium;
+                font-size: 1rem;
+                color: lighten(@secundary-black, 45%);
+            }
+
+            & .teacher-name{
+                font-size: 1.2rem;
+                font-family: @roboto-bold;
+                color: @primary-red;
+            }
+
+            & .teacher-curse{
+                font-family: @roboto-regular;
+            }
 
             & .btn-editar {
                 position: absolute;
