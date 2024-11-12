@@ -20,6 +20,7 @@ class Routes {
                 '/unit' => [UnitController::class, 'list'],
                 '/files/{id}' => [FileController::class, 'list'],
                 '/projectByProf' => [ProjectController::class, 'getByProfessor'],
+                '/projectByProfLimit' => [ProjectController::class, 'getByProfessorLimit'],
                 '/cover' => [FileController::class, 'getCover'],
             ],
             'POST' => [
