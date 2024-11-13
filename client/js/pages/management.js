@@ -25,10 +25,7 @@ export const ManagementPage = {
                         </div>
                     </div>
                 </div>
-
-
             </section>
-
         </main>
     `,
     data() {
