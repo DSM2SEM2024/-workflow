@@ -3,6 +3,7 @@ import { Login } from './pages/login.js';
 import { Home } from './pages/home.js';
 import { ManagementPage } from './pages/management.js';
 import { ManagementTeachers } from './pages/management-teachers.js';
+import { ManagementCurses } from './pages/management-curses.js';
 import { CreateUser } from './pages/create-user.js';
 import { MyProjects } from './components/my-projects.js';
 import { Project } from './pages/project.js';
@@ -21,6 +22,7 @@ const routes = [
     { path: '/login', component: Login },
     { path: '/management', component: ManagementPage },
     { path: '/management-teachers', component: ManagementTeachers },
+    { path: '/management-curses', component: ManagementCurses },
     { path: '/create-user', component: CreateUser },
     { path: '/create-project', component: CreateProject },
     { path: '/my-projects', component: MyProjects},

@@ -3,7 +3,7 @@ import { backend_url } from "../global-var/backend-url.js";
 
 export const ManagementPage = {
     template: `
-        <main id="management-page" class="d-flex justify-content-evenly align-items-center flex-row">
+        <main id="management-projects" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
                     <h2>Gerenciar Projetos</h2>
