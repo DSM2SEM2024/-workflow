@@ -14,6 +14,7 @@ import { RegisterCourse } from './pages/register-course.js';
 import { TeachersArea } from './pages/teachers-area.js';
 import { CreateProject } from './pages/create-project.js';
 import { MyData } from './components/my-data.js';
+import { MyProfile } from './components/my-profile.js';
 // import { Footer } from './components/footer.js';
 
 //Definindo as rotas através desse identificador
@@ -32,7 +33,8 @@ const routes = [
     { path: '/create-password/:email', component: CreatePassword},
     { path: '/register-course', component: RegisterCourse},
     { path: '/teachers-area', component: TeachersArea},
-    {path: '/my-data', component: MyData}
+    {path: '/my-data', component: MyData},
+    {path: '/my'}
 ];
 
 //Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.
