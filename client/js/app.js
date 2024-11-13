@@ -12,6 +12,7 @@ import { RegisterUnit } from './pages/register-unit.js';
 import { CreatePassword } from './pages/create-password.js';
 import { RegisterCourse } from './pages/register-course.js';
 import { TeachersArea } from './pages/teachers-area.js';
+import { CoordinatorsArea } from './pages/coordinators-area.js';
 import { CreateProject } from './pages/create-project.js';
 import { MyData } from './components/my-data.js';
 import { MyProfile } from './components/my-profile.js';
@@ -33,8 +34,9 @@ const routes = [
     { path: '/create-password/:email', component: CreatePassword},
     { path: '/register-course', component: RegisterCourse},
     { path: '/teachers-area', component: TeachersArea},
+    { path: '/coordinators-area', component: CoordinatorsArea},
     {path: '/my-data', component: MyData},
-    {path: '/my'}
+    {path: '/my-profile', component: MyProfile}
 ];
 
 //Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.
