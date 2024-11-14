@@ -117,8 +117,8 @@ button {
 }
 
 .navbar-toggler {
-    top: 5px;
-    left: 5px;
+    top: 1rem;
+    left: 1rem;
     height: 3rem;
     aspect-ratio: 1 / 1;
     background-color: @primary-red; /* Cor de fundo vermelha */
@@ -132,6 +132,28 @@ button {
 
 .menu-overlay {
     z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.95); /* Fundo branco com transparência */
+    backdrop-filter: blur(10px); /* Efeito de desfoque no fundo */
+    transition: opacity 0.3s ease-in-out; /* Transição suave ao aparecer */
+    
+    & nav {
+        animation: fadeInUp 0.5s ease-in-out;
+    }
+
+    & p {
+        font-size: 1.5rem; /* Tamanho da fonte */
+        color: @primary-red; /* Cor do texto */
+        font-weight: bold; /* Negrito */
+        text-transform: uppercase; /* Texto em maiúsculas */
+        letter-spacing: 0.1rem; /* Espaçamento entre letras */
+        margin: 0; /* Remove margens padrão */
+        transition: color 0.3s ease-in-out; /* Transição de cor suave */
+    }
+
+    & a {
+        text-decoration: none;
+    }
+
 }
 
 .navbar-toggler-icon {

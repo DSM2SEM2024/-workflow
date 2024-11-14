@@ -95,13 +95,13 @@ const App = {
                 <div v-if="isMenuOpen" class="menu-overlay position-fixed top-0 left-0 w-100 h-100 bg-white d-flex justify-content-center align-items-center">
                     <nav class="d-flex flex-column justify-content-center align-items-center gap-5 h-100">
                         <router-link to="/" @click="toggleMenu">
-                            <img class="icon" src="../images/icon-home.png" alt="Home">
+                            <p>Home</p>
                         </router-link>
                         <router-link to="/" @click="toggleMenu">
-                            <img class="icon" src="../images/search.png" alt="Search">
+                            <p>Pesquisar</p>
                         </router-link>
                         <router-link to="/my-projects" @click="toggleMenu">
-                            <img class="icon" src="../images/colletion.png" alt="My Projects">
+                            <p>Meus projetos</p>
                         </router-link>
                     </nav>
                 </div>
