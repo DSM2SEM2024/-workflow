@@ -5,7 +5,6 @@ import { ManagementPage } from './pages/management.js';
 import { ManagementTeachers } from './pages/management-teachers.js';
 import { ManagementCurses } from './pages/management-curses.js';
 import { CreateUser } from './pages/create-user.js';
-import { MyProjects } from './components/my-projects.js';
 import { Project } from './pages/project.js';
 import { urlBase } from './global-var/url-base.js';
 import { RegisterUnit } from './pages/register-unit.js';
@@ -16,7 +15,8 @@ import { CoordinatorsArea } from './pages/coordinators-area.js';
 import { CreateProject } from './pages/create-project.js';
 import { MyData } from './components/my-data.js';
 import { MyProfile } from './components/my-profile.js';
-// import { Footer } from './components/footer.js';
+import { MyProjects } from './components/my-projects.js';
+import { MyContacts } from './components/my-contacts.js';
 
 //Definindo as rotas através desse identificador
 const routes = [
@@ -36,7 +36,8 @@ const routes = [
     { path: '/teachers-area', component: TeachersArea},
     { path: '/coordinators-area', component: CoordinatorsArea},
     {path: '/my-data', component: MyData},
-    {path: '/my-profile', component: MyProfile}
+    {path: '/my-profile', component: MyProfile},
+    {path : '/my-contacts', component: MyContacts}
 ];
 
 //Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.

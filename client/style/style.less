@@ -1196,7 +1196,7 @@ main {
             gap: 20%;
         }
 
-        & .teachers-projects {
+        & .teachers-projects, .management-board {
             padding: 3rem 0rem 3rem 0rem;
 
             & .title-section {
@@ -1245,6 +1245,51 @@ main {
                         & p {
                             margin-bottom: 0.2rem;
                             color: lighten(@primary-black, 30%);
+                        }
+                    }
+                }
+            }
+
+            & .subtitle{
+                background: @terciary-white;
+                border-radius: 0.4rem;
+                padding: 1.5rem;
+                margin: -3rem 0rem 2rem 0rem;
+                max-width: 80%;
+                min-width: 15rem;
+
+                & h3{
+                    font-size: 1rem;
+                }
+            }
+
+            & .section-middle{
+                margin: 1rem 0rem 3rem 0rem;
+
+                & .statistic{
+                    & .graphic{
+                        padding: 1rem;
+                        border-radius: 0.5rem;
+                        background: @quaternary-white;
+
+                        & h4{
+                            font-size: 1rem;
+                            text-align: center;
+                        }
+                    }            
+                }
+
+                & .access{
+                    background: @terciary-white;
+                    border-radius: 0.4rem;
+                    padding: 1rem;
+
+                    & ul{
+                        padding: 0rem;
+                        margin: 0rem;
+                        & li{
+                            list-style: none;
+                            text-align: center;
                         }
                     }
                 }
