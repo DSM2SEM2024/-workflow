@@ -35,10 +35,10 @@ export const CoordinatorsArea = {
 
                         <div class="access w-20">
                             <ul>
-                                <li>Cursos</li>
-                                <li>Professores</li>
-                                <li>Projetos</li>
-                                <li>Unidades</li>
+                                <li><RouterLink to="/management-curses">Cursos</RouterLink></li>
+                                <li><RouterLink to="/management-teachers">Professores</RouterLink></li>
+                                <li><RouterLink to="/management">Projetos</RouterLink></li>
+                                <li><RouterLink to="/management-unities">Unidades</RouterLink></li>
                             </ul>
                         </div>
                     </div>
