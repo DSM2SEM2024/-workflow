@@ -972,7 +972,7 @@ main {
     }
 }
 
-#management-projects, #management-teachers, #management-curses {
+#management-projects, #management-teachers, #management-curses, #management-unities {
 
     & .page-content {
         width: 40vw;
@@ -1002,7 +1002,7 @@ main {
         }
     }
 
-    & .new-project-card, .new-teacher-card, .new-curse-card {
+    & .new-project-card, .new-teacher-card, .new-curse-card, .new-unitie-card {
         width: 100%;
         margin: 1rem 0rem 1rem 0rem;
         border-radius: 0.1rem 0.1rem 0.3rem 0.3rem;
@@ -1032,10 +1032,10 @@ main {
         }
     }
 
-    & #projects-container, #teachers-container, #curses-container {
+    & #projects-container, #teachers-container, #curses-container, #unities-container {
         width: 100%;
 
-        & .project, .teacher, .curse {
+        & .project, .teacher, .curse, .unitie {
             margin: 1rem 0rem 1rem 0rem;
             position: relative;
             background: lighten(@quaternary-white, 7%);
@@ -1071,23 +1071,29 @@ main {
                 font-size: 1rem;
             }
 
-            & .teacher-unit, .name-unit {
+            & .teacher-unit, .name-unit, .name-city {
                 text-transform: uppercase;
                 font-family: @roboto-medium;
                 font-size: 1rem;
                 color: lighten(@secundary-black, 45%);
             }
 
-            & .teacher-name, .curse-name {
+            & .teacher-name, .curse-name{
                 font-size: 1.1rem;
                 font-family: @roboto-bold;
                 color: @primary-red;
             }
 
-            .curse-name {
+            .curse-name  {
                 font-size: 1.1rem;
                 font-family: @roboto-bold;
                 color: @secundary-black;
+            }
+
+            & .name-unity{
+                color: @primary-black;
+                font-size: 1.1rem;
+                font-family: @roboto-medium;
             }
 
             & .teacher-curse{
