@@ -497,7 +497,7 @@ main {
                     background: @background-red;
                     color: @primary-white;
                     margin-bottom: 0.2rem;
-                    margin-top: 1.7rem;
+                    margin-top: 1rem;
                     padding: 0.550rem;
                 }
 
@@ -1116,7 +1116,7 @@ main {
     }
 }
 
-#teachers-area {
+#teachers-area, #coordinator-area{
     & .dinamic-content {
         padding-bottom: 3rem;
 
@@ -1143,16 +1143,15 @@ main {
                         height: 1.5rem;
                         width: 1.5rem;
                     }
-
                 }
             }
 
             & .profile-apresentation {
-                & .teacher-name {
-                    font-size: 1.7rem;
+                & .user-name {
+                    font-size: 1.6rem;
                 }
 
-                & .teacher-expertise {
+                & .user-expertise {
                     font-size: 1.2rem;
                     font-family: @roboto-regular;
                     font-weight: normal;
@@ -1166,7 +1165,6 @@ main {
                     width: 1.5rem;
                     height: 1.5rem;
                 }
-
             }
         }
 
@@ -1204,7 +1202,7 @@ main {
             gap: 20%;
         }
 
-        & .teachers-projects {
+        & .teachers-projects, .management-board {
             padding: 3rem 0rem 3rem 0rem;
 
             & .title-section {
@@ -1253,6 +1251,58 @@ main {
                         & p {
                             margin-bottom: 0.2rem;
                             color: lighten(@primary-black, 30%);
+                        }
+                    }
+                }
+            }
+
+            & .subtitle{
+                background: @terciary-white;
+                border-radius: 0.4rem;
+                padding: 1.5rem;
+                margin: -3rem 0rem 2rem 0rem;
+                max-width: 80%;
+                min-width: 15rem;
+
+                & h3{
+                    font-size: 1rem;
+                }
+            }
+
+            & .section-middle{
+                margin: 1rem 0rem 3rem 0rem;
+
+                & .statistic{
+                    & .graphic{
+                        padding: 1rem;
+                        border-radius: 0.2rem;
+                        background: lighten(@quaternary-white, 5%);
+
+                        & h4{
+                            font-size: 1rem;
+                            text-align: center;
+                        }
+                    }            
+                }
+
+                & .access{
+                    background: @terciary-white;
+                    border-radius: 0.2rem;
+                    padding: 1rem;
+
+                    & ul{
+                        padding: 0rem;
+                        margin: 0rem;
+                        & li{
+                            list-style: none;
+                            text-align: center;
+
+                            & a{
+                                text-decoration: none;
+                                color: @primary-black;
+                                font-family: @roboto-regular;
+                                font-size: 0.9rem;
+                            }
                         }
                     }
                 }
