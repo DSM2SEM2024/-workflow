@@ -95,12 +95,19 @@ header {
         & .icon {
             width: 2rem;
             height: 2rem;
+            transition: all cubic-bezier(0.25, 0.8, 0.25, 1) .5s;
+
+        }
+
+        & .icon:hover {
+            transform: scale(1.2);
         }
 
         & .cps-icon {
             & .icon {
                 width: 2.5rem;
-                height: 2rem;
+                height: 1.8rem;
+                transform: scale(1.2);
                 margin-left: -0.3rem;
             }
         }
@@ -667,6 +674,13 @@ main {
                             border-radius: 0.2rem;
                             background: @terciary-white;
                             box-shadow: 0px 0px 3px 0px lighten(@primary-black, 50%);
+                            transition: all cubic-bezier(0.25, 0.8, 0.25, 1) .5s;
+                        }
+
+                        & button:hover {
+                            background: darken(@terciary-white, 10%);
+                            box-shadow: 0px 0px 5px 0px lighten(@primary-black, 40%);
+                            transform: translateY(-5px);
                         }
 
                         & .input-section,
@@ -682,6 +696,7 @@ main {
                                 background: @background-red;
                                 border-radius: 0.4rem 0rem 0rem 0.4rem;
                                 padding: 0.4rem 0.6rem 0.4rem 0.6rem;
+                                cursor: default;
 
                                 & img {
                                     width: 1.2rem;
@@ -693,10 +708,25 @@ main {
                                 border: none;
                                 margin: 0rem;
                                 border-radius: 0px;
-                                border-top: 0.01rem solid #707070;
-                                border-bottom: 0.01rem solid #707070;
-                                border-right: 0.01rem solid #707070;
+                                border-top: 1px solid #ccc;
+                                border-bottom: 1px solid #ccc;
+                                border-right: 1px solid #ccc;
                                 border-radius: 0rem 0.2rem 0.2rem 0rem;
+                                transition: all 0.3s ease;
+
+                                &:focus {
+                                    background-color: #e0e0e0;
+                                    border-color: darken(#ccc, 10%);
+                                }
+
+                                &:hover {
+                                    background-color: #e0e0e0;
+                                }
+                            }
+
+                            & select {
+                                appearance: none;
+                                outline: none;
                             }
                         }
                     }
@@ -712,6 +742,24 @@ main {
                         height: 1.5rem;
                         cursor: pointer;
                         position: absolute;
+                        transition: all cubic-bezier(0.25, 0.8, 0.25, 1) .5s;
+                    }
+
+                    & img:hover {
+                        transform: scale(1.2);
+                        animation: tilt-down 0.5s forwards;
+                    }
+                    
+                    @keyframes tilt-down {
+                        0% {
+                            transform: translateY(0px);
+                        }
+                        50% {
+                            transform: translateY(3px);
+                        }
+                        100% {
+                            transform: translateY(0px);
+                        }
                     }
                 }
             }

@@ -77,7 +77,7 @@ const App = {
                         <router-link to="/">
                         <img class="icon" src="../images/colletion.png" alt="Home">
                         </router-link>        
-                    </div>          
+                    </div>
                     
                     <div class="cps-icon">
                         <img class="icon" src="../images/logo-cps.png" alt="Home">
