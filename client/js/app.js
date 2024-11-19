@@ -2,23 +2,31 @@
 import { Login } from './pages/login.js';
 import { Home } from './pages/home.js';
 import { ManagementPage } from './pages/management.js';
+import { ManagementTeachers } from './pages/management-teachers.js';
+import { ManagementCurses } from './pages/management-curses.js';
+import { ManagementUnities } from './pages/management-unities.js';
 import { CreateUser } from './pages/create-user.js';
-import { MyProjects } from './components/my-projects.js';
 import { Project } from './pages/project.js';
 import { urlBase } from './global-var/url-base.js';
 import { RegisterUnit } from './pages/register-unit.js';
 import { CreatePassword } from './pages/create-password.js';
 import { RegisterCourse } from './pages/register-course.js';
 import { TeachersArea } from './pages/teachers-area.js';
+import { CoordinatorsArea } from './pages/coordinators-area.js';
 import { CreateProject } from './pages/create-project.js';
 import { MyData } from './components/my-data.js';
-// import { Footer } from './components/footer.js';
+import { MyProfile } from './components/my-profile.js';
+import { MyProjects } from './components/my-projects.js';
+import { MyContacts } from './components/my-contacts.js';
 
 // Definindo as rotas através desse identificador
 const routes = [
     { path: '/', component: Home },
     { path: '/login', component: Login },
     { path: '/management', component: ManagementPage },
+    { path: '/management-teachers', component: ManagementTeachers },
+    { path: '/management-curses', component: ManagementCurses },
+    { path: '/management-unities', component: ManagementUnities },
     { path: '/create-user', component: CreateUser },
     { path: '/create-project', component: CreateProject },
     { path: '/my-projects', component: MyProjects},
@@ -28,7 +36,11 @@ const routes = [
     { path: '/create-password/:email', component: CreatePassword},
     { path: '/register-course', component: RegisterCourse},
     { path: '/teachers-area', component: TeachersArea},
-    { path: '/my-data', component: MyData}
+    { path: '/coordinators-area', component: CoordinatorsArea},
+    { path: '/my-data', component: MyData},
+    { path: '/my-profile', component: MyProfile},
+    { path : '/my-contacts', component: MyContacts}
+
 ];
 
 // Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.

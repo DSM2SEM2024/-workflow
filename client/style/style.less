@@ -570,7 +570,7 @@ main {
                     background: @background-red;
                     color: @primary-white;
                     margin-bottom: 0.2rem;
-                    margin-top: 1.7rem;
+                    margin-top: 1rem;
                     padding: 0.550rem;
                 }
 
@@ -1045,7 +1045,7 @@ main {
     }
 }
 
-#management-page {
+#management-projects, #management-teachers, #management-curses, #management-unities {
 
     & .page-content {
         width: 40vw;
@@ -1075,12 +1075,12 @@ main {
         }
     }
 
-    & .new-project-card {
+    & .new-project-card, .new-teacher-card, .new-curse-card, .new-unitie-card {
         width: 100%;
         margin: 1rem 0rem 1rem 0rem;
         border-radius: 0.1rem 0.1rem 0.3rem 0.3rem;
         padding: 1.5rem;
-        background: linear-gradient(to right, lighten(@primary-white, 7%), lighten(@quaternary-white, 5%));
+        background: linear-gradient(to right, lighten(@primary-white, 2%), lighten(@quaternary-white, 8%));
         box-shadow: 0px 3px 2px @quaternary-white;
 
         & h1,
@@ -1090,9 +1090,9 @@ main {
         }
 
         & h1 {
-            color: @lighten-black;
+            color: @primary-black;
             opacity: 0.8;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
         }
 
         & h2 {
@@ -1105,13 +1105,13 @@ main {
         }
     }
 
-    & #projects-container {
+    & #projects-container, #teachers-container, #curses-container, #unities-container {
         width: 100%;
 
-        & .project {
+        & .project, .teacher, .curse, .unitie {
             margin: 1rem 0rem 1rem 0rem;
             position: relative;
-            background: lighten(@quaternary-white, 5%);
+            background: lighten(@quaternary-white, 7%);
             box-shadow: 1px 0px 2px 0px @quaternary-white;
             width: 100%;
             padding: 1.5rem;
@@ -1139,6 +1139,39 @@ main {
                 color: @lighten-black;
             }
 
+            & p{
+                margin-bottom: 0rem;
+                font-size: 1rem;
+            }
+
+            & .teacher-unit, .name-unit, .name-city {
+                text-transform: uppercase;
+                font-family: @roboto-medium;
+                font-size: 1rem;
+                color: lighten(@secundary-black, 45%);
+            }
+
+            & .teacher-name, .curse-name{
+                font-size: 1.1rem;
+                font-family: @roboto-bold;
+                color: @primary-red;
+            }
+
+            .curse-name  {
+                font-size: 1.1rem;
+                font-family: @roboto-bold;
+                color: @secundary-black;
+            }
+
+            & .name-unity{
+                color: @primary-black;
+                font-size: 1.1rem;
+                font-family: @roboto-medium;
+            }
+
+            & .teacher-curse{
+                font-family: @roboto-regular;
+            }
 
             & .btn-editar {
                 position: absolute;
@@ -1156,7 +1189,7 @@ main {
     }
 }
 
-#teachers-area {
+#teachers-area, #coordinator-area{
     & .dinamic-content {
         padding-bottom: 3rem;
 
@@ -1183,16 +1216,15 @@ main {
                         height: 1.5rem;
                         width: 1.5rem;
                     }
-
                 }
             }
 
             & .profile-apresentation {
-                & .teacher-name {
-                    font-size: 1.7rem;
+                & .user-name {
+                    font-size: 1.6rem;
                 }
 
-                & .teacher-expertise {
+                & .user-expertise {
                     font-size: 1.2rem;
                     font-family: @roboto-regular;
                     font-weight: normal;
@@ -1206,7 +1238,6 @@ main {
                     width: 1.5rem;
                     height: 1.5rem;
                 }
-
             }
         }
 
@@ -1244,7 +1275,7 @@ main {
             gap: 20%;
         }
 
-        & .teachers-projects {
+        & .teachers-projects, .management-board {
             padding: 3rem 0rem 3rem 0rem;
 
             & .title-section {
@@ -1293,6 +1324,58 @@ main {
                         & p {
                             margin-bottom: 0.2rem;
                             color: lighten(@primary-black, 30%);
+                        }
+                    }
+                }
+            }
+
+            & .subtitle{
+                background: @terciary-white;
+                border-radius: 0.4rem;
+                padding: 1.5rem;
+                margin: -3rem 0rem 2rem 0rem;
+                max-width: 80%;
+                min-width: 15rem;
+
+                & h3{
+                    font-size: 1rem;
+                }
+            }
+
+            & .section-middle{
+                margin: 1rem 0rem 3rem 0rem;
+
+                & .statistic{
+                    & .graphic{
+                        padding: 1rem;
+                        border-radius: 0.2rem;
+                        background: lighten(@quaternary-white, 5%);
+
+                        & h4{
+                            font-size: 1rem;
+                            text-align: center;
+                        }
+                    }            
+                }
+
+                & .access{
+                    background: @terciary-white;
+                    border-radius: 0.2rem;
+                    padding: 1rem;
+
+                    & ul{
+                        padding: 0rem;
+                        margin: 0rem;
+                        & li{
+                            list-style: none;
+                            text-align: center;
+
+                            & a{
+                                text-decoration: none;
+                                color: @primary-black;
+                                font-family: @roboto-regular;
+                                font-size: 0.9rem;
+                            }
                         }
                     }
                 }
