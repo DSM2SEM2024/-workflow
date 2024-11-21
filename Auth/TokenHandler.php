@@ -1,7 +1,6 @@
 <?php
 namespace Src\Auth;
 require 'config.php';
-require_once __DIR__.'/../../vendor/autoload.php';
 
 use Exception;
 use Firebase\JWT\BeforeValidException;
