@@ -21,4 +21,4 @@ export const Home = {
     components:{
         MyProjects
     }    
-};v
+};
