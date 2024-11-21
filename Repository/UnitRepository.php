@@ -2,7 +2,7 @@
 namespace Src\Repository;
 use Src\Database\Database;
 use Src\Model\Unit;
-use Src\model\Message;
+use Src\Model\Message;
 use PDO;
 use PDOException;
 
