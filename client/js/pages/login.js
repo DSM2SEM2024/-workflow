@@ -19,11 +19,11 @@ export const Login = {
 
                 <div>
                     <div class="d-flex flex-column justify-content-start form-inputs">
-                        <input type="email" v-model="email" placeholder="E-mail">
-                        <p class="message-error error-email"><!--E-mail inválido.--></p>
+                        <input type="email" v-model="email" placeholder="E-mail" required>
+                        <p v-if="invalidEmail" class="message-error error-email">{{emailAlert}}</p>
 
-                        <input type="password" v-model="password" placeholder="Senha">
-                        <p class="message-error error-password"><!--A senha é muito curta.--></p>
+                        <input type="password" v-model="password" placeholder="Senha" required>
+                        <p v-if="invalidPassword" class="message-error error-password">{{passwordAlert}}</p>
                     </div>
 
                     <div class="d-flex justify-content-between flex-row options-password">
@@ -37,7 +37,7 @@ export const Login = {
                     <p class="message-error error-password"><!-- E-mail ou senha incorretos. Tente novamente. --></p>
 
                     <div class="d-flex justify-content-center flex-column gap-3 options-login">
-                        <button type="submit" class="button btn-red" @click="login">Entrar</button>
+                        <button type="submit" class="button btn-red" @click="verifyForLogin">Entrar</button>
                         <button type="submit" class="d-flex justify-content-center flex-row align-items-center gap-3 button btn-white">
                             <img class="icon" src="../images/logo-microsoft.png" alt="Logo Microsoft">
                             Entrar com Microsoft
@@ -52,7 +52,11 @@ export const Login = {
             email: '',
             password: '',
             manter_login: false,
-            base_host: window.location.href.split('#')[0]
+            base_host: window.location.href.split('#')[0],
+            invalidEmail: false,
+            emailAlert: '',
+            invalidPassword: false,
+            passwordAlert: ''
         };
     },
     inject: ['urlBase'],
@@ -76,22 +80,47 @@ export const Login = {
                     login: this.manter_login
                 })
             };
-            
+            Swal.showLoading();
             fetch(url, options)
             .then(response=>response.json())
             .then(response=>{
-
+                Swal.close();
                 if(response.status==true){
                     window.localStorage.setItem('reposystem_token',response.data);
                     this.$router.push('/management');
                 } else {
                     // tratamento de falha no login temporário
-                    alert(response.message);
+                    Swal.fire({
+                        title: `${response.code} - Houve um erro`,
+                        text: response.message,
+                        icon: 'error'
+                    });
                 }
 
             })
 
-        }
+        },
+        validarEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        },
+        verifyForLogin(){
+            if(!this.validarEmail(this.email)){
+                this.invalidEmail = true;
+                this.emailAlert = 'Insira um e-mail válido';
+            } else {
+                this.invalidEmail = false;
+            }
+            if(this.password.length<8){
+                this.invalidPassword = true;
+                this.passwordAlert = 'Senha muito curta (min: 8 caracteres)';
+            } else {
+                this.invalidPassword = false;
+            }
+            if(this.validarEmail(this.email) && this.password.length > 7){
+                this.login();
+            }
+        },
     },
     created() {
     }

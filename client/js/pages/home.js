@@ -116,6 +116,7 @@ export const Home = {
         },
         navigate,
         list(){
+            Swal.showLoading();
             let url = backend_url+'/project'
             fetch(url)
             .then(response=>response.json())
@@ -164,6 +165,7 @@ export const Home = {
                     });
                     
                 });
+                Swal.close();
             })
 
         }
