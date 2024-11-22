@@ -41,7 +41,7 @@ export const MyData = {
 
                     <div class="section-list d-flex justify-content-start flex-row gap-4">                               
                         <div class="units d-flex flex-column align-items-start">
-                            <!-- Insira um foreach com todas as unidades das quais o professor faz parte (só visualização) -->
+                            <!-- Insira um foreach com todas as unidades das quais o professor/coordenador faz parte (só visualização) -->
                             <h4>Unidades:</h4>
                             <ul>
                                 <li v-for="unity in units">{{unity}}</li>
@@ -51,7 +51,7 @@ export const MyData = {
                             </ul>
                         </div>    
                         <!-- Insira um foreach com todos os cursos dos quais o professor ministra (só visualização) -->
-                        <div class="curses d-flex flex-column align-items-start">
+                        <div v-if="typeUser === 'teacher'" class="curses d-flex flex-column align-items-start">
                             <h4>Cursos:</h4>
                                 
                             <ul>
@@ -81,8 +81,8 @@ export const MyData = {
             showMyData: false,
             typeUser: 'teacher',
 
-            name: 'Professor',
-            email: 'professor@fatec.sp.gov.br',
+            name: 'Usuário',
+            email: 'usuario@fatec.sp.gov.br',
             expertise: 'Graduado em Engenharia da Computação',
             password: 'as547d!d9f',
             // units: ['Fatec Mauá', 'Fatec Mogi das Cruzes', 'Fatec Guaratinguetá'],

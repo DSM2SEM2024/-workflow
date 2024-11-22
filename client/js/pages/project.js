@@ -114,6 +114,7 @@ export const Project = {
             // this.email;
         },
         getById(){
+            Swal.showLoading();
             let url = backend_url+'/project/'+this.project.ID_Project;
             fetch(url)
             .then(response=>response.json())
@@ -143,6 +144,7 @@ export const Project = {
             .then(response=>response.json())
             .then(response=>{
                 this.files = response.data;
+                Swal.close();
             })
         },
         isPdf(file_type){

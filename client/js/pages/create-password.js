@@ -20,10 +20,10 @@ export const CreatePassword = {
                 <div class="form-newpassword">
                     <div class="d-flex flex-column justify-content-start form-inputs">
                         <input type="password" v-model="password" placeholder="Senha">
+                        <p v-if="invalidPassword" class="message-error error-newpassword">{{passwordAlert}}</p>
                         
                         <input type="password" v-model="confirm" placeholder="Confirme a senha">
-                        <p class="message-error error-newpassword"><!--As senhas não coincidem --></p>
-                        <!-- A senha precisa de, no mínimo (regras de negócio) ou as senhas não coincidem -->               
+                        <p v-if="invalidConfirm" class="message-error error-newpassword">{{confirmAlert}}</p>              
                     </div>
 
                     <div class="d-flex justify-content-center flex-column gap-3 option-register">
@@ -38,7 +38,11 @@ export const CreatePassword = {
             code: decodeURIComponent(window.location.href.split('create-password/')[1]),
             password: '',
             confirm: '',
-            base_host: window.location.href.split('#')[0]
+            base_host: window.location.href.split('#')[0],
+            invalidPassword: false,
+            invalidConfirm: false,
+            passwordAlert: '',
+            confirmAlert: ''
         };
     },
     inject: ['urlBase'],
@@ -62,19 +66,41 @@ export const CreatePassword = {
                 })
             };
             
-            if(this.password==this.confirm){
+            if(this.password==this.confirm && this.password.length>7){
+                Swal.showLoading();
                 fetch(url, options)
                 .then(response=>response.json())
                 .then(response=>{
-                    console.log(response)
                     if(response.status==true){
+                        Swal.close();
                         this.$router.push('/login');
                     } else {
-                        // tratamento de falha no login temporário
-                        alert(response.message);
+                        Swal.fire({
+                            title: `${response.code} - Houve um erro`,
+                            text: response.message,
+                            icon: 'error'
+                        })
                     }
     
                 })
+                .catch(error=>{
+                    Swal.fire({
+                        title: `Houve um erro`,
+                        text: error.message,
+                        icon: 'error'
+                    })
+                })
+            }
+            if(this.password.length<8){
+                this.invalidPassword = true;
+                this.passwordAlert = 'Senha muito pequena, insira ao menos 8 caracteres';
+            } else {
+                this.invalidPassword = false;
+            }
+
+            if(this.password!=this.confirm){
+                this.invalidConfirm = true;
+                this.confirmAlert = 'As senhas não coincidem';
             }
 
         }

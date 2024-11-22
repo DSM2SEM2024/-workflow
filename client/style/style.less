@@ -126,7 +126,7 @@ header {
                 margin-left: -0.3rem;
             }
         }
-    }
+    }   
 }
 
 button {
@@ -137,6 +137,80 @@ button {
     padding: 0.5rem;
     font-family: @roboto-regular;
     font-size: 0.9rem;
+}
+
+.navbar-toggler {
+    top: 1rem;
+    left: 1rem;
+    height: 3rem;
+    aspect-ratio: 1 / 1;
+    background-color: @primary-red; /* Cor de fundo vermelha */
+    border-radius: .4rem; /* Bordas arredondadas */
+    padding: 0.5rem; /* Padding interno */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    outline: none;
+    border: none;
+    z-index: 10000;
+}
+
+.menu-overlay {
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.95); /* Fundo branco com transparência */
+    backdrop-filter: blur(10px); /* Efeito de desfoque no fundo */
+    transition: opacity 0.3s ease-in-out; /* Transição suave ao aparecer */
+    
+    & nav {
+        animation: fadeInUp 0.5s ease-in-out;
+    }
+
+    & p {
+        font-size: 1.5rem; /* Tamanho da fonte */
+        color: @primary-red; /* Cor do texto */
+        font-weight: bold; /* Negrito */
+        text-transform: uppercase; /* Texto em maiúsculas */
+        letter-spacing: 0.1rem; /* Espaçamento entre letras */
+        margin: 0; /* Remove margens padrão */
+        transition: color 0.3s ease-in-out; /* Transição de cor suave */
+    }
+
+    & a {
+        text-decoration: none;
+    }
+
+}
+
+.navbar-toggler-icon {
+    display: block;
+    width: 1.5rem;
+    height: 0.2rem;
+    background-color: white; /* Cor do ícone */
+    border-radius: 0.125rem;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: white; /* Cor das linhas do ícone */
+    border-radius: 0.125rem;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar-toggler-icon::before {
+    top: -0.6rem;
+}
+
+.navbar-toggler-icon::after {
+    top: 0.6rem;
+}
+
+.burger-button:focus {
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0); /* Exemplo de sombra ao focar */
 }
 
 main {
@@ -562,7 +636,7 @@ main {
                     background: @background-red;
                     color: @primary-white;
                     margin-bottom: 0.2rem;
-                    margin-top: 1.7rem;
+                    margin-top: 1rem;
                     padding: 0.550rem;
                 }
 
@@ -1179,7 +1253,7 @@ main {
     }
 }
 
-#management-projects, #management-teachers, #management-curses {
+#management-projects, #management-teachers, #management-curses, #management-unities {
 
     & .page-content {
         width: 40vw;
@@ -1209,7 +1283,7 @@ main {
         }
     }
 
-    & .new-project-card, .new-teacher-card, .new-curse-card {
+    & .new-project-card, .new-teacher-card, .new-curse-card, .new-unitie-card {
         width: 100%;
         margin: 1rem 0rem 1rem 0rem;
         border-radius: 0.1rem 0.1rem 0.3rem 0.3rem;
@@ -1247,10 +1321,10 @@ main {
         transform: translateY(-.1rem);
     }
 
-    & #projects-container, #teachers-container, #curses-container {
+    & #projects-container, #teachers-container, #curses-container, #unities-container {
         width: 100%;
 
-        & .project, .teacher, .curse {
+        & .project, .teacher, .curse, .unitie {
             margin: 1rem 0rem 1rem 0rem;
             position: relative;
             background: lighten(@quaternary-white, 7%);
@@ -1286,23 +1360,29 @@ main {
                 font-size: 1rem;
             }
 
-            & .teacher-unit, .name-unit {
+            & .teacher-unit, .name-unit, .name-city {
                 text-transform: uppercase;
                 font-family: @roboto-medium;
                 font-size: 1rem;
                 color: lighten(@secundary-black, 45%);
             }
 
-            & .teacher-name, .curse-name {
+            & .teacher-name, .curse-name{
                 font-size: 1.1rem;
                 font-family: @roboto-bold;
                 color: @primary-red;
             }
 
-            .curse-name {
+            .curse-name  {
                 font-size: 1.1rem;
                 font-family: @roboto-bold;
                 color: @secundary-black;
+            }
+
+            & .name-unity{
+                color: @primary-black;
+                font-size: 1.1rem;
+                font-family: @roboto-medium;
             }
 
             & .teacher-curse{
@@ -1333,7 +1413,7 @@ main {
     }
 }
 
-#teachers-area {
+#teachers-area, #coordinator-area{
     & .dinamic-content {
         padding-bottom: 3rem;
 
@@ -1360,7 +1440,6 @@ main {
                         height: 1.5rem;
                         width: 1.5rem;
                     }
-
                 }
 
                 & .btn-send-photo:hover {
@@ -1369,11 +1448,11 @@ main {
             }
 
             & .profile-apresentation {
-                & .teacher-name {
-                    font-size: 1.7rem;
+                & .user-name {
+                    font-size: 1.6rem;
                 }
 
-                & .teacher-expertise {
+                & .user-expertise {
                     font-size: 1.2rem;
                     font-family: @roboto-regular;
                     font-weight: normal;
@@ -1451,7 +1530,7 @@ main {
             }
         }
 
-        & .teachers-projects {
+        & .teachers-projects, .management-board {
             padding: 3rem 0rem 3rem 0rem;
             overflow-x: hidden;
 
@@ -1524,6 +1603,58 @@ main {
 
                 & .project:hover {
                     transform: translateX(.2rem);
+                }
+            }
+
+            & .subtitle{
+                background: @terciary-white;
+                border-radius: 0.4rem;
+                padding: 1.5rem;
+                margin: -3rem 0rem 2rem 0rem;
+                max-width: 80%;
+                min-width: 15rem;
+
+                & h3{
+                    font-size: 1rem;
+                }
+            }
+
+            & .section-middle{
+                margin: 1rem 0rem 3rem 0rem;
+
+                & .statistic{
+                    & .graphic{
+                        padding: 1rem;
+                        border-radius: 0.2rem;
+                        background: lighten(@quaternary-white, 5%);
+
+                        & h4{
+                            font-size: 1rem;
+                            text-align: center;
+                        }
+                    }            
+                }
+
+                & .access{
+                    background: @terciary-white;
+                    border-radius: 0.2rem;
+                    padding: 1rem;
+
+                    & ul{
+                        padding: 0rem;
+                        margin: 0rem;
+                        & li{
+                            list-style: none;
+                            text-align: center;
+
+                            & a{
+                                text-decoration: none;
+                                color: @primary-black;
+                                font-family: @roboto-regular;
+                                font-size: 0.9rem;
+                            }
+                        }
+                    }
                 }
             }
         }
