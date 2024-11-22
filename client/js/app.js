@@ -90,10 +90,7 @@ const App = {
                         </router-link>
                         <router-link to="/my-projects">
                             <img class="icon" src="../images/colletion.png" alt="My Projects">
-                        </router-link>
-                        <router-link to="/">
-                            <img class="icon" src="../images/colletion.png" alt="Home">
-                        </router-link>        
+                        </router-link>       
                     </div>
 
                     
