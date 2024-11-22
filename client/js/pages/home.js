@@ -198,16 +198,36 @@ export const Home = {
             this.unit_filter = '';
             this.start_filter = '';
             this.end_filter = '';
+            this.renderedProjects = this.projects;
         },
-        applyFilter(){
-            this.renderedProjects = [];
-            this.projects.forEach(project => {
-                if( (this.name_filter!='') && (project.Name.includes(this.name_filter))){
-                    this.renderedProjects.push(project);
-                }
+        applyFilter() {
+            // Converter datas apenas se os campos forem preenchidos
+            let start = this.start_filter ? new Date(this.start_filter) : null;
+            let end = this.end_filter ? new Date(this.end_filter) : null;
+        
+            // Inicializar a lista de projetos renderizados
+            this.renderedProjects = this.projects.filter(project => {
+                // Verificar o filtro de nome (se preenchido)
+                const nameMatch = this.name_filter
+                    ? project.Name.toLowerCase().includes(this.name_filter.toLowerCase())
+                    : true;
+        
+                // Verificar o filtro de unidade (se preenchido)
+                const unitMatch = this.unit_filter
+                    ? this.unit_filter == project.ID_Unit
+                    : true;
+        
+                // Verificar o filtro de data (se ambos preenchidos)
+                const dateMatch = (start && end)
+                    ? new Date(project.End_Date).getTime() >= start.getTime() &&
+                      new Date(project.End_Date).getTime() <= end.getTime()
+                    : true;
+        
+                // Retornar true apenas se todos os filtros forem atendidos
+                return nameMatch && unitMatch && dateMatch;
             });
-
         }
+        
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
