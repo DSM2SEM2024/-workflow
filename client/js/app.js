@@ -40,7 +40,6 @@ const routes = [
     { path: '/my-data', component: MyData},
     { path: '/my-profile', component: MyProfile},
     { path : '/my-contacts', component: MyContacts}
-
 ];
 
 // Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.
@@ -92,7 +91,11 @@ const App = {
                         <router-link to="/my-projects">
                             <img class="icon" src="../images/colletion.png" alt="My Projects">
                         </router-link>
-                    </div>          
+                        <router-link to="/">
+                            <img class="icon" src="../images/colletion.png" alt="Home">
+                        </router-link>        
+                    </div>
+
                     
                     <div class="cps-icon">
                         <img class="icon" src="../images/logo-cps.png" alt="CPS Logo">

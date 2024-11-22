@@ -28,7 +28,7 @@ export const Login = {
 
                     <div class="d-flex justify-content-between flex-row options-password">
                         <div class="d-flex justify-content-start align-items-center gap-2">
-                            <input type="checkbox" v-model="manter_login">
+                            <input type="checkbox" v-model="manter_login" class="teste">
                             <label>Lembrar credenciais</label>
                         </div>
 

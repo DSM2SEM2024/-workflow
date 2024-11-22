@@ -41,8 +41,8 @@ export const CreateProject = {
                                 <p class="message-error error-endDate"></p>
                             </div>
                         </div>
-                        <div class="form-inputs d-flex justify-content-start d-column">
-                            <div class="d-flex flex-column align-items-start">
+                        <div class="form-inputs d-flex justify-content-start d-column w-100">
+                            <div class="d-flex flex-column align-items-start w-100">
                                 <textarea class="description" placeholder="Descrição" v-model="description"></textarea>
                                 <p class="message-error error-description"></p>
                             </div>

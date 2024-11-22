@@ -9,6 +9,24 @@ export const TeachersArea = {
     template: `
         <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
+                <div class="section-top d-flex justify-content-start align-items-start flex-row gap-5">
+                    <div class="profile-picture">
+                        <button class="btn-send-photo"><img src="../images/icon-sendphoto.png"></button>
+                    </div>
+
+                    <div class="d-flex flex-row justify-content-between align-items-start w-100">
+                        <div class="profile-apresentation d-flex justify-content-start flex-column">
+                            <h2 class="teacher-name">Professor</h2>
+                            <p class="teacher-expertise">Graduado em Engenharia da Computação</p>
+                        </div>
+                        <button class="btn-configuration" @click="toggleMyData"> 
+                            <img class="icon" src="../images/icon-configuration.png" alt="Projeto Interdisciplinar">
+                            </i>{{ showMyData ? '': '' }}
+                        </button>
+                    </div>
+                </div>
+
+                <MyData v-if="showMyData"></MyData>
                 <MyProfile></MyProfile>
 
                 <div class="section section-career">
