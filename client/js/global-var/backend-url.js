@@ -1,1 +1,1 @@
-export const backend_url = 'http://localhost:70';
+export const backend_url = 'http://workflow.faustinopsy.com';

@@ -74,6 +74,23 @@
 @roboto-thin: 'Roboto-Thin', sans-serif;
 @font-size: 16px;
 
+* {
+    transition: all cubic-bezier(0.25, 0.8, 0.25, 1) .5s;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: lighten(@terciary-black, 70%);
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}
+
 body {
     font-size: 16px;
     padding: none;
@@ -95,12 +112,10 @@ header {
         & .icon {
             width: 2rem;
             height: 2rem;
-            transition: all cubic-bezier(0.25, 0.8, 0.25, 1) .5s;
-
         }
 
         & .icon:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
 
         & .cps-icon {
@@ -200,6 +215,10 @@ main {
                     height: 1.5rem;
                     cursor: pointer;
                 }
+
+                & .icon:hover {
+                    transform: scale(1.2);
+                }
             }
 
             & form {
@@ -241,7 +260,7 @@ main {
                     textarea {
                         outline: none;
                         width: 16rem;
-                        border: 0.01px solid @terciary-black;
+                        border: 0.01px solid lighten(@terciary-black, 50%);
                         border-radius: 0.3rem;
                         padding: 0.400rem 1rem 0.400rem 1rem;
                         font-size: 0.9rem;
@@ -249,8 +268,22 @@ main {
                         margin: 1rem 0rem 0rem 0rem;
                     }
 
+                    & input:focus,
+                    select:focus,
+                    textarea:focus {
+                        background-color: #e0e0e0;
+                        border-color: lighten(@terciary-black, 35%);
+                    }
+
+                    & input:hover,
+                    select:hover,
+                    textarea:hover {
+                        background-color: #e0e0e0;
+                    }
+
                     & select {
                         padding: 0.480rem 1rem 0.415rem 1rem;
+                        outline: none;
                     }
 
                     & .icon {
@@ -262,12 +295,16 @@ main {
 
                     & .add-btn {
                         position: relative;
-                        margin: 1.7rem 0rem 0rem 0rem;
+                        margin: 1rem 0rem 0rem 0rem;
                         right: calc(5% - 1rem);
                         color: @primary-red;
                         font-weight: bolder;
                         font-size: 1.5rem;
                         cursor: pointer;
+                    }
+
+                    & .add-btn:hover {
+                        transform: scale(1.2);
                     }
 
                     & .description {
@@ -280,7 +317,7 @@ main {
                         outline: none;
                         width: 16rem;
                         min-width: 20%;
-                        border: 0.01px solid #707070;
+                        border: 0.01px solid lighten(@terciary-black, 50%);
                         border-radius: 0.3rem;
                         padding: 0.400rem 1rem 0.400rem 1rem;
                         font-size: 0.9rem;
@@ -293,6 +330,22 @@ main {
                             opacity: 0.6;
                         }
 
+                        & .icon:hover {
+                            animation: tilt-down 1.5s infinite;
+                        }
+
+                        @keyframes tilt-down {
+                            0% {
+                                transform: translateY(0rem);
+                            }
+                            50% {
+                                transform: translateY(.2rem);
+                            }
+                            100% {
+                                transform: translateY(0rem);
+                            }
+                        }
+                        
                         & p {
                             margin: .4rem 0 .8rem 0;
                             color: @lighten-black;
@@ -308,6 +361,10 @@ main {
                             border-radius: 0.3rem;
                             font-size: 0.7rem;
                             padding: .4rem 1rem;
+                        }
+
+                        & button:hover {
+                            transform: translateY(-.2rem);
                         }
                     }
                 }
@@ -368,6 +425,9 @@ main {
                             cursor: pointer;
                         }
 
+                        & span:hover {
+                            transform: scale(1.2);
+                        }
 
                         & .files {
                             width: calc(24rem + 5%);
@@ -375,7 +435,14 @@ main {
 
                         & select {
                             padding: 0.420rem 1rem 0.420rem 1rem;
+                            outline: none;
                         }
+                    }
+
+                    & .members:hover,
+                    .files:hover,
+                    .unit:hover {
+                        transform: translateX(.2rem);
                     }
 
                     & .unit {
@@ -416,20 +483,7 @@ main {
                     width: calc(17rem + 5%);
                     padding: 0 1rem 1rem 0;
                     height: 10rem;
-                    overflow-y: auto;
-
-                    &::-webkit-scrollbar {
-                        width: 8px;
-                    }
-
-                    &::-webkit-scrollbar-thumb {
-                        background: lighten(@terciary-black, 70%);
-                        border-radius: 10px;
-                    }
-
-                    &::-webkit-scrollbar-track {
-                        background: transparent;
-                    }
+                    overflow-y: auto;                    
                 }
 
                 & .teacher-section,
@@ -495,6 +549,10 @@ main {
                             & .curse-name {
                                 color: @primary-red;
                             }
+                        }
+
+                        & .linked-data:hover {
+                            transform: translateX(-2rem);
                         }
                     }
                 }
@@ -566,6 +624,22 @@ main {
                         height: 0.8rem;
                     }
                 }
+
+                & .btn-create:hover {
+                    animation: tilt-right .8s forwards;
+                }
+
+                @keyframes tilt-right {
+                    0% {
+                        transform: translateX(0rem);
+                    }
+                    50% {
+                        transform: translateX(0.5rem);
+                    }
+                    100% {
+                        transform: translateX(0rem);
+                    }
+                }
             }
         }
     }
@@ -579,7 +653,7 @@ main {
     & .left-content {
         & figure {
             & img {
-                max-width: 80%;
+                max-width: 80%;   
             }
         }
     }
@@ -616,6 +690,16 @@ main {
             border: 0.01rem solid #707070;
             border-radius: 0.2rem;
             padding: 0.5rem 1rem 0.5rem 1rem;
+            outline: none;
+
+            &:focus {
+                background-color: #e0e0e0;
+                border-color: darken(@primary-black, 10%);
+            }
+
+            &:hover {
+                background-color: #e0e0e0;
+            }
         }
     }
 
@@ -634,6 +718,10 @@ main {
             }
         }
 
+        & button:hover {
+            transform: scale(1.05);
+        }
+
         & .btn-white {
             background: @terciary-white;
         }
@@ -643,6 +731,12 @@ main {
 #create-password {
     & .form-inputs {
         gap: 1rem;
+    }
+
+    & .option-register {
+        & button:hover {
+            transform: scale(1.05);
+        }
     }
 }
 
@@ -674,7 +768,6 @@ main {
                             border-radius: 0.2rem;
                             background: @terciary-white;
                             box-shadow: 0px 0px 3px 0px lighten(@primary-black, 50%);
-                            transition: all cubic-bezier(0.25, 0.8, 0.25, 1) .5s;
                         }
 
                         & button:hover {
@@ -712,7 +805,6 @@ main {
                                 border-bottom: 1px solid #ccc;
                                 border-right: 1px solid #ccc;
                                 border-radius: 0rem 0.2rem 0.2rem 0rem;
-                                transition: all 0.3s ease;
 
                                 &:focus {
                                     background-color: #e0e0e0;
@@ -747,19 +839,6 @@ main {
 
                     & img:hover {
                         transform: scale(1.2);
-                        animation: tilt-down 0.5s forwards;
-                    }
-                    
-                    @keyframes tilt-down {
-                        0% {
-                            transform: translateY(0px);
-                        }
-                        50% {
-                            transform: translateY(3px);
-                        }
-                        100% {
-                            transform: translateY(0px);
-                        }
                     }
                 }
             }
@@ -823,7 +902,15 @@ main {
                         text-transform: capitalize;
                         padding: 0.5rem 1rem 0.5rem 1rem;
                     }
+
+                    & button:hover {
+                        transform: translateY(-0.2rem);
+                    }
                 }
+            }
+
+            & .project-card:hover {
+                transform: scale(1.02);
             }
         }
     }
@@ -889,6 +976,10 @@ main {
             }
         }
 
+        & .project:hover {
+            transform: translateX(.2rem);
+        }
+
         & .button-section {
             padding-top: 1rem;
 
@@ -899,6 +990,10 @@ main {
                 outline: none;
                 border-radius: 0.3rem;
                 text-transform: capitalize;
+            }
+
+            & button:hover {
+                transform: translateY(-.2rem);
             }
         }
     }
@@ -934,19 +1029,51 @@ main {
                     width: 1rem;
                     height: auto;
                     border-radius: .5rem;
+                    z-index: 10;
                 }
 
                 & h1 {
                     font-family: @roboto-bold;
                     font-style: oblique;
                     text-transform: uppercase;
+                    margin-bottom: 0;
+                }
+
+            }
+
+            & .data-title:hover {
+
+                & .icon-title {
+                    transform: translateX(.4rem);
+                }
+
+                & h1 {
+                    transform: translateX(.8rem);
                 }
             }
 
             & h3 {
                 font-size: 1.2rem;
                 color: @terciary-red;
+                position: relative;
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    bottom: -.1rem;
+                    left: 0;
+                    width: 0;
+                    height: .1rem;
+                    background-color: @terciary-red;
+                    transition: width 0.4s ease;
+                }
+
+
+                &:hover:before {
+                    width: 100%;
+                }
             }
+           
         }
 
         & .section-files {
@@ -985,6 +1112,16 @@ main {
                         padding-top: .9rem;
                     }
                 }
+
+                & .right-data {
+                    & img:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            & .files-content:hover {
+                transform: translateX(.2rem);
             }
         }
 
@@ -992,13 +1129,14 @@ main {
             padding: 2rem 0rem 2rem 0rem;
 
             & .label-content {
+
                 & label {
                     color: @primary-black;
                     opacity: 0.8;
                     text-transform: uppercase;
                     padding-bottom: 0.5rem;
                     font-size: 0.9rem;
-
+                    
                 }
 
                 & div>p {
@@ -1015,7 +1153,28 @@ main {
                 color: @primary-red;
                 font-family: @roboto-bold;
                 font-size: 0.9rem;
+                position: absolute;
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        bottom: -.1rem;
+                        left: 0;
+                        width: 0;
+                        height: .1rem;
+                        background-color: @terciary-red;
+                        transition: width 0.4s ease;
+                    }
+    
+    
+                    &:hover:before {
+                        width: 100%;
+                    }
             }
+        }
+
+        & .label-content:hover {
+            transform: translateX(.2rem);
         }
     }
 }
@@ -1078,6 +1237,14 @@ main {
         & button {
             text-transform: none;
         }
+
+        & button:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    & .new-project-card:hover, .new-teacher-card:hover, .new-curse-card:hover {
+        transform: translateY(-.1rem);
     }
 
     & #projects-container, #teachers-container, #curses-container {
@@ -1153,7 +1320,15 @@ main {
                     height: 1rem;
                     margin-right: .4rem;
                 }
+
             }
+            & .btn-editar:hover {
+                transform: scale(1.05);
+            }
+        }
+
+        & .project:hover, .teacher:hover, .curse:hover {
+            transform: translateX(.2rem);
         }
     }
 }
@@ -1187,6 +1362,10 @@ main {
                     }
 
                 }
+
+                & .btn-send-photo:hover {
+                    transform: scale(1.1);
+                }
             }
 
             & .profile-apresentation {
@@ -1201,12 +1380,28 @@ main {
                 }
             }
 
+            & .profile-apresentation:hover {
+                transform: translateX(.2rem);
+
+                & .teacher-name:hover {
+                    transform: translateX(.2rem);
+                }
+                
+                & .teacher-expertise:hover {
+                    transform: translateX(.2rem);
+                }
+            }
+
             & .btn-configuration {
                 background: transparent;
 
                 & img {
                     width: 1.5rem;
                     height: 1.5rem;
+                }
+
+                &:hover {
+                    transform: rotate(180deg) scale(1.2);
                 }
 
             }
@@ -1240,14 +1435,25 @@ main {
                     height: 1.5rem;
                 }
             }
+
+            & .list {
+                p:hover {
+                    transform: translateX(.2rem);
+                }
+            }
         }
 
         & .section-bottom {
             gap: 20%;
+
+            & .left>div:hover {
+                transform: translateX(.2rem);
+            }
         }
 
         & .teachers-projects {
             padding: 3rem 0rem 3rem 0rem;
+            overflow-x: hidden;
 
             & .title-section {
                 background: @background-red;
@@ -1272,8 +1478,25 @@ main {
                     border-radius: 0.2rem;
                     background: lighten(@quaternary-white, 5%);
                     margin-top: 0.8rem;
-                    width: 100%;
+                    width: 70%;
                     cursor: pointer;
+                    position: relative;
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 0;
+                        height: 2px;
+                        
+                        background-color: @terciary-red;
+                        transition: width 0.4s ease;
+                    }
+
+                    &:hover:before {
+                        width: 100%;
+                    }
 
                     & .left {
                         & p {
@@ -1298,6 +1521,10 @@ main {
                         }
                     }
                 }
+
+                & .project:hover {
+                    transform: translateX(.2rem);
+                }
             }
         }
     }
@@ -1316,5 +1543,17 @@ main {
         & .form-content {
             max-width: 58vw;
         }
+    }
+
+    & .btn-change {
+        transform: translateY(-.6rem);
+    }
+
+    & .btn-change:hover {
+        transform: translateY(-.8rem);
+    }
+
+    & ul>li:hover {
+        transform: translateX(.2rem);
     }
 }

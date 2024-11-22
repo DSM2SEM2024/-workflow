@@ -32,7 +32,7 @@ const routes = [
     { path: '/create-password/:email', component: CreatePassword},
     { path: '/register-course', component: RegisterCourse},
     { path: '/teachers-area', component: TeachersArea},
-    {path: '/my-data', component: MyData}
+    { path: '/my-data', component: MyData}
 ];
 
 //Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.

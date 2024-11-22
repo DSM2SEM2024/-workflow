@@ -9,7 +9,7 @@ export const TeachersArea = {
             <div class="dinamic-content">
                 <div class="section-top d-flex justify-content-start align-items-start flex-row gap-5">
                     <div class="profile-picture">
-                    <button class="btn-send-photo"><img src="../images/icon-sendphoto.png"></button>
+                        <button class="btn-send-photo"><img src="../images/icon-sendphoto.png"></button>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between align-items-start w-100">
