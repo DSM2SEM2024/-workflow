@@ -5,9 +5,8 @@ use Src\Controller\TokenController;
 use Src\Controller\ProjectController;
 use Src\Controller\UnitController;
 use Src\Controller\FileController;
-use Src\Controller\MailController;
+use Src\Controller\CourseController;
 use Src\Controller\UserController;
-use Src\Routes\Router;
 
 class Routes {
 
@@ -22,6 +21,7 @@ class Routes {
                 '/projectByProf' => [ProjectController::class, 'getByProfessor'],
                 '/projectByProfLimit' => [ProjectController::class, 'getByProfessorLimit'],
                 '/cover' => [FileController::class, 'getCover'],
+                '/course' => [CourseController::class, 'list'],
             ],
             'POST' => [
                 '/professor/login' => [ProfessorController::class, 'login'],
