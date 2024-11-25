@@ -24,14 +24,14 @@ export function validateAccess(role){
         if(response.status==false){
             switch (role) {
                 case 'professor':
-                    window.location.href = urlBase + '#/login'; 
+                    this.$router.push('/login');
                     break;
             
                 case 'coordinator':
-                    window.location.href = urlBase + '#/login-coordinator'; 
+                    this.$router.push('/login-coordinator');
                     break;
                 case 'admin':
-                    window.location.href = urlBase + '#/login-admin';
+                    this.$router.push('/login-admin');
                     break;
             }
             

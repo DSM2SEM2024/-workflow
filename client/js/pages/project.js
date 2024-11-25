@@ -7,8 +7,9 @@ export const Project = {
     template: `
         <main id="project" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
-                <div class="page-section d-flex justify-content-start align-items-center">
+                <div class="page-section d-flex justify-content-between align-items-center">
                     <h2>Informações do Projeto</h2>
+                    <button class="edit-button" v-if="isProfessor" @click="toggleUpdate">{{edit_btn_txt}}</button>
                 </div>
 
                 <div class="section-data d-flex flex-column align-items-start gap-1">
@@ -97,7 +98,10 @@ export const Project = {
             },
             sem: '',
             members: '',
-            files: []
+            files: [],
+            isProfessor: false,
+            updateMode: false,
+            edit_btn_txt: 'EDITAR',
         }
     },
     inject: ['urlBase'],
@@ -110,12 +114,11 @@ export const Project = {
             // this.email;
         },
         getById(){
+            Swal.showLoading();
             let url = backend_url+'/project/'+this.project.ID_Project;
-            console.log(url)
             fetch(url)
             .then(response=>response.json())
             .then(response=>{
-                console.log(response)
                 if(response.status==true){
                     this.project = response.data;
                     this.project.End_Date = dateFormatter(this.project.End_Date);
@@ -141,7 +144,7 @@ export const Project = {
             .then(response=>response.json())
             .then(response=>{
                 this.files = response.data;
-                console.log(this.files)
+                Swal.close();
             })
         },
         isPdf(file_type){
@@ -179,11 +182,40 @@ export const Project = {
             }
         },
         dateFormatter,
-        semChecker
+        semChecker,
+        professorChecker(){
+            let token = window.localStorage.getItem('reposystem_token');
+            let url = backend_url+'/token/validateAccess';
+            let options = {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization':`Bearer ${token}`
+                },
+                body: JSON.stringify({role:'professor'})
+            }
+            fetch(url, options)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.data.sub.ID_Professor == this.project.ID_Professor){
+                    this.isProfessor = response.data;
+                }
+            })
+        },
+        toggleUpdate(){
+            this.updateMode = !this.updateMode;
+            if(this.updateMode){
+                this.edit_btn_txt = 'CANCELAR';
+            } else {
+                this.edit_btn_txt = 'EDITAR';
+            }
+        }
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
         this.getById();
         this.getFiles();
+        this.professorChecker();
     }
 };

@@ -30,6 +30,7 @@ export const RegisterCourse = {
                                 </div>
                                 <span>-</span>
                             </div>
+                            <p class="message-error error-unit"><!-- O campo unidade é obrigatório --></p>
                         </div>
                     </form>
                     <br>
@@ -52,6 +53,7 @@ export const RegisterCourse = {
                                 <span>-</span>
                             </div>
                         </div>
+                        <p class="message-error error-member"><!-- O campo docente é obrigatório --></p>
                     </form>
 
                     <hr>

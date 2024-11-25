@@ -1,20 +1,31 @@
+<<<<<<< HEAD
 import { MyData } from '../components/my-data.js';
 import { backend_url } from '../global-var/backend-url.js';
+=======
+import { MyContacts } from '../components/my-contacts.js';
+import { MyProfile } from '../components/my-profile.js';
+>>>>>>> main
 
 export const TeachersArea = {
     components: {
-        MyData
+        MyProfile,
+        MyContacts
     },
     template: `
         <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
                 <div class="section-top d-flex justify-content-start align-items-start flex-row gap-5">
+<<<<<<< HEAD
                     <div class="profile-picture"> <!-- onde fica a foto? -->
                         <button class="btn-send-photo" @click="uploadPhoto">
                             <img src="../images/icon-sendphoto.png">
                             <input type="file" ref="pfp" @change="savePhoto" style="display: none">
                         </button>
                         <img class="profile-picture" src="https://picsum.photos/200" alt="foto do professor">
+=======
+                    <div class="profile-picture">
+                        <button class="btn-send-photo"><img src="../images/icon-sendphoto.png"></button>
+>>>>>>> main
                     </div>
 
                     <div class="d-flex flex-row justify-content-between align-items-start w-100">
@@ -30,6 +41,7 @@ export const TeachersArea = {
                 </div>
 
                 <MyData v-if="showMyData"></MyData>
+                <MyProfile></MyProfile>
 
                 <div class="section section-career">
                     <h4>Graduação</h4>
@@ -83,39 +95,17 @@ export const TeachersArea = {
                     </div>
                 </section>
 
-                <div class="section section-bottom d-flex justify-content-start align-items-start">
-                    <div class="left d-flex flex-column gap-2">
-                        <h4>Contato</h4>
-                        <div class="d-flex flex-row justify-content-start align-items-center gap-2">
-                            <img class="icon" src="../images/icon-email.png" alt="Projeto Interdisciplinar">
-                            <a href="">fretz.junior@fatec.sp.gov.br</a>
-                        </div>
-                        <div class="d-flex flex-row justify-content-start align-items-center gap-2">
-                            <img class="icon" src="../images/icon-linkedin.png" alt="Projeto Interdisciplinar">
-                            <a href="">Frets Sievers Júnior</a>
-                        </div>                       
-                    </div>
-
-                    <div class="right d-flex flex-column flex-wrap gap-2">
-                        <h4>Instituição</h4>
-
-                        <div class="list d-flex flex-column align-items-start">
-                            <p>Fatec Itaquera - Prof° Miguel Reale</p>
-                            <p>Fatec Mogi das Cruzes</p>
-                            <p>Fatec Ferraz de Vasconcelos</p>
-                            <p>Fatec Mauá</p>
-
-                        </div>
-
-                    </div>
-                </div>
+               <MyContacts></MyContacts>
             </div>
         </main>
     `,
     data() {
         return {
+<<<<<<< HEAD
             showMyData: false,
             pfp: null,
+=======
+>>>>>>> main
         }
     },
     inject: ['urlBase'],
@@ -123,6 +113,7 @@ export const TeachersArea = {
         gerarSlug(titulo) {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
+<<<<<<< HEAD
         //Função para exibir componente de dados pessoais.
         toggleMyData() {
             this.showMyData = !this.showMyData;
@@ -163,6 +154,8 @@ export const TeachersArea = {
         },
 
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
+=======
+>>>>>>> main
         save() {
         }
     },

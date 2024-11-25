@@ -12,7 +12,7 @@ export const Home = {
                 </div>
 
                 <section class="form-content">
-                    <form class="box-search">
+                    <form class="box-search" @submit.prevent="">
                         <div class="icon-column d-flex justify-content-end top-0">
                             <img class="icon" src="../images/bottom-section.png" alt="Projeto Interdisciplinar">
                         </div>
@@ -24,19 +24,20 @@ export const Home = {
                                     <div class="input-icon">
                                         <img src="../images/icon-searchlight.png" alt="Projeto Interdisciplinar">
                                     </div>
-                                    <input type="text" name="name" placeholder="Digite o nome do projeto...">
+                                    <input v-model="name_filter" type="text" name="name" placeholder="Digite o nome do projeto...">
                                 </div>
                             </div>
                             <div class="gap-column">
                             </div>                            
                             <div class="input-content">
-                                <label>Curso</label>
+                                <label>Unidade</label>
                                 <div class="select-section">
                                     <div class="input-icon">
                                         <img src="../images/icon-bottom.png" alt="Projeto Interdisciplinar">
                                     </div>
-                                    <select name="curses">
-                                        <option>Escolha um curso...</option>
+                                    <select v-model="unit_filter" name="units">
+                                        <option value="">Escolha uma unidade...</option>
+                                        <option v-for="unit in units" :value="unit.ID_Unit">{{unit.Unit_Name}}</option>
                                     </select>
                                 </div>
                             </div>                    
@@ -49,7 +50,7 @@ export const Home = {
                                     <div class="input-icon">
                                         <img src="../images/calendar.png" alt="Projeto Interdisciplinar">
                                     </div>
-                                    <input type="date" name="name">                                    
+                                    <input v-model="start_filter" type="date" name="name">                                    
                                 </div>                               
                             </div>
                             <div class="gap-column d-flex justify-content-end align-items-end">
@@ -60,13 +61,13 @@ export const Home = {
                                     <div class="input-icon">
                                         <img src="../images/calendar.png" alt="Projeto Interdisciplinar">
                                     </div>
-                                    <input type="date" name="name">                                    
+                                    <input v-model="end_filter" type="date" name="name">                                    
                                 </div>                                
                             </div>
 
                             <div class="input-content d-flex align-items-center gap-3">
-                                <button class="btn-white" name="filter">Filtrar</button>
-                                <button class="btn-white" name="clear">Limpar</button>
+                                <button class="btn-white" name="filter" @click="applyFilter">Filtrar</button>
+                                <button class="btn-white" name="clear" @click="limpar">Limpar</button>
                             </div>
                         </div>                        
                     </form>
@@ -74,7 +75,7 @@ export const Home = {
 
                 <article class="project-container d-flex flex-row w-100 gap-5 flex-wrap">
 
-                    <div class="project-card" v-for="project in projects" :key="project.ID_Project" >
+                    <div class="project-card" v-for="project in renderedProjects" :key="project.ID_Project" >
                         <h1 class="project-title">{{project.Name}}</h1>
                         <img class="project-image" :src="project.cover.File_Data" alt="Projeto Interdisciplinar">
 
@@ -88,7 +89,7 @@ export const Home = {
                             </div>
 
                             <div class="w-20">
-                                <button class="button btn-red" @click="navigate('project/'+project.ID_Project)">Visualizar</button>
+                                <button class="button btn-red" @click="(this.$router.push('/project/'+project.ID_Project))">Visualizar</button>
                             </div>
                         </div>
                     </div>
@@ -101,8 +102,14 @@ export const Home = {
     data() {
         return{
             projects: [],
+            renderedProjects: [],
             showMyProjects: false,
-            token: window.localStorage.getItem('reposystem_token')
+            token: window.localStorage.getItem('reposystem_token'),
+            units: [],
+            name_filter: '',
+            unit_filter: '',
+            start_filter: '',
+            end_filter: ''
         }
     },
     inject: ['urlBase'],
@@ -116,6 +123,7 @@ export const Home = {
         },
         navigate,
         list(){
+            Swal.showLoading();
             let url = backend_url+'/project'
             fetch(url)
             .then(response=>response.json())
@@ -124,6 +132,8 @@ export const Home = {
                     this.projects = response.data;
                 }
                 this.listImages();
+                this.renderedProjects = this.projects;
+                console.log(this.projects)
             })
         },
         validateLogin(){
@@ -155,7 +165,6 @@ export const Home = {
             fetch(url)
             .then(response=>response.json())
             .then(response=>{
-                console.log(response)
                 response.data.forEach(img => {
 
                     this.projects.forEach(project => {
@@ -165,13 +174,64 @@ export const Home = {
                     });
                     
                 });
-                console.log(this.projects);
+                Swal.close();
             })
 
+        },
+        listUnits(){
+
+            let url = `${backend_url}/unit`;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status==true){
+                    this.units = response.data;
+                }
+            })
+
+        },
+        prevent(){
+            Swal.fire('teste');
+        },
+        limpar(){
+            this.name_filter = '';
+            this.unit_filter = '';
+            this.start_filter = '';
+            this.end_filter = '';
+            this.renderedProjects = this.projects;
+        },
+        applyFilter() {
+            // Converter datas apenas se os campos forem preenchidos
+            let start = this.start_filter ? new Date(this.start_filter) : null;
+            let end = this.end_filter ? new Date(this.end_filter) : null;
+        
+            // Inicializar a lista de projetos renderizados
+            this.renderedProjects = this.projects.filter(project => {
+                // Verificar o filtro de nome (se preenchido)
+                const nameMatch = this.name_filter
+                    ? project.Name.toLowerCase().includes(this.name_filter.toLowerCase())
+                    : true;
+        
+                // Verificar o filtro de unidade (se preenchido)
+                const unitMatch = this.unit_filter
+                    ? this.unit_filter == project.ID_Unit
+                    : true;
+        
+                // Verificar o filtro de data (se ambos preenchidos)
+                const dateMatch = (start && end)
+                    ? new Date(project.End_Date).getTime() >= start.getTime() &&
+                      new Date(project.End_Date).getTime() <= end.getTime()
+                    : true;
+        
+                // Retornar true apenas se todos os filtros forem atendidos
+                return nameMatch && unitMatch && dateMatch;
+            });
         }
+        
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
+        this.listUnits();
         this.list();
         this.validateLogin();
     },

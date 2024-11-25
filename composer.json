@@ -2,7 +2,7 @@
     "name": "app/src",
     "autoload": {
         "psr-4": {
-            "Src\\": "src"
+            "Src\\": "./"
         }
     },
     "authors": [

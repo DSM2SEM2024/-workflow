@@ -88,4 +88,28 @@ class ProjectController {
 
     }
 
+    public function getByProfessor(){
+        $array = TokenHandler::verifyPermission("professor");
+        $repo = new ProjectRepository();
+        $project = new Project();
+        $prof_token = $array['data']->sub;
+        $prof = new Professor();
+        $prof->setId($prof_token->ID_Professor);
+
+        $project->setProfessor($prof);
+        echo json_encode($repo->selectByProfessor($project));
+    }
+
+    public function getByProfessorLimit(){
+        $array = TokenHandler::verifyPermission("professor");
+        $repo = new ProjectRepository();
+        $project = new Project();
+        $prof_token = $array['data']->sub;
+        $prof = new Professor();
+        $prof->setId($prof_token->ID_Professor);
+
+        $project->setProfessor($prof);
+        echo json_encode($repo->selectByProfessorLimit($project));
+    }
+
 }

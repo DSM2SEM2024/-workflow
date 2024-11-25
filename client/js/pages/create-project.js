@@ -1,4 +1,3 @@
-import { navigate } from "../functions/navigate.js";
 import { validateAccess } from "../functions/validate-access.js";
 import { backend_url } from "../global-var/backend-url.js";
 
@@ -15,20 +14,38 @@ export const CreateProject = {
                         <h3>Informações do projeto</h3>
                         <img class="icon" src="../images/bottom-section.png" alt="Expandir">
                     </div>
-                    <form>
+                    <!-- Todos os campos são obrigatórios -->
+                    <form id="form-createproject">
                         <div class="form-inputs d-flex justify-content-start d-column">
-                            <input type="text" placeholder="Nome" v-model="name">
-                            <input type="date" placeholder="Data de início" v-model="startDate" >
+                            <div class="d-flex flex-column align-items-start">                            
+                                <input type="text" placeholder="Nome" v-model="name">
+                                <p class="message-error error-name"></p>
+                            </div>
+                            <div class="d-flex flex-column align-items-start">                            
+                                <input type="date" placeholder="Data de início" v-model="startDate" >
+                                <p class="message-error error-startDate"></p>
+                            </div>
                         </div>
+
                         <div class="form-inputs d-flex justify-content-start d-column">
-                            <select v-model="unitId">
-                                <option value="">Selecione unidade...</option>
-                                <option v-for="unit in units" :value="unit.ID_Unit">{{unit.Unit_Name}}</option>
-                            </select>
-                            <input type="date" placeholder="Data de conclusão" v-model="endDate">
+                            <div class="d-flex flex-column align-items-start">                            
+                                <select v-model="unitId">
+                                    <option value="">Selecione unidade...</option>
+                                    <option v-for="unit in units" :value="unit.ID_Unit">{{unit.Unit_Name}}</option>
+                                </select>
+                                <p class="message-error error-unit"></p>
+                            </div>
+
+                            <div class="d-flex flex-column align-items-start">
+                                <input type="date" placeholder="Data de conclusão" v-model="endDate">
+                                <p class="message-error error-endDate"></p>
+                            </div>
                         </div>
-                        <div class="form-inputs d-flex justify-content-start d-column">
-                            <textarea class="description" placeholder="Descrição" v-model="description"></textarea>
+                        <div class="form-inputs d-flex justify-content-start d-column w-100">
+                            <div class="d-flex flex-column align-items-start w-100">
+                                <textarea class="description" placeholder="Descrição" v-model="description"></textarea>
+                                <p class="message-error error-description"></p>
+                            </div>
                         </div>                        
                     </form>
                     <br>
@@ -39,11 +56,15 @@ export const CreateProject = {
                     <form>
                         <h1>Adicione um novo integrante clicando no ícone abaixo</h1>
                         <h2>É necessário informar o nome completo do integrante</h2>
-                        <div class="form-inputs d-flex justify-content-start d-column">
+
+
+                        <div class="form-inputs d-flex justify-content-start flex-row">
                             <input type="text" placeholder="Integrante" v-model="participant"> 
                             <span class="add-btn" @click="adicionar">+</span>
                         </div>              
-                        <div class="form-entries d-flex justify-content-start d-column flex-column">
+                        <p class="message-error error-participant"></p>
+
+                        <div class="form-entries d-flex justify-content-start flex-column">
                             <!-- Exemplo de membros abaixo -->
                             <div class="members" v-for="(member, key) in participants">
                                 <img src="../images/user.png" alt="Expandir">
@@ -69,7 +90,8 @@ export const CreateProject = {
                                     <p>Anexe ou arraste o arquivo para cá </p>
                                     <button type="button">Selecionar arquivo</button>
                                     <input type="file" multiple ref="fileInput" @change="handleFileSelect" style="display: none"/>
-                                </div>         
+                                </div>     
+                                <p class="message-error error-file"></p>    
                             </div>  
                             <div class="form-entries d-flex justify-content-start d-column flex-column">
                                 <!-- Exemplo de membros abaixo -->
@@ -157,6 +179,7 @@ export const CreateProject = {
             this.participants.splice(key,1);
         },
         cadastrar() {
+            Swal.showLoading();
             let token = window.localStorage.getItem('reposystem_token');
             let url = backend_url + '/project/create';
         
@@ -193,14 +216,24 @@ export const CreateProject = {
             fetch(url, options)
             .then(response => response.json())
             .then(response => {
-                console.log(response);
                 if (response.status == true) {
-                    navigate('project/' + response.data);
+                    Swal.close();
+                    this.$router.push(`/project/${response.data}`);
                 } else {
-                    alert('Cadastro inválido');
+                    Swal.fire({
+                        title: `${response.code} - Cadastro inválido`,
+                        text: response.message,
+                        icon: 'error'
+                    })
                 }
             })
-            .catch(error => console.error('Erro ao enviar:', error));
+            .catch(error => {
+                Swal.fire({
+                    title: `Erro ao enviar`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            });
         },        
         async handleDrop(event) {
             const itens = event.dataTransfer.items;
