@@ -3,6 +3,7 @@ namespace Src\Controller;
 use Src\Auth\TokenHandler;
 use Src\Model\Message;
 use Src\Model\Professor;
+use src\Model\File;
 use Src\Repository\ProfessorRepository;
 use Src\Controller\MailController;
 use Src\Controller\MailRepository;
@@ -32,6 +33,32 @@ class ProfessorController {
             http_response_code(401);
             echo json_encode($permission_response);
         }
+
+    }
+
+    public function updatePfp($id){
+        $data = $_FILES['pfp'][0];
+        $repo = new ProfessorRepository();
+        $professor = new Professor();
+
+        $file = new File();
+        $file->setData(base64_encode(file_get_contents($data['tmp_name'])));
+
+        $professor->setPfp($file);
+        $professor->setId($id);
+
+        $token_response = TokenHandler::verifyPermission('professor');
+
+        if($token_response['status']){
+            $response = $repo->updatePfp($professor);
+
+            http_response_code($response['code']);
+            echo json_encode($response);
+        }else{
+            http_response_code($token_response['code']);
+            echo json_encode($token_response);
+        }
+
 
     }
 

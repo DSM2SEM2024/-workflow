@@ -30,7 +30,8 @@ class Routes {
                 '/password/define' => [UserController::class, 'switchPassword']
             ],
             'PUT' => [
-                '/a/{id}' => [ProfessorController::class, 'login'],
+                '/profilePicture/{id}' => [ProfessorController::class, 'updatePfp'],
+
             ],
             'DELETE' => [
                 '/b/{id}' => [ProfessorController::class, 'login'],
