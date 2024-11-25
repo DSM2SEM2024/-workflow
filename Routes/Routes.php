@@ -22,6 +22,7 @@ class Routes {
                 '/projectByProfLimit' => [ProjectController::class, 'getByProfessorLimit'],
                 '/cover' => [FileController::class, 'getCover'],
                 '/course' => [CourseController::class, 'list'],
+                '/professor/{id}' => [ProfessorController::class, 'getById']
             ],
             'POST' => [
                 '/professor/login' => [ProfessorController::class, 'login'],

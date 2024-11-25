@@ -11,31 +11,7 @@ export const TeachersArea = {
     template: `
         <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
-                <div class="section-top d-flex justify-content-start align-items-start flex-row gap-5">
-                    <div class="profile-picture"> <!-- onde fica a foto? -->
-                        <button class="btn-send-photo" @click="uploadPhoto">
-                            <img src="../images/icon-sendphoto.png">
-                            <input type="file" ref="pfp" @change="savePhoto" style="display: none">
-                        </button>
-                        <img class="profile-picture" src="https://picsum.photos/200" alt="foto do professor">
-                    <div class="profile-picture">
-                        <button class="btn-send-photo"><img src="../images/icon-sendphoto.png"></button>
-                    </div>
-
-                    <div class="d-flex flex-row justify-content-between align-items-start w-100">
-                        <div class="profile-apresentation d-flex justify-content-start flex-column">
-                            <h2 class="teacher-name">Professor</h2>
-                            <p class="teacher-expertise">Graduado em Engenharia da Computação</p>
-                        </div>
-                        <button class="btn-configuration" @click="toggleMyData"> 
-                            <img class="icon" src="../images/icon-configuration.png" alt="Projeto Interdisciplinar">
-                            </i>{{ showMyData ? '': '' }}
-                        </button>
-                    </div>
-                </div>
-
-                <MyData v-if="showMyData"></MyData>
-                <MyProfile></MyProfile>
+                <MyProfile :professor_name="professor.Name" :id="id"></MyProfile>
 
                 <div class="section section-career">
                     <h4>Graduação</h4>
@@ -96,7 +72,9 @@ export const TeachersArea = {
     data() {
         return {
             showMyData: false,
-            pfp: null,
+            pfp: 'https://picsum.photos/200',
+            professor: {},
+            id: window.location.href.split('/teachers-area/')[1],
         }
     },
     inject: ['urlBase'],
@@ -145,9 +123,27 @@ export const TeachersArea = {
 
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         save() {
+        },
+
+        fetchData(){
+            Swal.showLoading();
+            let id = this.id;
+            let url = backend_url+'/professor/'+id;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                console.log(response.data)
+                this.professor = response.data;
+                Swal.close();
+            })
+            .catch(error=>{
+                Swal.fire(error.getMessage)
+            })
+
         }
+
     },
     created() {
-        //Conteúdos que deverão ser carregados em uma espécie de onload.
+        this.fetchData();
     }
 };

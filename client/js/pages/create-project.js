@@ -89,7 +89,7 @@ export const CreateProject = {
                                     <img class="icon" src="../images/download.png" alt="Integrante">
                                     <p>Anexe ou arraste o arquivo para cá </p>
                                     <button type="button">Selecionar arquivo</button>
-                                    <input type="file" multiple ref="fileInput" @change="handleFileSelect" style="display: none"/>
+                                    <input type="file" accept=".jpg, .png" multiple ref="fileInput" @change="handleFileSelect" style="display: none"/>
                                 </div>     
                                 <p class="message-error error-file"></p>    
                             </div>  

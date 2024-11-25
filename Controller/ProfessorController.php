@@ -38,11 +38,13 @@ class ProfessorController {
 
     public function updatePfp($id){
         $data = $_FILES['pfp'][0];
+        $extension = pathinfo($_FILES['pfp']['name'], PATHINFO_EXTENSION);
         $repo = new ProfessorRepository();
         $professor = new Professor();
 
         $file = new File();
-        $file->setData(base64_encode(file_get_contents($data['tmp_name'])));
+        $base64 = base64_encode(file_get_contents($data['tmp_name']));
+        $file->setData("data:image/$extension;base64,$base64");
 
         $professor->setPfp($file);
         $professor->setId($id);
@@ -51,7 +53,9 @@ class ProfessorController {
 
         if($token_response['status']){
             $response = $repo->updatePfp($professor);
-
+            if($response['status']){
+                $response['data'] = $file->getData();
+            }
             http_response_code($response['code']);
             echo json_encode($response);
         }else{
@@ -122,6 +126,15 @@ class ProfessorController {
         } else {
             return $token_response;
         }
+
+    }
+
+    public function getById($id){
+
+        $repo = new ProfessorRepository();
+        $professor = new Professor();
+        $professor->setId($id);
+        echo json_encode($repo->selectById($professor));
 
     }
 

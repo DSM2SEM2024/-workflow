@@ -84,9 +84,9 @@ export const Project = {
 
                     <br>
 
-                    <a href="" target="_blank">
+                    <router-link :to="('/teachers-area/'+this.project.ID_Professor)">
                         Se interessou pelo Projeto e deseja entrar em contato?
-                    </a>
+                    </router-link>
                 </div>
             </section>
         </main>
