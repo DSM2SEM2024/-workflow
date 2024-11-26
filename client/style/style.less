@@ -74,6 +74,7 @@
 @roboto-thin: 'Roboto-Thin', sans-serif;
 @font-size: 16px;
 
+
 * {
     transition: all cubic-bezier(0.25, 0.8, 0.25, 1) .5s;
 
@@ -126,7 +127,7 @@ header {
                 margin-left: -0.3rem;
             }
         }
-    }   
+    }
 }
 
 button {
@@ -144,10 +145,14 @@ button {
     left: 1rem;
     height: 3rem;
     aspect-ratio: 1 / 1;
-    background-color: @primary-red; /* Cor de fundo vermelha */
-    border-radius: .4rem; /* Bordas arredondadas */
-    padding: 0.5rem; /* Padding interno */
-    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    background-color: @primary-red;
+    /* Cor de fundo vermelha */
+    border-radius: .4rem;
+    /* Bordas arredondadas */
+    padding: 0.5rem;
+    /* Padding interno */
+    cursor: pointer;
+    /* Cursor de ponteiro ao passar o mouse */
     outline: none;
     border: none;
     z-index: 10000;
@@ -155,22 +160,33 @@ button {
 
 .menu-overlay {
     z-index: 9999;
-    background-color: rgba(255, 255, 255, 0.95); /* Fundo branco com transparência */
-    backdrop-filter: blur(10px); /* Efeito de desfoque no fundo */
-    transition: opacity 0.3s ease-in-out; /* Transição suave ao aparecer */
-    
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Fundo branco com transparência */
+    backdrop-filter: blur(10px);
+    /* Efeito de desfoque no fundo */
+    transition: opacity 0.5s ease-in-out;
+    /* Transição suave ao aparecer */
+
     & nav {
         animation: fadeInUp 0.5s ease-in-out;
     }
 
     & p {
-        font-size: 1.5rem; /* Tamanho da fonte */
-        color: @primary-red; /* Cor do texto */
-        font-weight: bold; /* Negrito */
-        text-transform: uppercase; /* Texto em maiúsculas */
-        letter-spacing: 0.1rem; /* Espaçamento entre letras */
-        margin: 0; /* Remove margens padrão */
-        transition: color 0.3s ease-in-out; /* Transição de cor suave */
+        font-family: @roboto-regular;
+        font-size: 1.5rem;
+        /* Tamanho da fonte */
+        color: @primary-red;
+        /* Cor do texto */
+        font-weight: bold;
+        /* Negrito */
+        text-transform: uppercase;
+        /* Texto em maiúsculas */
+        letter-spacing: 0.1rem;
+        /* Espaçamento entre letras */
+        margin: 0;
+        /* Remove margens padrão */
+        transition: color 0.3s ease-in-out;
+        /* Transição de cor suave */
     }
 
     & a {
@@ -183,7 +199,8 @@ button {
     display: block;
     width: 1.5rem;
     height: 0.2rem;
-    background-color: white; /* Cor do ícone */
+    background-color: white;
+    /* Cor do ícone */
     border-radius: 0.125rem;
     position: relative;
     transition: all 0.3s ease-in-out;
@@ -195,7 +212,8 @@ button {
     display: block;
     width: 100%;
     height: 100%;
-    background-color: white; /* Cor das linhas do ícone */
+    background-color: white;
+    /* Cor das linhas do ícone */
     border-radius: 0.125rem;
     position: absolute;
     transition: all 0.3s ease-in-out;
@@ -210,7 +228,8 @@ button {
 }
 
 .burger-button:focus {
-    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0); /* Exemplo de sombra ao focar */
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0);
+    /* Exemplo de sombra ao focar */
 }
 
 main {
@@ -251,7 +270,7 @@ main {
             background: @background-red;
             color: @terciary-white;
             min-width: 70%;
-            height: 4rem;
+            height: 3.6rem;
             border-radius: 0.4rem;
 
             & h2 {
@@ -383,6 +402,7 @@ main {
 
                     & .description {
                         width: calc(32rem + 5%);
+                        min-width: 100%;
                         height: 8rem;
                         resize: none;
                     }
@@ -480,6 +500,8 @@ main {
                             margin-bottom: 0;
                             color: @lighten-black;
                             opacity: 0.8;
+                            word-break: break-all;
+                            padding: 0rem 0.5rem 0rem 0.5rem
                         }
 
                         & span {
@@ -569,7 +591,7 @@ main {
                         margin-top: 1rem;
                     }
 
-                    & .message-error{
+                    & .message-error {
                         margin: 0rem;
                     }
 
@@ -595,8 +617,9 @@ main {
                         }
 
                         & span {
-                            width: 1rem;
-                            height: 1rem;
+                            min-width: 16px;
+                            height: 16px;
+                            min-height: 16px;
                             border-radius: 0.15rem;
                             background-color: @primary-red;
                             display: flex;
@@ -609,6 +632,7 @@ main {
                         }
 
                         & .linked-data {
+                            word-break: break-all;
 
                             & .unity-name {
                                 color: lighten(@secundary-black, 40%);
@@ -618,6 +642,7 @@ main {
                             & .discipline-name {
                                 color: @secundary-black;
                                 font-family: @roboto-bold;
+                                word-break: break-all;
                             }
 
                             & .curse-name {
@@ -818,6 +843,8 @@ main {
     & .dinamic-content {
         .form-content {
             & .box-search {
+                width: 100%;
+
                 & .form-inputs {
                     display: flex;
                     flex-direction: row;
@@ -926,8 +953,10 @@ main {
 
             & .project-card {
                 width: 32rem;
+                min-width: 32rem;
                 max-width: 100%;
                 padding: 2rem 0rem 0rem 0rem;
+                word-break: break-all;
 
                 & h1 {
                     font-size: 1.5rem;
@@ -938,6 +967,7 @@ main {
                 & .project-image {
                     width: 100%;
                     height: 20rem;
+                    min-height: 20rem;
                     background: @terciary-white;
                     border-radius: 0.2rem;
                 }
@@ -993,7 +1023,7 @@ main {
 #my-projects {
     width: 20vw;
     min-width: 20rem;
-    padding-top: 4.5rem;
+    padding: 4.5rem 1rem 1rem 1rem;
 
     & .section-title {
         width: 100%;
@@ -1081,7 +1111,7 @@ main {
     & .dinamic-content {
         width: 65vw;
         background-color: @quinary-white;
-        padding-left: 4rem;
+        padding-left: 3.5rem;
 
         & .page-section {
 
@@ -1253,7 +1283,10 @@ main {
     }
 }
 
-#management-projects, #management-teachers, #management-curses, #management-unities {
+#management-projects,
+#management-teachers,
+#management-curses,
+#management-unities {
 
     & .page-content {
         width: 40vw;
@@ -1265,7 +1298,7 @@ main {
             background: @background-red;
             color: @terciary-white;
             width: 100%;
-            height: 4rem;
+            height: 3.3rem;
             border-radius: 0.4rem;
             display: flex;
             justify-content: space-between !important;
@@ -1283,7 +1316,10 @@ main {
         }
     }
 
-    & .new-project-card, .new-teacher-card, .new-curse-card, .new-unitie-card {
+    & .new-project-card,
+    .new-teacher-card,
+    .new-curse-card,
+    .new-unitie-card {
         width: 100%;
         margin: 1rem 0rem 1rem 0rem;
         border-radius: 0.1rem 0.1rem 0.3rem 0.3rem;
@@ -1321,10 +1357,16 @@ main {
         transform: translateY(-.1rem);
     }
 
-    & #projects-container, #teachers-container, #curses-container, #unities-container {
+    & #projects-container,
+    #teachers-container,
+    #curses-container,
+    #unities-container {
         width: 100%;
 
-        & .project, .teacher, .curse, .unitie {
+        & .project,
+        .teacher,
+        .curse,
+        .unitie {
             margin: 1rem 0rem 1rem 0rem;
             position: relative;
             background: lighten(@quaternary-white, 7%);
@@ -1355,37 +1397,40 @@ main {
                 color: @lighten-black;
             }
 
-            & p{
+            & p {
                 margin-bottom: 0rem;
                 font-size: 1rem;
             }
 
-            & .teacher-unit, .name-unit, .name-city {
+            & .teacher-unit,
+            .name-unit,
+            .name-city {
                 text-transform: uppercase;
                 font-family: @roboto-medium;
                 font-size: 1rem;
                 color: lighten(@secundary-black, 45%);
             }
 
-            & .teacher-name, .curse-name{
+            & .teacher-name,
+            .curse-name {
                 font-size: 1.1rem;
                 font-family: @roboto-bold;
                 color: @primary-red;
             }
 
-            .curse-name  {
+            .curse-name {
                 font-size: 1.1rem;
                 font-family: @roboto-bold;
                 color: @secundary-black;
             }
 
-            & .name-unity{
+            & .name-unity {
                 color: @primary-black;
                 font-size: 1.1rem;
                 font-family: @roboto-medium;
             }
 
-            & .teacher-curse{
+            & .teacher-curse {
                 font-family: @roboto-regular;
             }
 
@@ -1413,7 +1458,8 @@ main {
     }
 }
 
-#teachers-area, #coordinator-area{
+#teachers-area,
+#coordinator-area {
     & .dinamic-content {
         padding-bottom: 3rem;
 
@@ -1530,7 +1576,8 @@ main {
             }
         }
 
-        & .teachers-projects, .management-board {
+        & .teachers-projects,
+        .management-board {
             padding: 3rem 0rem 3rem 0rem;
             overflow-x: hidden;
 
@@ -1606,7 +1653,7 @@ main {
                 }
             }
 
-            & .subtitle{
+            & .subtitle {
                 background: @terciary-white;
                 border-radius: 0.4rem;
                 padding: 1.5rem;
@@ -1614,40 +1661,41 @@ main {
                 max-width: 80%;
                 min-width: 15rem;
 
-                & h3{
+                & h3 {
                     font-size: 1rem;
                 }
             }
 
-            & .section-middle{
+            & .section-middle {
                 margin: 1rem 0rem 3rem 0rem;
 
-                & .statistic{
-                    & .graphic{
+                & .statistic {
+                    & .graphic {
                         padding: 1rem;
                         border-radius: 0.2rem;
                         background: lighten(@quaternary-white, 5%);
 
-                        & h4{
+                        & h4 {
                             font-size: 1rem;
                             text-align: center;
                         }
-                    }            
+                    }
                 }
 
-                & .access{
+                & .access {
                     background: @terciary-white;
                     border-radius: 0.2rem;
                     padding: 1rem;
 
-                    & ul{
+                    & ul {
                         padding: 0rem;
                         margin: 0rem;
-                        & li{
+
+                        & li {
                             list-style: none;
                             text-align: center;
 
-                            & a{
+                            & a {
                                 text-decoration: none;
                                 color: @primary-black;
                                 font-family: @roboto-regular;
@@ -1675,6 +1723,194 @@ main {
             max-width: 58vw;
         }
     }
+
+}
+
+
+/*Responsive Layout with media queries*/
+//Desktop
+@media (min-width: 992px) {}
+
+//Tablet
+@media (min-width: 768px) and (max-width: 991px) {
+    header {
+        display: none;
+    }
+}
+
+//Mobile
+@media (max-width: 767px) {
+    main {
+        & .dinamic-content {
+            padding: 4.5rem 1rem 0rem 1rem;
+     
+            & ,.form-content {
+                & form{
+                    & .form-inputs{
+                        & .description{
+                            width: 16rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #login,
+    #create-password {
+        flex-direction: column-reverse !important;
+
+        & .left-content {
+            & figure {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                & img {
+                    max-width: 40%;
+                }
+            }
+        }
+
+
+        & .middle-content {
+            display: none;
+        }
+    }
+
+    #management-projects,
+    #management-teachers,
+    #management-curses,
+    #management-users,
+    #management-unities {
+        width: 100%;
+        padding: 4.5rem 2rem 0rem 2rem;
+
+        & .dinamic-content {
+            width: 100%;
+            padding: 0rem;
+
+            & .page-section {
+                min-width: 100%;
+                width: 100%;
+            }
+
+            & .page-content {
+                width: 100%;
+                min-width: 100%;
+            }
+
+            & .new-project-card {
+                width: 100%;
+
+            }
+        }
+    }
+
+    #home {
+        & .dinamic-content {
+            & .project-container {
+                & .project-card {
+                    min-width: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    #my-data {
+        min-width: 100%;
+
+        & .dinamic-content {
+            width: 100%;
+
+            & .form-content {
+                min-width: 100%;
+            }
+        }
+    }
+
+    #coordinator-area {
+        & .dinamic-content {
+            & .management-board {
+                width: 100%;
+                min-width: 100%;
+
+                & .section-middle {
+                    gap: 1rem;
+                    & .statistic {
+                        & .graphic {
+                            min-width: 100%!important;
+                            width: 100%!important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 580px) {
+    #home {
+        & .dinamic-content {
+            & .form-content {
+                padding: 1rem 1.5rem 0.9rem 1.5rem;
+                min-width: 100%;
+
+                & .box-search {
+                    & .form-inputs {
+                        gap: 0.5rem;
+                        flex-direction: column;
+                        align-items: start !important;
+
+                        & .input-content {
+                            & .input-section {
+                                min-width: 100%;
+                            }
+
+                            & button {
+                                margin-top: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #login {
+        padding: 0rem 2rem 0rem 2rem;
+    }
+
+    #management-curses,
+    #management-projects,
+    #management-teachers,
+    #management-users,
+    #management-unities {
+
+        & #teachers-container,
+        #curses-container,
+        #projects-container,
+        #users-container,
+        #unities-container {
+            & .teacher {
+                & .teacher-curse {
+                    padding-right: 5rem;
+                }
+            }
+
+            & .curse {
+                & .curse-name {
+                    padding-right: 5rem;
+                }
+            }
+
+            & .unitie {
+                & .name-unity {
+                    padding-right: 5rem;
+                }
+            }
+        }
 
     & .btn-change {
         transform: translateY(-.6rem);

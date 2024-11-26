@@ -16,7 +16,7 @@ export const CreateUser = {
                         <img class="icon" src="../images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
-                        <div class="form-inputs d-flex justify-content-start d-column">
+                        <div class="form-inputs d-flex justify-content-start d-column flex-wrap">
                             <div class="d-flex flex-column align-items-start">                            
                                 <input v-model="name" type="text" name="name" placeholder="Nome">
                                 <p class="message-error error-name"></p>
@@ -27,7 +27,7 @@ export const CreateUser = {
                                 <p class="message-error error-email"></p>
                             </div>
                         </div>
-                        <div class="form-inputs d-flex justify-content-start d-column">  
+                        <div class="form-inputs d-flex justify-content-start d-column flex-wrap">  
                             <div class="d-flex flex-column align-items-start">
                                 <select v-model="unit" class="unity">
                                     <option value="">Unidade</option>
@@ -52,8 +52,8 @@ export const CreateUser = {
                                 <img class="icon" src="../images/bottom-section.png" alt="Expandir">
                             </div>
 
-                            <div class="form-inputs d-flex justify-content-start align-items-end d-column">
-                                <div class="d-flex flex-row align-items-end no-wrap gap-3">
+                            <div class="form-inputs d-flex justify-content-start align-items-end d-column flex-wrap">
+                                <div class="d-flex flex-row align-items-end gap-3 flex-wrap">
                                     <div class="d-flex flex-column align-items-start">                            
                                         <input v-model="formation" type="text" name="degree" placeholder="Formação">
                                     </div>
@@ -92,7 +92,7 @@ export const CreateUser = {
 
                             <p class="description-unit">Adicione uma nova unidade clicando no ícone abaixo.</p>
 
-                            <div class="form-inputs d-flex justify-content-start d-column">
+                            <div class="form-inputs d-flex justify-content-start d-column flex-wrap">
                                 <div class="d-flex flex-column align-items-start">
                                     <input type="text" name="degree" placeholder="Formação">
                                     <p class="message-error error-degree"></p>
@@ -136,7 +136,7 @@ export const CreateUser = {
 
                     <hr>
 
-                    <div class="form-footer d-flex justify-content-between d-row align-items-start">
+                    <div class="form-footer d-flex justify-content-between d-row align-items-start gap-2 flex-wrap">
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
                         <button class="btn-create" @click="send">Cadastrar usuário ‎ |
                             <img class="icon" src="../images/next.png" alt="Expandir">
@@ -148,7 +148,7 @@ export const CreateUser = {
     `,
     data() {
         return {
-            career: 'teacher',
+            career: '',
             roles: [
                 {
                     value: 'professor',
