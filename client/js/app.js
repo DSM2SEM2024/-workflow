@@ -23,6 +23,7 @@ import { MyContacts } from './components/my-contacts.js';
 // Definindo as rotas através desse identificador
 const routes = [
     { path: '/header', component: Header },
+    { path: '/home', redirect: '/'},
     { path: '/', component: Home, meta: { title: 'Home' }},
     { path: '/login', component: Login, meta: { title: 'Login' }},
     { path: '/management', component: ManagementPage, meta: { title: 'Gestão de Projetos' }},
@@ -95,7 +96,7 @@ const App = {
         return {
             urlBase: this.urlBase
         };
-    }
+    },
 };
 
 // Finalizando a criação da aplicação, aplicando rota, versionamento e carregando no body do index.

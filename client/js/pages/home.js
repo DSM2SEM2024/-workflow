@@ -7,7 +7,6 @@ import { validateAccess } from '../functions/validate-access.js';
 export const Home = {
     template: `
         <Header></Header>
-
         <main id="home" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">

@@ -2,16 +2,19 @@ import { MyData } from '../components/my-data.js';
 import { backend_url } from '../global-var/backend-url.js';
 import { MyContacts } from '../components/my-contacts.js';
 import { MyProfile } from '../components/my-profile.js';
+import { Header } from '../components/header.js';
 
 export const TeachersArea = {
     components: {
         MyProfile,
-        MyContacts
+        MyContacts,
+        Header
     },
     template: `
+        <Header></Header>
         <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
-                <MyProfile :professor_name="professor.Name" :id="id" :img="professor.Profile_Picture"></MyProfile>
+                <MyProfile :professor_name="professor.Name" :id="id" :img="pfp"></MyProfile>
 
                 <div class="section section-career">
                     <h4>Graduação</h4>
@@ -72,7 +75,7 @@ export const TeachersArea = {
     data() {
         return {
             showMyData: false,
-            pfp: 'https://picsum.photos/200',
+            pfp: '',
             professor: {
                 Profile_Picture: ''
             },
@@ -133,7 +136,7 @@ export const TeachersArea = {
             .then(response=>response.json())
             .then(response=>{
                 this.professor = response.data;
-                console.log(this.professor.Profile_Picture)
+                this.pfp = response.data.Profile_Picture;
                 Swal.close();
             })
             .catch(error=>{

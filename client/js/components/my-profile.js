@@ -8,7 +8,7 @@ export const MyProfile = {
     template: `
         <div class="section-top d-flex justify-content-start align-items-start flex-row gap-5">
             <div class="profile-picture" :style="
-                ('background-image: url('+src+')')"> <!-- onde fica a foto? -->
+                ('background-image: url('+img+')')"> <!-- onde fica a foto? -->
                 <button class="btn-send-photo" @click="uploadPhoto">
                     <img src="../images/icon-sendphoto.png">
                     <form style="display: none" enctype="multipart/form-data">
@@ -52,6 +52,7 @@ export const MyProfile = {
             required: false
         },
         img:{
+            type: String,
             required: true
         }
     },
@@ -66,7 +67,7 @@ export const MyProfile = {
         save() {
         },
         handleImg(){
-            console.log(this.img)
+            this.src = this.img;
         },
         uploadPhoto(){
             this.$refs.pfp.click();
@@ -93,8 +94,9 @@ export const MyProfile = {
             .then(response => response.json())
             .then(response => {
                 
-                console.log(response.data)
-                this.src = response.data
+                if(response.status){
+                    location.reload(true);
+                }
                 
             })
             .catch(error => {
