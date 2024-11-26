@@ -1,7 +1,9 @@
 import { validateAccess } from "../functions/validate-access.js";
+import { Header } from "../components/header.js";
 
 export const RegisterUnit = {
     template: `
+        <Header></Header>
         <main id="register-unit" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
@@ -121,6 +123,9 @@ export const RegisterUnit = {
         </main>
         {{email}} {{password}}
     `,
+    components: {
+        Header    
+    },
     data() {
         return {
             // email: null,

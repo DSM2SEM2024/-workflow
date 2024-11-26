@@ -1,8 +1,10 @@
 import { navigate } from "../functions/navigate.js";
 import { backend_url } from "../global-var/backend-url.js";
+import { Header } from "../components/header.js";
 
 export const MyProjects = {
     template: `
+    <Header></Header>
     <div id="my-projects" class="">
         <div class="section-title">
             <h2>Meus projetos</h2>
@@ -29,6 +31,9 @@ export const MyProjects = {
         </div>
     </div>
     `,
+    components: {
+        Header
+    },
     data() {
         return {
             projects: []

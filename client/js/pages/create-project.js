@@ -1,8 +1,10 @@
 import { validateAccess } from "../functions/validate-access.js";
 import { backend_url } from "../global-var/backend-url.js";
+import { Header } from "../components/header.js";
 
 export const CreateProject = {
     template: `
+        <Header></Header>
         <main id="create-project" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
@@ -125,6 +127,9 @@ export const CreateProject = {
             </section>
         </main>
     `,
+    components:{
+        Header
+    },
     data() {
         return {
             // email: null,

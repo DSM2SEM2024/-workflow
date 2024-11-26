@@ -1,12 +1,10 @@
+import { Header } from '../components/header.js';
 import { MyProfile } from '../components/my-profile.js';
 import { MyContacts } from '../components/my-contacts.js';
 
 export const CoordinatorsArea = {
-    components: {
-        MyProfile,
-        MyContacts
-    },
     template: `
+        <Header></Header>
         <main id="coordinator-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
                 <MyProfile></MyProfile>
@@ -40,12 +38,16 @@ export const CoordinatorsArea = {
                             </ul>
                         </div>
                     </div>
-
                     <MyContacts></MyContacts>
                 </section>
             </div>
         </main>
     `,
+    components: {
+        Header,
+        MyProfile,
+        MyContacts
+    },
     data() {
         return {
         }
