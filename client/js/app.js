@@ -34,6 +34,7 @@ const routes = [
     { path: '/register-unit', component: RegisterUnit, meta: { title: 'Registrar Unidade' }},
     { path: '/teachers-area', component: TeachersArea, meta: { title: 'Área do Docente' }},
     { path: '/create-password/:email', component: CreatePassword, meta: { title: 'Criar Senha' }},
+      
     { path: '/register-course', component: RegisterCourse, meta: { title: 'Registrar Curso' }},
     { path: '/coordinators-area', component: CoordinatorsArea, meta: { title: 'Área do Coordenador' }},
     { path: '/my-data', component: MyData, meta: { title: 'Meus Dados' }},
@@ -95,8 +96,9 @@ const App = {
                         </router-link>
                         <router-link to="/my-projects">
                             <img class="icon" src="../images/colletion.png" alt="My Projects">
-                        </router-link>
-                    </div>          
+                        </router-link>       
+                    </div>
+
                     
                     <div class="cps-icon">
                         <img class="icon" src="../images/logo-cps.png" alt="CPS Logo">

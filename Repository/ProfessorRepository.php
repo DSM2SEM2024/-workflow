@@ -115,4 +115,17 @@ class ProfessorRepository {
         }
     }
 
+    public function updatePfp(Professor $professor){
+        $update = 'UPDATE professor SET Profile_Picture = ? WHERE ID_Professor = ?';
+        $prepare = $this->pdo->prepare($update);
+        $prepare->bindValue(1, $professor->getPfp()->getData());
+        $prepare->bindValue(2, $professor->getId());
+
+        try {
+            $prepare->execute();
+            return Message::send(true,200,'Cadastro atualizado com sucesso',[]);
+        } catch (PDOException $e) {
+            return Message::send(false,$e->getCode(),$e->getMessage(),[]);
+        }
+    }
 }

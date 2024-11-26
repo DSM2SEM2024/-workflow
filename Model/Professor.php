@@ -1,5 +1,6 @@
 <?php
 namespace Src\Model;
+use Src\Model\File;
 
 class Professor {
 
@@ -8,6 +9,7 @@ class Professor {
     private string $email;
     private string $expertise;
     private string $password;
+    private File $pfp;
     private $unit;
 
 
@@ -122,4 +124,20 @@ class Professor {
     {
         $this->password = $password;
     }
+
+    public function getPfp()
+    {
+        return $this->pfp;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */ 
+    public function setPfp($pfp)
+    {
+        $this->pfp = $pfp;
+    }
+
 }

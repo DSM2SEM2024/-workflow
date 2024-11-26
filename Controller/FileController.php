@@ -4,6 +4,7 @@ use Src\Model\File;
 use Src\Model\Message;
 use Src\Model\Project;
 use Src\Repository\FileRepository;
+use src\Repository\ProfessorRepository;
 
 class FileController {
 

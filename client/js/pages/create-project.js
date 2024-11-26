@@ -41,8 +41,8 @@ export const CreateProject = {
                                 <p class="message-error error-endDate"></p>
                             </div>
                         </div>
-                        <div class="form-inputs d-flex justify-content-start d-column">
-                            <div class="d-flex flex-column align-items-start">
+                        <div class="form-inputs d-flex justify-content-start d-column w-100">
+                            <div class="d-flex flex-column align-items-start w-100">
                                 <textarea class="description" placeholder="Descrição" v-model="description"></textarea>
                                 <p class="message-error error-description"></p>
                             </div>
@@ -179,6 +179,7 @@ export const CreateProject = {
             this.participants.splice(key,1);
         },
         cadastrar() {
+            Swal.showLoading();
             let token = window.localStorage.getItem('reposystem_token');
             let url = backend_url + '/project/create';
         
@@ -215,14 +216,24 @@ export const CreateProject = {
             fetch(url, options)
             .then(response => response.json())
             .then(response => {
-                console.log(response);
                 if (response.status == true) {
+                    Swal.close();
                     this.$router.push(`/project/${response.data}`);
                 } else {
-                    alert('Cadastro inválido');
+                    Swal.fire({
+                        title: `${response.code} - Cadastro inválido`,
+                        text: response.message,
+                        icon: 'error'
+                    })
                 }
             })
-            .catch(error => console.error('Erro ao enviar:', error));
+            .catch(error => {
+                Swal.fire({
+                    title: `Erro ao enviar`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            });
         },        
         async handleDrop(event) {
             const itens = event.dataTransfer.items;
