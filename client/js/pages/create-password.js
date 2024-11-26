@@ -26,6 +26,8 @@ export const CreatePassword = {
                         <p v-if="invalidConfirm" class="message-error error-newpassword">{{confirmAlert}}</p>              
                     </div>
 
+                    <br>
+
                     <div class="d-flex justify-content-center flex-column gap-3 option-register">
                         <button type="submit" class="button btn-red signin" @click="signin">Registrar-se</button>
                     </div>

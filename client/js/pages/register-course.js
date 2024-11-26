@@ -1,7 +1,9 @@
 import { validateAccess } from "../functions/validate-access.js";
+import { Header } from "../components/header.js";
 
 export const RegisterCourse = {
     template: `
+        <Header></Header>
         <main id="register-course" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
@@ -14,7 +16,7 @@ export const RegisterCourse = {
                         <img class="icon" src="../images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
-                        <div class="form-inputs d-flex justify-content-start d-column">
+                        <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
                             <input type="text" placeholder="Nome">
                             <select>
                                 <option value="unit">Unidade</option>
@@ -39,7 +41,7 @@ export const RegisterCourse = {
                         <img class="icon" src="../images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
-                        <div class="form-inputs d-flex justify-content-start d-column">
+                        <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
                             <input type="text" placeholder="Nome">
                             <select>
                                 <option value="teacher">Docente</option>
@@ -58,7 +60,7 @@ export const RegisterCourse = {
 
                     <hr>
 
-                    <div class="form-footer d-flex justify-content-between d-column align-items-start">
+                    <div class="form-footer d-flex justify-content-between d-column align-items-start flex-wrap">
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
 
                         <button class="btn-create">Cadastrar Curso ‎ |
@@ -71,6 +73,9 @@ export const RegisterCourse = {
         </main>
         {{email}} {{password}}
     `,
+    components: {    
+        Header
+    },
     data() {
         return {
             // email: null,

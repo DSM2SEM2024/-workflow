@@ -1,9 +1,11 @@
 import { validateAccess } from "../functions/validate-access.js";
 import { backend_url } from "../global-var/backend-url.js";
 import { token } from "../global-var/token.js";
+import { Header } from "../components/header.js";
 
 export const CreateUser = {
     template: `
+        <Header></Header>
         <main id="create-user" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
@@ -146,6 +148,9 @@ export const CreateUser = {
             </section>
         </main>
     `,
+    components: {
+        Header
+    },
     data() {
         return {
             career: '',
@@ -186,6 +191,10 @@ export const CreateUser = {
     },
     inject: ['urlBase'],
     methods: {
+        
+        toggleMenu() {
+            this.isMenuOpen = !this.isMenuOpen;
+        },
         gerarSlug(titulo) {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
