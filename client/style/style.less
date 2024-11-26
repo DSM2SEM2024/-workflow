@@ -357,6 +357,7 @@ main {
 
                     & .description {
                         width: calc(32rem + 5%);
+                        min-width: 100%;
                         height: 8rem;
                         resize: none;
                     }
@@ -434,6 +435,8 @@ main {
                             margin-bottom: 0;
                             color: @lighten-black;
                             opacity: 0.8;
+                            word-break: break-all;
+                            padding: 0rem 0.5rem 0rem 0.5rem
                         }
 
                         & span {
@@ -552,8 +555,9 @@ main {
                         }
 
                         & span {
-                            width: 1rem;
-                            height: 1rem;
+                            min-width: 16px;
+                            height: 16px;
+                            min-height: 16px;
                             border-radius: 0.15rem;
                             background-color: @primary-red;
                             display: flex;
@@ -566,6 +570,7 @@ main {
                         }
 
                         & .linked-data {
+                            word-break: break-all;
 
                             & .unity-name {
                                 color: lighten(@secundary-black, 40%);
@@ -575,6 +580,7 @@ main {
                             & .discipline-name {
                                 color: @secundary-black;
                                 font-family: @roboto-bold;
+                                word-break: break-all;
                             }
 
                             & .curse-name {
@@ -735,6 +741,8 @@ main {
     & .dinamic-content {
         .form-content {
             & .box-search {
+                width: 100%;
+
                 & .form-inputs {
                     display: flex;
                     flex-direction: row;
@@ -817,8 +825,10 @@ main {
 
             & .project-card {
                 width: 32rem;
+                min-width: 32rem;
                 max-width: 100%;
                 padding: 2rem 0rem 0rem 0rem;
+                word-break: break-all;
 
                 & h1 {
                     font-size: 1.5rem;
@@ -829,6 +839,7 @@ main {
                 & .project-image {
                     width: 100%;
                     height: 20rem;
+                    min-height: 20rem;
                     background: @terciary-white;
                     border-radius: 0.2rem;
                 }
@@ -876,7 +887,7 @@ main {
 #my-projects {
     width: 20vw;
     min-width: 20rem;
-    padding-top: 4.5rem;
+    padding: 4.5rem 1rem 1rem 1rem;
 
     & .section-title {
         width: 100%;
@@ -1447,11 +1458,6 @@ main {
     header {
         display: none;
     }
-
-    #management-projects{
- 
-
-    }
 }
 
 //Mobile
@@ -1459,10 +1465,21 @@ main {
     main {
         & .dinamic-content {
             padding: 4.5rem 1rem 0rem 1rem;
+     
+            & ,.form-content {
+                & form{
+                    & .form-inputs{
+                        & .description{
+                            width: 16rem;
+                        }
+                    }
+                }
+            }
         }
     }
 
-    #login {
+    #login,
+    #create-password {
         flex-direction: column-reverse !important;
 
         & .left-content {
@@ -1483,29 +1500,75 @@ main {
         }
     }
 
-    #management-projects, #management-teachers, #management-curses, #management-users, #management-unities {
+    #management-projects,
+    #management-teachers,
+    #management-curses,
+    #management-users,
+    #management-unities {
         width: 100%;
         padding: 4.5rem 2rem 0rem 2rem;
-        & .dinamic-content{
+
+        & .dinamic-content {
             width: 100%;
             padding: 0rem;
-            
-            & .page-section{
+
+            & .page-section {
                 min-width: 100%;
                 width: 100%;
             }
 
-            & .page-content{
+            & .page-content {
                 width: 100%;
                 min-width: 100%;
             }
-            & .new-project-card{
+
+            & .new-project-card {
                 width: 100%;
 
             }
-            
         }
+    }
 
+    #home {
+        & .dinamic-content {
+            & .project-container {
+                & .project-card {
+                    min-width: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    #my-data {
+        min-width: 100%;
+
+        & .dinamic-content {
+            width: 100%;
+
+            & .form-content {
+                min-width: 100%;
+            }
+        }
+    }
+
+    #coordinator-area {
+        & .dinamic-content {
+            & .management-board {
+                width: 100%;
+                min-width: 100%;
+
+                & .section-middle {
+                    gap: 1rem;
+                    & .statistic {
+                        & .graphic {
+                            min-width: 100%!important;
+                            width: 100%!important;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -1541,22 +1604,31 @@ main {
         padding: 0rem 2rem 0rem 2rem;
     }
 
-    #management-curses, #management-projects, #management-teachers, #management-users, #management-unities {
-        & #teachers-container, #curses-container, #projects-container, #users-container, #unities-container {
-            & .teacher{
-                & .teacher-curse{
+    #management-curses,
+    #management-projects,
+    #management-teachers,
+    #management-users,
+    #management-unities {
+
+        & #teachers-container,
+        #curses-container,
+        #projects-container,
+        #users-container,
+        #unities-container {
+            & .teacher {
+                & .teacher-curse {
                     padding-right: 5rem;
                 }
             }
 
-            & .curse{
-                & .curse-name{
+            & .curse {
+                & .curse-name {
                     padding-right: 5rem;
                 }
             }
 
-            & .unitie{
-                & .name-unity{
+            & .unitie {
+                & .name-unity {
                     padding-right: 5rem;
                 }
             }

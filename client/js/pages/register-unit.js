@@ -14,7 +14,7 @@ export const RegisterUnit = {
                         <img class="icon" src="../images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
-                        <div class="form-inputs d-flex justify-content-start d-column">
+                        <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
                             <div class="d-flex flex-column align-items-start">
                                 <input type="text" placeholder="Nome da unidade">
                                 <p class="message-error error-name"></p>
@@ -25,7 +25,7 @@ export const RegisterUnit = {
                                 <p class="message-error error-cep"><!-- O CEP é inválido.--></p>
                             </div>
                         </div>
-                        <div class="form-inputs d-flex justify-content-start d-column">
+                        <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
 
                             <div class="d-flex flex-column align-items-start">
                                 <input type="text" placeholder="Endereço">
@@ -38,7 +38,7 @@ export const RegisterUnit = {
                             </div>
                         </div>
 
-                        <div class="form-inputs d-flex justify-content-start flex-row">
+                        <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
                             <div class="d-flex flex-column align-items-start">
                                 <input type="text" placeholder="Cidade">
                                 <p class="message-error error-city"><!-- A cidade é obrigatório.--></p>
@@ -108,7 +108,7 @@ export const RegisterUnit = {
 
                     <hr>
 
-                    <div class="form-footer d-flex justify-content-between d-column align-items-start">
+                    <div class="form-footer d-flex justify-content-between d-column align-items-start gap-3 flex-wrap">
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
 
                         <button class="btn-create">Cadastrar Unidade ‎ |

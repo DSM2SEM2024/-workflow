@@ -21,15 +21,13 @@ export const CoordinatorsArea = {
                     </div>
 
                     <div class="section-middle d-flex justify-content-between flex-row">
-                        <div class="statistic d-flex justify-content-start flex-row gap-3">
+                        <div class="statistic d-flex justify-content-start flex-row gap-3 flex-wrap">
                             <div class="graphic d-flex justify-content-center align-items-center flex-column w-30">
                                 <h4>Projetos por Curso</h4>
                             </div>
 
                             <div class="graphic d-flex justify-content-center align-items-center flex-column w-50">
                                 <h4>Total de Projetos Interdisciplinares por ano</h4>
-                            
-                            
                             </div>
                         </div>
 

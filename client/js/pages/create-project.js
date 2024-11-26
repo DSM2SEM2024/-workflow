@@ -16,7 +16,7 @@ export const CreateProject = {
                     </div>
                     <!-- Todos os campos são obrigatórios -->
                     <form id="form-createproject">
-                        <div class="form-inputs d-flex justify-content-start d-column">
+                        <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
                             <div class="d-flex flex-column align-items-start">                            
                                 <input type="text" placeholder="Nome" v-model="name">
                                 <p class="message-error error-name"></p>
@@ -27,7 +27,7 @@ export const CreateProject = {
                             </div>
                         </div>
 
-                        <div class="form-inputs d-flex justify-content-start d-column">
+                        <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
                             <div class="d-flex flex-column align-items-start">                            
                                 <select v-model="unitId">
                                     <option value="">Selecione unidade...</option>
@@ -113,7 +113,7 @@ export const CreateProject = {
 
                     <hr>
 
-                    <div class="form-footer d-flex justify-content-between d-column align-items-start">
+                    <div class="form-footer d-flex justify-content-between d-column align-items-start gap-3 flex-wrap">
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
 
                         <button class="btn-create" @click="cadastrar">Cadastrar projeto ‎ |
