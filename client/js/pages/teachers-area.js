@@ -3,6 +3,7 @@ import { backend_url } from '../global-var/backend-url.js';
 import { MyContacts } from '../components/my-contacts.js';
 import { MyProfile } from '../components/my-profile.js';
 import { Header } from '../components/header.js';
+import { dateFormatter } from '../functions/date-formatter.js';
 
 export const TeachersArea = {
     components: {
@@ -33,36 +34,14 @@ export const TeachersArea = {
                     </div>
 
                     <div class="list d-flex flex-column align-items-start">
-                        <div class="project d-flex justify-content-between align-items-end gap-3">
+                        <div v-for="project in projects" @click="(this.$router.push('/project/'+project.ID_Project))" class="project d-flex justify-content-between align-items-end gap-3">
                             <div class="left d-flex flex-column align-items-start">
-                                <p class="project-name">Nome do Projeto</p>
-                                <p class="curse-name">Curso</p>
+                                <p class="project-name">{{project.Name}}</p>
+                                <p class="curse-name">Desenvolvimento de Software Multiplataforma</p>
                             </div>
 
                             <div class="right">
-                                <p class="project-createdate">29/11/2024</p>
-                            </div>
-                        </div>
-
-                        <div class="project d-flex justify-content-between align-items-end gap-3">
-                            <div class="left d-flex flex-column align-items-start">
-                                <p class="project-name">Nome do Projeto</p>
-                                <p class="curse-name">Curso</p>
-                            </div>
-
-                            <div class="right">
-                                <p class="project-createdate">29/11/2024</p>
-                            </div>
-                        </div>    
-                        
-                        <div class="project d-flex justify-content-between align-items-end gap-3">
-                            <div class="left d-flex flex-column align-items-start">
-                                <p class="project-name">Nome do Projeto</p>
-                                <p class="curse-name">Curso</p>
-                            </div>
-
-                            <div class="right">
-                                <p class="project-createdate">29/11/2024</p>
+                                <p class="project-createdate">{{dateFormatter(project.End_Date)}}</p>
                             </div>
                         </div> 
                     </div>
@@ -80,10 +59,12 @@ export const TeachersArea = {
                 Profile_Picture: ''
             },
             id: window.location.href.split('/teachers-area/')[1],
+            projects: []
         }
     },
     inject: ['urlBase'],
     methods: {
+        dateFormatter,
         gerarSlug(titulo) {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
@@ -137,16 +118,25 @@ export const TeachersArea = {
             .then(response=>{
                 this.professor = response.data;
                 this.pfp = response.data.Profile_Picture;
-                Swal.close();
             })
             .catch(error=>{
                 Swal.fire(error.getMessage)
             })
 
+        },
+        getProjects(){
+            let url = `${backend_url}/projectProf/${this.id}`;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                this.projects = response.data;
+                Swal.close();
+            })
         }
 
     },
     created() {
         this.fetchData();
+        this.getProjects();
     }
 };

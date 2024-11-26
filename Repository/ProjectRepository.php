@@ -101,4 +101,20 @@ class ProjectRepository{
         }
     }
 
+    public function selectByProfId(Professor $professor){
+
+        $select = 'SELECT * FROM project WHERE ID_Professor = ?';
+        $prepare = $this->pdo->prepare($select);
+        $prepare->bindValue(1, $professor->getId());
+
+        try {
+            $prepare->execute();
+            $array = $prepare->fetchAll();
+            return Message::send(true, 200, 'Projetos encontrados', $array);
+        } catch (PDOException $e) {
+            return Message::send(false, $e->getCode(),$e->getMessage(),[]);
+        }
+
+    }
+
 }

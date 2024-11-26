@@ -107,6 +107,7 @@ export const MyProfile = {
                 })
             });
         },
+        
     },
     created() {
         this.handleImg();
