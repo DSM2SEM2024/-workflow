@@ -11,7 +11,7 @@ export const TeachersArea = {
     template: `
         <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
-                <MyProfile :professor_name="professor.Name" :id="id"></MyProfile>
+                <MyProfile :professor_name="professor.Name" :id="id" :img="professor.Profile_Picture"></MyProfile>
 
                 <div class="section section-career">
                     <h4>Graduação</h4>
@@ -73,7 +73,9 @@ export const TeachersArea = {
         return {
             showMyData: false,
             pfp: 'https://picsum.photos/200',
-            professor: {},
+            professor: {
+                Profile_Picture: ''
+            },
             id: window.location.href.split('/teachers-area/')[1],
         }
     },
@@ -93,7 +95,6 @@ export const TeachersArea = {
         },savePhoto(event){
             const selecionados = Array.from(event.target.files);
             this.pfp = selecionados;
-            console.log(this.pfp);
 
             let formData = new FormData();
 
@@ -111,7 +112,6 @@ export const TeachersArea = {
             fetch(backend_url+"/profilePicture/6", options)
             .then(response => response.json())
             .then(response => {
-                console.log(response);
                 if (response.status == true) {
                     navigate('project/' + response.data);
                 } else {
@@ -132,8 +132,8 @@ export const TeachersArea = {
             fetch(url)
             .then(response=>response.json())
             .then(response=>{
-                console.log(response.data)
                 this.professor = response.data;
+                console.log(this.professor.Profile_Picture)
                 Swal.close();
             })
             .catch(error=>{

@@ -7,12 +7,16 @@ export const MyProfile = {
     },
     template: `
         <div class="section-top d-flex justify-content-start align-items-start flex-row gap-5">
-            <div class="profile-picture"> <!-- onde fica a foto? -->
+            <div class="profile-picture" :style="
+                ('background-image: url('+src+')')"> <!-- onde fica a foto? -->
                 <button class="btn-send-photo" @click="uploadPhoto">
                     <img src="../images/icon-sendphoto.png">
-                    <input type="file" ref="pfp" @change="savePhoto" style="display: none" accept=".jpg, .png">
+                    <form style="display: none" enctype="multipart/form-data">
+                        <input type="file" ref="pfp" @change="savePhoto" accept=".jpg, .png">
+                    </form>
+                    
                 </button>
-                <img class="profile-picture" :src="src" alt="foto do professor">
+                <!-- <img class="profile-picture" :src="src" alt="foto do professor"> -->
                 
             </div>
 
@@ -46,6 +50,9 @@ export const MyProfile = {
         },
         id:{
             required: false
+        },
+        img:{
+            required: true
         }
     },
     inject: ['urlBase'],
@@ -58,20 +65,23 @@ export const MyProfile = {
         },
         save() {
         },
+        handleImg(){
+            console.log(this.img)
+        },
         uploadPhoto(){
             this.$refs.pfp.click();
         },
         savePhoto(event){
-            const selecionados = Array.from(event.target.files);
+
+            const selecionados = event.target.files;
             this.pfp = selecionados;
-            console.log(this.pfp);
 
             let formData = new FormData();
-
-            formData.append('pfp', this.pfp);
-
+            formData.append('pfp', selecionados[0]);
+            console.log(formData.getAll('pfp'));
+            let url = backend_url+'/profilePicture/'+this.id;
             let options = {
-                method: 'PUT',
+                method: 'POST',
                 mode: 'cors',
                 headers: {
                     'Authorization': `Bearer ${this.token}`
@@ -79,19 +89,13 @@ export const MyProfile = {
                 body: formData
             };
         
-            fetch(backend_url+"/profilePicture/"+this.id, options)
+            fetch(url, options)
             .then(response => response.json())
             .then(response => {
-                console.log(response);
-                if (response.status == true) {
-                    navigate('project/' + response.data);
-                } else {
-                    Swal.fire({
-                        title: `${response.code} - Erro no registro`,
-                        text: response.message,
-                        icon: 'error'
-                    })
-                }
+                
+                console.log(response.data)
+                this.src = response.data
+                
             })
             .catch(error => {
                 Swal.fire({
@@ -103,6 +107,7 @@ export const MyProfile = {
         },
     },
     created() {
+        this.handleImg();
     }
 };
 

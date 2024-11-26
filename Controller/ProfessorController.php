@@ -3,7 +3,7 @@ namespace Src\Controller;
 use Src\Auth\TokenHandler;
 use Src\Model\Message;
 use Src\Model\Professor;
-use src\Model\File;
+use Src\Model\File;
 use Src\Repository\ProfessorRepository;
 use Src\Controller\MailController;
 use Src\Controller\MailRepository;
@@ -37,7 +37,7 @@ class ProfessorController {
     }
 
     public function updatePfp($id){
-        $data = $_FILES['pfp'][0];
+        $data = $_FILES['pfp'];
         $extension = pathinfo($_FILES['pfp']['name'], PATHINFO_EXTENSION);
         $repo = new ProfessorRepository();
         $professor = new Professor();

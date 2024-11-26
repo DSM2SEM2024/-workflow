@@ -30,11 +30,11 @@ class Routes {
                 '/token/validateAccess' => [TokenController::class, 'verifyPermission'],
                 '/project/create' => [ProjectController::class, 'create'],
                 '/unit/create' => [UnitController::class, 'create'],
-                '/password/define' => [UserController::class, 'switchPassword']
+                '/password/define' => [UserController::class, 'switchPassword'],
+                '/profilePicture/{id}' => [ProfessorController::class, 'updatePfp'],
             ],
             'PUT' => [
-                '/profilePicture/{id}' => [ProfessorController::class, 'updatePfp'],
-
+                
             ],
             'DELETE' => [
                 '/b/{id}' => [ProfessorController::class, 'login'],
