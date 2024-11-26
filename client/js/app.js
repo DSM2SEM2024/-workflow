@@ -21,30 +21,37 @@ import { MyContacts } from './components/my-contacts.js';
 
 // Definindo as rotas através desse identificador
 const routes = [
-    { path: '/', component: Home },
-    { path: '/login', component: Login },
-    { path: '/management', component: ManagementPage },
-    { path: '/management-teachers', component: ManagementTeachers },
-    { path: '/management-curses', component: ManagementCurses },
-    { path: '/management-unities', component: ManagementUnities },
-    { path: '/create-user', component: CreateUser },
-    { path: '/create-project', component: CreateProject },
-    { path: '/my-projects', component: MyProjects},
-    { path: '/project/:id', component: Project},
-    { path: '/register-unit', component: RegisterUnit},
-    { path: '/teachers-area/:id', component: TeachersArea},
-    { path: '/create-password/:email', component: CreatePassword},
-    { path: '/register-course', component: RegisterCourse},
-    { path: '/coordinators-area', component: CoordinatorsArea},
-    { path: '/my-data', component: MyData},
-    { path: '/my-profile', component: MyProfile},
-    { path : '/my-contacts', component: MyContacts}
+    { path: '/', component: Home, meta: { title: 'Home' }},
+    { path: '/login', component: Login, meta: { title: 'Login' }},
+    { path: '/management', component: ManagementPage, meta: { title: 'Gestão' }},
+    { path: '/management-teachers', component: ManagementTeachers, meta: { title: 'Gestão de Professores' }},
+    { path: '/management-curses', component: ManagementCurses, meta: { title: 'Gestão de Cursos' }},
+    { path: '/management-unities', component: ManagementUnities, meta: { title: 'Gestão de Unidades' }},
+    { path: '/create-user', component: CreateUser, meta: { title: 'Criar Usuário' }},
+    { path: '/create-project', component: CreateProject, meta: { title: 'Criar Projeto' }},
+    { path: '/my-projects', component: MyProjects, meta: { title: 'Meus Projetos' }},
+    { path: '/project/:id', component: Project, meta: { title: 'Projeto' }},
+    { path: '/register-unit', component: RegisterUnit, meta: { title: 'Registrar Unidade' }},
+    { path: '/teachers-area', component: TeachersArea, meta: { title: 'Área do Docente' }},
+    { path: '/create-password/:email', component: CreatePassword, meta: { title: 'Criar Senha' }},
+      
+    { path: '/register-course', component: RegisterCourse, meta: { title: 'Registrar Curso' }},
+    { path: '/coordinators-area', component: CoordinatorsArea, meta: { title: 'Área do Coordenador' }},
+    { path: '/my-data', component: MyData, meta: { title: 'Meus Dados' }},
+    { path: '/my-profile', component: MyProfile, meta: { title: 'Meu Perfil' }},
+    { path: '/my-contacts', component: MyContacts, meta: { title: 'Meus Contatos' }}
 ];
 
-// Criando um histórico de rotas para facilitar a navegação entre as páginas. Página anterior e posterior.
+// Criando o router
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),
     routes
+});
+
+// Atualizando o título da página dinamicamente
+router.afterEach((to) => {
+    const defaultTitle = 'IP Repository'; // Título padrão
+    document.title = to.meta.title ? `${to.meta.title} - ${defaultTitle}` : defaultTitle;
 });
 
 const App = {
