@@ -359,6 +359,7 @@ main {
                         font-size: 0.9rem;
                         font-family: @roboto-regular;
                         margin: 1rem 0rem 0rem 0rem;
+                        cursor: pointer;
                     }
 
                     & input:focus,
@@ -432,14 +433,16 @@ main {
                             0% {
                                 transform: translateY(0rem);
                             }
+
                             50% {
                                 transform: translateY(.2rem);
                             }
+
                             100% {
                                 transform: translateY(0rem);
                             }
                         }
-                        
+
                         & p {
                             margin: .4rem 0 .8rem 0;
                             color: @lighten-black;
@@ -579,7 +582,7 @@ main {
                     width: calc(17rem + 5%);
                     padding: 0 1rem 1rem 0;
                     height: 10rem;
-                    overflow-y: auto;                    
+                    overflow-y: auto;
                 }
 
                 & .teacher-section,
@@ -732,9 +735,11 @@ main {
                     0% {
                         transform: translateX(0rem);
                     }
+
                     50% {
                         transform: translateX(0.5rem);
                     }
+
                     100% {
                         transform: translateX(0rem);
                     }
@@ -752,7 +757,7 @@ main {
     & .left-content {
         & figure {
             & img {
-                max-width: 80%;   
+                max-width: 80%;
             }
         }
     }
@@ -841,7 +846,10 @@ main {
 
 #home {
     & .dinamic-content {
+        min-width: 65vw;
+
         .form-content {
+
             & .box-search {
                 width: 100%;
 
@@ -1005,6 +1013,7 @@ main {
                     & button {
                         text-transform: capitalize;
                         padding: 0.5rem 1rem 0.5rem 1rem;
+                        min-width: 100px;
                     }
 
                     & button:hover {
@@ -1177,7 +1186,7 @@ main {
                     width: 100%;
                 }
             }
-           
+
         }
 
         & .section-files {
@@ -1200,6 +1209,7 @@ main {
                 background-color: lighten(@quaternary-white, 5%);
                 padding: 0.8rem;
                 border-radius: .2rem;
+                word-break: break-all;
 
                 & .left-data,
                 .right-data {
@@ -1240,7 +1250,7 @@ main {
                     text-transform: uppercase;
                     padding-bottom: 0.5rem;
                     font-size: 0.9rem;
-                    
+
                 }
 
                 & div>p {
@@ -1259,21 +1269,21 @@ main {
                 font-size: 0.9rem;
                 position: absolute;
 
-                    &:before {
-                        content: "";
-                        position: absolute;
-                        bottom: -.1rem;
-                        left: 0;
-                        width: 0;
-                        height: .1rem;
-                        background-color: @terciary-red;
-                        transition: width 0.4s ease;
-                    }
-    
-    
-                    &:hover:before {
-                        width: 100%;
-                    }
+                &:before {
+                    content: "";
+                    position: absolute;
+                    bottom: -.1rem;
+                    left: 0;
+                    width: 0;
+                    height: .1rem;
+                    background-color: @terciary-red;
+                    transition: width 0.4s ease;
+                }
+
+
+                &:hover:before {
+                    width: 100%;
+                }
             }
         }
 
@@ -1353,7 +1363,9 @@ main {
         }
     }
 
-    & .new-project-card:hover, .new-teacher-card:hover, .new-curse-card:hover {
+    & .new-project-card:hover,
+    .new-teacher-card:hover,
+    .new-curse-card:hover {
         transform: translateY(-.1rem);
     }
 
@@ -1447,12 +1459,15 @@ main {
                 }
 
             }
+
             & .btn-editar:hover {
                 transform: scale(1.05);
             }
         }
 
-        & .project:hover, .teacher:hover, .curse:hover {
+        & .project:hover,
+        .teacher:hover,
+        .curse:hover {
             transform: translateX(.2rem);
         }
     }
@@ -1514,7 +1529,7 @@ main {
                 & .teacher-name:hover {
                     transform: translateX(.2rem);
                 }
-                
+
                 & .teacher-expertise:hover {
                     transform: translateX(.2rem);
                 }
@@ -1618,7 +1633,7 @@ main {
                         left: 0;
                         width: 0;
                         height: 2px;
-                        
+
                         background-color: @terciary-red;
                         transition: width 0.4s ease;
                     }
@@ -1744,18 +1759,28 @@ main {
 //Mobile
 @media (max-width: 767px) {
     main {
+        width: 100%;
         & .dinamic-content {
+            width: 100%;
             padding: 4.5rem 1rem 0rem 1rem;
-     
-            & ,.form-content {
-                & form{
-                    & .form-inputs{
-                        & .description{
+
+            & .form-content {
+                & form {
+                    & .form-inputs {
+                        & .description {
                             width: 16rem;
                         }
                     }
                 }
             }
+        }
+    }
+
+    #project{
+        & .dinamic-content{
+            width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
     }
 
@@ -1841,10 +1866,11 @@ main {
 
                 & .section-middle {
                     gap: 1rem;
+
                     & .statistic {
                         & .graphic {
-                            min-width: 100%!important;
-                            width: 100%!important;
+                            min-width: 100% !important;
+                            width: 100% !important;
                         }
                     }
                 }
@@ -1914,16 +1940,17 @@ main {
                 }
             }
         }
-    }
-    & .btn-change {
-        transform: translateY(-.6rem);
-    }
+    
+        & .btn-change {
+            transform: translateY(-.6rem);
+        }
 
-    & .btn-change:hover {
-        transform: translateY(-.8rem);
-    }
+        & .btn-change:hover {
+            transform: translateY(-.8rem);
+        }
 
-    & ul>li:hover {
-        transform: translateX(.2rem);
+        & ul>li:hover {
+            transform: translateX(.2rem);
+        }
     }
 }

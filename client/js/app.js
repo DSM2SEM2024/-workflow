@@ -1,4 +1,5 @@
 // Importando os arquivos através do caminho e atribuindo o seu identificador
+import { Header } from './components/header.js';
 import { Login } from './pages/login.js';
 import { Home } from './pages/home.js';
 import { ManagementPage } from './pages/management.js';
@@ -21,9 +22,10 @@ import { MyContacts } from './components/my-contacts.js';
 
 // Definindo as rotas através desse identificador
 const routes = [
+    { path: '/header', component: Header },
     { path: '/', component: Home, meta: { title: 'Home' }},
     { path: '/login', component: Login, meta: { title: 'Login' }},
-    { path: '/management', component: ManagementPage, meta: { title: 'Gestão' }},
+    { path: '/management', component: ManagementPage, meta: { title: 'Gestão de Projetos' }},
     { path: '/management-teachers', component: ManagementTeachers, meta: { title: 'Gestão de Professores' }},
     { path: '/management-curses', component: ManagementCurses, meta: { title: 'Gestão de Cursos' }},
     { path: '/management-unities', component: ManagementUnities, meta: { title: 'Gestão de Unidades' }},
@@ -34,7 +36,6 @@ const routes = [
     { path: '/register-unit', component: RegisterUnit, meta: { title: 'Registrar Unidade' }},
     { path: '/teachers-area/:id', component: TeachersArea, meta: { title: 'Área do Docente' }},
     { path: '/create-password/:email', component: CreatePassword, meta: { title: 'Criar Senha' }},
-      
     { path: '/register-course', component: RegisterCourse, meta: { title: 'Registrar Curso' }},
     { path: '/coordinators-area', component: CoordinatorsArea, meta: { title: 'Área do Coordenador' }},
     { path: '/my-data', component: MyData, meta: { title: 'Meus Dados' }},
@@ -77,54 +78,10 @@ const App = {
             this.isMenuOpen = !this.isMenuOpen;
         }
     },
-    // components: {
-    //     Footer
-    // },
     // Aplicando o template header padrão em todas as views (páginas) dinamicamente
     // Depois do conteúdo (páginas), implementa-se o footer na ordem em cascata
     template: `
         <div class="d-flex justify-content-start flex-row h-100">
-            <header class="d-flex flex-column align-items-center h-100 d-none d-md-flex">
-                <nav class="d-flex flex-column justify-content-between gap-5 h-100">
-                    <!-- Menu lateral -->
-                    <div class="d-flex flex-column justify-content-between gap-5">
-                        <router-link to="/">
-                            <img class="icon" src="../images/icon-home.png" alt="Home">
-                        </router-link>
-                        <router-link to="/">
-                            <img class="icon" src="../images/search.png" alt="Search">
-                        </router-link>
-                        <router-link to="/my-projects">
-                            <img class="icon" src="../images/colletion.png" alt="My Projects">
-                        </router-link>       
-                    </div>
-
-                    
-                    <div class="cps-icon">
-                        <img class="icon" src="../images/logo-cps.png" alt="CPS Logo">
-                    </div>
-                </nav>
-            </header>
-
-            <div class="d-md-none position-relative">
-                <button class="navbar-toggler position-absolute d-flex justify-content-center align-items-center burger-button" type="button" @click="toggleMenu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div v-if="isMenuOpen" class="menu-overlay position-fixed top-0 left-0 w-100 h-100 bg-white d-flex justify-content-center align-items-center">
-                    <nav class="d-flex flex-column justify-content-center align-items-center gap-5 h-100">
-                        <router-link to="/" @click="toggleMenu">
-                            <p>Home</p>
-                        </router-link>
-                        <router-link to="/" @click="toggleMenu">
-                            <p>Pesquisar</p>
-                        </router-link>
-                        <router-link to="/my-projects" @click="toggleMenu">
-                            <p>Meus projetos</p>
-                        </router-link>
-                    </nav>
-                </div>
-            </div>
-
             <router-view></router-view>
         </div>
     `,

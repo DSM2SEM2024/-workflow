@@ -2,9 +2,11 @@ import { backend_url } from "../global-var/backend-url.js";
 import { urlBase } from "../global-var/url-base.js";
 import { dateFormatter } from "../functions/date-formatter.js";
 import { semChecker } from "../functions/sem-checker.js";
+import { Header } from "../components/header.js";
 
 export const Project = {
     template: `
+        <Header></Header>
         <main id="project" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-between align-items-center">
@@ -47,9 +49,7 @@ export const Project = {
                                 <img class="icon" src="../images/icon-upload.png" alt="Projeto Interdisciplinar">
                             </a>
                         </div>
-
                     </div>
-
                 </div>  
 
                 <div class="section-info">
@@ -91,6 +91,9 @@ export const Project = {
             </section>
         </main>
     `,
+    components: {
+        Header
+    },
     data() {
         return {
             project: {

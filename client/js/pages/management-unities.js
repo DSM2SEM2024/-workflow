@@ -1,8 +1,10 @@
 import { validateAccess } from "../functions/validate-access.js";
 import { backend_url } from "../global-var/backend-url.js";
+import { Header } from "../components/header.js";
 
 export const ManagementUnities = {
     template: `
+    <Header></Header>
     <main id="management-unities" class="d-flex justify-content-evenly align-items-center flex-row">
         <section class="dinamic-content">
             <div class="page-section d-flex justify-content-start align-items-center">
@@ -27,7 +29,10 @@ export const ManagementUnities = {
             </div>
         </section>
     </main>
-`,
+    `,
+    components: {
+        Header
+    },
     data() {
         return {
             curses: [],
