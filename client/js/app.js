@@ -32,7 +32,7 @@ const routes = [
     { path: '/my-projects', component: MyProjects, meta: { title: 'Meus Projetos' }},
     { path: '/project/:id', component: Project, meta: { title: 'Projeto' }},
     { path: '/register-unit', component: RegisterUnit, meta: { title: 'Registrar Unidade' }},
-    { path: '/teachers-area', component: TeachersArea, meta: { title: 'Área do Docente' }},
+    { path: '/teachers-area/:id', component: TeachersArea, meta: { title: 'Área do Docente' }},
     { path: '/create-password/:email', component: CreatePassword, meta: { title: 'Criar Senha' }},
       
     { path: '/register-course', component: RegisterCourse, meta: { title: 'Registrar Curso' }},
