@@ -15,7 +15,7 @@ export const TeachersArea = {
         <Header></Header>
         <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
-                <MyProfile :professor_name="professor.Name" :id="id" :img="pfp"></MyProfile>
+                <MyProfile :id="id" :img="pfp" :professor="professor" :units="units" :courses="courses" ></MyProfile>
 
                 <div class="section section-career">
                     <h4>Graduação</h4>
@@ -47,7 +47,7 @@ export const TeachersArea = {
                     </div>
                 </section>
 
-               <MyContacts></MyContacts>
+               <MyContacts :id="id" :units="units" :professor="professor"></MyContacts>
             </div>
         </main>
     `,
@@ -59,7 +59,9 @@ export const TeachersArea = {
                 Profile_Picture: ''
             },
             id: window.location.href.split('/teachers-area/')[1],
-            projects: []
+            projects: [],
+            units: [],
+            courses: [],
         }
     },
     inject: ['urlBase'],
@@ -130,6 +132,23 @@ export const TeachersArea = {
             .then(response=>response.json())
             .then(response=>{
                 this.projects = response.data;
+                
+            })
+        },
+        getUnits(){
+            let url = backend_url+'/unitByProfessor/'+this.id;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                this.units = response.data;
+            })
+        },
+        getCourses(){
+            let url = backend_url+'/courseByProfessor/'+this.id;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                this.courses = response.data;
                 Swal.close();
             })
         }
@@ -138,5 +157,7 @@ export const TeachersArea = {
     created() {
         this.fetchData();
         this.getProjects();
+        this.getUnits();
+        this.getCourses();
     }
 };

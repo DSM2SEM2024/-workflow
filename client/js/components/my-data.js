@@ -1,4 +1,5 @@
 import { navigate } from "../functions/navigate.js";
+import { backend_url } from "../global-var/backend-url.js";
 
 export const MyData = {
     template: `
@@ -44,10 +45,7 @@ export const MyData = {
                             <!-- Insira um foreach com todas as unidades das quais o professor/coordenador faz parte (só visualização) -->
                             <h4>Unidades:</h4>
                             <ul>
-                                <li v-for="unity in units">{{unity}}</li>
-                                <li>Fatec Mauá</li>
-                                <li>Fatec Mogi das Cruzes</li>
-                                <li>Fatec Guaratinguetá</li>
+                                <li v-for="unit in units">{{unit.Unit_Name}}</li>
                             </ul>
                         </div>    
                         <!-- Insira um foreach com todos os cursos dos quais o professor ministra (só visualização) -->
@@ -55,10 +53,7 @@ export const MyData = {
                             <h4>Cursos:</h4>
                                 
                             <ul>
-                                <li v-for="curse in curses">{{curse}}</li>
-                                <li>Design Digital</li>
-                                <li>Desenvolvimento de Sistemas</li>
-                                <li>Desenvolvimento Web</li>
+                                <li v-for="course in courses">{{course.Course_Name}}</li>
                             </ul>
                         </div>    
                     </div>
@@ -87,6 +82,18 @@ export const MyData = {
             password: 'as547d!d9f',
             // units: ['Fatec Mauá', 'Fatec Mogi das Cruzes', 'Fatec Guaratinguetá'],
             // curses: ['Design Digital', 'Desenvolvimento de Sistemas', 'Desenvolvimento Web']
+            courses:[]
+        }
+    },
+    props:{
+        professor:{
+            required: true
+        },
+        units:{
+            required: true
+        },
+        courses:{
+            required: true
         }
     },
     inject: ['urlBase'],
@@ -96,9 +103,10 @@ export const MyData = {
         },
         save() {
         },
-        navigate
+        navigate,
     },
     created() {
+        console.log(this.courses)
     }
 };
 

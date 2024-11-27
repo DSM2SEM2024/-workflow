@@ -3,6 +3,7 @@ namespace Src\Controller;
 use Src\Model\Course;
 use Src\Model\Unit;
 use Src\Repository\CourseRepository;
+use Src\Model\Professor;
 
 class CourseController {
 
@@ -18,6 +19,17 @@ class CourseController {
         $repo = new CourseRepository();
 
         echo json_encode($repo->selectByUnit($unit));
+
+    }
+
+    public function getByProfessor($id){
+        
+        $professor = new Professor();
+        $professor->setId($id);
+        $repo = new CourseRepository();
+        
+        echo json_encode($repo->selectByProfessor($professor));
+
 
     }
 

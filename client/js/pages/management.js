@@ -12,6 +12,11 @@ export const ManagementPage = {
                 </div>
                 <div class="page-content d-flex justify-content-start align-items-start flex-column">
                     <div class="new-project-card">
+                        <h1>Acessar meu perfil</h1>
+                        <h2>Veja e manuseie seu perfil público dentro do sistema.</h2>
+                        <button class="btn-red" @click="(this.$router.push('/teachers-area/'+id))">Abrir perfil</button>
+                    </div>
+                    <div class="new-project-card">
                         <h1>Crie um novo Projeto Interdisciplinar</h1>
                         <h2>Gerencie os Projetos através da central de gerenciamento. Crie e atualize Projetos existentes.</h2>
                         <button class="btn-red" @click="(this.$router.push('/create-project'))">+ Criar Projeto</button>
@@ -39,6 +44,8 @@ export const ManagementPage = {
             // password: null
             base_host: window.location.href.split('#')[0],
             projects: [],
+            id: '',
+            token: window.localStorage.getItem('reposystem_token')
         };
     },
     inject: ['urlBase'],
@@ -51,12 +58,13 @@ export const ManagementPage = {
             // this.email;
         },
         getProjectByProfessor(){
+            Swal.showLoading();
             let token = window.localStorage.getItem("reposystem_token");
             let options = {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${this.token}`,
                 }
             }
 
@@ -68,6 +76,22 @@ export const ManagementPage = {
             }
             )
 
+        },
+        getIdByToken(){
+            let url = backend_url+'/idByToken';
+            let options = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${this.token}`,
+                }
+            }
+            fetch(url,options)
+            .then(response=>response.json())
+            .then(response=>{
+                this.id = response.ID_Professor;
+                Swal.close();
+            })
         },
         defStatus(status){
             if(status==0){
@@ -83,5 +107,6 @@ export const ManagementPage = {
     created() {
         validateAccess('professor');
         this.getProjectByProfessor();
+        this.getIdByToken();
     }
 };

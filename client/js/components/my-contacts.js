@@ -7,11 +7,7 @@ export const MyContacts = {
             <h4>Contato</h4>
             <div class="d-flex flex-row justify-content-start align-items-center gap-2">
                 <img class="icon" src="../images/icon-email.png" alt="Projeto Interdisciplinar">
-                <a href="">fretz.junior@fatec.sp.gov.br</a>
-            </div>
-            <div class="d-flex flex-row justify-content-start align-items-center gap-2">
-                <img class="icon" src="../images/icon-linkedin.png" alt="Projeto Interdisciplinar">
-                <a href="">Frets Sievers Júnior</a>
+                <a :href="('mailto:'+professor.Email)">{{professor.Email}}</a>
             </div>
         </div>
 
@@ -19,10 +15,7 @@ export const MyContacts = {
             <h4>Instituição</h4>
 
             <div class="list d-flex flex-column align-items-start">
-                <p>Fatec Itaquera - Prof° Miguel Reale</p>
-                <p>Fatec Mogi das Cruzes</p>
-                <p>Fatec Ferraz de Vasconcelos</p>
-                <p>Fatec Mauá</p>
+                <p v-for="unit in units">{{unit.Unit_Name}}</p>
 
             </div>
 
@@ -33,6 +26,17 @@ export const MyContacts = {
         return {
         }
     },
+    props:{
+        id:{
+            required: true
+        },
+        professor:{
+            required: true
+        },
+        units:{
+            required: true
+        }
+    },
     inject: ['urlBase'],
     methods: {
         gerarSlug(titulo) {
@@ -40,7 +44,7 @@ export const MyContacts = {
         },
         save() {
         },
-        navigate
+        navigate,
     },
     created() {
     }

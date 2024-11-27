@@ -23,10 +23,13 @@ class Routes {
                 '/projectProf/{id}' => [ProjectController::class, 'getProjectByProfId'],
                 '/cover' => [FileController::class, 'getCover'],
                 '/course' => [CourseController::class, 'list'],
-                '/professor/{id}' => [ProfessorController::class, 'getById']
+                '/professor/{id}' => [ProfessorController::class, 'getById'],
+                '/idByToken' => [ProfessorController::class, 'getIdByToken'],
+                '/unitByProfessor/{id}' => [UnitController::class, 'getByProfessor'],
+                '/courseByProfessor/{id}' => [CourseController::class, 'getByProfessor']
             ],
             'POST' => [
-                '/professor/login' => [ProfessorController::class, 'login'],
+                '/login' => [UserController::class, 'loginSwitch'],
                 '/user/create' => [UserController::class, 'userSwitch'],
                 '/token/validateAccess' => [TokenController::class, 'verifyPermission'],
                 '/project/create' => [ProjectController::class, 'create'],

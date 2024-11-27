@@ -22,8 +22,8 @@ export const MyProfile = {
 
             <div class="d-flex flex-row justify-content-between align-items-start w-100">
                 <div class="profile-apresentation d-flex justify-content-start flex-column">
-                    <h2 class="teacher-name">Professor {{professor_name}}</h2>
-                    <p class="teacher-expertise">Graduado em Engenharia da Computação</p>
+                    <h2 class="teacher-name">Professor {{professor.Name}}</h2>
+                    <p class="teacher-expertise">{{professor.Area_of_Expertise}}</p>
                 </div>
                 <button class="btn-configuration" @click="toggleMyData"> 
                     <img class="icon" src="../images/icon-configuration.png" alt="Projeto Interdisciplinar">
@@ -32,7 +32,7 @@ export const MyProfile = {
             </div>
         </div>
 
-        <MyData v-if="showMyData"></MyData>
+        <MyData v-if="showMyData" :professor="professor" :units="units" :courses="courses"></MyData>
 
     `,
     data() {
@@ -44,15 +44,20 @@ export const MyProfile = {
         }
     },
     props:{
-        professor_name:{
-            type: String,
-            required: false
-        },
         id:{
-            required: false
+            required: true
         },
         img:{
             type: String,
+            required: true
+        },
+        professor:{
+            required: true
+        },
+        units:{
+            required: true
+        },
+        courses: {
             required: true
         }
     },
@@ -79,7 +84,6 @@ export const MyProfile = {
 
             let formData = new FormData();
             formData.append('pfp', selecionados[0]);
-            console.log(formData.getAll('pfp'));
             let url = backend_url+'/profilePicture/'+this.id;
             let options = {
                 method: 'POST',

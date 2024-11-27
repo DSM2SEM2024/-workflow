@@ -11,6 +11,7 @@ class Professor {
     private string $password;
     private File $pfp;
     private $unit;
+    private $course;
 
 
     /**
@@ -140,4 +141,18 @@ class Professor {
         $this->pfp = $pfp;
     }
 
+
+    /**
+     * Get the value of course
+     */
+    public function getCourse() {
+        return $this->course;
+    }
+
+    /**
+     * Set the value of course
+     */
+    public function setCourse($course) {
+        $this->course = $course;
+    }
 }

@@ -10,7 +10,6 @@ use Src\Repository\MailRepository;
 class MailController {
 
     public function requestPassword($name, $email, $id, $role){
-
         $data = json_decode(file_get_contents('php://input'),true);
         if($role=='professor'){
             $cargo = 'Professor';

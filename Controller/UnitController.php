@@ -2,6 +2,7 @@
 namespace Src\Controller;
 use Src\Model\Unit;
 use Src\Repository\UnitRepository;
+use Src\Model\Professor;
 
 class UnitController {
 
@@ -22,6 +23,17 @@ class UnitController {
         $unit->setAddress($data['Address']);
 
         echo json_encode($repo->insert($unit));
+
+    }
+
+    public function getByProfessor($id){
+        
+        $professor = new Professor();
+        $professor->setId($id);
+        $repo = new UnitRepository();
+        
+        echo json_encode($repo->selectByProfessor($professor));
+
 
     }
 

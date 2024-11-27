@@ -64,7 +64,7 @@ export const CreateUser = {
                                         <div class="d-flex flex-row align-items-end gap-3">
                                             <select v-model="course" class="curse">
                                                 <option value="">Curso</option>
-                                                <option value="dsm">Desenv. de Software Multiplataforma</option>
+                                                <option value="1">Desenv. de Software Multiplataforma</option>
                                             </select>
                                             <img class="icon" src="../images/icon-add.png" alt="Expandir">
                                         </div>
@@ -96,14 +96,14 @@ export const CreateUser = {
 
                             <div class="form-inputs d-flex justify-content-start d-column flex-wrap">
                                 <div class="d-flex flex-column align-items-start">
-                                    <input type="text" name="degree" placeholder="Formação">
+                                    <input v-model="expertise" type="text" name="degree" placeholder="Formação">
                                     <p class="message-error error-degree"></p>
                                 </div>
 
                                 <div class="d-flex flex-column align-items-start">
                                     <select v-model="course" class="curse">
                                         <option value="">Curso</option>
-                                        <option value="dsm">Desenv. de Software Multiplataforma</option>
+                                        <option value="1">Desenv. de Software Multiplataforma</option>
                                     </select>
                                     <p class="message-error error-curse"></p>
                                 </div>
@@ -154,6 +154,7 @@ export const CreateUser = {
     data() {
         return {
             career: '',
+            expertise: '',
             roles: [
                 {
                     value: 'professor',
@@ -241,13 +242,16 @@ export const CreateUser = {
                     name: this.name,
                     email: this.email,
                     role: this.role,
-                    unit: this.unit
+                    unit: this.unit,
+                    expertise: this.expertise,
+                    course: this.course
                 })
             }
-            console.log('Mail request');
+            
             fetch(url, options)
             .then(response=>response.json())
             .then(response=>{
+                console.log(response)
                 if(response.status==true){
                     Swal.fire({
                         title: 'Solicitação enviada',
