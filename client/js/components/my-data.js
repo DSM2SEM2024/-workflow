@@ -82,7 +82,6 @@ export const MyData = {
             password: 'as547d!d9f',
             // units: ['Fatec Mauá', 'Fatec Mogi das Cruzes', 'Fatec Guaratinguetá'],
             // curses: ['Design Digital', 'Desenvolvimento de Sistemas', 'Desenvolvimento Web']
-            courses:[]
         }
     },
     props:{
@@ -104,9 +103,15 @@ export const MyData = {
         save() {
         },
         navigate,
+        render(){
+            this.name = this.professor.Name;
+            this.email = this.professor.Email;
+            this.expertise = this.professor.Area_of_Expertise;
+            this.password = '';
+        }
     },
     created() {
-        console.log(this.courses)
+        this.render();
     }
 };
 

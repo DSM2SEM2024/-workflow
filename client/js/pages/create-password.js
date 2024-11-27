@@ -73,7 +73,6 @@ export const CreatePassword = {
                 fetch(url, options)
                 .then(response=>response.json())
                 .then(response=>{
-                    console.log(response);
                     if(response.status==true){
                         Swal.close();
                         this.$router.push('/login');

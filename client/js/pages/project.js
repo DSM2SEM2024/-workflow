@@ -11,7 +11,7 @@ export const Project = {
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-between align-items-center">
                     <h2>Informações do Projeto</h2>
-                    <button class="edit-button" v-if="isProfessor" @click="toggleUpdate">{{edit_btn_txt}}</button>
+                    <button class="edit-button" v-if="isProfessor" @click="navi">{{edit_btn_txt}}</button>
                 </div>
 
                 <div class="section-data d-flex flex-column align-items-start gap-1">
@@ -96,6 +96,7 @@ export const Project = {
     },
     data() {
         return {
+            id: window.location.href.split('project/')[1],
             project: {
                 ID_Project: window.location.href.split('project/')[1]
             },
@@ -109,6 +110,9 @@ export const Project = {
     },
     inject: ['urlBase'],
     methods: {
+        navi(){
+            this.$router.push('/update-project/'+this.id);
+        },
         gerarSlug(titulo) {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },

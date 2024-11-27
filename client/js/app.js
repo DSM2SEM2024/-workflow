@@ -19,6 +19,7 @@ import { MyData } from './components/my-data.js';
 import { MyProfile } from './components/my-profile.js';
 import { MyProjects } from './components/my-projects.js';
 import { MyContacts } from './components/my-contacts.js';
+import { UpdateProject } from './pages/update-project.js';
 
 // Definindo as rotas através desse identificador
 const routes = [
@@ -44,7 +45,9 @@ const routes = [
     { path: '/coordinators-area', component: CoordinatorsArea, meta: { title: 'Área do Coordenador' }},
     { path: '/my-data', component: MyData, meta: { title: 'Meus Dados' }},
     { path: '/my-profile', component: MyProfile, meta: { title: 'Meu Perfil' }},
-    { path: '/my-contacts', component: MyContacts, meta: { title: 'Meus Contatos' }}
+    { path: '/my-contacts', component: MyContacts, meta: { title: 'Meus Contatos' }},
+    { path: '/update-project/:id', component: UpdateProject, meta: { title: 'Atualizar Projeto' }},
+    { path: '/update-project', redirect: '/'}
 ];
 
 // Criando o router

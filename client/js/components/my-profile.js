@@ -9,7 +9,7 @@ export const MyProfile = {
         <div class="section-top d-flex justify-content-start align-items-start flex-row gap-5">
             <div class="profile-picture" :style="
                 ('background-image: url('+img+')')"> <!-- onde fica a foto? -->
-                <button class="btn-send-photo" @click="uploadPhoto">
+                <button v-if="editable" class="btn-send-photo" @click="uploadPhoto">
                     <img src="../images/icon-sendphoto.png">
                     <form style="display: none" enctype="multipart/form-data">
                         <input type="file" ref="pfp" @change="savePhoto" accept=".jpg, .png">
@@ -25,7 +25,7 @@ export const MyProfile = {
                     <h2 class="teacher-name">Professor {{professor.Name}}</h2>
                     <p class="teacher-expertise">{{professor.Area_of_Expertise}}</p>
                 </div>
-                <button class="btn-configuration" @click="toggleMyData"> 
+                <button v-if="editable" class="btn-configuration" @click="toggleMyData"> 
                     <img class="icon" src="../images/icon-configuration.png" alt="Projeto Interdisciplinar">
                     </i>{{ showMyData ? '': '' }}
                 </button>
@@ -41,6 +41,7 @@ export const MyProfile = {
             pfp: null,
             src: 'https://picsum.photos/200',
             token: window.localStorage.getItem('reposystem_token'),
+            editable: false
         }
     },
     props:{
@@ -59,6 +60,16 @@ export const MyProfile = {
         },
         courses: {
             required: true
+        },
+        yours:{
+            required: true
+        }
+    },
+    watch:{
+        yours(newer, older){
+            if(newer){
+                this.editable = true;
+            }
         }
     },
     inject: ['urlBase'],
@@ -111,10 +122,17 @@ export const MyProfile = {
                 })
             });
         },
+        isYours(){
+            console.log(this.yours)
+            if(this.yours==true){
+                this.editable = true;
+            }
+        }
         
     },
     created() {
         this.handleImg();
+        this.isYours();
     }
 };
 

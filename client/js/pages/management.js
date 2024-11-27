@@ -71,7 +71,6 @@ export const ManagementPage = {
             fetch(backend_url+ '/projectByProf', options)
             .then(response=> response.json())
             .then(response=>{
-                console.log(response),
                 this.projects = response.data
             }
             )

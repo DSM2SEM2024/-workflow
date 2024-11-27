@@ -135,7 +135,6 @@ export const Home = {
                 }
                 this.listImages();
                 this.renderedProjects = this.projects;
-                console.log(this.projects)
             })
         },
         validateLogin(){

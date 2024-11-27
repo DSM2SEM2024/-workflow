@@ -26,7 +26,8 @@ class Routes {
                 '/professor/{id}' => [ProfessorController::class, 'getById'],
                 '/idByToken' => [ProfessorController::class, 'getIdByToken'],
                 '/unitByProfessor/{id}' => [UnitController::class, 'getByProfessor'],
-                '/courseByProfessor/{id}' => [CourseController::class, 'getByProfessor']
+                '/courseByProfessor/{id}' => [CourseController::class, 'getByProfessor'],
+                '/verifyTeachersPage/{id}' =>[TokenController::class, 'verifyTeachersPage']
             ],
             'POST' => [
                 '/login' => [UserController::class, 'loginSwitch'],

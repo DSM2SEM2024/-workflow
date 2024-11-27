@@ -15,9 +15,9 @@ export const TeachersArea = {
         <Header></Header>
         <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
-                <MyProfile :id="id" :img="pfp" :professor="professor" :units="units" :courses="courses" ></MyProfile>
+                <MyProfile :yours="yours" :id="id" :img="pfp" :professor="professor" :units="units" :courses="courses" ></MyProfile>
 
-                <div class="section section-career">
+                <!--<div class="section section-career">
                     <h4>Graduação</h4>
 
                     <div class="list d-flex flex-column align-items-start">
@@ -26,7 +26,7 @@ export const TeachersArea = {
                         <p>Tecnologia em Análise e Desenvolvimento de Sistemas</p>
                         <p>Mestrado em Engenharia Eletrônica e Computação pelo Instituto Tecnológico de Aeronáutica (ITA)</p>
                     </div>
-                </div>
+                </div> -->
 
                 <section class="teachers-projects">
                     <div class="title-section">
@@ -62,6 +62,8 @@ export const TeachersArea = {
             projects: [],
             units: [],
             courses: [],
+            token: window.localStorage.getItem('reposystem_token'),
+            yours: false,
         }
     },
     inject: ['urlBase'],
@@ -151,11 +153,30 @@ export const TeachersArea = {
                 this.courses = response.data;
                 Swal.close();
             })
+        },
+        isYours(){
+            let url = `${backend_url}/verifyTeachersPage/${this.id}`;
+            let options = {
+                method: 'GET',
+                mode: 'cors',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }
+            fetch(url,options)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status){
+                    this.yours = true;
+                }
+            })
         }
 
     },
     created() {
         this.fetchData();
+        this.isYours();
         this.getProjects();
         this.getUnits();
         this.getCourses();
