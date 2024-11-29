@@ -10,6 +10,7 @@ use Src\Repository\MailRepository;
 class MailController {
 
     public function requestPassword($name, $email, $id, $role){
+        $redirect_href = 'https://dsm2sem2024.github.io/-workflow';
         $data = json_decode(file_get_contents('php://input'),true);
         if($role=='professor'){
             $cargo = 'Professor';
@@ -56,7 +57,7 @@ class MailController {
                             </p>
                             <p>Atenciosamente,</p>
                             <p>$mail_name</p>
-                            <a href='http://localhost:8080/#/create-password/$token'>Avançar para criação de senha</a> \n\n
+                            <a href='$redirect_href/#/create-password/$token'>Avançar para criação de senha</a> \n\n
                             <a href='http://localhost:70/user/remove/$id'>Recusar cadastro</a>";
 
             $mail->send();
