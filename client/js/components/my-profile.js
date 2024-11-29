@@ -22,7 +22,7 @@ export const MyProfile = {
 
             <div class="d-flex flex-row justify-content-between align-items-start w-100">
                 <div class="profile-apresentation d-flex justify-content-start flex-column">
-                    <h2 class="teacher-name">Professor {{professor.Name}}</h2>
+                    <h2 class="teacher-name">Professor(a) {{professor.Name}}</h2>
                     <p class="teacher-expertise">{{professor.Area_of_Expertise}}</p>
                 </div>
                 <button v-if="editable" class="btn-configuration" @click="toggleMyData"> 

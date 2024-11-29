@@ -6,7 +6,7 @@ export const MyData = {
     <section v-show="showMyData" id="my-data" class="d-flex justify-content-evenly align-items-center flex-row">
         <div class="dinamic-content">
             <div class="form-content">
-                <form>
+                <form @submit.prevent>
                     <!-- Deixe todas as informações do usuário já carregadas nos inputs. -->
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Minhas informações</h3>
@@ -21,7 +21,7 @@ export const MyData = {
 
                         <div class="d-flex flex-column align-items-start">
                             <input type="email" name="email" placeholder="E-mail" v-model="email">
-                            <p class="message-error error-email"></p>
+                            <p v-if="invalidEmail" class="message-error error-email">Insira um e-mail em formato válido</p>
                         </div>
                     </div>
 
@@ -29,15 +29,15 @@ export const MyData = {
                     <div class="form-inputs d-flex justify-content-start align-items-start flex-row flex-wrap">
                         <div v-if="typeUser === 'teacher'" class="d-flex flex-column align-items-start">                            
                             <input type="text" name="expertise" placeholder="Formação" v-model="expertise">
-                            <p class="message-error error-expertise">Mensagem de erro</p>
+                            <p class="message-error error-expertise"></p>
                         </div>
                         <div class="form-inputs d-flex justify-content-start align-items-start flex-row">
                             <div class="d-flex flex-column align-items-start">                            
                                 <input type="password" name="password" placeholder="Digite a sua senha..." v-model="password">
-                                <p class="message-error error-password">Teste mensagem de erro</p>
+                                <p v-if="invalidPassword" class="message-error error-password">Senha muito curta (mínimo 8 caracteres)</p>
                             </div>
                         </div>                        
-                            <button class="btn-change" @click="changePassword">Alterar senha</button>
+                            <button class="btn-change" @click="verifyForPassword">Alterar senha</button>
                     </div>
 
                     <div class="section-list d-flex justify-content-start flex-row gap-4">                               
@@ -61,7 +61,7 @@ export const MyData = {
                     <hr class="line-password">
 
                     <div class="form-footer d-flex justify-content-between d-row align-items-start">
-                        <button click="updateMyData" class="btn-create">Atualizar informações ‎ |
+                        <button @click="verifyForUpdate" class="btn-create">Atualizar informações ‎ |
                             <img class="icon" src="./images/next.png" alt="Expandir">
                         </button>
                     </div>
@@ -79,7 +79,9 @@ export const MyData = {
             name: 'Usuário',
             email: 'usuario@fatec.sp.gov.br',
             expertise: 'Graduado em Engenharia da Computação',
-            password: 'as547d!d9f',
+            password: '',
+            invalidEmail: false,
+            invalidPassword: false,
             // units: ['Fatec Mauá', 'Fatec Mogi das Cruzes', 'Fatec Guaratinguetá'],
             // curses: ['Design Digital', 'Desenvolvimento de Sistemas', 'Desenvolvimento Web']
         }
@@ -100,7 +102,83 @@ export const MyData = {
         gerarSlug(titulo) {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
-        save() {
+        validarEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        },
+        verifyForUpdate(){
+            if(!this.validarEmail(this.email)){
+                this.invalidEmail = true;
+                this.emailAlert = 'Insira um e-mail válido';
+            } else {
+                this.invalidEmail = false;
+            }
+            if(this.validarEmail(this.email)){
+                this.updateMyData();
+            }
+        },
+        verifyForPassword(){
+            if(this.password.length<8){
+                this.invalidPassword = true;
+                this.passwordAlert = 'Senha muito curta (min: 8 caracteres)';
+            } else {
+                this.invalidPassword = false;
+                this.updatePassword();
+            }
+        },
+        updateMyData() {
+            Swal.showLoading();
+            let url = `${backend_url}/update/${this.professor.ID_Professor}`;
+            let options = {
+                method: 'PUT',
+                mode: 'cors',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    name: this.name,
+                    email: this.email,
+                    expertise: this.expertise
+                })
+            }
+
+            fetch(url,options)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status){
+                    Swal.close();
+                    location.reload(true);
+                }
+            })
+
+        },
+        updatePassword() {
+            Swal.showLoading();
+            let url = `${backend_url}/updatePassword/${this.professor.ID_Professor}`;
+            let options = {
+                method: 'PUT',
+                mode: 'cors',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    password: this.password
+                })
+            }
+
+            fetch(url,options)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status){
+                    Swal.fire({
+                        title: 'Atualização bem sucedida',
+                        text: response.message,
+                        icon: 'success'
+                    });
+                    this.password = '';
+                }
+            })
+
         },
         navigate,
         render(){
