@@ -17,16 +17,15 @@ export const TeachersArea = {
             <div class="dinamic-content">
                 <MyProfile :yours="yours" :id="id" :img="pfp" :professor="professor" :units="units" :courses="courses" ></MyProfile>
 
-                <!--<div class="section section-career">
-                    <h4>Graduação</h4>
+                <div class="section section-career">
+                    <h4>Especializações</h4>
 
                     <div class="list d-flex flex-column align-items-start">
-                        <p>Ciências Contábeis</p>
-                        <p>Engenharia da Computação</p>
-                        <p>Tecnologia em Análise e Desenvolvimento de Sistemas</p>
-                        <p>Mestrado em Engenharia Eletrônica e Computação pelo Instituto Tecnológico de Aeronáutica (ITA)</p>
+                        <p>Experiência: {{professor.Area_of_Expertise}}</p>
+                        <p>Dá aula em unidades como {{units[0].Unit_Name}}</p>
+                        <p>Leciona como docente no curso de {{courses[0].Course_Name}}</p>
                     </div>
-                </div> -->
+                </div>
 
                 <section class="teachers-projects">
                     <div class="title-section">
