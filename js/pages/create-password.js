@@ -6,7 +6,7 @@ export const CreatePassword = {
         <main id="create-password" class="dinamic-content d-flex justify-content-evenly align-items-center flex-row">
             <div class="left-content">
                 <figure>
-                    <img src="/iprepository/images/logo-cps.png" alt="Logo Centro Paula Souza">
+                    <img src="./images/logo-cps.png" alt="Logo Centro Paula Souza">
                 </figure>
             </div>
 
