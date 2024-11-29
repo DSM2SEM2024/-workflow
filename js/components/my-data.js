@@ -6,7 +6,7 @@ export const MyData = {
     <section v-show="showMyData" id="my-data" class="d-flex justify-content-evenly align-items-center flex-row">
         <div class="dinamic-content">
             <div class="form-content">
-                <form>
+                <form @submit.prevent>
                     <!-- Deixe todas as informações do usuário já carregadas nos inputs. -->
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Minhas informações</h3>
@@ -61,7 +61,7 @@ export const MyData = {
                     <hr class="line-password">
 
                     <div class="form-footer d-flex justify-content-between d-row align-items-start">
-                        <button click="updateMyData" class="btn-create">Atualizar informações ‎ |
+                        <button @click="updateMyData" class="btn-create">Atualizar informações ‎ |
                             <img class="icon" src="./images/next.png" alt="Expandir">
                         </button>
                     </div>
@@ -100,7 +100,27 @@ export const MyData = {
         gerarSlug(titulo) {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
-        save() {
+        updateMyData() {
+            let url = `${backend_url}/update/${this.professor.ID_Professor}`;
+            let options = {
+                method: 'PUT',
+                mode: 'cors',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    name: this.name,
+                    email: this.email,
+                    expertise: this.expertise
+                })
+            }
+
+            fetch(url,options)
+            .then(response=>response.json())
+            .then(response=>{
+                console.log(response)
+            })
+
         },
         navigate,
         render(){
