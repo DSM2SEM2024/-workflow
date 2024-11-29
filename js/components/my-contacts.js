@@ -6,7 +6,7 @@ export const MyContacts = {
         <div class="left d-flex flex-column gap-2">
             <h4>Contato</h4>
             <div class="d-flex flex-row justify-content-start align-items-center gap-2">
-                <img class="icon" src="../images/icon-email.png" alt="Projeto Interdisciplinar">
+                <img class="icon" src="/images/icon-email.png" alt="Projeto Interdisciplinar">
                 <a :href="('mailto:'+professor.Email)">{{professor.Email}}</a>
             </div>
         </div>

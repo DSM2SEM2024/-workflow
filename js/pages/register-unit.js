@@ -13,7 +13,7 @@ export const RegisterUnit = {
                 <section class="form-content">
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Informações da Unidade</h3>
-                        <img class="icon" src="../images/bottom-section.png" alt="Expandir">
+                        <img class="icon" src="/images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
                         <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
@@ -55,7 +55,7 @@ export const RegisterUnit = {
                     <br>
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Corpo Administrativo</h3>
-                        <img class="icon" src="../images/bottom-section.png" alt="Expandir">
+                        <img class="icon" src="/images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
                         <h1>Adicione um novo coordenador clicando no ícone abaixo</h1>
@@ -68,7 +68,7 @@ export const RegisterUnit = {
                         <div class="form-entries d-flex justify-content-start d-column flex-column">
                             <!-- Exemplo de coordenador abaixo -->
                             <div class="members">
-                                <img src="../images/user.png" alt="Expandir">
+                                <img src="/images/user.png" alt="Expandir">
                                 <p>Rodrigo Aragão</p>
                                 <span>-</span>
                             </div>
@@ -78,7 +78,7 @@ export const RegisterUnit = {
                     <br>
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Corpo Docente</h3>
-                        <img class="icon" src="../images/bottom-section.png" alt="Expandir">
+                        <img class="icon" src="/images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
                         <h1>Adicione um novo docente clicando no ícone abaixo</h1>
@@ -90,17 +90,17 @@ export const RegisterUnit = {
                         <div class="form-entries fe-limited d-flex justify-content-start d-column flex-column">
                             <!-- Exemplo de docentes abaixo -->
                             <div class="members">
-                                <img src="../images/user.png" alt="Expandir">
+                                <img src="/images/user.png" alt="Expandir">
                                 <p>Fretz Sievers</p>
                                 <span>-</span>
                             </div>
                             <div class="members">
-                                <img src="../images/user.png" alt="Expandir">
+                                <img src="/images/user.png" alt="Expandir">
                                 <p>Rodrigo Faustino</p>
                                 <span>-</span>
                             </div>
                             <div class="members">
-                                <img src="../images/user.png" alt="Expandir">
+                                <img src="/images/user.png" alt="Expandir">
                                 <p>Daniel da Silva</p>
                                 <span>-</span>
                             </div>
@@ -114,7 +114,7 @@ export const RegisterUnit = {
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
 
                         <button class="btn-create">Cadastrar Unidade ‎ |
-                            <img class="icon" src="../images/next.png" alt="Integrante">
+                            <img class="icon" src="/images/next.png" alt="Integrante">
                         </button>
                     </div>
                 

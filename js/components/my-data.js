@@ -10,7 +10,7 @@ export const MyData = {
                     <!-- Deixe todas as informações do usuário já carregadas nos inputs. -->
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Minhas informações</h3>
-                        <img class="icon" src="../images/bottom-section.png" alt="Expandir">
+                        <img class="icon" src="/images/bottom-section.png" alt="Expandir">
                     </div>
                                     
                     <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
@@ -62,7 +62,7 @@ export const MyData = {
 
                     <div class="form-footer d-flex justify-content-between d-row align-items-start">
                         <button click="updateMyData" class="btn-create">Atualizar informações ‎ |
-                            <img class="icon" src="../images/next.png" alt="Expandir">
+                            <img class="icon" src="/images/next.png" alt="Expandir">
                         </button>
                     </div>
                 </form>

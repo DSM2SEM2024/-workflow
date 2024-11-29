@@ -13,7 +13,7 @@ export const RegisterCourse = {
                 <section class="form-content">
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Informações do Curso</h3>
-                        <img class="icon" src="../images/bottom-section.png" alt="Expandir">
+                        <img class="icon" src="/images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
                         <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
@@ -25,7 +25,7 @@ export const RegisterCourse = {
                         <div class="form-entries d-flex justify-content-start d-column flex-column">
                             <!-- Exemplo de unidade abaixo -->
                             <div class="unit">
-                                <img src="../images/icon-university.png" alt="Expandir">
+                                <img src="/images/icon-university.png" alt="Expandir">
                                 <div class="unit-info justify-content-center align-items-start">
                                     <h1>Fatec Itaquera - São Paulo</h1>
                                     <h2>Av. Miguel Ignácio Curi, 360 - Itaquera, São Paulo - SP, 08295-005</h2>
@@ -38,7 +38,7 @@ export const RegisterCourse = {
                     <br>
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Informações da disciplina</h3>
-                        <img class="icon" src="../images/bottom-section.png" alt="Expandir">
+                        <img class="icon" src="/images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
                         <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
@@ -50,7 +50,7 @@ export const RegisterCourse = {
                         <div class="form-entries d-flex justify-content-start d-column flex-column">
                             <!-- Exemplo de docente abaixo -->
                             <div class="members">
-                                <img src="../images/user.png" alt="Expandir">
+                                <img src="/images/user.png" alt="Expandir">
                                 <p>Rodrigo Aragão</p>
                                 <span>-</span>
                             </div>
@@ -64,7 +64,7 @@ export const RegisterCourse = {
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
 
                         <button class="btn-create">Cadastrar Curso ‎ |
-                            <img class="icon" src="../images/next.png" alt="Integrante">
+                            <img class="icon" src="/images/next.png" alt="Integrante">
                         </button>
                     </div>
                 
