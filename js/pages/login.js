@@ -6,7 +6,7 @@ export const Login = {
         <main id="login" class="dinamic-content d-flex justify-content-evenly align-items-center flex-row">
             <div class="left-content">
                 <figure>
-                    <img src="https://gustavojoia.github.io/iprepository/images/logo-cps.png" alt="Logo Centro Paula Souza">
+                    <img src="/iprepository/images/logo-cps.png" alt="Logo Centro Paula Souza">
                 </figure>
             </div>
 
@@ -39,7 +39,7 @@ export const Login = {
                     <div class="d-flex justify-content-center flex-column gap-3 options-login">
                         <button type="submit" class="button btn-red" @click="verifyForLogin">Entrar</button>
                         <button type="submit" class="d-flex justify-content-center flex-row align-items-center gap-3 button btn-white">
-                            <img class="icon" src="https://gustavojoia.github.io/iprepository/images/logo-microsoft.png" alt="Logo Microsoft">
+                            <img class="icon" src="/iprepository/images/logo-microsoft.png" alt="Logo Microsoft">
                             Entrar com Microsoft
                         </button>
                     </div>

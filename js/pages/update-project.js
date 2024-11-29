@@ -16,7 +16,7 @@ export const UpdateProject = {
                 <section class="form-content">
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Informações do projeto</h3>
-                        <img class="icon" src="https://gustavojoia.github.io/iprepository/images/bottom-section.png" alt="Expandir">
+                        <img class="icon" src="/iprepository/images/bottom-section.png" alt="Expandir">
                     </div>
                     <!-- Todos os campos são obrigatórios -->
                     <form id="form-createproject">
@@ -55,7 +55,7 @@ export const UpdateProject = {
                     <br>
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Integrantes</h3>
-                        <img class="icon" src="https://gustavojoia.github.io/iprepository/images/bottom-section.png" alt="Expandir">
+                        <img class="icon" src="/iprepository/images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
                         <h1>Adicione um novo integrante clicando no ícone abaixo</h1>
@@ -71,7 +71,7 @@ export const UpdateProject = {
                         <div class="form-entries d-flex justify-content-start flex-column">
                             <!-- Exemplo de membros abaixo -->
                             <div class="members" v-for="(member, key) in participants">
-                                <img src="https://gustavojoia.github.io/iprepository/images/user.png" alt="Expandir">
+                                <img src="/iprepository/images/user.png" alt="Expandir">
                                 <p>{{member.participantName}}</p>
                                 <span @click="remover(key)">-</span>
                             </div>
@@ -80,7 +80,7 @@ export const UpdateProject = {
                     <br>
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Anexos</h3>
-                        <img class="icon" src="https://gustavojoia.github.io/iprepository/images/bottom-section.png" alt="Expandir">
+                        <img class="icon" src="/iprepository/images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
                         <div class="form-gap d-flex d-row flex-row">
@@ -90,7 +90,7 @@ export const UpdateProject = {
                                     <option v-for="type in file_types" :value="type">{{type}}</option>
                                 </select>
                                 <div @dragover.prevent @drop.prevent="handleDrop" @click="selecionarArquivo" class="file-drop d-flex justify-content-center d-column flex-column align-items-center">
-                                    <img class="icon" src="https://gustavojoia.github.io/iprepository/images/download.png" alt="Integrante">
+                                    <img class="icon" src="/iprepository/images/download.png" alt="Integrante">
                                     <p>Anexe ou arraste o arquivo para cá </p>
                                     <button type="button">Selecionar arquivo</button>
                                     <input type="file" accept=".jpg, .png" multiple ref="fileInput" @change="handleFileSelect" style="display: none"/>
@@ -100,26 +100,26 @@ export const UpdateProject = {
                             <div class="form-entries d-flex justify-content-start d-column flex-column">
                                 <!-- Exemplo de membros abaixo -->
                                 <div class="files" v-for="(url, index) in attach.links" :key="index">
-                                    <img src="https://gustavojoia.github.io/iprepository/images/file-link.png" alt="Expandir">
+                                    <img src="/iprepository/images/file-link.png" alt="Expandir">
                                     <p>{{url.URL}}</p>
                                     <span @click="removerArquivo(index,'link')" >-</span>
                                 </div>
                                 <div class="files" v-for="(file, index) in attach.files" :key="index">
-                                    <img v-if="isPdf(file.File_Type)" src="https://gustavojoia.github.io/iprepository/images/file-pdf.png" alt="Expandir">
-                                    <img v-if="isImg(file.File_Type)" src="https://gustavojoia.github.io/iprepository/images/icon-upload.png" alt="Expandir">
-                                    <img v-if="isElse(file.File_Type)" src="https://gustavojoia.github.io/iprepository/images/icon-file.png" alt="Expandir">
+                                    <img v-if="isPdf(file.File_Type)" src="/iprepository/images/file-pdf.png" alt="Expandir">
+                                    <img v-if="isImg(file.File_Type)" src="/iprepository/images/icon-upload.png" alt="Expandir">
+                                    <img v-if="isElse(file.File_Type)" src="/iprepository/images/icon-file.png" alt="Expandir">
                                     <p>{{file.File_Name}}</p>
                                     <span @click="removerArquivo(index,'file')" >-</span>
                                 </div>     
                                 <div class="files" v-for="(url, index) in new_attach.links" :key="index">
-                                    <img src="https://gustavojoia.github.io/iprepository/images/file-link.png" alt="Expandir">
+                                    <img src="/iprepository/images/file-link.png" alt="Expandir">
                                     <p>{{url}}</p>
                                     <span @click="removerArquivo(index,'link')" >-</span>
                                 </div>
                                 <div class="files" v-for="(file, index) in new_attach.files" :key="index">
-                                    <img v-if="new_isPdf(file)" src="https://gustavojoia.github.io/iprepository/images/file-pdf.png" alt="Expandir">
-                                    <img v-if="new_isImg(file)" src="https://gustavojoia.github.io/iprepository/images/icon-upload.png" alt="Expandir">
-                                    <img v-if="new_isElse(file)" src="https://gustavojoia.github.io/iprepository/images/icon-file.png" alt="Expandir">
+                                    <img v-if="new_isPdf(file)" src="/iprepository/images/file-pdf.png" alt="Expandir">
+                                    <img v-if="new_isImg(file)" src="/iprepository/images/icon-upload.png" alt="Expandir">
+                                    <img v-if="new_isElse(file)" src="/iprepository/images/icon-file.png" alt="Expandir">
                                     <p>{{file.name}}</p>
                                     <span @click="removerArquivo(index,'file')" >-</span>
                                 </div>                         
@@ -133,7 +133,7 @@ export const UpdateProject = {
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
 
                         <button class="btn-create" @click="cadastrar">Cadastrar projeto ‎ |
-                            <img class="icon" src="https://gustavojoia.github.io/iprepository/images/next.png" alt="Integrante">
+                            <img class="icon" src="/iprepository/images/next.png" alt="Integrante">
                         </button>
                     </div>
                 
