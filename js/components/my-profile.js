@@ -1,4 +1,4 @@
-import { MyData } from '../components/my-data.js';
+import { MyData } from './my-data.js';
 import { backend_url } from '../global-var/backend-url.js';
 
 export const MyProfile = {
