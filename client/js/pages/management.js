@@ -28,7 +28,7 @@ export const ManagementPage = {
                         <div v-for="project in projects" class="project d-flex flex-column">
                             <h1>{{project.Name}}<span>— {{defDate(project.End_Date)}}</span></h1>
                             <h2>Desenvolvimento de Software e Multiplataforma</h2>
-                            <button @click="(this.$router.push('/project/'+project.ID_Project))" class="btn-editar btn-red"><img class="icon" src="../images/lapis.png">Editar</button>
+                            <button @click="(this.$router.push('/project/'+project.ID_Project))" class="btn-editar btn-red"><img class="icon" src="./images/lapis.png">Editar</button>
                         </div>
                     </div>
                 </div>

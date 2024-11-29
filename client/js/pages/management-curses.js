@@ -23,7 +23,7 @@ export const ManagementCurses = {
                     <div class="curse d-flex flex-column">
                         <p class="name-unit">Fatec Itaquera - Prof° Miguel Reale</p>
                         <p class="curse-name">Desenvolvimento de Software e Multiplataforma</p>
-                        <button class="btn-editar btn-red"><img class="icon" src="../images/lapis.png">Editar</button>
+                        <button class="btn-editar btn-red"><img class="icon" src="./images/lapis.png">Editar</button>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,7 @@ export const ManagementTeachers = {
                         <p class="teacher-unit">Fatec Itaquera - Prof° Miguel Reale</p>
                         <p class="teacher-name">Fretz Sievers Junior</p>
                         <p class="teacher-curse">Desenvolvimento de Software e Multiplataforma</p>
-                        <button class="btn-editar btn-red"><img class="icon" src="../images/lapis.png">Editar</button>
+                        <button class="btn-editar btn-red"><img class="icon" src="./images/lapis.png">Editar</button>
                     </div>
                 </div>
             </div>

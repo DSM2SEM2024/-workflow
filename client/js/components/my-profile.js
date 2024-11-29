@@ -1,4 +1,4 @@
-import { MyData } from '../components/my-data.js';
+import { MyData } from './my-data.js';
 import { backend_url } from '../global-var/backend-url.js';
 
 export const MyProfile = {
@@ -10,7 +10,7 @@ export const MyProfile = {
             <div class="profile-picture" :style="
                 ('background-image: url('+img+')')"> <!-- onde fica a foto? -->
                 <button v-if="editable" class="btn-send-photo" @click="uploadPhoto">
-                    <img src="../images/icon-sendphoto.png">
+                    <img src="./images/icon-sendphoto.png">
                     <form style="display: none" enctype="multipart/form-data">
                         <input type="file" ref="pfp" @change="savePhoto" accept=".jpg, .png">
                     </form>
@@ -26,7 +26,7 @@ export const MyProfile = {
                     <p class="teacher-expertise">{{professor.Area_of_Expertise}}</p>
                 </div>
                 <button v-if="editable" class="btn-configuration" @click="toggleMyData"> 
-                    <img class="icon" src="../images/icon-configuration.png" alt="Projeto Interdisciplinar">
+                    <img class="icon" src="./images/icon-configuration.png" alt="Projeto Interdisciplinar">
                     </i>{{ showMyData ? '': '' }}
                 </button>
             </div>
