@@ -25,7 +25,7 @@ export function validateAccess(role){
         if(response.status==false){
             switch (role) {
                 case 'professor':
-                    window.location.href = urlBase+'#/home';
+                    window.location.href = urlBase+'#/login';
                     break;
             
                 case 'coordinator':
