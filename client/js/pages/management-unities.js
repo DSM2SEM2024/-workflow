@@ -23,7 +23,7 @@ export const ManagementUnities = {
                     <div class="unitie d-flex flex-column">
                         <p class="name-city">São Paulo - SP</p>
                         <p class="name-unity">Fatec Itaquera - Profº Miguel Reale</p>
-                        <button class="btn-editar btn-red"><img class="icon" src="../images/lapis.png">Editar</button>
+                        <button class="btn-editar btn-red"><img class="icon" src="./images/lapis.png">Editar</button>
                     </div>
                 </div>
             </div>

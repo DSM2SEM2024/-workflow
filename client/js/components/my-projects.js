@@ -1,6 +1,6 @@
 import { navigate } from "../functions/navigate.js";
 import { backend_url } from "../global-var/backend-url.js";
-import { Header } from "../components/header.js";
+import { Header } from "./header.js";
 
 export const MyProjects = {
     template: `
