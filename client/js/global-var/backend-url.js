@@ -1,1 +1,0 @@
-export const backend_url = 'https://workflow.faustinopsy.com';
