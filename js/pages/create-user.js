@@ -15,7 +15,7 @@ export const CreateUser = {
                 <section class="form-content">
                     <div class="section-title d-flex justify-content-between flex-row align-items-center"> 
                         <h3>Informações do usuário</h3>
-                        <img class="icon" src="/iprepository/images/bottom-section.png" alt="Expandir">
+                        <img class="icon" src="https://gustavojoia.github.io/iprepository/images/bottom-section.png" alt="Expandir">
                     </div>
                     <form>
                         <div class="form-inputs d-flex justify-content-start d-column flex-wrap">
@@ -51,7 +51,7 @@ export const CreateUser = {
                         <div class="coordinator-section" v-if="role === 'coordinator'">
                             <div class="section-title d-flex justify-content-between flex-row align-items-center">
                                 <h3>Formação e Curso</h3>
-                                <img class="icon" src="/iprepository/images/bottom-section.png" alt="Expandir">
+                                <img class="icon" src="https://gustavojoia.github.io/iprepository/images/bottom-section.png" alt="Expandir">
                             </div>
 
                             <div class="form-inputs d-flex justify-content-start align-items-end d-column flex-wrap">
@@ -66,7 +66,7 @@ export const CreateUser = {
                                                 <option value="">Curso</option>
                                                 <option value="1">Desenv. de Software Multiplataforma</option>
                                             </select>
-                                            <img class="icon" src="/iprepository/images/icon-add.png" alt="Expandir">
+                                            <img class="icon" src="https://gustavojoia.github.io/iprepository/images/icon-add.png" alt="Expandir">
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@ export const CreateUser = {
 
                             <div class="section-linked-data d-flex justify-content-between align-items-start gap-2">
                                 <div class="d-flex flex-row justify-content-start align-items-center gap-3">
-                                    <img class="icon" src="/iprepository/images/icon-university.png" alt="Expandir">
+                                    <img class="icon" src="https://gustavojoia.github.io/iprepository/images/icon-university.png" alt="Expandir">
                                     <div class="linked-data d-flex flex-column justify-content-start">
                                         <p class="unity-name">Unidade</p>
                                         <p class="curse-name">Curso</p>
@@ -89,7 +89,7 @@ export const CreateUser = {
                         <div class="teacher-section" v-else-if="role === 'professor'">
                             <div class="section-title d-flex justify-content-between flex-row align-items-center">
                                 <h3>Curso e Disciplina</h3>
-                                <img class="icon" src="/iprepository/images/bottom-section.png" alt="Expandir">
+                                <img class="icon" src="https://gustavojoia.github.io/iprepository/images/bottom-section.png" alt="Expandir">
                             </div>
 
                             <p class="description-unit">Adicione uma nova unidade clicando no ícone abaixo.</p>
@@ -115,14 +115,14 @@ export const CreateUser = {
                                         <option value="">Disciplina</option>
                                         <option v-for="discipline in disciplines" value="discipline.id">{{discipline.name}}</option>
                                     </select>
-                                    <img @click="addDiscipline" class="icon" src="/iprepository/images/icon-add.png" alt="Expandir">
+                                    <img @click="addDiscipline" class="icon" src="https://gustavojoia.github.io/iprepository/images/icon-add.png" alt="Expandir">
                                 </div>
                             </div>
                             <p class="message-error error-discipline"></p>
 
                             <div v-for="(discipline, index) in objects_prof" class="section-linked-data d-flex justify-content-between align-items-start gap-2">
                                 <div class="d-flex flex-row justify-content-start align-items-center gap-3">
-                                    <img class="icon" src="/iprepository/images/icon-university.png" alt="Expandir">
+                                    <img class="icon" src="https://gustavojoia.github.io/iprepository/images/icon-university.png" alt="Expandir">
                                     <div class="linked-data d-flex flex-column justify-content-start">
                                         <p class="unity-name">{{discipline.unit_name}}</p>
                                         <p class="discipline-name">{{discipline.discipline_name}}</p>
@@ -141,7 +141,7 @@ export const CreateUser = {
                     <div class="form-footer d-flex justify-content-between d-row align-items-start gap-2 flex-wrap">
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
                         <button class="btn-create" @click="send">Cadastrar usuário ‎ |
-                            <img class="icon" src="/iprepository/images/next.png" alt="Expandir">
+                            <img class="icon" src="https://gustavojoia.github.io/iprepository/images/next.png" alt="Expandir">
                         </button>
                     </div>            
                 </section>
