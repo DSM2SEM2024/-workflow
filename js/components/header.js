@@ -24,10 +24,14 @@ export const Header = {
             </header>
 
             <div class="d-md-none position-relative">
-                <button class="navbar-toggler position-absolute d-flex justify-content-center align-items-center burger-button" type="button" @click="toggleMenu">
+                <button class="navbar-toggler position-absolute d-flex justify-content-center align-items-center burger-button" type="button" @click="toggleMenu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div v-if="isMenuOpen" class="menu-overlay position-fixed top-0 left-0 w-100 h-100 bg-white d-flex justify-content-center align-items-center">
+            </div>
+
+            <div class="offcanvas burguer-menu offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-body">
+                    <div class="menu-overlay position-fixed top-0 left-0 w-100 h-100 bg-white d-flex justify-content-center align-items-center">
                     <nav class="d-flex flex-column justify-content-center align-items-center gap-5 h-100">
                         <router-link to="/" @click="toggleMenu">
                             <p>Home</p>
@@ -40,9 +44,13 @@ export const Header = {
                         </router-link>
                     </nav>
                 </div>
+                </div>
             </div>
     `,
     data() {
+        return{
+            offcanvas: '',
+        }
     },
     inject: ['urlBase'],
     methods: {
@@ -51,10 +59,14 @@ export const Header = {
         },
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         save() {
+        },
+        toggleMenu(){
+            
         }
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
+        this.offcanvas = document.querySelector('.burguer-menu');
     },
 
 };
