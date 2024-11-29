@@ -39,7 +39,8 @@ class Routes {
                 '/profilePicture/{id}' => [ProfessorController::class, 'updatePfp'],
             ],
             'PUT' => [
-                
+                '/password/{id}' => [ProfessorController::class,'updatePassword'],
+                '/update/{id}' => [ProfessorController::class,'update']
             ],
             'DELETE' => [
                 '/b/{id}' => [ProfessorController::class, 'login'],
