@@ -33,13 +33,13 @@ export const Header = {
                 <div class="offcanvas-body">
                     <div class="menu-overlay position-fixed top-0 left-0 w-100 h-100 bg-white d-flex justify-content-center align-items-center">
                     <nav class="d-flex flex-column justify-content-center align-items-center gap-5 h-100">
-                        <router-link to="/" @click="toggleMenu">
+                        <router-link to="/" data-bs-dismiss="offcanvas">
                             <p>Home</p>
                         </router-link>
-                        <router-link to="/" @click="toggleMenu">
+                        <router-link to="/" data-bs-dismiss="offcanvas">
                             <p>Pesquisar</p>
                         </router-link>
-                        <router-link to="/management" @click="toggleMenu">
+                        <router-link to="/management" data-bs-dismiss="offcanvas">
                             <p>Meus projetos</p>
                         </router-link>
                     </nav>
