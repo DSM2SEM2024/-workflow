@@ -24,7 +24,7 @@ export const Home = {
                                 <label>Nome</label>
                                 <div class="input-section">
                                     <div class="input-icon">
-                                        <img src="/images/icon-searchlight.png" alt="Projeto Interdisciplinar">
+                                        <img src="/iprepository/images/icon-searchlight.png" alt="Projeto Interdisciplinar">
                                     </div>
                                     <input v-model="name_filter" type="text" name="name" placeholder="Digite o nome do projeto...">
                                 </div>
@@ -35,7 +35,7 @@ export const Home = {
                                 <label>Unidade</label>
                                 <div class="select-section">
                                     <div class="input-icon">
-                                        <img src="/images/icon-bottom.png" alt="Projeto Interdisciplinar">
+                                        <img src="/iprepository/images/icon-bottom.png" alt="Projeto Interdisciplinar">
                                     </div>
                                     <select v-model="unit_filter" name="units">
                                         <option value="">Escolha uma unidade...</option>
@@ -50,7 +50,7 @@ export const Home = {
                                 <label>Data</label>
                                 <div class="input-section">
                                     <div class="input-icon">
-                                        <img src="/images/calendar.png" alt="Projeto Interdisciplinar">
+                                        <img src="/iprepository/images/calendar.png" alt="Projeto Interdisciplinar">
                                     </div>
                                     <input v-model="start_filter" type="date" name="name">                                    
                                 </div>                               
@@ -61,7 +61,7 @@ export const Home = {
                             <div class="input-content">
                                 <div class="input-section">
                                     <div class="input-icon">
-                                        <img src="/images/calendar.png" alt="Projeto Interdisciplinar">
+                                        <img src="/iprepository/images/calendar.png" alt="Projeto Interdisciplinar">
                                     </div>
                                     <input v-model="end_filter" type="date" name="name">                                    
                                 </div>                                

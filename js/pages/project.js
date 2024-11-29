@@ -26,27 +26,27 @@ export const Project = {
                 <hr>
                 <div class="section-files d-flex flex-column justify-content-start gap-2">
                     <div class="title d-flex justify-content-start flex-row align-items-center gap-3">
-                        <img class="icon" src="/images/icon-file.png" alt="Projeto Interdisciplinar">
+                        <img class="icon" src="/iprepository/images/icon-file.png" alt="Projeto Interdisciplinar">
                         <h2>Anexos</h2>
                     </div>
 
                     <div v-for="(file, index) in files" class="files-content d-flex justify-content-between flex-row">
 
                         <div class="left-data d-flex justify-content-start align-items-center flex-row gap-3">
-                            <img v-if="isPdf(file.File_Type)" class="icon" src="/images/icon-pdf.png" alt="Projeto Interdisciplinar">
-                            <img v-if="isImg(file.File_Type)" class="icon" src="/images/icon-upload.png" alt="Projeto Interdisciplinar">
-                            <img v-if="isLink(file.File_Type)" class="icon" src="/images/icon-link.png" alt="Projeto Interdisciplinar">
-                            <img v-if="isElse(file.File_Type)" class="icon" src="/images/icon-file.png" alt="Projeto Interdisciplinar">
+                            <img v-if="isPdf(file.File_Type)" class="icon" src="/iprepository/images/icon-pdf.png" alt="Projeto Interdisciplinar">
+                            <img v-if="isImg(file.File_Type)" class="icon" src="/iprepository/images/icon-upload.png" alt="Projeto Interdisciplinar">
+                            <img v-if="isLink(file.File_Type)" class="icon" src="/iprepository/images/icon-link.png" alt="Projeto Interdisciplinar">
+                            <img v-if="isElse(file.File_Type)" class="icon" src="/iprepository/images/icon-file.png" alt="Projeto Interdisciplinar">
 
                             <p>{{file.File_Name}}</p>
                         </div>
 
                         <div class="right-data d-flex justify-content-start align-items-center flex-row gap-3">
                             <a v-if="isLink(file.File_Type)" :href="file.URL" target="_blank">
-                                <img class="icon" src="/images/icon-upload.png" alt="Projeto Interdisciplinar">
+                                <img class="icon" src="/iprepository/images/icon-upload.png" alt="Projeto Interdisciplinar">
                             </a>
                             <a v-else :href="file.File_Data" :download="file.File_Name">
-                                <img class="icon" src="/images/icon-upload.png" alt="Projeto Interdisciplinar">
+                                <img class="icon" src="/iprepository/images/icon-upload.png" alt="Projeto Interdisciplinar">
                             </a>
                         </div>
                     </div>
@@ -56,7 +56,7 @@ export const Project = {
                     <div class="label-content">
                         <label>Curso</label>
                         <div class="d-flex justify-content-start flex-row gap-2">
-                            <img class="icon" src="/images/external-link.png" alt="Projeto Interdisciplinar">
+                            <img class="icon" src="/iprepository/images/external-link.png" alt="Projeto Interdisciplinar">
                             <p>Desenvolvimento de Software e Multiplataforma</p>
                         </div>
                     </div>

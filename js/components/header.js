@@ -6,19 +6,19 @@ export const Header = {
                     <!-- Menu lateral -->
                     <div class="d-flex flex-column justify-content-between gap-5">
                         <router-link to="/">
-                            <img class="icon" src="/images/icon-home.png" alt="Home">
+                            <img class="icon" src="/iprepository/images/icon-home.png" alt="Home">
                         </router-link>
                         <router-link to="/">
-                            <img class="icon" src="/images/search.png" alt="Search">
+                            <img class="icon" src="/iprepository/images/search.png" alt="Search">
                         </router-link>
                         <router-link to="/management">
-                            <img class="icon" src="/images/colletion.png" alt="My Projects">
+                            <img class="icon" src="/iprepository/images/colletion.png" alt="My Projects">
                         </router-link>       
                     </div>
 
                     
                     <div class="cps-icon">
-                        <img class="icon" src="/images/logo-cps.png" alt="CPS Logo">
+                        <img class="icon" src="/iprepository/images/logo-cps.png" alt="CPS Logo">
                     </div>
                 </nav>
             </header>
