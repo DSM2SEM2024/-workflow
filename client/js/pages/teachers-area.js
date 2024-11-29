@@ -2,49 +2,28 @@ import { MyData } from '../components/my-data.js';
 import { backend_url } from '../global-var/backend-url.js';
 import { MyContacts } from '../components/my-contacts.js';
 import { MyProfile } from '../components/my-profile.js';
+import { Header } from '../components/header.js';
+import { dateFormatter } from '../functions/date-formatter.js';
 
 export const TeachersArea = {
     components: {
         MyProfile,
-        MyContacts
+        MyContacts,
+        Header
     },
     template: `
+        <Header></Header>
         <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
-                <div class="section-top d-flex justify-content-start align-items-start flex-row gap-5">
-                    <div class="profile-picture"> <!-- onde fica a foto? -->
-                        <button class="btn-send-photo" @click="uploadPhoto">
-                            <img src="../images/icon-sendphoto.png">
-                            <input type="file" ref="pfp" @change="savePhoto" style="display: none">
-                        </button>
-                        <img class="profile-picture" src="https://picsum.photos/200" alt="foto do professor">
-                    <div class="profile-picture">
-                        <button class="btn-send-photo"><img src="../images/icon-sendphoto.png"></button>
-                    </div>
-
-                    <div class="d-flex flex-row justify-content-between align-items-start w-100">
-                        <div class="profile-apresentation d-flex justify-content-start flex-column">
-                            <h2 class="teacher-name">Professor</h2>
-                            <p class="teacher-expertise">Graduado em Engenharia da Computação</p>
-                        </div>
-                        <button class="btn-configuration" @click="toggleMyData"> 
-                            <img class="icon" src="../images/icon-configuration.png" alt="Projeto Interdisciplinar">
-                            </i>{{ showMyData ? '': '' }}
-                        </button>
-                    </div>
-                </div>
-
-                <MyData v-if="showMyData"></MyData>
-                <MyProfile></MyProfile>
+                <MyProfile :yours="yours" :id="id" :img="pfp" :professor="professor" :units="units" :courses="courses" ></MyProfile>
 
                 <div class="section section-career">
-                    <h4>Graduação</h4>
+                    <h4>Especializações</h4>
 
                     <div class="list d-flex flex-column align-items-start">
-                        <p>Ciências Contábeis</p>
-                        <p>Engenharia da Computação</p>
-                        <p>Tecnologia em Análise e Desenvolvimento de Sistemas</p>
-                        <p>Mestrado em Engenharia Eletrônica e Computação pelo Instituto Tecnológico de Aeronáutica (ITA)</p>
+                        <p>Experiência: {{professor.Area_of_Expertise}}</p>
+                        <p>Dá aula em unidades como {{units[0].Unit_Name}}</p>
+                        <p>Leciona como docente no curso de {{courses[0].Course_Name}}</p>
                     </div>
                 </div>
 
@@ -54,53 +33,41 @@ export const TeachersArea = {
                     </div>
 
                     <div class="list d-flex flex-column align-items-start">
-                        <div class="project d-flex justify-content-between align-items-end gap-3">
+                        <div v-for="project in projects" @click="(this.$router.push('/project/'+project.ID_Project))" class="project d-flex justify-content-between align-items-end gap-3">
                             <div class="left d-flex flex-column align-items-start">
-                                <p class="project-name">Nome do Projeto</p>
-                                <p class="curse-name">Curso</p>
+                                <p class="project-name">{{project.Name}}</p>
+                                <p class="curse-name">Desenvolvimento de Software Multiplataforma</p>
                             </div>
 
                             <div class="right">
-                                <p class="project-createdate">29/11/2024</p>
-                            </div>
-                        </div>
-
-                        <div class="project d-flex justify-content-between align-items-end gap-3">
-                            <div class="left d-flex flex-column align-items-start">
-                                <p class="project-name">Nome do Projeto</p>
-                                <p class="curse-name">Curso</p>
-                            </div>
-
-                            <div class="right">
-                                <p class="project-createdate">29/11/2024</p>
-                            </div>
-                        </div>    
-                        
-                        <div class="project d-flex justify-content-between align-items-end gap-3">
-                            <div class="left d-flex flex-column align-items-start">
-                                <p class="project-name">Nome do Projeto</p>
-                                <p class="curse-name">Curso</p>
-                            </div>
-
-                            <div class="right">
-                                <p class="project-createdate">29/11/2024</p>
+                                <p class="project-createdate">{{dateFormatter(project.End_Date)}}</p>
                             </div>
                         </div> 
                     </div>
                 </section>
 
-               <MyContacts></MyContacts>
+               <MyContacts :id="id" :units="units" :professor="professor"></MyContacts>
             </div>
         </main>
     `,
     data() {
         return {
             showMyData: false,
-            pfp: null,
+            pfp: '',
+            professor: {
+                Profile_Picture: ''
+            },
+            id: window.location.href.split('/teachers-area/')[1],
+            projects: [],
+            units: [],
+            courses: [],
+            token: window.localStorage.getItem('reposystem_token'),
+            yours: false,
         }
     },
     inject: ['urlBase'],
     methods: {
+        dateFormatter,
         gerarSlug(titulo) {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
@@ -115,7 +82,6 @@ export const TeachersArea = {
         },savePhoto(event){
             const selecionados = Array.from(event.target.files);
             this.pfp = selecionados;
-            console.log(this.pfp);
 
             let formData = new FormData();
 
@@ -133,7 +99,6 @@ export const TeachersArea = {
             fetch(backend_url+"/profilePicture/6", options)
             .then(response => response.json())
             .then(response => {
-                console.log(response);
                 if (response.status == true) {
                     navigate('project/' + response.data);
                 } else {
@@ -145,9 +110,74 @@ export const TeachersArea = {
 
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         save() {
+        },
+
+        fetchData(){
+            Swal.showLoading();
+            let id = this.id;
+            let url = backend_url+'/professor/'+id;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                this.professor = response.data;
+                this.pfp = response.data.Profile_Picture;
+            })
+            .catch(error=>{
+                Swal.fire(error.getMessage)
+            })
+
+        },
+        getProjects(){
+            let url = `${backend_url}/projectProf/${this.id}`;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                this.projects = response.data;
+                
+            })
+        },
+        getUnits(){
+            let url = backend_url+'/unitByProfessor/'+this.id;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                this.units = response.data;
+            })
+        },
+        getCourses(){
+            let url = backend_url+'/courseByProfessor/'+this.id;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                this.courses = response.data;
+                Swal.close();
+            })
+        },
+        isYours(){
+            let url = `${backend_url}/verifyTeachersPage/${this.id}`;
+            let options = {
+                method: 'GET',
+                mode: 'cors',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }
+            fetch(url,options)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status){
+                    this.yours = true;
+                }
+            })
         }
+
     },
     created() {
-        //Conteúdos que deverão ser carregados em uma espécie de onload.
+        this.fetchData();
+        this.isYours();
+        this.getProjects();
+        this.getUnits();
+        this.getCourses();
     }
 };

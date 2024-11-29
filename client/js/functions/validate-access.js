@@ -21,17 +21,15 @@ export function validateAccess(role){
     fetch(validate_url, validate_options)
     .then(response=>response.json())
     .then(response=>{
+        console.log(response)
         if(response.status==false){
             switch (role) {
                 case 'professor':
-                    this.$router.push('/login');
+                    window.location.href = urlBase+'#/home';
                     break;
             
                 case 'coordinator':
-                    this.$router.push('/login-coordinator');
-                    break;
-                case 'admin':
-                    this.$router.push('/login-admin');
+                    window.location.href = urlBase+'#/project/1';
                     break;
             }
             

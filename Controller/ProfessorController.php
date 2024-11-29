@@ -3,12 +3,12 @@ namespace Src\Controller;
 use Src\Auth\TokenHandler;
 use Src\Model\Message;
 use Src\Model\Professor;
-use src\Model\File;
+use Src\Model\File;
 use Src\Repository\ProfessorRepository;
 use Src\Controller\MailController;
-use Src\Controller\MailRepository;
 use Src\Model\Project;
-use Src\Repository\MailRepository as RepositoryMailRepository;
+use Src\Repository\CourseRepository;
+use Src\Repository\MailRepository;
 
 class ProfessorController {
 
@@ -36,13 +36,22 @@ class ProfessorController {
 
     }
 
+    public function getIdByToken(){
+
+        $professor_uncoded = TokenHandler::verifyPermission('professor')['data']->sub;
+        echo json_encode($professor_uncoded);
+
+    }
+
     public function updatePfp($id){
-        $data = $_FILES['pfp'][0];
+        $data = $_FILES['pfp'];
+        $extension = pathinfo($_FILES['pfp']['name'], PATHINFO_EXTENSION);
         $repo = new ProfessorRepository();
         $professor = new Professor();
 
         $file = new File();
-        $file->setData(base64_encode(file_get_contents($data['tmp_name'])));
+        $base64 = base64_encode(file_get_contents($data['tmp_name']));
+        $file->setData("data:image/$extension;base64,$base64");
 
         $professor->setPfp($file);
         $professor->setId($id);
@@ -51,7 +60,9 @@ class ProfessorController {
 
         if($token_response['status']){
             $response = $repo->updatePfp($professor);
-
+            if($response['status']){
+                $response['data'] = $file->getData();
+            }
             http_response_code($response['code']);
             echo json_encode($response);
         }else{
@@ -74,9 +85,9 @@ class ProfessorController {
         if($login_response['status']){
             $token_response = TokenHandler::createAsLogin('professor',$login_response['data'], $data['login']);
             http_response_code($token_response['code']);
-            echo json_encode(Message::send(true,$token_response['code'],'Login efetuado',$token_response['data']));
+            return Message::send(true,$token_response['code'],'Login efetuado',$token_response['data']);
         } else {
-            echo json_encode($login_response);
+            return $login_response;
         }
 
     }
@@ -88,6 +99,9 @@ class ProfessorController {
         $professor = new Professor();
         $professor->setName($data['name']);
         $professor->setEmail($data['email']);
+        $professor->setExpertise($data['expertise']);
+        $professor->setCourse($data['course']);
+        $professor->setUnit($data['unit']);
 
         $insert_response = $repo->insert($professor);
         $professor->setId($insert_response['data']);
@@ -105,7 +119,7 @@ class ProfessorController {
 
         $data = json_decode(file_get_contents('php://input'),true);
         $token_response = TokenHandler::verifyMailToken($data['code']);
-
+        
         $repo = new ProfessorRepository();
         $professor = new Professor();
         $professor->setPassword($data['password']);
@@ -113,7 +127,7 @@ class ProfessorController {
         if($token_response['status']==true){
             $professor->setId($token_response['data']->id);
             $update_response = $repo->updatePassword($professor);
-            $mail_repo = new RepositoryMailRepository();
+            $mail_repo = new MailRepository();
             if($update_response['status']){
                 $mail_repo->clearCode($data['code']);
             }
@@ -122,6 +136,15 @@ class ProfessorController {
         } else {
             return $token_response;
         }
+
+    }
+
+    public function getById($id){
+
+        $repo = new ProfessorRepository();
+        $professor = new Professor();
+        $professor->setId($id);
+        echo json_encode($repo->selectById($professor));
 
     }
 

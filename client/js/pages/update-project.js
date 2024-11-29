@@ -1,14 +1,16 @@
 import { validateAccess } from "../functions/validate-access.js";
 import { backend_url } from "../global-var/backend-url.js";
 import { Header } from "../components/header.js";
+import { dateFormatter } from "../functions/date-formatter.js";
+import { semChecker } from "../functions/sem-checker.js";
 
-export const CreateProject = {
+export const UpdateProject = {
     template: `
         <Header></Header>
         <main id="create-project" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
-                    <h2>Novo Projeto</h2>
+                    <h2>Editando Projeto</h2>
                 </div>
 
                 <section class="form-content">
@@ -20,18 +22,18 @@ export const CreateProject = {
                     <form id="form-createproject">
                         <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
                             <div class="d-flex flex-column align-items-start">                            
-                                <input type="text" placeholder="Nome" v-model="name">
+                                <input type="text" placeholder="Nome" v-model="project.Name">
                                 <p class="message-error error-name"></p>
                             </div>
                             <div class="d-flex flex-column align-items-start">                            
-                                <input type="date" placeholder="Data de início" v-model="startDate" >
+                                <input type="date" placeholder="Data de início" v-model="project.Start_Date" >
                                 <p class="message-error error-startDate"></p>
                             </div>
                         </div>
 
                         <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
                             <div class="d-flex flex-column align-items-start">                            
-                                <select v-model="unitId">
+                                <select v-model="project.ID_Unit">
                                     <option value="">Selecione unidade...</option>
                                     <option v-for="unit in units" :value="unit.ID_Unit">{{unit.Unit_Name}}</option>
                                 </select>
@@ -39,13 +41,13 @@ export const CreateProject = {
                             </div>
 
                             <div class="d-flex flex-column align-items-start">
-                                <input type="date" placeholder="Data de conclusão" v-model="endDate">
+                                <input type="date" placeholder="Data de conclusão" v-model="project.End_Date">
                                 <p class="message-error error-endDate"></p>
                             </div>
                         </div>
                         <div class="form-inputs d-flex justify-content-start d-column w-100">
                             <div class="d-flex flex-column align-items-start w-100">
-                                <textarea class="description" placeholder="Descrição" v-model="description"></textarea>
+                                <textarea class="description" placeholder="Descrição" v-model="project.Description"></textarea>
                                 <p class="message-error error-description"></p>
                             </div>
                         </div>                        
@@ -99,16 +101,28 @@ export const CreateProject = {
                                 <!-- Exemplo de membros abaixo -->
                                 <div class="files" v-for="(url, index) in attach.links" :key="index">
                                     <img src="../images/file-link.png" alt="Expandir">
-                                    <p>{{url}}</p>
+                                    <p>{{url.URL}}</p>
                                     <span @click="removerArquivo(index,'link')" >-</span>
                                 </div>
                                 <div class="files" v-for="(file, index) in attach.files" :key="index">
-                                    <img v-if="isPdf(file)" src="../images/file-pdf.png" alt="Expandir">
-                                    <img v-if="isImg(file)" src="../images/icon-upload.png" alt="Expandir">
-                                    <img v-if="isElse(file)" src="../images/icon-file.png" alt="Expandir">
+                                    <img v-if="isPdf(file.File_Type)" src="../images/file-pdf.png" alt="Expandir">
+                                    <img v-if="isImg(file.File_Type)" src="../images/icon-upload.png" alt="Expandir">
+                                    <img v-if="isElse(file.File_Type)" src="../images/icon-file.png" alt="Expandir">
+                                    <p>{{file.File_Name}}</p>
+                                    <span @click="removerArquivo(index,'file')" >-</span>
+                                </div>     
+                                <div class="files" v-for="(url, index) in new_attach.links" :key="index">
+                                    <img src="../images/file-link.png" alt="Expandir">
+                                    <p>{{url}}</p>
+                                    <span @click="removerArquivo(index,'link')" >-</span>
+                                </div>
+                                <div class="files" v-for="(file, index) in new_attach.files" :key="index">
+                                    <img v-if="new_isPdf(file)" src="../images/file-pdf.png" alt="Expandir">
+                                    <img v-if="new_isImg(file)" src="../images/icon-upload.png" alt="Expandir">
+                                    <img v-if="new_isElse(file)" src="../images/icon-file.png" alt="Expandir">
                                     <p>{{file.name}}</p>
                                     <span @click="removerArquivo(index,'file')" >-</span>
-                                </div>                              
+                                </div>                         
                             </div>  
                         </div>           
                     </form>
@@ -134,6 +148,17 @@ export const CreateProject = {
         return {
             // email: null,
             // password: null
+            token: window.localStorage.getItem('reposystem_token'),
+            id: window.location.href.split('update-project/')[1],
+            project:{
+                ID_Project: window.location.href.split('update-project/')[1],
+                Name: '',
+                Description: '',
+                Start_Date:'',
+                End_Date:'',
+                Participants: [],
+                ID_Unit: ''
+            },
             base_url: window.location.href.split('#')[0],
             name: '',
             description: '',
@@ -149,6 +174,10 @@ export const CreateProject = {
                 files: [],
                 links: []
             },
+            new_attach:{
+                files: [],
+                links: []
+            },
             file_types: [
                 'Arquivo','URL'
             ],
@@ -157,6 +186,26 @@ export const CreateProject = {
     },
     inject: ['urlBase'],
     methods: {
+        isYours(){
+            let url = `${backend_url}/verifyTeachersPage/${this.project.ID_Professor}`;
+            let options = {
+                method: 'GET',
+                mode: 'cors',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }
+            fetch(url,options)
+            .then(response=>response.json())
+            .then(response=>{
+                console.log(url)
+                console.log(response)
+                if(response.status==false){
+                    this.$router.push('/');
+                }
+            })
+        },
         gerarSlug(titulo) {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
         },
@@ -250,7 +299,7 @@ export const CreateProject = {
               if (item.kind === 'file') {
                 const file = item.getAsFile();
                 if (file) {
-                  this.attach.files.push(file);
+                  this.new_attach.files.push(file);
                 }
               }
               // Verifica se o item é um link ou texto
@@ -259,13 +308,13 @@ export const CreateProject = {
                 const link = await new Promise((resolve) =>
                   item.getAsString(resolve)
                 );
-                this.attach.links.push(link);
+                this.new_attach.links.push(link);
               }
             }
         },
         isPdf(file){
 
-            if(file.type.split('/')[1]=='pdf'){
+            if(file=='pdf'){
                 return true;
             } else {
                 return false;
@@ -274,7 +323,7 @@ export const CreateProject = {
         },
         isImg(file){
 
-            if(file.type.split('/')[1]=='jpeg' || file.type.split('/')[1]=='png'){
+            if(file=='jpeg' || file=='png'){
                return true;
             } else {
                 return false;
@@ -282,6 +331,31 @@ export const CreateProject = {
 
         },
         isElse(file){
+            if(file!='jpeg' && file!='png' && file!='pdf'){
+                return true;
+            } else {
+                return false;
+            }
+        },
+        new_isPdf(file){
+
+            if(file.type.split('/')[1]=='pdf'){
+                return true;
+            } else {
+                return false;
+            }
+
+        },
+        new_isImg(file){
+
+            if(file.type.split('/')[1]=='jpeg' || file.type.split('/')[1]=='png'){
+               return true;
+            } else {
+                return false;
+            }
+
+        },
+        new_isElse(file){
             if(file.type.split('/')[1]!='jpeg' && file.type.split('/')[1]!='png' && file.type.split('/')[1]!='pdf'){
                 return true;
             } else {
@@ -293,7 +367,7 @@ export const CreateProject = {
         },
         handleFileSelect(event) {
             const selecionados = Array.from(event.target.files);
-            this.attach.files = this.attach.files.concat(selecionados);
+            this.new_attach.files = this.new_attach.files.concat(selecionados);
         },
         removerArquivo(index, type) {
             if(type=='file'){
@@ -301,11 +375,122 @@ export const CreateProject = {
             } else {
                 this.attach.links.splice(index, 1);
             }
+        },
+        navi(){
+            this.$router.push('/update-project/'+this.id);
+        },
+        gerarSlug(titulo) {
+            return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
+        },
+        //Função para salvar os dados de um formulário e enviar para o servidor back-end.
+        save() {
+            // this.email;
+        },
+        getById(){
+            Swal.showLoading();
+            let url = backend_url+'/project/'+this.project.ID_Project;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status==true){
+                    this.project = response.data;
+                    let count_participants = response.data.Participants.length;
+                    this.participants = response.data.Participants;
+                }
+            })
+        },
+        getFiles(){
+            let url = backend_url+'/files/'+this.project.ID_Project;
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{
+                console.log(response.data)
+                let attach = {
+                    files: [],
+                    links: []
+                }
+                response.data.forEach(file => {
+                    if(file.File_Type=='link'){
+                        attach.links.push(file);
+                    } else {
+                        attach.files.push(file)
+                    }
+                });
+                this.attach = attach;
+                Swal.close();
+            })
+        },
+        isPdf(file_type){
+
+            if(file_type=='pdf'){
+                return true;
+            } else {
+                return false;
+            }
+
+        },
+        isImg(file_type){
+
+            if(file_type=='jpeg' || file_type=='jpg' || file_type=='png'){
+               return true;
+            } else {
+                return false;
+            }
+
+        },
+        isLink(file_type){
+
+            if(file_type=='link'){
+               return true;
+            } else {
+                return false;
+            }
+
+        },
+        isElse(file_type){
+            if(file_type!='jpeg' && file_type!='jpg' && file_type!='png' && file_type!='pdf' && file_type!='link'){
+                return true;
+            } else {
+                return false;
+            }
+        },
+        dateFormatter,
+        semChecker,
+        professorChecker(){
+            let token = window.localStorage.getItem('reposystem_token');
+            let url = backend_url+'/token/validateAccess';
+            let options = {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization':`Bearer ${token}`
+                },
+                body: JSON.stringify({role:'professor'})
+            }
+            fetch(url, options)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.data.sub.ID_Professor == this.project.ID_Professor){
+                    this.isProfessor = response.data;
+                }
+            })
+        },
+        toggleUpdate(){
+            this.updateMode = !this.updateMode;
+            if(this.updateMode){
+                this.edit_btn_txt = 'CANCELAR';
+            } else {
+                this.edit_btn_txt = 'EDITAR';
+            }
         }
     },
     created() {
         //Conteúdos que deverão ser carregados em uma espécie de onload.
         validateAccess('professor');
         this.getUnits();
+        this.getById();
+        this.getFiles();
+        this.isYours();
     }
 };

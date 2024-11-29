@@ -28,8 +28,8 @@ export const Login = {
 
                     <div class="d-flex justify-content-between flex-row options-password">
                         <div class="d-flex justify-content-start align-items-center gap-2">
-                            <input type="checkbox" v-model="manter_login" class="teste">
-                            <label>Lembrar credenciais</label>
+                            <input id="remember" type="checkbox" v-model="manter_login" class="teste">
+                            <label for="remember">Lembrar credenciais</label>
                         </div>
 
                         <a href="">Esqueci a senha</a>
@@ -67,7 +67,7 @@ export const Login = {
         //Função para salvar os dados de um formulário e enviar para o servidor back-end.
         login() {
 
-            let url = backend_url+'/professor/login';
+            let url = backend_url+'/login';
             let options = {
                 method: 'POST',
                 mode: 'cors',
@@ -77,7 +77,7 @@ export const Login = {
                 body: JSON.stringify({
                     email: this.email,
                     password: this.password,
-                    login: this.manter_login
+                    login: this.manter_login,
                 })
             };
             Swal.showLoading();

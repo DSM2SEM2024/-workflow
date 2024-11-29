@@ -19,10 +19,12 @@ import { MyData } from './components/my-data.js';
 import { MyProfile } from './components/my-profile.js';
 import { MyProjects } from './components/my-projects.js';
 import { MyContacts } from './components/my-contacts.js';
+import { UpdateProject } from './pages/update-project.js';
 
 // Definindo as rotas através desse identificador
 const routes = [
     { path: '/header', component: Header },
+    { path: '/home', redirect: '/'},
     { path: '/', component: Home, meta: { title: 'Home' }},
     { path: '/login', component: Login, meta: { title: 'Login' }},
     { path: '/management', component: ManagementPage, meta: { title: 'Gestão de Projetos' }},
@@ -33,14 +35,19 @@ const routes = [
     { path: '/create-project', component: CreateProject, meta: { title: 'Criar Projeto' }},
     { path: '/my-projects', component: MyProjects, meta: { title: 'Meus Projetos' }},
     { path: '/project/:id', component: Project, meta: { title: 'Projeto' }},
+    { path: '/project', redirect: '/'},
     { path: '/register-unit', component: RegisterUnit, meta: { title: 'Registrar Unidade' }},
-    { path: '/teachers-area', component: TeachersArea, meta: { title: 'Área do Docente' }},
+    { path: '/teachers-area/:id', component: TeachersArea, meta: { title: 'Área do Docente' }},
+    { path: '/teachers-area', redirect: '/'},
     { path: '/create-password/:email', component: CreatePassword, meta: { title: 'Criar Senha' }},
+    { path: '/create-password', redirect: '/'},
     { path: '/register-course', component: RegisterCourse, meta: { title: 'Registrar Curso' }},
     { path: '/coordinators-area', component: CoordinatorsArea, meta: { title: 'Área do Coordenador' }},
     { path: '/my-data', component: MyData, meta: { title: 'Meus Dados' }},
     { path: '/my-profile', component: MyProfile, meta: { title: 'Meu Perfil' }},
-    { path: '/my-contacts', component: MyContacts, meta: { title: 'Meus Contatos' }}
+    { path: '/my-contacts', component: MyContacts, meta: { title: 'Meus Contatos' }},
+    { path: '/update-project/:id', component: UpdateProject, meta: { title: 'Atualizar Projeto' }},
+    { path: '/update-project', redirect: '/'}
 ];
 
 // Criando o router
@@ -95,7 +102,7 @@ const App = {
         return {
             urlBase: this.urlBase
         };
-    }
+    },
 };
 
 // Finalizando a criação da aplicação, aplicando rota, versionamento e carregando no body do index.

@@ -11,7 +11,7 @@ export const Header = {
                         <router-link to="/">
                             <img class="icon" src="../images/search.png" alt="Search">
                         </router-link>
-                        <router-link to="/my-projects">
+                        <router-link to="/management">
                             <img class="icon" src="../images/colletion.png" alt="My Projects">
                         </router-link>       
                     </div>
@@ -35,7 +35,7 @@ export const Header = {
                         <router-link to="/" @click="toggleMenu">
                             <p>Pesquisar</p>
                         </router-link>
-                        <router-link to="/my-projects" @click="toggleMenu">
+                        <router-link to="/management" @click="toggleMenu">
                             <p>Meus projetos</p>
                         </router-link>
                     </nav>

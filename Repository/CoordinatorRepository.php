@@ -123,7 +123,8 @@ class CoordinatorRepository {
                     return Message::send(true,200,'Usuário reconhecido',$data);
                 }
             }
-            return Message::send(false, 404, 'Usuário não reconhecido',[]);
+            $email = $coordinator->getEmail();
+            return Message::send(false, 404, "email: $email",[]);
            
         } catch (PDOException $e) {
             return Message::send(false, $e->getCode(),$e->getMessage(),[]);

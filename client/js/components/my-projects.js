@@ -4,7 +4,6 @@ import { Header } from "../components/header.js";
 
 export const MyProjects = {
     template: `
-    <Header></Header>
     <div id="my-projects" class="">
         <div class="section-title">
             <h2>Meus projetos</h2>

@@ -49,7 +49,7 @@ export const ManagementTeachers = {
         getAllProfessor() {
         }
     },
-    mounted() {
+    created() {
         validateAccess('coordinator');
     }
 };

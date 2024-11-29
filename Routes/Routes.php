@@ -20,20 +20,26 @@ class Routes {
                 '/files/{id}' => [FileController::class, 'list'],
                 '/projectByProf' => [ProjectController::class, 'getByProfessor'],
                 '/projectByProfLimit' => [ProjectController::class, 'getByProfessorLimit'],
+                '/projectProf/{id}' => [ProjectController::class, 'getProjectByProfId'],
                 '/cover' => [FileController::class, 'getCover'],
                 '/course' => [CourseController::class, 'list'],
+                '/professor/{id}' => [ProfessorController::class, 'getById'],
+                '/idByToken' => [ProfessorController::class, 'getIdByToken'],
+                '/unitByProfessor/{id}' => [UnitController::class, 'getByProfessor'],
+                '/courseByProfessor/{id}' => [CourseController::class, 'getByProfessor'],
+                '/verifyTeachersPage/{id}' =>[TokenController::class, 'verifyTeachersPage']
             ],
             'POST' => [
-                '/professor/login' => [ProfessorController::class, 'login'],
+                '/login' => [UserController::class, 'loginSwitch'],
                 '/user/create' => [UserController::class, 'userSwitch'],
                 '/token/validateAccess' => [TokenController::class, 'verifyPermission'],
                 '/project/create' => [ProjectController::class, 'create'],
                 '/unit/create' => [UnitController::class, 'create'],
-                '/password/define' => [UserController::class, 'switchPassword']
+                '/password/define' => [UserController::class, 'switchPassword'],
+                '/profilePicture/{id}' => [ProfessorController::class, 'updatePfp'],
             ],
             'PUT' => [
-                '/profilePicture/{id}' => [ProfessorController::class, 'updatePfp'],
-
+                
             ],
             'DELETE' => [
                 '/b/{id}' => [ProfessorController::class, 'login'],

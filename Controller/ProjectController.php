@@ -88,6 +88,16 @@ class ProjectController {
 
     }
 
+    public function getProjectByProfId($id){
+
+        $professor = new Professor();
+        $professor->setId($id);
+        $repo = new ProjectRepository();
+
+        echo json_encode($repo->selectByProfId($professor));
+
+    }
+
     public function getByProfessor(){
         $array = TokenHandler::verifyPermission("professor");
         $repo = new ProjectRepository();

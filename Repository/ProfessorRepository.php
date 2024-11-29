@@ -17,16 +17,53 @@ class ProfessorRepository {
 
     public function insert(Professor $professor){
     
-        $insert = 'INSERT INTO professor(Name,Email) VALUES(?,?)';
+        $insert = 'INSERT INTO professor(Name,Email,Area_of_Expertise) VALUES(?,?,?)';
         $prepare = $this->pdo->prepare($insert);
         $prepare->bindValue(1, $professor->getName());
         $prepare->bindValue(2, $professor->getEmail());
+        $prepare->bindValue(3, $professor->getExpertise());
         try{
             $prepare->execute();
-            return Message::send(true,200,'Cadastro efetuado com sucesso',$this->pdo->lastInsertId());
         } catch(PDOException $e){
             return Message::send(false, $e->getCode(),$e->getMessage(),[]);
         }
+        $professor->setId($this->pdo->lastInsertId());
+        $insert2 = 'INSERT INTO professor_course(ID_Professor, ID_Course) VALUES(?,?)';
+        $prepare2 = $this->pdo->prepare($insert2);
+        $prepare2->bindValue(1, $professor->getId());
+        $prepare2->bindValue(2, $professor->getCourse());
+        try {
+            $prepare2->execute();
+        } catch (PDOException $e) {
+            return Message::send(false, $e->getCode(),$professor->getCourse(),[]);
+        }
+
+        $insert3 = 'INSERT INTO professor_unit(ID_Professor, ID_Unit) VALUES(?,?)';
+        $prepare3 = $this->pdo->prepare($insert3);
+        $prepare3->bindValue(1, $professor->getId());
+        $prepare3->bindValue(2, $professor->getUnit());
+        try {
+            $prepare3->execute();
+            return Message::send(true,200,'Cadastro efetuado com sucesso',$professor->getId());
+        } catch (PDOException $e) {
+            return Message::send(false, $e->getCode(),$e->getMessage(),[]);
+        }
+        
+    }
+
+    public function selectByProfessor(Professor $professor){
+
+        $select = 'SELECT * FROM course INNER JOIN professor_course ON course.ID_Course = professor_course.ID_Course WHERE professor_course.ID_Professor = ?';
+        $prepare = $this->pdo->prepare($select);
+        $prepare->bindValue(1, $professor->getId()); 
+        try {
+            $prepare->execute();
+            $array = $prepare->fetchAll();
+            return Message::send(true, 200, 'Unidades encontradas',$array);
+        } catch (PDOException $e) {
+            return Message::send(false, $e->getCode(), $e->getMessage(),[]);
+        }
+
     }
 
     public function selectAll(){

@@ -22,6 +22,20 @@ class UserController {
         }
     }
 
+    public function loginSwitch(){
+
+        $pc = new ProfessorController();
+        $cc = new CoordinatorController();
+        $pc_r = $pc->login();
+        $cc_r = $cc->login();
+        if($pc_r['status']){
+            echo json_encode($pc_r);
+        } else {
+            echo json_encode($cc_r);
+        }
+        
+    }
+
     public function switchPassword(){
 
         $data = json_decode(file_get_contents('php://input'),true);
