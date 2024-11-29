@@ -112,7 +112,7 @@ class ProfessorRepository {
     }
 
     public function update(Professor $professor){
-        $update = 'UPDATE professor SET Name = ?, Email = ?,Password = ?, Area_of_Expertise = ? WHERE ID_Professor = ?';
+        $update = 'UPDATE professor SET Name = ?, Email = ?, Area_of_Expertise = ? WHERE ID_Professor = ?';
         $prepare = $this->pdo->prepare($update);
         $prepare->bindValue(1, $professor->getName());
         $prepare->bindValue(2, $professor->getEmail());
