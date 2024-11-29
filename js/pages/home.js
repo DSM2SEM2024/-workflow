@@ -16,7 +16,7 @@ export const Home = {
                 <section class="form-content">
                     <form class="box-search" @submit.prevent="">
                         <div class="icon-column d-flex justify-content-end top-0">
-                            <img class="icon" src="../images/bottom-section.png" alt="Projeto Interdisciplinar">
+                            <img class="icon" src="./images/bottom-section.png" alt="Projeto Interdisciplinar">
                         </div>
                                             
                         <div class="form-inputs d-flex justify-content-start flex-row flex-wrap">
