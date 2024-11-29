@@ -139,6 +139,18 @@ class ProfessorController {
 
     }
 
+    public function updatePassword($id){
+
+        $data = json_decode(file_get_contents('php://input'),true);
+        $professor = new Professor();
+        $professor->setId($id);
+        $professor->setPassword($data['password']);
+        $repo = new ProfessorRepository();
+        
+        echo json_encode($repo->updatePassword($professor));
+
+    }
+
     public function update($id){
 
         $repo = new ProfessorRepository();
