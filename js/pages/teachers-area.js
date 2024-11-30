@@ -13,7 +13,7 @@ export const TeachersArea = {
     },
     template: `
         <Header></Header>
-        <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
+        <main v-if="loaded" id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
                 <MyProfile :yours="yours" :id="id" :img="pfp" :professor="professor" :units="units" :courses="courses" ></MyProfile>
 
@@ -52,6 +52,7 @@ export const TeachersArea = {
     `,
     data() {
         return {
+            loaded: false,
             showMyData: false,
             pfp: '',
             professor: {
@@ -151,6 +152,7 @@ export const TeachersArea = {
             .then(response=>{
                 this.courses = response.data;
                 Swal.close();
+                this.loaded = true;
             })
         },
         isYours(){

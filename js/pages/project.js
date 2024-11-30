@@ -7,7 +7,7 @@ import { Header } from "../components/header.js";
 export const Project = {
     template: `
         <Header></Header>
-        <main id="project" class="d-flex justify-content-evenly align-items-center flex-row">
+        <main v-if="loaded" id="project" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-between align-items-center">
                     <h2>Informações do Projeto</h2>
@@ -96,6 +96,7 @@ export const Project = {
     },
     data() {
         return {
+            loaded: false,
             id: window.location.href.split('project/')[1],
             project: {
                 ID_Project: window.location.href.split('project/')[1]
@@ -205,9 +206,14 @@ export const Project = {
             fetch(url, options)
             .then(response=>response.json())
             .then(response=>{
+                console.log(response.data.sub,this.project.ID_Professor)
                 if(response.data.sub.ID_Professor == this.project.ID_Professor){
                     this.isProfessor = response.data;
                 }
+                this.loaded = true;
+            })
+            .catch(error=>{
+                this.loaded = true;
             })
         },
         toggleUpdate(){
