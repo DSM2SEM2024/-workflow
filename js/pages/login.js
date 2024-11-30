@@ -24,6 +24,11 @@ export const Login = {
 
                         <input type="password" v-model="password" placeholder="Senha" required>
                         <p v-if="invalidPassword" class="message-error error-password">{{passwordAlert}}</p>
+
+                        <select v-model="role" class="career">
+                            <option value="professor">Professor</option>
+                            <option value="coordinator">Coordenador</option>
+                        </select>
                     </div>
 
                     <div class="d-flex justify-content-between flex-row options-password">
@@ -56,7 +61,8 @@ export const Login = {
             invalidEmail: false,
             emailAlert: '',
             invalidPassword: false,
-            passwordAlert: ''
+            passwordAlert: '',
+            role: 'professor'
         };
     },
     inject: ['urlBase'],
@@ -78,6 +84,7 @@ export const Login = {
                     email: this.email,
                     password: this.password,
                     login: this.manter_login,
+                    role: this.role
                 })
             };
             Swal.showLoading();
@@ -85,8 +92,16 @@ export const Login = {
             .then(response=>response.json())
             .then(response=>{
                 Swal.close();
+                console.log(response)
                 if(response.status==true){
                     window.localStorage.setItem('reposystem_token',response.data);
+
+                    if('ID_Professor' in response.message){
+                        window.localStorage.setItem('reposystem_role','professor');
+                    } else if('ID_Coordinator' in response.message){
+                        window.localStorage.setItem('reposystem_role','coordinator');
+                    }
+
                     this.$router.push('/management');
                 } else {
                     // tratamento de falha no login temporário
