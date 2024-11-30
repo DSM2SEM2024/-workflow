@@ -4,7 +4,7 @@ import { Header } from "./header.js";
 
 export const MyProjects = {
     template: `
-    <div id="my-projects" class="">
+    <div v-if="isProfessor" id="my-projects" class="">
         <div class="section-title">
             <h2>Meus projetos</h2>
         </div>
@@ -35,7 +35,8 @@ export const MyProjects = {
     },
     data() {
         return {
-            projects: []
+            projects: [],
+            isProfessor: false
         }
     },
     inject: ['urlBase'],
@@ -74,6 +75,13 @@ export const MyProjects = {
         },
         defDate(date){
             return date.split('-')[2]+'/'+date.split('-')[1]+'/'+date.split('-')[0];
+        },
+        checkRole(){
+            if(window.localStorage.getItem('reposystem_role')=='professor'){
+                this.isProfessor = true;
+            } else {
+                this.isProfessor = false;
+            }
         }
     },
     created() {
