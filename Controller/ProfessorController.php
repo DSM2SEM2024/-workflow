@@ -85,7 +85,7 @@ class ProfessorController {
         if($login_response['status']){
             $token_response = TokenHandler::createAsLogin('professor',$login_response['data'], $data['login']);
             http_response_code($token_response['code']);
-            return Message::send(true,$token_response['code'],'Login efetuado',$token_response['data']);
+            return Message::send(true,$token_response['code'],$login_response['data'],$token_response['data']);
         } else {
             return $login_response;
         }
