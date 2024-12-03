@@ -37,10 +37,11 @@ class Routes {
                 '/unit/create' => [UnitController::class, 'create'],
                 '/password/define' => [UserController::class, 'switchPassword'],
                 '/profilePicture/{id}' => [ProfessorController::class, 'updatePfp'],
+                '/updateProject/{id}' => [ProjectController::class,'update'],
             ],
             'PUT' => [
                 '/updatePassword/{id}' => [ProfessorController::class,'updatePassword'],
-                '/update/{id}' => [ProfessorController::class,'update']
+                '/update/{id}' => [ProfessorController::class,'update'],
             ],
             'DELETE' => [
                 '/b/{id}' => [ProfessorController::class, 'login'],

@@ -7,6 +7,7 @@ use Src\Auth\TokenHandler;
 use Src\Model\Message;
 use Src\Model\Professor;
 use Src\Controller\FileController;
+use Src\Repository\FileRepository;
 
 class ProjectController {
 
@@ -120,6 +121,84 @@ class ProjectController {
 
         $project->setProfessor($prof);
         echo json_encode($repo->selectByProfessorLimit($project));
+    }
+
+    public function update($id){
+        $project = new Project();
+        $project->setId($id);
+
+        $project->setName($_POST['name']);
+        $project->setDescription($_POST['description']);
+        $project->setStartDate($_POST['startDate']);
+        $project->setEndDate($_POST['endDate']);
+        $project->setParticipants(serialize(json_decode($_POST['participants'],true)));
+
+        $unit = new Unit();
+        $unit->setId($_POST['unit']);
+        $project->setUnit($unit);
+        $project->setStatus(0);
+        $professor = new Professor();
+        $professor->setId($_POST['idProfessor']);
+        $project->setProfessor($professor);
+
+        $token_response = TokenHandler::verifyPermission($_POST['role']);
+        $repo = new ProjectRepository();
+
+        if($token_response['status']){
+            $update_response = $repo->update($project);
+            if($update_response['status']){
+                
+                $file_controller = new FileController();
+                
+                if (!empty($_FILES['arquivos'])) {
+                    $create_file_response1 = $file_controller->create($_FILES['arquivos'],'file',$project);
+                    if($create_file_response1['status']==false){
+                        echo json_encode($create_file_response1);
+                        exit();
+                    }
+                }
+    
+                // Tratamento de links (caso haja links no FormData)
+                $links = [];
+                if (!empty($_POST['links'])) {
+
+                    foreach ($_POST['links'] as $link) {
+                        $links[] = $link; // Adiciona cada link a um array para salvar ou processar
+                    }
+                    $create_file_response2 = $file_controller->create($links,'link',$project);
+                    if($create_file_response2['status']==false){
+                        echo json_encode($create_file_response2);
+                    }
+                }
+
+                if (!empty($_FILES['novos_arquivos'])) {
+                    $create_file_response1 = $file_controller->create($_FILES['novos_arquivos'],'file',$project);
+                    if($create_file_response1['status']==false){
+                        echo json_encode($create_file_response1);
+                        exit();
+                    }
+                }
+    
+                // Tratamento de links (caso haja links no FormData)
+                $links = [];
+                if (!empty($_POST['novos_links'])) {
+
+                    foreach ($_POST['novos_links'] as $link) {
+                        $links[] = $link; // Adiciona cada link a um array para salvar ou processar
+                    }
+                    $create_file_response2 = $file_controller->create($links,'link',$project);
+                    if($create_file_response2['status']==false){
+                        echo json_encode($create_file_response2);
+                    }
+                }
+
+            } else {
+                echo json_encode($update_response);
+            }
+        } else {
+            echo json_encode($token_response);
+        }
+
     }
 
 }
