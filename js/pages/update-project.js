@@ -134,7 +134,7 @@ export const UpdateProject = {
                     <div class="form-footer d-flex justify-content-between d-column align-items-start gap-3 flex-wrap">
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
 
-                        <button class="btn-create" @click="cadastrar">Cadastrar projeto ‎ |
+                        <button class="btn-create" @click="cadastrar">Atualizar projeto ‎ |
                             <img class="icon" src="./images/next.png" alt="Integrante">
                         </button>
                     </div>
