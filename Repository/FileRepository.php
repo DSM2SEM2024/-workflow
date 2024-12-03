@@ -72,14 +72,20 @@ class FileRepository {
 
     }
 
-    public function clearAttachs(Project $project){
+    public function clearAttachs(Project $project, $type){
 
-        $delete = 'DELETE FROM files WHERE ID_Project = ?';
-        $prepare = $this->pdo->prepare($delete);
-        $prepare->bindValue(1, $project->getId());
+        if($type=='link'){
+            $delete = 'DELETE FROM files WHERE ID_Project = ? AND File_Type = "link"';
+            $prepare = $this->pdo->prepare($delete);
+            $prepare->bindValue(1, $project->getId());
+        } else {
+            $delete = 'DELETE FROM files WHERE ID_Project = ? AND File_Type <> "link"';
+            $prepare = $this->pdo->prepare($delete);
+            $prepare->bindValue(1, $project->getId());
+        }
         try {
             $prepare->execute();
-            return Message::send(true,200,'Remoção concluída',[]);
+            echo json_encode(Message::send(true,200,'Remoção concluída',[]));exit();
         } catch (PDOException $e) {
             return Message::send(false,$e->getCode(),$e->getMessage(),[]);
         }
