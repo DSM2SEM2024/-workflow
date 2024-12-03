@@ -7,7 +7,7 @@ import { semChecker } from "../functions/sem-checker.js";
 export const UpdateProject = {
     template: `
         <Header></Header>
-        <main id="project" class="d-flex justify-content-evenly align-items-center flex-row">
+        <main v-if="loaded" id="project" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-between align-items-center">
                     <h2>Editando Projeto</h2>
@@ -148,8 +148,7 @@ export const UpdateProject = {
     },
     data() {
         return {
-            // email: null,
-            // password: null
+            loaded: false,
             token: window.localStorage.getItem('reposystem_token'),
             id: window.location.href.split('update-project/')[1],
             project:{
@@ -201,8 +200,6 @@ export const UpdateProject = {
             fetch(url,options)
             .then(response=>response.json())
             .then(response=>{
-                console.log(url)
-                console.log(response)
                 if(response.status==false){
                     this.$router.push('/');
                 }
@@ -237,18 +234,18 @@ export const UpdateProject = {
         cadastrar() {
             Swal.showLoading();
             let token = window.localStorage.getItem('reposystem_token');
-            let url = `${backend_url}/updateProject/${this.project.ID_Project}`;
+            let url = `${backend_url}/updateProject/${this.id}`;
         
             // Criar o objeto FormData
             let formData = new FormData();
             
             // Adicionar dados do projeto ao FormData
-            formData.append('name', this.name);
-            formData.append('description', this.description);
-            formData.append('startDate', this.startDate);
-            formData.append('endDate', this.endDate);
+            formData.append('name', this.project.Name);
+            formData.append('description', this.project.Description);
+            formData.append('startDate', this.project.Start_Date);
+            formData.append('endDate', this.project.End_Date);
             formData.append('participants', JSON.stringify(this.participants)); // Assumindo que `participants` seja um array
-            formData.append('unit', this.unitId);
+            formData.append('unit', this.project.ID_Unit);
             formData.append('role', 'professor');
             formData.append('idProfessor', this.project.ID_Professor);
         
@@ -280,9 +277,9 @@ export const UpdateProject = {
             fetch(url, options)
             .then(response => response.json())
             .then(response => {
+                console.log(response)
                 if (response.status == true) {
-                    Swal.close();
-                    this.$router.push(`/project/${response.data}`);
+                    this.$router.push(`/project/${this.id}`);
                 } else {
                     Swal.fire({
                         title: `${response.code} - Cadastro inválido`,
@@ -421,7 +418,6 @@ export const UpdateProject = {
             fetch(url)
             .then(response=>response.json())
             .then(response=>{
-                console.log(response.data)
                 let attach = {
                     files: [],
                     links: []
@@ -435,6 +431,7 @@ export const UpdateProject = {
                 });
                 this.attach = attach;
                 Swal.close();
+                this.loaded = true;
             })
         },
         isPdf(file_type){

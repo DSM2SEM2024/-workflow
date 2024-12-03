@@ -206,7 +206,6 @@ export const Project = {
             fetch(url, options)
             .then(response=>response.json())
             .then(response=>{
-                console.log(response.data.sub,this.project.ID_Professor)
                 if(response.data.sub.ID_Professor == this.project.ID_Professor){
                     this.isProfessor = response.data;
                 }
