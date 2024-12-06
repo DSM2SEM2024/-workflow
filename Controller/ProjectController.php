@@ -152,61 +152,41 @@ class ProjectController {
 
                 $file_controller = new FileController();
                 $file_repo = new FileRepository();
-
-                try {
+                $file_repo->clearAttachs($project,'files');
+                if(!empty($_POST['arquivos'])){
+                    $response = $file_controller->recreate(json_decode($_POST['arquivos'],true),'file',$project);
                     
-                    if (!empty($_FILES['arquivos'])) {
-                        $file_repo->clearAttachs($project,'file');
-                        $create_file_response1 = $file_controller->create($_FILES['arquivos'],'file',$project);
-                        if($create_file_response1['status']==false){
-                            echo json_encode($create_file_response1);
-                            exit();
-                        }
+                    if(!$response['status']){
+                        echo json_encode($response);
                     }
-        
-                    // Tratamento de links (caso haja links no FormData)
-                    $links = [];
-                    if (!empty($_POST['links'])) {
-                        $file_repo->clearAttachs($project,'link');
-                        foreach ($_POST['links'] as $link) {
-                            $links[] = $link; // Adiciona cada link a um array para salvar ou processar
-                        }
-                        $create_file_response2 = $file_controller->create($links,'link',$project);
-                        if($create_file_response2['status']==false){
-                            echo json_encode($create_file_response2);
-                        }
-                    }
-    
-                    if (!empty($_FILES['novos_arquivos'])) {
-                        $file_repo->clearAttachs($project,'file');
-                        $create_file_response1 = $file_controller->create($_FILES['novos_arquivos'],'file',$project);
-                        if($create_file_response1['status']==false){
-                            echo json_encode($create_file_response1);
-                            exit();
-                        }
-                    }
-        
-                    // Tratamento de links (caso haja links no FormData)
-                    $links = [];
-                    if (!empty($_POST['novos_links'])) {
-                        $file_repo->clearAttachs($project,'link');
-                        foreach ($_POST['novos_links'] as $link) {
-                            $links[] = $link; // Adiciona cada link a um array para salvar ou processar
-                        }
-                        $create_file_response2 = $file_controller->create($links,'link',$project);
-                        if($create_file_response2['status']==false){
-                            echo json_encode($create_file_response2);
-                        }
-                    }
-    
-                    echo json_encode(Message::send(true,200,'Projeto atualizado com sucesso',[]));
-
-                } catch (Exception $th) {
-                    echo json_encode(Message::send(false, 500, 'Erro na leitura',[]));
                 }
                 
+                $file_repo->clearAttachs($project,'link');
+                $links = json_decode($_POST['links']);
+                if(!empty($links)){
+                    $response = $file_controller->recreate(json_decode($_POST['links'],true),'link',$project);
+                    if(!$response['status']){
+                        echo json_encode($response);
+                    }
+                }
                 
 
+                if(!empty($_FILES['novos_arquivos'])){
+                    $response = $file_controller->create($_FILES['novos_arquivos'],'file',$project);
+                    if(!$response['status']){
+                        echo json_encode($response);
+                    }
+                }
+
+                if(!empty($_POST['novos_links'])){
+                    $response = $file_controller->create($_POST['novos_links'],'link',$project);
+                    if(!$response['status']){
+                        echo json_encode($response);
+                    }
+                }
+                
+                echo json_encode(Message::send(true, 200, 'Atualizado com sucesso',[]));exit();
+                
             } else {
                 echo json_encode($update_response);
             }

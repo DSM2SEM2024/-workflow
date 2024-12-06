@@ -85,7 +85,7 @@ class FileRepository {
         }
         try {
             $prepare->execute();
-            echo json_encode(Message::send(true,200,'Remoção concluída',[]));exit();
+            return Message::send(true,200,'Remoção concluída',[]);
         } catch (PDOException $e) {
             return Message::send(false,$e->getCode(),$e->getMessage(),[]);
         }
