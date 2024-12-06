@@ -7,7 +7,7 @@ import { Header } from "../components/header.js";
 export const Project = {
     template: `
         <Header></Header>
-        <main id="project" class="d-flex justify-content-evenly align-items-center flex-row">
+        <main v-if="loaded" id="project" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-between align-items-center">
                     <h2>Informações do Projeto</h2>
@@ -96,6 +96,7 @@ export const Project = {
     },
     data() {
         return {
+            loaded: false,
             id: window.location.href.split('project/')[1],
             project: {
                 ID_Project: window.location.href.split('project/')[1]
@@ -144,6 +145,13 @@ export const Project = {
                     });
                 }
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao buscar dados`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
         getFiles(){
             let url = backend_url+'/files/'+this.project.ID_Project;
@@ -152,6 +160,13 @@ export const Project = {
             .then(response=>{
                 this.files = response.data;
                 Swal.close();
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar anexos`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         isPdf(file_type){
@@ -208,6 +223,10 @@ export const Project = {
                 if(response.data.sub.ID_Professor == this.project.ID_Professor){
                     this.isProfessor = response.data;
                 }
+                this.loaded = true;
+            })
+            .catch(error=>{
+                this.loaded = true;
             })
         },
         toggleUpdate(){

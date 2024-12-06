@@ -150,6 +150,13 @@ export const MyData = {
                     location.reload(true);
                 }
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao atualizar os dados`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
 
         },
         updatePassword() {
@@ -177,6 +184,13 @@ export const MyData = {
                     });
                     this.password = '';
                 }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao atualizar a senha`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
 
         },

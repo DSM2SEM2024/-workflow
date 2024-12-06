@@ -83,10 +83,6 @@ export const CreateProject = {
                     <form>
                         <div class="form-gap d-flex d-row flex-row">
                             <div class="form-inputs d-flex justify-content-start d-column flex-column">
-                                <select v-model="file_type_value" placeholder="Escolha um arquivo">
-                                    <option value="">Escolha o tipo de anexo...</option>
-                                    <option v-for="type in file_types" :value="type">{{type}}</option>
-                                </select>
                                 <div @dragover.prevent @drop.prevent="handleDrop" @click="selecionarArquivo" class="file-drop d-flex justify-content-center d-column flex-column align-items-center">
                                     <img class="icon" src="./images/download.png" alt="Integrante">
                                     <p>Anexe ou arraste o arquivo para cá </p>
@@ -171,6 +167,13 @@ export const CreateProject = {
                 if(response.status==true){
                     this.units = response.data;
                 }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar unidades`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         adicionar(){

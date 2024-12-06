@@ -45,7 +45,7 @@ class ProjectRepository{
     public function selectAll(){
 
         $select = 'SELECT ID_Project, Name, Description, Start_Date, End_Date, Participants, ID_Unit, ID_Professor, Status FROM project 
-        WHERE Status = 1 ORDER BY ID_Project DESC';
+        WHERE Status = 1 ORDER BY End_Date DESC';
         try {
             $prepare = $this->pdo->prepare($select);
             $prepare->execute();
@@ -74,7 +74,7 @@ class ProjectRepository{
     }
     
     public function selectByProfessor(Project $project){
-        $select = 'SELECT * FROM project WHERE project.ID_professor = ? ORDER BY ID_Project DESC';
+        $select = 'SELECT * FROM project WHERE project.ID_professor = ? ORDER BY End_Date DESC';
         $prepare = $this->pdo->prepare($select);
         $prepare->bindValue(1, $project->getProfessor()->getId());
 
@@ -88,7 +88,7 @@ class ProjectRepository{
     }
 
     public function selectByProfessorLimit(Project $project){
-        $select = 'SELECT * FROM project WHERE project.ID_professor = ? ORDER BY ID_Project DESC LIMIT 3';
+        $select = 'SELECT * FROM project WHERE project.ID_professor = ? ORDER BY End_Date DESC LIMIT 3';
         $prepare = $this->pdo->prepare($select);
         $prepare->bindValue(1, $project->getProfessor()->getId());
 
@@ -103,7 +103,7 @@ class ProjectRepository{
 
     public function selectByProfId(Professor $professor){
 
-        $select = 'SELECT * FROM project WHERE ID_Professor = ?';
+        $select = 'SELECT * FROM project WHERE ID_Professor = ? AND Status = 1';
         $prepare = $this->pdo->prepare($select);
         $prepare->bindValue(1, $professor->getId());
 
@@ -113,6 +113,29 @@ class ProjectRepository{
             return Message::send(true, 200, 'Projetos encontrados', $array);
         } catch (PDOException $e) {
             return Message::send(false, $e->getCode(),$e->getMessage(),[]);
+        }
+
+    }
+
+    public function update(Project $project){
+
+        $update = 'UPDATE project SET Name = ?, Description = ?, Start_Date = ?, End_Date = ?, Participants = ?, ID_Unit = ?, ID_Professor = ?, Status = ? WHERE ID_Project = ?';
+        $prepare = $this->pdo->prepare($update);
+        $prepare->bindValue(1, $project->getName());
+        $prepare->bindValue(2, $project->getDescription());
+        $prepare->bindValue(3, $project->getStartDate());
+        $prepare->bindValue(4, $project->getEndDate());
+        $prepare->bindValue(5, $project->getParticipants());
+        $prepare->bindValue(6, $project->getUnit()->getId());
+        $prepare->bindValue(7, $project->getProfessor()->getId());
+        $prepare->bindValue(8, $project->getStatus());
+        $prepare->bindValue(9, $project->getId());
+        
+        try {
+            $prepare->execute();
+            return Message::send(true, 200, 'Atualização bem-sucedida',[]);
+        } catch (PDOException $e) {
+            return Message::send(false, $e->getCode(), $e->getMessage(),[]);
         }
 
     }

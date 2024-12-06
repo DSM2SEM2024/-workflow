@@ -21,7 +21,6 @@ export function validateAccess(role){
     fetch(validate_url, validate_options)
     .then(response=>response.json())
     .then(response=>{
-        console.log(response)
         if(response.status==false){
             switch (role) {
                 case 'professor':
@@ -34,5 +33,12 @@ export function validateAccess(role){
             }
             
         }
+    })
+    .catch(error=>{
+        Swal.fire({
+            title: `Erro na validação`,
+            text: error.message,
+            icon: 'error'
+        })
     })
 }

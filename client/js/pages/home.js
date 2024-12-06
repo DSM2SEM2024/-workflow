@@ -7,7 +7,7 @@ import { validateAccess } from '../functions/validate-access.js';
 export const Home = {
     template: `
         <Header></Header>
-        <main id="home" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
+        <main v-if="loaded" id="home" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
                     <h2>Projetos Interdisciplinares</h2>
@@ -103,6 +103,7 @@ export const Home = {
     `,
     data() {
         return{
+            loaded: false,
             projects: [],
             renderedProjects: [],
             showMyProjects: false,
@@ -136,6 +137,13 @@ export const Home = {
                 this.listImages();
                 this.renderedProjects = this.projects;
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar projetos`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
         validateLogin(){
             let url = backend_url+'/token/validateAccess';
@@ -158,6 +166,10 @@ export const Home = {
                 } else {
                     this.showMyProjects = false;
                 }
+                this.loaded = true;
+            })
+            .catch(error=>{
+                this.loaded = true;
             })
         },
         listImages(){
@@ -177,6 +189,13 @@ export const Home = {
                 });
                 Swal.close();
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar imagens`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
 
         },
         listUnits(){
@@ -188,6 +207,13 @@ export const Home = {
                 if(response.status==true){
                     this.units = response.data;
                 }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar unidades`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
 
         },

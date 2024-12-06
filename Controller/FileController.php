@@ -44,6 +44,35 @@ class FileController {
 
     }
 
+    public function recreate(Array $file, string $type, Project $project){
+
+        if($type=='file'){
+            foreach ($file as $index => $real_file) {
+                $f = new File();
+                $f->setName($real_file['File_Name']);
+                $data = explode('base64,',$real_file['File_Data'])[1];
+                $f->setData($data);
+                $f->setType(explode('.',$f->getName())[1]);
+                $f->setProject($project);
+
+                $create_response = $this->repo->insert($f);
+            }
+            return $create_response;
+        } else {
+            foreach ($file as $index => $url) {
+                $f = new File();
+                $f->setName($url['File_Name']);
+                $f->setUrl($url['URL']);
+                $f->setType($url['File_Type']);
+                $f->setProject($project);
+    
+                $create_response = $this->repo->insert($f);
+            }
+            return $create_response;
+        }
+
+    }
+
     public function list($project_id){
 
         $project = new Project();
