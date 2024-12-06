@@ -204,6 +204,13 @@ export const UpdateProject = {
                     this.$router.push('/');
                 }
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao validar acesso`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
         gerarSlug(titulo) {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
@@ -219,6 +226,13 @@ export const UpdateProject = {
                 if(response.status==true){
                     this.units = response.data;
                 }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar unidades`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         adicionar(){
@@ -250,12 +264,8 @@ export const UpdateProject = {
             formData.append('idProfessor', this.project.ID_Professor);
         
             // Adicionar arquivos ao FormData
-            this.attach.files.forEach((arquivo, index) => {
-                formData.append(`arquivos[${index}]`, arquivo);
-            });
-            this.attach.links.forEach((arquivo, index) => {
-                formData.append(`links[${index}]`, arquivo);
-            });
+            formData.append('arquivos',JSON.stringify(this.attach.files));
+            formData.append('links',JSON.stringify(this.attach.links));
 
             this.new_attach.files.forEach((arquivo, index) => {
                 formData.append(`novos_arquivos[${index}]`, arquivo);
@@ -273,12 +283,12 @@ export const UpdateProject = {
                 },
                 body: formData
             };
-        
+            
             fetch(url, options)
             .then(response => response.json())
             .then(response => {
-                console.log(response)
-                if (response.status == true) {
+
+                if (response.status) {
                     this.$router.push(`/project/${this.id}`);
                 } else {
                     Swal.fire({
@@ -412,6 +422,13 @@ export const UpdateProject = {
                     this.isYours();
                 }
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao buscar dados`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
         getFiles(){
             let url = backend_url+'/files/'+this.project.ID_Project;
@@ -432,6 +449,13 @@ export const UpdateProject = {
                 this.attach = attach;
                 Swal.close();
                 this.loaded = true;
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar anexos`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         isPdf(file_type){
@@ -488,6 +512,13 @@ export const UpdateProject = {
                 if(response.data.sub.ID_Professor == this.project.ID_Professor){
                     this.isProfessor = response.data;
                 }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao validar acesso`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         toggleUpdate(){

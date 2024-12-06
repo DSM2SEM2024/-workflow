@@ -145,6 +145,13 @@ export const Project = {
                     });
                 }
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao buscar dados`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
         getFiles(){
             let url = backend_url+'/files/'+this.project.ID_Project;
@@ -153,6 +160,13 @@ export const Project = {
             .then(response=>{
                 this.files = response.data;
                 Swal.close();
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar anexos`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         isPdf(file_type){

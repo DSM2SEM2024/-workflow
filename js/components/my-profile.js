@@ -123,7 +123,6 @@ export const MyProfile = {
             });
         },
         isYours(){
-            console.log(this.yours)
             if(this.yours==true){
                 this.editable = true;
             }

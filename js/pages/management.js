@@ -72,8 +72,14 @@ export const ManagementPage = {
             .then(response=> response.json())
             .then(response=>{
                 this.projects = response.data
-            }
-            )
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar projetos`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
 
         },
         getIdByToken(){
@@ -90,6 +96,13 @@ export const ManagementPage = {
             .then(response=>{
                 this.id = response.ID_Professor;
                 Swal.close();
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao buscar dados`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         defStatus(status){
@@ -141,6 +154,13 @@ export const ManagementPage = {
                         this.loaded = true;
                     }
                 }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao validar acesso`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         }
     },

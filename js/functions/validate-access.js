@@ -34,4 +34,11 @@ export function validateAccess(role){
             
         }
     })
+    .catch(error=>{
+        Swal.fire({
+            title: `Erro na validação`,
+            text: error.message,
+            icon: 'error'
+        })
+    })
 }

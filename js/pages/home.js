@@ -137,6 +137,13 @@ export const Home = {
                 this.listImages();
                 this.renderedProjects = this.projects;
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar projetos`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
         validateLogin(){
             let url = backend_url+'/token/validateAccess';
@@ -182,6 +189,13 @@ export const Home = {
                 });
                 Swal.close();
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar imagens`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
 
         },
         listUnits(){
@@ -193,6 +207,13 @@ export const Home = {
                 if(response.status==true){
                     this.units = response.data;
                 }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar unidades`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
 
         },

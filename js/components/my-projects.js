@@ -60,10 +60,15 @@ export const MyProjects = {
             fetch(backend_url+ '/projectByProfLimit', options)
             .then(response=> response.json())
             .then(response=>{
-                console.log(response),
                 this.projects = response.data
-            }
-            )
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar os projetos`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
 
         },
         defStatus(status){

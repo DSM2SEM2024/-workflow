@@ -92,7 +92,6 @@ export const Login = {
             .then(response=>response.json())
             .then(response=>{
                 Swal.close();
-                console.log(response)
                 if(response.status==true){
                     window.localStorage.setItem('reposystem_token',response.data);
 
@@ -112,6 +111,13 @@ export const Login = {
                     });
                 }
 
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro no login`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
 
         },
