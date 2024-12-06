@@ -13,7 +13,7 @@ export const TeachersArea = {
     },
     template: `
         <Header></Header>
-        <main id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
+        <main v-if="loaded" id="teachers-area" class="d-flex flex-row justify-content-between gap-2 flex-wrap">
             <div class="dinamic-content">
                 <MyProfile :yours="yours" :id="id" :img="pfp" :professor="professor" :units="units" :courses="courses" ></MyProfile>
 
@@ -52,6 +52,7 @@ export const TeachersArea = {
     `,
     data() {
         return {
+            loaded: false,
             showMyData: false,
             pfp: '',
             professor: {
@@ -135,6 +136,13 @@ export const TeachersArea = {
                 this.projects = response.data;
                 
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar projetos`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
         getUnits(){
             let url = backend_url+'/unitByProfessor/'+this.id;
@@ -142,6 +150,13 @@ export const TeachersArea = {
             .then(response=>response.json())
             .then(response=>{
                 this.units = response.data;
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar unidades`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         getCourses(){
@@ -151,6 +166,14 @@ export const TeachersArea = {
             .then(response=>{
                 this.courses = response.data;
                 Swal.close();
+                this.loaded = true;
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar cursos`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         isYours(){
@@ -169,6 +192,13 @@ export const TeachersArea = {
                 if(response.status){
                     this.yours = true;
                 }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao validar acesso`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         }
 

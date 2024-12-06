@@ -1,11 +1,10 @@
-import { validateAccess } from "../functions/validate-access.js";
 import { backend_url } from "../global-var/backend-url.js";
 import { Header } from "../components/header.js";
 
 export const ManagementPage = {
     template: `
         <Header></Header>
-        <main id="management-projects" class="d-flex justify-content-evenly align-items-center flex-row">
+        <main v-if="loaded" id="management-projects" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
                 <div class="page-section d-flex justify-content-start align-items-center">
                     <h2>Gerenciar Projetos</h2>
@@ -42,6 +41,7 @@ export const ManagementPage = {
         return {
             // email: null,
             // password: null
+            loaded: false,
             base_host: window.location.href.split('#')[0],
             projects: [],
             id: '',
@@ -72,8 +72,14 @@ export const ManagementPage = {
             .then(response=> response.json())
             .then(response=>{
                 this.projects = response.data
-            }
-            )
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar projetos`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
 
         },
         getIdByToken(){
@@ -91,6 +97,13 @@ export const ManagementPage = {
                 this.id = response.ID_Professor;
                 Swal.close();
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao buscar dados`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
         defStatus(status){
             if(status==0){
@@ -101,10 +114,58 @@ export const ManagementPage = {
         },
         defDate(date){
             return date.split('-')[2]+'/'+date.split('-')[1]+'/'+date.split('-')[0];
+        },
+        validateAccess(role){
+
+            let token = window.localStorage.getItem('reposystem_token');
+        
+            let validate_url = backend_url+'/token/validateAccess';
+            let validate_options = {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization':`Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    role: role
+                })
+            }
+        
+            fetch(validate_url, validate_options)
+            .then(response=>response.json())
+            .then(response=>{
+                if(response.status==false){
+                    switch (role) {
+                        case 'professor':
+                            this.$router.push('/login')
+                            break;
+                    
+                        case 'coordinator':
+                            this.$router.push('/home')
+                            break;
+                    }
+                    Swal.close();
+                } else {
+                    if(window.localStorage.getItem('reposystem_role')=='coordinator'){
+                        Swal.close();
+                        this.$router.push('/management-teachers')
+                    } else {
+                        this.loaded = true;
+                    }
+                }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao validar acesso`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         }
     },
     created() {
-        validateAccess('professor');
+        this.validateAccess('professor');
         this.getProjectByProfessor();
         this.getIdByToken();
     }

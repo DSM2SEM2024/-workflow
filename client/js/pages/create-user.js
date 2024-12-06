@@ -285,6 +285,13 @@ export const CreateUser = {
                     this.units = response.data;
                 }
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar unidades`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
     },
     created() {

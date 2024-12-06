@@ -23,15 +23,20 @@ class UserController {
     }
 
     public function loginSwitch(){
-
+        $role = json_decode(file_get_contents('php://input'),true)['role'];
         $pc = new ProfessorController();
         $cc = new CoordinatorController();
-        $pc_r = $pc->login();
-        $cc_r = $cc->login();
-        if($pc_r['status']){
-            echo json_encode($pc_r);
-        } else {
-            echo json_encode($cc_r);
+
+        switch ($role) {
+            case 'professor':
+                $pc_r = $pc->login();
+                echo json_encode($pc_r);
+                break;
+            
+            case 'coordinator':
+                $cc_r = $cc->login();
+                echo json_encode($cc_r);
+                break;
         }
         
     }

@@ -7,10 +7,11 @@ import { semChecker } from "../functions/sem-checker.js";
 export const UpdateProject = {
     template: `
         <Header></Header>
-        <main id="create-project" class="d-flex justify-content-evenly align-items-center flex-row">
+        <main v-if="loaded" id="project" class="d-flex justify-content-evenly align-items-center flex-row">
             <section class="dinamic-content">
-                <div class="page-section d-flex justify-content-start align-items-center">
+                <div class="page-section d-flex justify-content-between align-items-center">
                     <h2>Editando Projeto</h2>
+                    <button class="edit-button" @click="navi">Cancelar</button>
                 </div>
 
                 <section class="form-content">
@@ -98,7 +99,7 @@ export const UpdateProject = {
                                 <p class="message-error error-file"></p>    
                             </div>  
                             <div class="form-entries d-flex justify-content-start d-column flex-column">
-                                <!-- Exemplo de membros abaixo -->
+                                <!-- Arquivos já presentes -->
                                 <div class="files" v-for="(url, index) in attach.links" :key="index">
                                     <img src="./images/file-link.png" alt="Expandir">
                                     <p>{{url.URL}}</p>
@@ -110,18 +111,19 @@ export const UpdateProject = {
                                     <img v-if="isElse(file.File_Type)" src="./images/icon-file.png" alt="Expandir">
                                     <p>{{file.File_Name}}</p>
                                     <span @click="removerArquivo(index,'file')" >-</span>
-                                </div>     
+                                </div>  
+                                <!-- Arquivos novos -->   
                                 <div class="files" v-for="(url, index) in new_attach.links" :key="index">
                                     <img src="./images/file-link.png" alt="Expandir">
                                     <p>{{url}}</p>
-                                    <span @click="removerArquivo(index,'link')" >-</span>
+                                    <span @click="removerArquivoNovos(index,'link')" >-</span>
                                 </div>
                                 <div class="files" v-for="(file, index) in new_attach.files" :key="index">
                                     <img v-if="new_isPdf(file)" src="./images/file-pdf.png" alt="Expandir">
                                     <img v-if="new_isImg(file)" src="./images/icon-upload.png" alt="Expandir">
                                     <img v-if="new_isElse(file)" src="./images/icon-file.png" alt="Expandir">
                                     <p>{{file.name}}</p>
-                                    <span @click="removerArquivo(index,'file')" >-</span>
+                                    <span @click="removerArquivoNovos(index,'file')" >-</span>
                                 </div>                         
                             </div>  
                         </div>           
@@ -132,7 +134,7 @@ export const UpdateProject = {
                     <div class="form-footer d-flex justify-content-between d-column align-items-start gap-3 flex-wrap">
                         <p>Atenção, certifique-se de preencher os campos obrigatórios!</p>
 
-                        <button class="btn-create" @click="cadastrar">Cadastrar projeto ‎ |
+                        <button class="btn-create" @click="cadastrar">Atualizar projeto ‎ |
                             <img class="icon" src="./images/next.png" alt="Integrante">
                         </button>
                     </div>
@@ -146,8 +148,7 @@ export const UpdateProject = {
     },
     data() {
         return {
-            // email: null,
-            // password: null
+            loaded: false,
             token: window.localStorage.getItem('reposystem_token'),
             id: window.location.href.split('update-project/')[1],
             project:{
@@ -199,11 +200,16 @@ export const UpdateProject = {
             fetch(url,options)
             .then(response=>response.json())
             .then(response=>{
-                console.log(url)
-                console.log(response)
                 if(response.status==false){
                     this.$router.push('/');
                 }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao validar acesso`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         gerarSlug(titulo) {
@@ -221,6 +227,13 @@ export const UpdateProject = {
                     this.units = response.data;
                 }
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar unidades`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
         adicionar(){
             let integrante = {
@@ -235,26 +248,30 @@ export const UpdateProject = {
         cadastrar() {
             Swal.showLoading();
             let token = window.localStorage.getItem('reposystem_token');
-            let url = backend_url + '/project/create';
+            let url = `${backend_url}/updateProject/${this.id}`;
         
             // Criar o objeto FormData
             let formData = new FormData();
             
             // Adicionar dados do projeto ao FormData
-            formData.append('name', this.name);
-            formData.append('description', this.description);
-            formData.append('startDate', this.startDate);
-            formData.append('endDate', this.endDate);
+            formData.append('name', this.project.Name);
+            formData.append('description', this.project.Description);
+            formData.append('startDate', this.project.Start_Date);
+            formData.append('endDate', this.project.End_Date);
             formData.append('participants', JSON.stringify(this.participants)); // Assumindo que `participants` seja um array
-            formData.append('unit', this.unitId);
+            formData.append('unit', this.project.ID_Unit);
             formData.append('role', 'professor');
+            formData.append('idProfessor', this.project.ID_Professor);
         
             // Adicionar arquivos ao FormData
-            this.attach.files.forEach((arquivo, index) => {
-                formData.append(`arquivos[${index}]`, arquivo);
+            formData.append('arquivos',JSON.stringify(this.attach.files));
+            formData.append('links',JSON.stringify(this.attach.links));
+
+            this.new_attach.files.forEach((arquivo, index) => {
+                formData.append(`novos_arquivos[${index}]`, arquivo);
             });
-            this.attach.links.forEach((arquivo, index) => {
-                formData.append(`links[${index}]`, arquivo);
+            this.new_attach.links.forEach((arquivo, index) => {
+                formData.append(`novos_links[${index}]`, arquivo);
             });
         
             // Configurar a requisição
@@ -266,13 +283,13 @@ export const UpdateProject = {
                 },
                 body: formData
             };
-        
+            
             fetch(url, options)
             .then(response => response.json())
             .then(response => {
-                if (response.status == true) {
-                    Swal.close();
-                    this.$router.push(`/project/${response.data}`);
+
+                if (response.status) {
+                    this.$router.push(`/project/${this.id}`);
                 } else {
                     Swal.fire({
                         title: `${response.code} - Cadastro inválido`,
@@ -375,9 +392,15 @@ export const UpdateProject = {
             } else {
                 this.attach.links.splice(index, 1);
             }
+        },removerArquivoNovos(index, type) {
+            if(type=='file'){
+                this.new_attach.files.splice(index, 1);
+            } else {
+                this.new_attach.links.splice(index, 1);
+            }
         },
         navi(){
-            this.$router.push('/update-project/'+this.id);
+            this.$router.push('/project/'+this.id);
         },
         gerarSlug(titulo) {
             return titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-');
@@ -396,7 +419,15 @@ export const UpdateProject = {
                     this.project = response.data;
                     let count_participants = response.data.Participants.length;
                     this.participants = response.data.Participants;
+                    this.isYours();
                 }
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao buscar dados`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         getFiles(){
@@ -404,7 +435,6 @@ export const UpdateProject = {
             fetch(url)
             .then(response=>response.json())
             .then(response=>{
-                console.log(response.data)
                 let attach = {
                     files: [],
                     links: []
@@ -418,6 +448,14 @@ export const UpdateProject = {
                 });
                 this.attach = attach;
                 Swal.close();
+                this.loaded = true;
+            })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao listar anexos`,
+                    text: error.message,
+                    icon: 'error'
+                })
             })
         },
         isPdf(file_type){
@@ -475,6 +513,13 @@ export const UpdateProject = {
                     this.isProfessor = response.data;
                 }
             })
+            .catch(error=>{
+                Swal.fire({
+                    title: `Erro ao validar acesso`,
+                    text: error.message,
+                    icon: 'error'
+                })
+            })
         },
         toggleUpdate(){
             this.updateMode = !this.updateMode;
@@ -491,6 +536,5 @@ export const UpdateProject = {
         this.getUnits();
         this.getById();
         this.getFiles();
-        this.isYours();
     }
 };
