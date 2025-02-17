@@ -32,7 +32,7 @@
             },
             "time": "2024-05-18T18:05:11+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Firebase\\JWT\\": "src"
@@ -110,7 +110,7 @@
             },
             "time": "2024-10-09T10:07:50+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "PHPMailer\\PHPMailer\\": "src/"
@@ -170,7 +170,7 @@
             },
             "time": "2021-06-22T18:29:16+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
